@@ -2,13 +2,11 @@ package com.bitflip.sanolagani.document;
 
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.tools.PDFText2HTML;
 import technology.tabula.*;
 import technology.tabula.extractors.SpreadsheetExtractionAlgorithm;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -18,14 +16,25 @@ public class ReadDocumentWithTabula {
 
         PDDocument doc=null;
         StringBuilder text= new StringBuilder();
-        doc = Loader.loadPDF(new File("D:\\sanolagani\\documents\\NRB.pdf"));
 
-        File file = new File("./file.tsv");
+        String inputPath = "D:/sanolagani/documents/";
+        String documentName = "NRB";
+        String documentExtension = ".pdf";
+        String tsvDirectoryPath = "src/main/resources/output/" + documentName+"/";
+
+        doc = Loader.loadPDF(new File(inputPath+ documentName+documentExtension));
+        File opdir = new File(tsvDirectoryPath);
+        boolean directoryCreated = opdir.mkdir();
+        System.out.println("Directory creation status: " + !directoryCreated);
+
         SpreadsheetExtractionAlgorithm sea = new SpreadsheetExtractionAlgorithm();
         PageIterator it = new ObjectExtractor(doc).extract();
+
+        int i = 0;
         while (it.hasNext()) {
             Page page = it.next();
             List<Table> tableList = sea.extract(page);
+            ++i;
 
 //            Iterate over the tables in a page
             for(Table table: tableList){
@@ -37,9 +46,12 @@ public class ReadDocumentWithTabula {
                         text.append("\t");
                     }
                     text.append("\n");
-                    break;
+
                 }
-                Files.write(Paths.get("table1.tsv"), text.toString().getBytes());
+
+                PDDocument document = Loader.loadPDF(new File(inputPath+documentName+ documentExtension));
+                Files.write(Paths.get(tsvDirectoryPath+"table" + i+".tsv"), text.toString().getBytes());
+                text = new StringBuilder();
             }
         }
     }
