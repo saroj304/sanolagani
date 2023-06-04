@@ -39,7 +39,7 @@ public class ReadDocumentWithPDFBox {
     }
 
     public static void main(String[] args) throws IOException {
-        String inputPath = "D:/sanolagani/documents/";
+        String inputPath = "sanolagani/documents/";
 //        String outputPath = "src/main/resources/images/";
         String documentName = "NRB";
         String documentExtension = ".pdf";
