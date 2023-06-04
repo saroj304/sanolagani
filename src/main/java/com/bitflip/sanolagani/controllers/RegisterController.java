@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.service.UserService;
+import com.bitflip.sanolagani.serviceimpl.EmailService;
 
 
 @Controller
@@ -22,6 +23,8 @@ public class RegisterController {
 	UserService userservice;
 	@Autowired
 	BCryptPasswordEncoder passwordencoder;
+	@Autowired
+	EmailService emailservice;
 	
 	
 	@GetMapping("/register")
@@ -36,6 +39,8 @@ public class RegisterController {
 			return"signup";
 		}
 		user.setPassword(passwordencoder.encode(user.getPassword()));
+		emailservice.sendEmail(user.getEmail());
+		
 		userservice.saveUser(user);
 		return "index";
 	}

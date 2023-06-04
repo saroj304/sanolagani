@@ -33,13 +33,13 @@ public class ReadDocumentWithPDFBox {
     }
 
     public ReadDocumentWithPDFBox() {
-        this.inputPath = "D:/sanolagani/documents/";
+        this.inputPath = "src/main/resources/documents/";
         this.outputPath = "src/main/resources/images/";
         this.documentName = "SBL Q4 Report 3 August 2022_2.pdf";
     }
 
     public static void main(String[] args) throws IOException {
-        String inputPath = "D:/sanolagani/documents/";
+        String inputPath = "src/main/resources/documents/";
 //        String outputPath = "src/main/resources/images/";
         String documentName = "NRB";
         String documentExtension = ".pdf";
