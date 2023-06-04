@@ -12,28 +12,33 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class ReadDocumentWithTabula {
-    public static void main(String[] args) throws IOException {
+    String path;
+    String documentName;
+    String tsvDirectoryPath = null;
 
-        PDDocument doc=null;
-        StringBuilder text= new StringBuilder();
+    PDDocument doc = null;
+    SpreadsheetExtractionAlgorithm sea = null;
 
-        String inputPath = "D:/sanolagani/documents/";
-        String documentName = "NRB";
-        String documentExtension = ".pdf";
-        String tsvDirectoryPath = "src/main/resources/output/" + documentName+"/";
-
-        doc = Loader.loadPDF(new File(inputPath+ documentName+documentExtension));
-        File opdir = new File(tsvDirectoryPath);
+    public ReadDocumentWithTabula(String path) throws IOException {
+        this.path = path;
+        this.documentName = new File(path).getName().split("\\.")[0];
+        this.tsvDirectoryPath = "src/main/resources/output/" + this.documentName+"/";
+        this.doc = Loader.loadPDF(new File(this.path));
+        File opdir = new File(this.tsvDirectoryPath);
         boolean directoryCreated = opdir.mkdir();
-        System.out.println("Directory creation status: " + !directoryCreated);
 
-        SpreadsheetExtractionAlgorithm sea = new SpreadsheetExtractionAlgorithm();
-        PageIterator it = new ObjectExtractor(doc).extract();
+        this.sea = new SpreadsheetExtractionAlgorithm();
 
+    }
+
+    public void extractAllTables() throws IOException {
+        StringBuilder text = new StringBuilder();
+        PageIterator it = new ObjectExtractor(this.doc).extract();
         int i = 0;
+
         while (it.hasNext()) {
             Page page = it.next();
-            List<Table> tableList = sea.extract(page);
+            List<Table> tableList = this.sea.extract(page);
             ++i;
 
 //            Iterate over the tables in a page
@@ -49,10 +54,16 @@ public class ReadDocumentWithTabula {
 
                 }
 
-                PDDocument document = Loader.loadPDF(new File(inputPath+documentName+ documentExtension));
+                PDDocument document = Loader.loadPDF(new File(this.path));
                 Files.write(Paths.get(tsvDirectoryPath+"table" + i+".tsv"), text.toString().getBytes());
                 text = new StringBuilder();
             }
         }
+    }
+
+    public static void main(String[] args) throws IOException {
+        ReadDocumentWithTabula reader = new ReadDocumentWithTabula("./documents/NRB.pdf");
+        reader.extractAllTables();
+
     }
 }
