@@ -1,0 +1,40 @@
+STATEMENT OF PROFIT OR LOSS (16 NPR)
+For the Year ended 31 Ashadh 2077 (15 July 2020)
+NOTE CURRENTYEAR PREVIOUS YEAR
+
+Interest income 429 13956188913  13,019.443,721
+Interest expense 430 8645778418  7,320,851,928
+MNetinterestincome 5310410495  5698.591,93
+Fee and commission income: 431 1,144.656.716 1.025,000.325
+Fee and commission expense 432 128,502,771 133.605.344
+Net fee and commission income 1,016,153,945 891,394,981
+Net interest, fee and commission income 6,326,564,440  6,589,986,775
+Met trading income 433 263,563,607 306,924,048
+Other operating income 434 122,206,758 99,537,441
+Total operating income 6.712,336,804 6,996,448,264
+Impairment charge/ (reversal) for loans and ather losses 435 548,470,483 136,755,710
+Net operating income 6,163,866,321 6,859,692,554
+Operating expense
+Personnel expenses 436 1646,839,964  1653,206,315
+Other operating expenses 437 784,499,401 726,832,851
+Depreciation & Amortisation 438 149,835,180 127,443,880
+Operating Profit 3582,691,776  4,352,119,508
+Non operating income 4.39 p
+Mon operating expense. 440 612,663 4,337,697
+Profit before income tax 3,582,078.,114 4,347,781,811
+Income tax expense 441
+
+Current Tax Expenses 1079441418  1,298,359,472
+
+Deferred Tax (Expenses)/Income 13,606,014 4,699,723
+Profit for the period 2,516,243,710 3,054,122,062
+Profit attributable to:
+
+Equity holders of the Bank 2,516,243,710 3,054,122,062
+
+Non-cantrolling interest >
+Profit for the period 2,516,243,710 3.054,122,062
+Earnings per share
+Basic earnings per share 29.71 38.05
+Diluted earnings per share 29.57 37.67
+
