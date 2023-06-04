@@ -1,7 +1,9 @@
-package com.bitflip.sanolagani.document;
+package com.bitflip.sanolagani.document.service;
 
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import technology.tabula.*;
 import technology.tabula.extractors.SpreadsheetExtractionAlgorithm;
 
@@ -11,15 +13,17 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class ReadDocumentWithTabula {
+@Service
+public class ExtractTablesFromPDF implements IExtractTablesFromPDF{
     String path;
     String documentName;
     String tsvDirectoryPath = null;
-
     PDDocument doc = null;
     SpreadsheetExtractionAlgorithm sea = null;
 
-    public ReadDocumentWithTabula(String path) throws IOException {
+//    @Autowired IExtractTablesFromPDF extractTablesFromPDF;
+    public ExtractTablesFromPDF(){}
+    public ExtractTablesFromPDF(String path) throws IOException {
         this.path = path;
         this.documentName = new File(path).getName().split("\\.")[0];
         this.tsvDirectoryPath = "src/main/resources/output/" + this.documentName+"/";
@@ -47,23 +51,19 @@ public class ReadDocumentWithTabula {
                 for(List<RectangularTextContainer> rows: table.getRows()){
 //                    Iterate over the cells in a table
                     for(RectangularTextContainer cells: rows){
-                        text.append(cells.getText().replace("\r", "").strip());
-                        text.append("\t");
+                        String value = cells.getText().replace("\r", " ").strip();
+                        if(value==null){
+                            value = "-";
+                        }
+                        text.append(value).append("\t");
                     }
                     text.append("\n");
 
                 }
 
-                PDDocument document = Loader.loadPDF(new File(this.path));
                 Files.write(Paths.get(tsvDirectoryPath+"table" + i+".tsv"), text.toString().getBytes());
                 text = new StringBuilder();
             }
         }
-    }
-
-    public static void main(String[] args) throws IOException {
-        ReadDocumentWithTabula reader = new ReadDocumentWithTabula("./documents/NRB.pdf");
-        reader.extractAllTables();
-
     }
 }
