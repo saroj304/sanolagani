@@ -34,6 +34,7 @@ public class DocumentWithTesseract {
     }
     public DocumentWithTesseract(String image_path, String output_path) {
         this.image = new File(image_path);
+        System.out.println(image_path);
         this.tesseract = new Tesseract();
         this.output_path = output_path;
         this.tesseract.setDatapath("src/main/resources/tessdata/");
@@ -46,6 +47,8 @@ public class DocumentWithTesseract {
     }
 
     public void read(File imageFile) throws IllegalArgumentException, IOException{
+    	System.out.println("up to here is ok");
+    	System.out.println(imageFile);
         this.ipimage= ImageIO.read(imageFile);
     }
 
@@ -152,7 +155,7 @@ public class DocumentWithTesseract {
 
     public static void main(String[] args) throws Exception {
         String image_name = "NRB.png";
-        String path = "src/main/resources/output/NRB/page-11.png";
+        String path = "src/main/resources/images/img_1.png";
 //        "src/main/resources/output/SBL Q4 Report 3 August 2022_2/1.png"
         DocumentWithTesseract document = new DocumentWithTesseract(
                 path,
