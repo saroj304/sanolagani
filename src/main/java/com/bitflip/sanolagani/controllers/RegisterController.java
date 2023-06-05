@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -21,6 +22,8 @@ import java.util.Map;
 import java.util.HashMap;
 
 
+import com.bitflip.sanolagani.models.User;
+import com.bitflip.sanolagani.service.UserService;
 
 
 @Controller
@@ -29,11 +32,12 @@ public class RegisterController {
 	UserService userservice;
 	@Autowired
 	BCryptPasswordEncoder passwordencoder;
+
 	@Autowired
 	EmailService emailservice;
 
     private Map<String, String> otpStore = new HashMap<>();
-	
+
 	
 	@GetMapping("/register")
 	public String registerPage(@ModelAttribute("user")User user) {
@@ -42,6 +46,7 @@ public class RegisterController {
 	
 	@PostMapping("/register")
 	public String saveUser(@Valid @ModelAttribute("user")User user ,BindingResult result) {
+
 		if(result.hasErrors()) {
 			return "signup";
 		}
@@ -52,17 +57,17 @@ public class RegisterController {
 		return "otp";
 		
 	}
+
 	@PostMapping("/otpverify")
 	public String otpVerify(@RequestParam("otp") int otp, @RequestParam("email") String email) {
 		String useremail = email;
 		String userotp = Integer.toString(otp);
-		
 		System.out.println(otpStore);
-		if (otpStore.containsKey(useremail)) {
+		if (otpStore.containsKey(email)) {
             String storedOTP = otpStore.get(useremail);
 
             if (storedOTP.equals(hashOTP(userotp))) {
-                otpStore.remove(useremail); // OTP matched, remove it from store
+                otpStore.remove(email); // OTP matched, remove it from store
                 return "login";
             }
         }
@@ -74,4 +79,5 @@ public class RegisterController {
 	  private String hashOTP(String otp) {
 	        return DigestUtils.sha256Hex(otp); // Hash the OTP for storage and comparison
 	    }
+
 }

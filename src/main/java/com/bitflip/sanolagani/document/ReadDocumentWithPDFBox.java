@@ -15,16 +15,15 @@ import java.nio.file.Paths;
 
 
 public class ReadDocumentWithPDFBox {
-    String inputPath, outputPath, documentName;
+    String outputPath, url, documentName;
     public void pdfToImage(PDDocument document){
         try {
             PDFRenderer renderer = new PDFRenderer(document);
             BufferedImage image = renderer.renderImageWithDPI(0, 300); // Render the first page with 300 DPI
 
-            File outputDirectoryPath = new File(outputPath+documentName.split("\\.")[0]);
+            File outputDirectoryPath = new File(outputPath+url.split("\\.")[0]);
             outputDirectoryPath.mkdir();
-            ImageIO.write(image, "png", new File(outputPath+documentName.split("\\.")[0]+"/1.png"));
-            System.out.println("PDF converted to image successfully!");
+            ImageIO.write(image, "png", new File(outputPath+this.documentName.split("\\.")[0]));
 
             document.close();
         } catch (Exception e) {
@@ -32,32 +31,17 @@ public class ReadDocumentWithPDFBox {
         }
     }
 
-    public ReadDocumentWithPDFBox() {
-        this.inputPath = "src/main/resources/documents/";
+    public ReadDocumentWithPDFBox(String url) throws IOException {
         this.outputPath = "src/main/resources/images/";
-        this.documentName = "SBL Q4 Report 3 August 2022_2.pdf";
+        this.url = url;
+        PDDocument document = Loader.loadPDF(new File(url));
+        File opdir = new File("src/main/resources/output/" + new File(url).getName());
+        opdir.mkdir();
     }
 
-    public static void main(String[] args) throws IOException {
-        String inputPath = "src/main/resources/documents/";
-//        String outputPath = "src/main/resources/images/";
-        String documentName = "NRB";
-        String documentExtension = ".pdf";
-        String textDirectoryPath = "src/main/resources/output/" + documentName+"/";
+    public void write(PDDocument document) throws IOException {
+        String text = new PDFTextStripper().getText(document);
 
-//        Create the text output directory if doesn't exist
-        File opdir = new File(textDirectoryPath);
-        boolean directoryCreated = opdir.mkdir();
-        System.out.println("Directory creation status: " + !directoryCreated);
-        PDDocument document = Loader.loadPDF(new File(inputPath+documentName+ documentExtension));
-
-        Files.write(Paths.get(textDirectoryPath+documentName+".html"), new PDFText2HTML().getText(document).getBytes());
-//        String text = new PDFTextStripper().getText(document);
-
-//        Files.write(Paths.get(textDirectoryPath+documentName+".txt"), text.getBytes());
-        System.out.println("Writing into the files completed.");
-
-
+        Files.write(Paths.get(".txt"), text.getBytes());
     }
-
 }

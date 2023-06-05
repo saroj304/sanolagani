@@ -13,8 +13,7 @@ public class EmailService {
     @Autowired
     private JavaMailSender mailSender;
     private String otp;
-    
-    
+
 
     public String sendEmail(String to) {
         SimpleMailMessage message = new SimpleMailMessage();
@@ -24,15 +23,12 @@ public class EmailService {
         message.setText("your otp for the registration is "+ otp);
         mailSender.send(message);
         return otp;
-     
     }
+
     public int generateOtp() {
     	Random rand = new Random();
     	int randomNum = rand.nextInt(999999 - 111111 + 1) + 111111;
     	return randomNum;
     }
-    
-
-    
-    
 }
+
