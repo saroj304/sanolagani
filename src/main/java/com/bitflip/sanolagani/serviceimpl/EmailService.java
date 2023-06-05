@@ -21,7 +21,7 @@ public class EmailService {
         otp = Integer.toString(generateOtp());
         message.setTo(to);
         message.setSubject("OTP for registration");
-        message.setText("your otp for the registration at sanolagani is "+ otp);
+        message.setText("your otp for the registration is "+ otp);
         mailSender.send(message);
         return otp;
      
