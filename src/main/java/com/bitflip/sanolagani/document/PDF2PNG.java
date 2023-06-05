@@ -32,7 +32,8 @@ public class PDF2PNG {
     }
 
     public static void main(String[] args) {
-        PDF2PNG converter = new PDF2PNG("documents/NRB.pdf", "png");
+
+        PDF2PNG converter = new PDF2PNG("src/main/java/sanolagani/documents/NRB.pdf", "png");
         try {
             converter.generateImageFromPDF();
         }catch (IOException e){
