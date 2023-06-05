@@ -61,15 +61,12 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 
-<<<<<<< HEAD
-=======
+
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 		</dependency>
-
-
->>>>>>> 8a7b388a6ae8b3d8640cc12480d406e99105cbeb
+		
 		<!-- https://mvnrepository.com/artifact/technology.tabula/tabula -->
 		<dependency>
 		    <groupId>technology.tabula</groupId>
@@ -99,36 +96,24 @@
 
 		<!-- https://mvnrepository.com/artifact/clojure-interop/java.awt -->
 		<!-- For image preprocessing -->
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 8cb02cfe1ef9f59cee1e34312d8903924f6730c9
+
     
     <!--sending email dependency -->
       <dependency>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-starter-mail</artifactId>
      </dependency>
-<<<<<<< HEAD
-
 
       <dependency>
         <groupId>commons-codec</groupId>
         <artifactId>commons-codec</artifactId>
     </dependency>
-=======
-
-
-
->>>>>>> 8a7b388a6ae8b3d8640cc12480d406e99105cbeb
-=======
-
 
       <dependency>
         <groupId>commons-codec</groupId>
         <artifactId>commons-codec</artifactId>
     </dependency>
->>>>>>> 8cb02cfe1ef9f59cee1e34312d8903924f6730c9
+
 
 	</dependencies>
 
