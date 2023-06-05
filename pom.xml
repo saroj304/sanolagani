@@ -96,9 +96,18 @@
 
 		<!-- https://mvnrepository.com/artifact/clojure-interop/java.awt -->
 		<!-- For image preprocessing -->
+    
+    <!--sending email dependency -->
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-mail</artifactId>
+     </dependency>
 
 
-
+      <dependency>
+        <groupId>commons-codec</groupId>
+        <artifactId>commons-codec</artifactId>
+    </dependency>
 
 	</dependencies>
 
