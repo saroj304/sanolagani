@@ -15,16 +15,15 @@ import java.nio.file.Paths;
 
 
 public class ReadDocumentWithPDFBox {
-    String inputPath, outputPath, documentName;
+    String outputPath, url, documentName;
     public void pdfToImage(PDDocument document){
         try {
             PDFRenderer renderer = new PDFRenderer(document);
             BufferedImage image = renderer.renderImageWithDPI(0, 300); // Render the first page with 300 DPI
 
-            File outputDirectoryPath = new File(outputPath+documentName.split("\\.")[0]);
+            File outputDirectoryPath = new File(outputPath+url.split("\\.")[0]);
             outputDirectoryPath.mkdir();
-            ImageIO.write(image, "png", new File(outputPath+documentName.split("\\.")[0]+"/1.png"));
-            System.out.println("PDF converted to image successfully!");
+            ImageIO.write(image, "png", new File(outputPath+this.documentName.split("\\.")[0]));
 
             document.close();
         } catch (Exception e) {
@@ -32,16 +31,24 @@ public class ReadDocumentWithPDFBox {
         }
     }
 
+<<<<<<< HEAD
     public ReadDocumentWithPDFBox() {
 <<<<<<< HEAD
         this.inputPath = "src/main/resources/documents/";
 =======
         this.inputPath = "D:/sanolagani/documents/";
 >>>>>>> 8a7b388a6ae8b3d8640cc12480d406e99105cbeb
+=======
+    public ReadDocumentWithPDFBox(String url) throws IOException {
+>>>>>>> 8cb02cfe1ef9f59cee1e34312d8903924f6730c9
         this.outputPath = "src/main/resources/images/";
-        this.documentName = "SBL Q4 Report 3 August 2022_2.pdf";
+        this.url = url;
+        PDDocument document = Loader.loadPDF(new File(url));
+        File opdir = new File("src/main/resources/output/" + new File(url).getName());
+        opdir.mkdir();
     }
 
+<<<<<<< HEAD
     public static void main(String[] args) throws IOException {
 <<<<<<< HEAD
         String inputPath = "src/main/resources/documents/";
@@ -65,7 +72,11 @@ public class ReadDocumentWithPDFBox {
 //        Files.write(Paths.get(textDirectoryPath+documentName+".txt"), text.getBytes());
         System.out.println("Writing into the files completed.");
 
+=======
+    public void write(PDDocument document) throws IOException {
+        String text = new PDFTextStripper().getText(document);
+>>>>>>> 8cb02cfe1ef9f59cee1e34312d8903924f6730c9
 
+        Files.write(Paths.get(".txt"), text.getBytes());
     }
-
 }

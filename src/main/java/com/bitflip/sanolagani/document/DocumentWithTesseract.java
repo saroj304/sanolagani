@@ -50,6 +50,7 @@ public class DocumentWithTesseract {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     public void read(File imageFile) throws IllegalArgumentException, IOException{
     	System.out.println("up to here is ok");
     	System.out.println(imageFile);
@@ -58,6 +59,10 @@ public class DocumentWithTesseract {
     public void read() throws IllegalArgumentException, IOException{
         this.ipimage= ImageIO.read(this.image);
 >>>>>>> 8a7b388a6ae8b3d8640cc12480d406e99105cbeb
+=======
+    public void read() throws IllegalArgumentException, IOException {
+        this.ipimage = ImageIO.read(this.image);
+>>>>>>> 8cb02cfe1ef9f59cee1e34312d8903924f6730c9
     }
 
     public BufferedImage processImg(BufferedImage ipimage,
@@ -243,6 +248,7 @@ public class DocumentWithTesseract {
         String imageName = "img_7.png";
         String pathDir = "src/main/resources/images/";
         String imagePath = pathDir + imageName;
+
 //        "src/main/resources/output/SBL Q4 Report 3 August 2022_2/1.png"
         DocumentWithTesseract document = new DocumentWithTesseract(
                 imagePath,
@@ -250,11 +256,14 @@ public class DocumentWithTesseract {
         );
         document.read();
         document.writeToFile(true);
+<<<<<<< HEAD
 
 
 >>>>>>> 8a7b388a6ae8b3d8640cc12480d406e99105cbeb
 
 
+=======
+>>>>>>> 8cb02cfe1ef9f59cee1e34312d8903924f6730c9
     }
 
 }

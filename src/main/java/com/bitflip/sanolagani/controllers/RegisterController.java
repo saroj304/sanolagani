@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 8cb02cfe1ef9f59cee1e34312d8903924f6730c9
 import org.springframework.web.bind.annotation.RequestParam;
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -20,6 +23,7 @@ import com.bitflip.sanolagani.service.UserService;
 import com.bitflip.sanolagani.serviceimpl.EmailService;
 import java.util.Map;
 import java.util.HashMap;
+<<<<<<< HEAD
 
 
 =======
@@ -28,6 +32,8 @@ import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.service.UserService;
 >>>>>>> 8a7b388a6ae8b3d8640cc12480d406e99105cbeb
 
+=======
+>>>>>>> 8cb02cfe1ef9f59cee1e34312d8903924f6730c9
 
 @Controller
 public class RegisterController {
@@ -36,12 +42,18 @@ public class RegisterController {
 	@Autowired
 	BCryptPasswordEncoder passwordencoder;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 8cb02cfe1ef9f59cee1e34312d8903924f6730c9
 	@Autowired
 	EmailService emailservice;
 
     private Map<String, String> otpStore = new HashMap<>();
+<<<<<<< HEAD
 =======
 >>>>>>> 8a7b388a6ae8b3d8640cc12480d406e99105cbeb
+=======
+>>>>>>> 8cb02cfe1ef9f59cee1e34312d8903924f6730c9
 	
 	
 	@GetMapping("/register")
@@ -51,6 +63,7 @@ public class RegisterController {
 	
 	@PostMapping("/register")
 	public String saveUser(@Valid @ModelAttribute("user")User user ,BindingResult result) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if(result.hasErrors()) {
 			return "signup";
@@ -86,12 +99,41 @@ public class RegisterController {
 	    }
 =======
 		System.out.println(result.hasErrors());
+=======
+>>>>>>> 8cb02cfe1ef9f59cee1e34312d8903924f6730c9
 		if(result.hasErrors()) {
-			return"signup";
+			return "signup";
 		}
 		user.setPassword(passwordencoder.encode(user.getPassword()));
-		userservice.saveUser(user);
-		return "index";
+		String otp = emailservice.sendEmail(user.getEmail());
+		otpStore.put(user.getEmail(), hashOTP(otp));
+
+		return "otp";
+		
 	}
+<<<<<<< HEAD
 >>>>>>> 8a7b388a6ae8b3d8640cc12480d406e99105cbeb
+=======
+	@PostMapping("/otpverify")
+	public String otpVerify(@RequestParam("otp") int otp, @RequestParam("email") String email) {
+		String useremail = email;
+		String userotp = Integer.toString(otp);
+		System.out.println(otpStore);
+		if (otpStore.containsKey(email)) {
+            String storedOTP = otpStore.get(useremail);
+
+            if (storedOTP.equals(hashOTP(userotp))) {
+                otpStore.remove(email); // OTP matched, remove it from store
+                return "login";
+            }
+        }
+
+		return "index";
+    }
+		
+
+	  private String hashOTP(String otp) {
+	        return DigestUtils.sha256Hex(otp); // Hash the OTP for storage and comparison
+	    }
+>>>>>>> 8cb02cfe1ef9f59cee1e34312d8903924f6730c9
 }
