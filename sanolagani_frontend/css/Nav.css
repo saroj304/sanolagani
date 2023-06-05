@@ -1,0 +1,16 @@
+.full__width{
+    background-color: var(--color-blue);
+}
+.nav__container{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0 10px 0;
+}
+.left ul{
+    display: flex;
+    gap: 15px;
+}
+.right ul{
+    display: flex;
+    gap: 15px;
+}
