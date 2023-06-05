@@ -22,6 +22,13 @@ public class CustomUserDetailService implements UserDetailsService {
 		User user = userrepo.findByEmail(username);
 		System.out.println(user.getFname());
 		if (user == null) {
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8a7b388a6ae8b3d8640cc12480d406e99105cbeb
+=======
+>>>>>>> 8cb02cfe1ef9f59cee1e34312d8903924f6730c9
 			throw new UsernameNotFoundException("user does not exist");
 		}
 		return new CustomUserDetail(user);
