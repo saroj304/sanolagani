@@ -1,0 +1,5 @@
+package com.bitflip.sanolagani.securityconfigurationfilerchain;
+
+public class SeurityConfiguration extends Websecuri{
+
+}

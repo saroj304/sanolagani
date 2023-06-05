@@ -1,0 +1,7 @@
+package com.bitflip.sanolagani.serviceimpl;
+
+import com.bitflip.sanolagani.service.UserService;
+
+public class UserServiceImpl implements UserService {
+
+}

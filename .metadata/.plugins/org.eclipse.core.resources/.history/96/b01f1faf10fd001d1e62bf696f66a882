@@ -1,0 +1,5 @@
+package com.bitflip.sanolagani.controller;
+
+public class HomeController {
+
+}

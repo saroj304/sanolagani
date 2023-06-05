@@ -1,0 +1,8 @@
+package com.bitflip.sanolagani.securityconfigurationfilerchain;
+
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
+@EnableWebSecurity
+public class SeurityConfiguration extends webSecurityConfigureAdapter{
+
+}

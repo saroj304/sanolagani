@@ -1,0 +1,29 @@
+package com.bitflip.sanolagani.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+import com.bitflip.sanolagani.models.User;
+import com.bitflip.sanolagani.service.UserService;
+
+@Controller
+public class RegisterController {
+	@Autowired
+	UserService userservice;
+	
+	
+	
+	@GetMapping("/register")
+	public String registerPage(@ModelAttribute("user")User user) {
+		return "signup";
+	}
+	
+	
+	public String saveUser(@ModelAttribute("user")User user) {
+		
+		userservice.saveUser(user);
+		return "index";
+	}
+}

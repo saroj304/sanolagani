@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Design by foolishdeveloper.com -->
+<title>LoginPage</title>
+
+
+
+</head>
+<body>
+
+	<div class="background">
+		<div class="shape"></div>
+		<div class="shape"></div>
+	</div>
+	<form>
+		<h3>Login Here</h3>
+
+		<div>
+			<label for="username">Username</label> <input type="text"
+				placeholder="Email or Phone" id="username">
+		</div>
+
+		<div>
+			<label for="password">Password</label> <input type="password"
+				placeholder="Password" id="password">
+		</div>
+
+		<button>Log In</button>
+		<button>
+			<a th:href="@{/register}"> Signup</a>
+		</button>
+		<div class="social">
+			<div class="go">
+				<i class="fab fa-google"></i> Google
+			</div>
+			<div class="fb">
+				<i class="fab fa-facebook"></i> Facebook
+			</div>
+		</div>
+	</form>
+</body>
+</html>
