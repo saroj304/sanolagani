@@ -23,7 +23,6 @@ public class User {
 	@Column
 	@NotBlank
 	private String lname;
-	@Column(unique = true)
 	@Email(message = "please insert valid email address")
 	@NotBlank
 	private String email;

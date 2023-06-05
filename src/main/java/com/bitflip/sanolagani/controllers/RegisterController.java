@@ -63,14 +63,12 @@ public class RegisterController {
 	public String otpVerify(@RequestParam("otp") int otp, @RequestParam("email") String email) {
 		String useremail = email;
 		String userotp = Integer.toString(otp);
-		System.out.println(otpStore);
 		if (otpStore.containsKey(email)) {
             String storedOTP = otpStore.get(useremail);
 
             if (storedOTP.equals(hashOTP(userotp))) {
                 otpStore.remove(email); // OTP matched, remove it from store
                userservice.saveUser(user);
-               System.out.println(user);
                 return "login";
             }
         }
