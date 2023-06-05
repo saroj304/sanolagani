@@ -22,7 +22,11 @@ public class SeurityConfiguration extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 	 http
 	    .authorizeRequests()
+<<<<<<< HEAD
 	    .antMatchers("/login","/register","/otpverify").permitAll()
+=======
+	    .antMatchers("/login","/register").permitAll()
+>>>>>>> 8a7b388a6ae8b3d8640cc12480d406e99105cbeb
 	    .anyRequest()
 	    .authenticated()
 	    .and()
