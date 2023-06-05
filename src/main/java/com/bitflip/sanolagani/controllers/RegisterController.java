@@ -37,6 +37,7 @@ public class RegisterController {
 	EmailService emailservice;
 
     private Map<String, String> otpStore = new HashMap<>();
+    private User user;
 
 	
 	@GetMapping("/register")
@@ -46,7 +47,7 @@ public class RegisterController {
 	
 	@PostMapping("/register")
 	public String saveUser(@Valid @ModelAttribute("user")User user ,BindingResult result) {
-
+        this.user = user;
 		if(result.hasErrors()) {
 			return "signup";
 		}
@@ -68,6 +69,8 @@ public class RegisterController {
 
             if (storedOTP.equals(hashOTP(userotp))) {
                 otpStore.remove(email); // OTP matched, remove it from store
+               userservice.saveUser(user);
+               System.out.println(user);
                 return "login";
             }
         }
