@@ -1,0 +1,21 @@
+footer{
+    background: var(--color-bg);
+}
+.footer__container{
+    display: grid;
+    grid-template-columns: 2.5fr 2fr 2fr 1fr;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+.first h5{
+    text-transform: capitalize;
+    font-weight: 400;
+    color: var(--color-gray);
+}
+.footer__list li a{
+    color: var(--color-gray);
+    font-size: 15px;
+}
+.about__link:hover{
+    margin-left: .5rem;
+}

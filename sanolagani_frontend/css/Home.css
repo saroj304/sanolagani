@@ -1,0 +1,24 @@
+.home{
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+.home__conatiner{
+    display: flex;
+    gap: 50px;
+}
+.heading__info{
+    
+}
+.heading__info h1{
+    text-transform: capitalize;
+}
+.heading_info h5{
+    color: var(--color-gray);
+}
+.home__left{
+    width: 50%;
+
+}
+.home__right{
+    width: 50%;
+}
