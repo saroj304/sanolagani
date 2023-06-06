@@ -14,15 +14,19 @@ import java.util.List;
 
 public class ReadDocumentWithTabula {
     PDDocument doc = null;
+    String filePath = null;
+    File file = null;
     public ReadDocumentWithTabula(String filePath) throws IOException {
-         this.doc = Loader.loadPDF(new File(filePath));
+         this.file = new File(filePath);
+         this.doc = Loader.loadPDF(file);
+         this.filePath = filePath;
 
     }
 
-    public void getAllTables(String filePath) throws IOException {
+    public void getAllTables() throws IOException {
         StringBuilder text= new StringBuilder();
 
-        String tsvDirectoryPath = "src/main/resources/files/";
+        String tsvDirectoryPath = "src/main/resources/tsvs/"+this.file.getName().replace(".pdf","");
 
         File opdir = new File(tsvDirectoryPath);
         boolean directoryCreated = opdir.mkdir();

@@ -34,11 +34,6 @@ public class DocumentWithTesseract {
     }
     public DocumentWithTesseract(String image_path, String output_path) {
         this.image = new File(image_path);
-
-        System.out.println(image_path);
-
-        System.out.println(image_path);
-
         this.tesseract = new Tesseract();
         this.output_path = output_path;
         this.tesseract.setDatapath("src/main/resources/tessdata/");
@@ -170,25 +165,18 @@ public class DocumentWithTesseract {
     public void writeToFile(boolean processImage) throws IOException, TesseractException {
         // doing OCR on the image
         // and storing result in string str
-        System.out.println("Inititating the process");
         List<String> lines;
         if(processImage) {
-            System.out.println("Preprocessing on the image file");
             lines = Arrays.asList(processImageAndExtractText().split("/n"));
         }
         else {
             lines = Arrays.asList(extractText().split("/n"));
         }
 
-        System.out.println("Obtained image of type: "+ this.ipimage.getType());
-
-        System.out.println("Obtained image of type: "+ this.ipimage.getType());
-
         // Write the lines to the file using the Files class
         Files.write(Paths.get(this.output_path +
                 this.image.getName()
                 .replace(".png",".txt")), lines);
-        System.out.println("Writing into the files completed.");
     }
 
 
