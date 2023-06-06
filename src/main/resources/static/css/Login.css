@@ -1,0 +1,74 @@
+.login__container{
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    position: relative;
+    
+}
+.login__left{
+    /* border: 1px solid black; */
+    width: 48%;
+}
+.login__left img{
+    width: 80%;
+    /* border: 1px solid black; */
+    margin: 0 auto;
+}
+.login__right{
+    /* border: 1px solid black; */
+    margin-top: 2rem;
+    width: 48%;
+    padding: 2rem 4rem;
+}
+.login__right form{
+    display: flex;
+    flex-direction: column;
+}
+.heading__background{
+    background: var(--color-bg);
+    border-radius: 10px;
+    margin-bottom: 3rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-around;
+}
+.heading__background h2{
+    padding: 0 20px;
+    border-radius: 10px;
+}
+.input__box{
+    line-height: 2.2rem;
+    padding: 5px 10px;
+    font-size: 15px;
+    margin-bottom: 1rem;
+    letter-spacing: .5px;
+    background: var(--color-bg);
+    width: 80%;
+    margin-left: 10%;
+    border-radius: 10px;
+    border: none;
+}
+.btn__login{
+    width: 80%;
+    font-size: 18px;
+    text-align: center;
+    margin-left: 10%;
+}
+.btn__login:hover{
+    background: var(--color-blue-variant);
+}
+.forgot__password{
+    margin-top: 1rem;
+    text-align: center;
+}
+.forgot__password:hover{
+    text-decoration: underline;
+    transition: var(--transition);
+    font-size: bold;
+}
+.active{
+    background: var(--color-blue);
+    border-radius: 10px;
+    color: var(--color-white);
+    transition: var(--transition);
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/Login.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/Header.css">
+</head>
+<body>
+    <header class='container header__container'>
+        <div>
+            <h1><a href="/" class='logo hover_none'>Sanolagani</a> </h1>
+        </div>
+        <div class='search'>
+            <input type="search" name="search" placeholder='Search' id="" />
+            <GrSearch class='search__icon' />
+        </div>
+    </header>
+    <section>
+        <div class="container login__container">
+            <div class="login__left">
+                <img th:src="@{'/photos/register.png'}" alt="image" />
+            </div>
+            <div class="login__right">
+                <div class="heading__background">
+                    <a href="user_login.html" ><h2>Login</h2></a>
+                    <a href="user_signup.html" class='active'><h2>Sign Up</h2></a>
+                </div>
+                <form th:action="@{/register}" method = "post">
+                    <input class='input__box' type="text`" placeholder='First Name' name="fname" required/>
+                    <input class='input__box' type="text" placeholder='Last Name'name="lname" required/>
+                    <input class='input__box' type="email" placeholder='Email' name="email" required/>
+                    <input class='input__box' type="number" placeholder='Mobile Number' name="mobile" required/>
+                    <input class='input__box' type="password" placeholder='Password' name="password" required/>
+                    <input class='input__box' type="password" placeholder='Password' name="c_password" required/>
+                    <input class='btn btn__login' type="submit" value='Sign Up' required/>
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

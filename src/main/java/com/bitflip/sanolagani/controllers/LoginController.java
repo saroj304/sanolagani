@@ -13,12 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class LoginController {
 @GetMapping("/login")
 	public String loginPage() {
-
-		return "home";
+		return "user_login";
 	}
 @PostMapping("/login")
 public String loginpage() {
-	return "login";
+	return "user_login";
 }
 	}
 

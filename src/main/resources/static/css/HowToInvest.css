@@ -1,0 +1,27 @@
+.howtoinvest{
+    background: var(--color-light-gray);
+    padding-bottom: 3rem;
+}
+.howtoinvest__info{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.invest__container h1{
+    margin-bottom: 1.5rem;
+    text-transform: capitalize;
+}
+.howtoinvest__info h2{
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+.text-upper{
+    text-transform: uppercase;
+    line-height: 1.7rem;
+}
+.invest__desc{
+    font-size: 15px;
+    color: var(--color-gray);
+    line-height: 1.2rem;
+    margin-top: 15px;
+}
+  
