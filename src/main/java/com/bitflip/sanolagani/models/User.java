@@ -27,8 +27,15 @@ public class User {
 	@NotBlank
 	private String email;
 	@Column
+	private String role;
+
+	@Column
 	@NotBlank
 	private String password;
+	
+	public User() {
+		this.role = "USER";
+	}
 
 	public int getId() {
 		return id;
@@ -56,6 +63,9 @@ public class User {
 
 	public String getEmail() {
 		return email;
+	}
+	public String getRole() {
+		return role;
 	}
 
 	public void setEmail(String email) {

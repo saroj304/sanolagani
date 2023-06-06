@@ -1,9 +1,12 @@
 package com.bitflip.sanolagani.models;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -23,8 +26,8 @@ public class CustomUserDetail implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+	SimpleGrantedAuthority simplegrantedauthority = new  SimpleGrantedAuthority(user.getRole());
+		return List.of(simplegrantedauthority);
 	}
 
 	@Override
