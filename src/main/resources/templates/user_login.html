@@ -29,7 +29,7 @@
                     <a th:href="@{/login}" class='active'><h2>Login</h2></a>
                     <a th:href="@{/register}"><h2>Sign Up</h2></a>
                 </div>
-                <form th:action="@{/login}" method="post">
+                <form th:action="@{/processlogin}" method="post">
                     <input class='input__box' type="email" placeholder='Email' name="email" required/>
                     <input class='input__box' type="password" placeholder='Password' name="password" required/>
                     <input class='btn btn__login' type="submit" value='Log In' required/>
