@@ -22,7 +22,7 @@ public class SeurityConfiguration extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 	 http
 	    .authorizeRequests()
-	    .antMatchers("/login","/register","/otpverify").permitAll()
+	    .antMatchers("/login","/register","/otpverify","/home","/").permitAll()
 	    .anyRequest()
 	    .authenticated()
 	    .and()
@@ -66,7 +66,7 @@ auth.authenticationProvider(daoAuthenticationProvider());
 @Override
 public void configure(WebSecurity web) throws Exception {
 	web.ignoring()
-	.antMatchers("/resources/**");
+	.antMatchers("/resources/**","/static/**","/css/**","/photos/**");
 }
 
 }
