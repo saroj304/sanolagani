@@ -42,14 +42,14 @@ public class RegisterController {
 	
 	@GetMapping("/register")
 	public String registerPage(@ModelAttribute("user")User user) {
-		return "signup";
+		return "user_signup";
 	}
 	
 	@PostMapping("/register")
 	public String saveUser(@Valid @ModelAttribute("user")User user ,BindingResult result) {
         this.user = user;
 		if(result.hasErrors()) {
-			return "signup";
+			return "user_signup";
 		}
 		user.setPassword(passwordencoder.encode(user.getPassword()));
 		String otp = emailservice.sendEmail(user.getEmail());
@@ -69,7 +69,7 @@ public class RegisterController {
             if (storedOTP.equals(hashOTP(userotp))) {
                 otpStore.remove(email); // OTP matched, remove it from store
                userservice.saveUser(user);
-                return "login";
+                return "user_login";
             }
         }
 
