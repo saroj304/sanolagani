@@ -29,9 +29,9 @@
                     <a th:href="@{/login}" class='active'><h2>Login</h2></a>
                     <a th:href="@{/register}"><h2>Sign Up</h2></a>
                 </div>
-                <form action="#">
-                    <input class='input__box' type="email" placeholder='Email' required/>
-                    <input class='input__box' type="password" placeholder='Password' required/>
+                <form th:action="@{/login}" method="post">
+                    <input class='input__box' type="email" placeholder='Email' name="email" required/>
+                    <input class='input__box' type="password" placeholder='Password' name="password" required/>
                     <input class='btn btn__login' type="submit" value='Log In' required/>
                 </form>
                 <h5 class='forgot__password'><a href="#">Forgot Password?</a></h5>
