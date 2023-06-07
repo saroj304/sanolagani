@@ -22,15 +22,15 @@ public class LoginController {
 	public String loginPage() {
 		return "user_login";
 	}
-@PostMapping("/login")
-public String loginpage(@RequestParam("email") String email,@RequestParam("password") String password) {
-	boolean bool=userlogin.verifyLogin(email,password);
-	if(bool) {
-		System.out.println(bool);
-		return "index";
-	}
-	return "user_login";
-}
+//@PostMapping("/login")
+//public String loginpage(@RequestParam("email") String email,@RequestParam("password") String password) {
+//	boolean bool=userlogin.verifyLogin(email,password);
+//	if(bool) {
+//		System.out.println(bool);
+//		return "index";
+//	}
+//	return "user_login";
+//}
 	}
 
 

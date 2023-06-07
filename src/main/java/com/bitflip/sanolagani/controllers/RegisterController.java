@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.apache.commons.codec.digest.DigestUtils;
 
+import com.bitflip.sanolagani.models.Role;
 import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.service.UserService;
 import com.bitflip.sanolagani.serviceimpl.EmailService;
@@ -52,6 +53,11 @@ public class RegisterController {
 			return "user_signup";
 		}
 		user.setPassword(passwordencoder.encode(user.getPassword()));
+		Role r=new Role();
+		 r.setDescription("manages everything");
+		 r.setName("ADMIN");
+		 System.out.println("setting role");
+		 user.addRole(r);
 		String otp = emailservice.sendEmail(user.getEmail());
 		otpStore.put(user.getEmail(), hashOTP(otp));
 
@@ -75,8 +81,6 @@ public class RegisterController {
 
 		return "index";
     }
-		
-
 	  private String hashOTP(String otp) {
 	        return DigestUtils.sha256Hex(otp); // Hash the OTP for storage and comparison
 	    }
