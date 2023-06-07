@@ -37,9 +37,11 @@ public class User {
 	@Email(message = "please insert valid email address")
 	@NotBlank
 	private String email;
+
 	@Column
 	@NotBlank
 	private String password;
+
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_role_tbl", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "role_id") })
@@ -85,12 +87,11 @@ public class User {
 		this.password = password;
 	}
 
-	public Set<Role> getRole() {
-		return role;
-	}
-
 	public void setRole(Set<Role> role) {
 		this.role = role;
+	}
+	public Set<Role> getRole() {
+		return role;
 	}
 
 	public void addRole(Role r) {

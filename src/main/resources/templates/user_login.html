@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="css/Header.css">
 </head>
 <body>
+<<<<<<< HEAD
 	<header class='container header__container'>
 		<div>
 			<h1>
@@ -45,5 +46,35 @@
 			</div>
 		</div>
 	</section>
+=======
+    <header class='container header__container'>
+        <div>
+            <h1><a href="/" class='logo hover_none'>Sanolagani</a> </h1>
+        </div>
+        <div class='search'>
+            <input type="search" name="search" placeholder='Search' id="" />
+            <GrSearch class='search__icon' />
+        </div>
+    </header>
+    <section>
+        <div class="container login__container">
+            <div class="login__left">
+                <img th:src="@{'photos/register.png'}" alt="image" />
+            </div>
+            <div class="login__right">
+                <div class="heading__background">
+                    <a th:href="@{/login}" class='active'><h2>Login</h2></a>
+                    <a th:href="@{/register}"><h2>Sign Up</h2></a>
+                </div>
+                <form th:action="@{/processlogin}" method="post">
+                    <input class='input__box' type="email" placeholder='Email' name="email" required/>
+                    <input class='input__box' type="password" placeholder='Password' name="password" required/>
+                    <input class='btn btn__login' type="submit" value='Log In' required/>
+                </form>
+                <h5 class='forgot__password'><a href="#">Forgot Password?</a></h5>
+            </div>
+        </div>
+    </section>
+>>>>>>> be829483c5b6328d119adedeb8a6a9ce2ccf0cc5
 </body>
 </html>
