@@ -28,8 +28,6 @@ public class SeurityConfiguration extends WebSecurityConfigurerAdapter{
 	 http
 	    .authorizeRequests()
 	    .antMatchers("/login","/register","/otpverify").permitAll()
-	    .anyRequest()
-	    .authenticated()
 	    .anyRequest().authenticated()
 	    .and()
 	    .formLogin()
