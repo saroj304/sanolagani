@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.bitflip.sanolagani.models.CustomUserDetail;
+import com.bitflip.sanolagani.models.Role;
 import com.bitflip.sanolagani.models.User;
 
 import com.bitflip.sanolagani.repository.UserRepo;
@@ -27,6 +28,9 @@ public class CustomUserDetailService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userrepo.findByEmail(username);
 		System.out.println(user.getFname());
+		for(Role r:user.getRole()) {
+			System.out.println(r.getName());
+		}
 		if (user == null) {
 			throw new UsernameNotFoundException("user does not exist");
 		}
