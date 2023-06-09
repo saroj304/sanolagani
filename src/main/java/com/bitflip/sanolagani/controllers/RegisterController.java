@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.apache.commons.codec.digest.DigestUtils;
 
+import com.bitflip.sanolagani.models.Company;
 import com.bitflip.sanolagani.models.Role;
 import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.service.UserService;
@@ -84,5 +85,15 @@ public class RegisterController {
 	  private String hashOTP(String otp) {
 	        return DigestUtils.sha256Hex(otp); // Hash the OTP for storage and comparison
 	    }
+	  
+	  // company register
+	  
 
-}
+		@GetMapping("/companyregister")
+		public String companySignupPage() {
+			return "company_signup";
+		}
+		@PostMapping("/register")
+		public String saveCompany(@Valid @ModelAttribute("company")Company company ,BindingResult result) {
+   return null;
+}}
