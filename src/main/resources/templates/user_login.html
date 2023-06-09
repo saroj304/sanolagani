@@ -5,9 +5,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login</title>
-<link rel="stylesheet" type="text/css" href="css/Login.css">
+<link rel="stylesheet" type="text/css" href="css/LoginSignup.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/Header.css">
+<link rel="stylesheet" type="text/css" href="css/Footer.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 	<header class='container header__container'>
@@ -17,9 +21,11 @@
 			</h1>
 		</div>
 		<div class='search'>
-			<input type="search" name="search" placeholder='Search' id="" />
-			<GrSearch class='search__icon' />
-		</div>
+            <form method="get">
+                <input type="search" name="search" placeholder='Search' id="" />
+                <button type="submit" class="search__icon"><i class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
+            </form>
+        </div>
 	</header>
 	<section>
 		<div class="container login__container">
@@ -45,6 +51,40 @@
 			</div>
 		</div>
 	</section>
+
+	    <!-- Footer -->
+		<footer>
+			<div class="container footer__container">
+				<div class="first">
+					<h1 class='logo'>Sanolagani</h1>
+					<h5>&copy; all rights are reserved 2023</h5>
+				</div>
+				<div class="second">
+					<h2>About Us</h2>
+					<ul class='footer__list'>
+						<li><a href="#" class='about__link'>Our Team</a></li>
+						<li><a href="#" class='about__link'>Careers</a></li>
+						<li><a href="#" class='about__link'>Blog</a></li>
+					</ul>
+				</div>
+				<div class="third">
+					<h2>Wrok Together</h2>
+					<ul class='footer__list'>
+						<li><a href="#" class='about__link'>Raise Capital</a></li>
+						<li><a href="#" class='about__link'>Refer a friend</a></li>
+						<li><a href="#" class='about__link'>Success stories</a></li>
+						<li><a href="#" class='about__link'>Partnership</a></li>
+					</ul>
+				</div>
+				<div class="fourth">
+					<h2>Need Help</h2>
+					<ul class='footer__list'>
+						<li><a href="#" class='about__link'>Contact us</a></li>
+						<li><a href="#" class='about__link'>Need Help</a></li>
+					</ul>
+				</div>
+			</div>
+		</footer>
    
 </body>
 </html>
