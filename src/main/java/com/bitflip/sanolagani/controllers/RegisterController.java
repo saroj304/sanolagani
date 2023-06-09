@@ -92,7 +92,7 @@ public class RegisterController {
 		public String companySignupPage() {
 			return "company_signup";
 		}
-		@PostMapping("/register")
+		@PostMapping("/companyregister")
 		public String saveCompany(@Valid @ModelAttribute("company")Company company ,BindingResult result) {
    return null;
 }}
