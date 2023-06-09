@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -22,6 +24,7 @@ import org.hibernate.annotations.ManyToAny;
 import org.springframework.stereotype.Component;
 
 @Component
+
 @Entity
 @Table(name = "user_tbl")
 public class User {
@@ -44,6 +47,20 @@ public class User {
 	@JoinTable(name = "user_role_tbl", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "role_id") })
 	private Set<Role> role = new HashSet<>();
+	
+	@OneToMany(mappedBy = "user")
+	private List<Investment> investments;
+	
+	@OneToOne(mappedBy = "user")
+    private Portfolio portfolio;
+
+	public List<Investment> getInvestments() {
+		return investments;
+	}
+
+	public void setInvestments(List<Investment> investments) {
+		this.investments = investments;
+	}
 
 	public int getId() {
 		return id;

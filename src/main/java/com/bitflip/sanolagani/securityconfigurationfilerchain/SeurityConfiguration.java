@@ -16,13 +16,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.bitflip.sanolagani.service.CustomUserDetailService;
+
+import com.bitflip.sanolagani.serviceimpl.CustomUserDetailService;
 @Configuration
 @EnableWebSecurity
 public class SeurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Autowired
 	CustomUserDetailService customuserdetailservice;
-
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 	 http
@@ -70,6 +71,8 @@ public BCryptPasswordEncoder passwordEncoder() {
 protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     auth.userDetailsService(customuserdetailservice)
         .passwordEncoder(passwordEncoder());
+   
+    
 }
 
 @Override
@@ -81,8 +84,8 @@ public void configure(WebSecurity web) throws Exception {
 //private AuthenticationSuccessHandler successHandler() {
 //    return (request, response, authentication) -> {
 //        // Redirect the user to the originally requested page
-//        response.sendRedirect(request.getRequestURI());
-//    };
+//       response.sendRedirect(request.getRequestURI());
+//   };
+//}
 }
-
 
