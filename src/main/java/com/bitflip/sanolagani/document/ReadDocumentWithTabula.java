@@ -25,8 +25,8 @@ public class ReadDocumentWithTabula {
 
     public void getAllTables() throws IOException {
         StringBuilder text= new StringBuilder();
-
-        String tsvDirectoryPath = "src/main/resources/tsvs/"+this.file.getName().replace(".pdf","");
+        String fileName = this.file.getName().replace(".pdf","");
+        String tsvDirectoryPath = "src/main/resources/tsvs/"+fileName;
 
         File opdir = new File(tsvDirectoryPath);
         boolean directoryCreated = opdir.mkdir();
@@ -56,7 +56,7 @@ public class ReadDocumentWithTabula {
                     text.append("\n");
 
                 }
-                Files.write(Paths.get(tsvDirectoryPath+"table" + i+".tsv"), text.toString().getBytes());
+                Files.write(Paths.get(tsvDirectoryPath+"/table" + i+".tsv"), text.toString().getBytes());
                 text = new StringBuilder();
             }
         }
