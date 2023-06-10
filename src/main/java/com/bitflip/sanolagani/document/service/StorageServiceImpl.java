@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 
 @Service
 public class StorageServiceImpl implements StorageService {
@@ -26,6 +27,7 @@ public class StorageServiceImpl implements StorageService {
         dir.mkdir();
         document.setFilePath(dir.getPath()+"/"+ file.getOriginalFilename());
         document.setCompanyName("ABC company");
+        document.setUploadDate(LocalDateTime.now());
 
         try {
             byte[] b = file.getBytes();
@@ -38,7 +40,7 @@ public class StorageServiceImpl implements StorageService {
         }catch (IOException e){
             System.out.println("An error occured");
         }
-//        fileRepository.save(document);
+        fileRepository.save(document);
     }
 
     @Override
