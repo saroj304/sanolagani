@@ -43,7 +43,7 @@ public class Document {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "file_id")
+    @Column(name = "file_id", unique = true, nullable = false)
     private long fileId;
 
     @Column(name = "path", unique = true, nullable = false, updatable = true)
