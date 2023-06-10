@@ -44,7 +44,7 @@ public class TablesController {
 
         @GetMapping("/table")
         public String getTable(Model model) throws IOException {
-            List<Map<String, String>> table = convertTsvToJson("src/main/resources/output/NRB/table98.tsv");
+            List<Map<String, String>> table = convertTsvToJson("D:\\sanolagani\\src\\main\\resources\\tsvs\\First Quarter\\table30.tsv");
             model.addAttribute("table",table);
             return "documents/table";
         }
