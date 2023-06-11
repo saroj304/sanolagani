@@ -30,7 +30,6 @@ public class SeurityConfiguration extends WebSecurityConfigurerAdapter{
 	    .antMatchers("/login","/register","/otpverify").permitAll()
 	    .anyRequest()
 	    .authenticated()
-	    .anyRequest().authenticated()
 	    .and()
 	    .formLogin()
 	    .loginPage("/login")
