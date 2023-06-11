@@ -3,6 +3,7 @@ package com.bitflip.sanolagani.document.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -43,10 +44,10 @@ public class TablesController {
             return jsonList;
         }
 
-        @GetMapping("/table/${firm}")
-        public String getTable(@RequestParam String firm, @org.jetbrains.annotations.NotNull Model model) throws IOException {
-            String filePath = "src/main/resources/output/${firm}";
-            List<Map<String, String>> table = convertTsvToJson("src/main/resources/output/${company}/table98.tsv");
+        @GetMapping("/table/{firm}")
+        public String getTable(@PathVariable("firm") String firm, Model model) throws IOException {
+            String filePath = "src/main/resources/output/"+firm+"/";
+            List<Map<String, String>> table = convertTsvToJson(filePath+"table47.tsv");
             model.addAttribute("table",table);
             return "documents/table";
         }
