@@ -44,8 +44,8 @@ public class TablesController {
         }
 
         @GetMapping("/table/${firm}")
-        public String getTable(@RequestParam String firm, Model model) throws IOException {
-            String filePath = $"src/main/resources/output/{firm}";
+        public String getTable(@RequestParam String firm, @org.jetbrains.annotations.NotNull Model model) throws IOException {
+            String filePath = "src/main/resources/output/${firm}";
             List<Map<String, String>> table = convertTsvToJson("src/main/resources/output/${company}/table98.tsv");
             model.addAttribute("table",table);
             return "documents/table";
