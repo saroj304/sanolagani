@@ -1,12 +1,19 @@
 package com.bitflip.sanolagani.models;
 
+//import java.util.HashSet;
 import java.util.List;
-
+//import java.util.Set;
+//
+//import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -41,17 +48,30 @@ public class Company {
 	private String timespanforraisingcapital;
 	@Column
 	private String filename;
+	@Column
+	private String pan_image_name;
+	@Column
+	private String citizenship_fname;
+	@Column
+	private String citizenship_bname;
+	@Column
+    private String role;
+    
 	@OneToOne(mappedBy = "company")
     private Portfolio portfolio;
 	
 	public Company() {
 		this.minimum_quantity=1;
+		this.role="COMPANY";
 	}
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getRole() {
+		return role;
 	}
 	public int getMinimumQuantity() {
 		return minimum_quantity;
@@ -152,5 +172,28 @@ public class Company {
 	public void setTimespanforraisingcapital(String timespanforraisingcapital) {
 		this.timespanforraisingcapital = timespanforraisingcapital;
 	}
-
+	public String getPan_image_name() {
+		return pan_image_name;
+	}
+	public void setPan_image_name(String pan_image_name) {
+		this.pan_image_name = pan_image_name;
+	}
+	public String getCitizenship_fname() {
+		return citizenship_fname;
+	}
+	public void setCitizenship_name(String citizenship_name) {
+		this.citizenship_fname = citizenship_name;
+	}
+	public Portfolio getPortfolio() {
+		return portfolio;
+	}
+	public void setPortfolio(Portfolio portfolio) {
+		this.portfolio = portfolio;
+	}
+	 public String getCitizenship_bname() {
+			return citizenship_bname;
+	}
+	public void setCitizenship_bname(String citizenship_bname) {
+			this.citizenship_bname = citizenship_bname;
+	}
 }

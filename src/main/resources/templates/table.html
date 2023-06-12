@@ -1,0 +1,40 @@
+
+                  <table>
+                    <thead>
+                      <tr >
+                        <th scope="col">
+                        </th>
+                        <th scope="col">id</th>
+                        <th scope="col">first name</th>
+                        <th scope="col">last name</th>
+                        <th scope="col">company name</th>
+                        <th scope="col">phone</th>
+                        <th scope="col">file name</th>
+                        <th scope="col">timespan</th>
+                        <th scope="col">price_per_share</th>
+                        <th scope="col">Amount to be raised</th>
+                        <th scope="col">PAN image name</th>
+                        <th scope="col">Front citizenship image name</th>
+                        <th scope="col">Back citizenship image name</th>
+                        
+                      </tr>
+                    </thead>
+                    <tbody >
+				  <tr th:each="detail: ${UnverfiedCompanies}">
+                        <td scope="col" th:text="${detail.id}" />
+                        <td scope="col" th:text="${detail.fname}" />
+                        <td scope="col" th:text="${detail.lname}" />
+                        <td scope="col" th:text="${detail.companyname}" />
+                        <td scope="col" th:text="${detail.phnum}" />
+                        <td scope="col" th:text="${detail.filename}" />
+                        <td scope="col" th:text="${detail.timespanforraisingcapital}" />
+                        <td scope="col" th:text="${detail.price_per_share}" />
+                       <td scope="col" th:text="${detail.raisedcapital}" />
+                        <td scope="col" th:text="${detail.pan_image_name}" />
+                        <td scope="col" th:text="${detail.citizenship_fname}" />
+                        <td scope="col" th:text="${detail.citizenship_bname}" /> 
+                      </tr>
+           
+                    </tbody>
+                  </table>
+     
