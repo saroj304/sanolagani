@@ -79,7 +79,7 @@ public class EmailService {
       helper.addAttachment("citizenship_front", citizen_front);
       helper.addAttachment("citizenship_back", citizen_back);
       helper.addAttachment("company_register_details", register_photo);
-    //  mailSender.send(message);
+      mailSender.send(message);
       
       //to store on the secondary memory  
       String pdf_name = company.getCompanyname()+"_"+company.getId()+"_"+ pdfFile.getOriginalFilename();
