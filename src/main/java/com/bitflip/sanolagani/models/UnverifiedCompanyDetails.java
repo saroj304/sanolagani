@@ -30,7 +30,7 @@ public class UnverifiedCompanyDetails {
 	@Column
 	private double price_per_share;
 	@Column
-	private int minimum_quantity;
+	private int maximum_quantity;
 	@Column
 	private String timespanforraisingcapital;
 	@Column
@@ -41,15 +41,11 @@ public class UnverifiedCompanyDetails {
 	private String citizenship_fname;
 	@Column
 	private String citizenship_bname;
-	@Column
-    private String role;
+	
 	@Column
 	private String raisedcapital;
 	
-public UnverifiedCompanyDetails() {
-		this.minimum_quantity=1;
-		this.role="COMPANY";
-	}
+
 	public int getId() {
 		return id;
 	}
@@ -74,9 +70,7 @@ public UnverifiedCompanyDetails() {
 	public void setPrice_per_share(double price_per_share) {
 		this.price_per_share = price_per_share;
 	}
-	public int getMinimumQuantity() {
-		return minimum_quantity;
-	}
+	
 	public String getTimespanforraisingcapital() {
 		return timespanforraisingcapital;
 	}
@@ -144,7 +138,12 @@ public UnverifiedCompanyDetails() {
 		this.raisedcapital = raisedcapital;
 	}
 	
-     
+	public int getMaximum_quantity() {
+		return maximum_quantity;
+	}
+	public void setMaximum_quantity(int maximum_quantity) {
+		this.maximum_quantity = maximum_quantity;
+	}
 	
 	
 }

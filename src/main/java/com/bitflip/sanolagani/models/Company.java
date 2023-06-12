@@ -56,6 +56,8 @@ public class Company {
 	private String citizenship_bname;
 	@Column
     private String role;
+	@Column
+	private int maximum_quantity;
     
 	@OneToOne(mappedBy = "company")
     private Portfolio portfolio;
@@ -181,7 +183,7 @@ public class Company {
 	public String getCitizenship_fname() {
 		return citizenship_fname;
 	}
-	public void setCitizenship_name(String citizenship_name) {
+	public void setCitizenship_fname(String citizenship_name) {
 		this.citizenship_fname = citizenship_name;
 	}
 	public Portfolio getPortfolio() {
@@ -196,4 +198,11 @@ public class Company {
 	public void setCitizenship_bname(String citizenship_bname) {
 			this.citizenship_bname = citizenship_bname;
 	}
+	public int getMaximum_quantity() {
+		return maximum_quantity;
+	}
+	public void setMaximum_quantity(int maximum_quantity) {
+		this.maximum_quantity = maximum_quantity;
+	}
+	
 }

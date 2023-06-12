@@ -29,7 +29,7 @@ public class SeurityConfiguration extends WebSecurityConfigurerAdapter{
 	 http
 	    .authorizeRequests()
 	    .antMatchers("/login","/register","/otpverify","/companyregister","/companyverify",
-	    		"/tables").permitAll()
+	    		"/tables","/addCompany","/tables/edit/**").permitAll()
 	    .antMatchers("/admin/**").hasRole("ADMIN")
 	    .anyRequest().authenticated()
 	    .and()

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bitflip.sanolagani.models.Company;
 import com.bitflip.sanolagani.models.UnverifiedCompanyDetails;
+import com.bitflip.sanolagani.repository.CompanyRepo;
 import com.bitflip.sanolagani.repository.UnverifiedCompanyRepo;
 import com.bitflip.sanolagani.service.AdminService;
 
@@ -15,31 +16,47 @@ import com.bitflip.sanolagani.service.AdminService;
 public class AdminServiceImpl implements AdminService {
 	@Autowired
 	UnverifiedCompanyRepo unverified_repo;
-	UnverifiedCompanyDetails unverified_details = new UnverifiedCompanyDetails();
+	@Autowired
+	CompanyRepo company_repo;
+	private UnverifiedCompanyDetails unverified_details;
 	@Override
-	public void saveUnverifiedCompany(Company company) { 
-		
-		unverified_details.setCompanyname(company.getCompanyname());
-		unverified_details.setPhnum(company.getPhnum());
-		unverified_details.setEmail(company.getEmail());
-		unverified_details.setFname(company.getFname());
-		unverified_details.setLname(company.getLname());
-		unverified_details.setSector(company.getSector());
-		unverified_details.setWebsiteurl(company.getWebsiteurl());
-		unverified_details.setCitizenship_bname(company.getCitizenship_bname());
-		unverified_details.setCitizenship_fname(company.getCitizenship_fname());
-		unverified_details.setPan_image_name(company.getPan_image_name());
-		unverified_details.setFilename(company.getFilename());
-		unverified_details.setPrice_per_share(company.getPrice_per_share());
-		unverified_details.setTimespanforraisingcapital(company.getTimespanforraisingcapital());
-		unverified_details.setRaisedcapital(company.getPreviouslyraisedcapital());
-		unverified_repo.save(unverified_details);
+	public void saveUnverifiedCompany(UnverifiedCompanyDetails un_company) { 
+		this.unverified_details=un_company;
+		unverified_repo.save(un_company);
 	}
 
 	@Override
 	public List<UnverifiedCompanyDetails> fetchAll() {
 		List<UnverifiedCompanyDetails> details = unverified_repo.findAll();
 		return details;
+	}
+
+	@Override
+	public void deleteData(int id) {
+		unverified_repo.deleteById(id);
+		
+	}
+
+	@Override
+	public void saveVerifiedCompany(int id,Company company) {
+	     unverified_details = unverified_repo.getById(id);
+	     company.setFname(unverified_details.getFname());
+	     company.setLname(unverified_details.getLname());
+	     company.setCompanyname(unverified_details.getCompanyname());
+	     company.setEmail(unverified_details.getEmail());
+	     company.setPhnum(unverified_details.getPhnum());
+	     company.setSector(unverified_details.getSector());
+	     company.setWebsiteurl(unverified_details.getWebsiteurl());
+	     company.setPreviouslyraisedcapital(unverified_details.getRaisedcapital());
+	     company.setPrice_per_share(unverified_details.getPrice_per_share());
+	     company.setTimespanforraisingcapital(unverified_details.getTimespanforraisingcapital());
+	     company.setFilename(unverified_details.getFilename());
+	     company.setPan_image_name(unverified_details.getPan_image_name());
+	     company.setCitizenship_fname(unverified_details.getCitizenship_fname());
+	     company.setCitizenship_bname(unverified_details.getCitizenship_bname());
+	     company.setMaximum_quantity(unverified_details.getMaximum_quantity());
+	     company_repo.save(company);
+	     unverified_repo.deleteById(id);
 	}
 
 }

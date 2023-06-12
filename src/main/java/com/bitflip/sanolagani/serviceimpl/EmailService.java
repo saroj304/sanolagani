@@ -58,7 +58,7 @@ public class EmailService {
     	int randomNum = rand.nextInt(999999 - 111111 + 1) + 111111;
     	return randomNum;
     }
-    public String verifyCompanyDetails(@Valid @ModelAttribute("company")Company company,
+    public String verifyCompanyDetails(@Valid @ModelAttribute("company")UnverifiedCompanyDetails un_company,
                               HttpServletRequest request,
                               BindingResult result)  throws MessagingException, IOException {
 
@@ -73,19 +73,19 @@ public class EmailService {
       
       helper.setTo("raayaseetal@gmail.com");
       helper.setSubject("company registration details");
-      helper.setText("Registration request for the company having name :"+company.getCompanyname());
+      helper.setText("Registration request for the company having name :"+un_company.getCompanyname());
 
       helper.addAttachment("company_audit_report", pdfFile);
       helper.addAttachment("citizenship_front", citizen_front);
       helper.addAttachment("citizenship_back", citizen_back);
       helper.addAttachment("company_register_details", register_photo);
-      mailSender.send(message);
+     // mailSender.send(message);
       
       //to store on the secondary memory  
-      String pdf_name = company.getCompanyname()+"_"+company.getId()+"_"+ pdfFile.getOriginalFilename();
-      String citizen_front_name = company.getCompanyname()+"_"+company.getId()+"_"+citizen_front.getOriginalFilename();
-      String citizen_back_name = company.getCompanyname()+"_"+company.getId()+"_"+citizen_back.getOriginalFilename();
-      String register_photo_name = company.getCompanyname()+"_"+company.getId()+"_"+register_photo.getOriginalFilename();
+      String pdf_name = un_company.getCompanyname()+"_"+un_company.getId()+"_"+ pdfFile.getOriginalFilename();
+      String citizen_front_name = un_company.getCompanyname()+"_"+un_company.getId()+"_"+citizen_front.getOriginalFilename();
+      String citizen_back_name = un_company.getCompanyname()+"_"+un_company.getId()+"_"+citizen_back.getOriginalFilename();
+      String register_photo_name = un_company.getCompanyname()+"_"+un_company.getId()+"_"+register_photo.getOriginalFilename();
       try {
 
     		byte[] citizen_f = citizen_front.getBytes();
@@ -108,11 +108,11 @@ public class EmailService {
     	   Path regiser_path = Paths.get(path+register_photo_name);
     	   Files.write(regiser_path, register);
     	   
-    	   company.setFilename(pdf_name);
-    	   company.setCitizenship_name(citizen_front_name);
-    	   company.setCitizenship_bname(citizen_back_name);
-    	   company.setPan_image_name(register_photo_name);
-    	  adminservice.saveUnverifiedCompany(company);
+    	   un_company.setFilename(pdf_name);
+    	   un_company.setCitizenship_fname(citizen_front_name);
+    	   un_company.setCitizenship_bname(citizen_back_name);
+    	   un_company.setPan_image_name(register_photo_name);
+    	  adminservice.saveUnverifiedCompany(un_company);
     	  System.out.println("sucess");
     	 
     	}catch(Exception e) {

@@ -96,11 +96,11 @@ public class RegisterController {
 			return "company_registration";
 		}
 		@PostMapping("/companyverify")
-		public String verifyCompany(@Valid @ModelAttribute("company") Company company,
+		public String verifyCompany(@Valid @ModelAttribute("company") UnverifiedCompanyDetails un_company,
 				                  HttpServletRequest request,
 				                  BindingResult result) {
 			try {
-			String results=emailservice.verifyCompanyDetails(company, request, result);
+			String results=emailservice.verifyCompanyDetails(un_company, request, result);
 			if(results.equalsIgnoreCase("success")) {
 				System.out.println(results);
 				return "user_login";
