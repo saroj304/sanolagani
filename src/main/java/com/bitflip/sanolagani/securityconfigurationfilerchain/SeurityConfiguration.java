@@ -32,6 +32,7 @@ public class SeurityConfiguration extends WebSecurityConfigurerAdapter{
 	    		"/tables","/addCompany","/tables/edit/**").permitAll()
 	    .antMatchers("/admin/**").hasRole("ADMIN")
 	    .anyRequest().authenticated()
+
 	    .and()
 	    .formLogin()
 	    .loginPage("/login")
