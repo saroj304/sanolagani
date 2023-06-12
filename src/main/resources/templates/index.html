@@ -9,8 +9,15 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/Nav.css">
     <link rel="stylesheet" type="text/css" href="css/Header.css">
+    <link rel="stylesheet" type="text/css" href="css/Home.css">
     <link rel="stylesheet" type="text/css" href="css/HowToInvest.css">
     <link rel="stylesheet" type="text/css" href="css/Footer.css">
+    <link rel="stylesheet" type="text/css" href="css/MostMomentum.css">
+    <link rel="stylesheet" type="text/css" href="css/MostFunded.css">
+    <link rel="stylesheet" type="text/css" href="css/Invest.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -19,8 +26,11 @@
             <h1><a href="/" class='logo hover_none'>Sanolagani</a> </h1>
         </div>
         <div class='search'>
-            <input type="search" name="search" placeholder='Search' id="" />
-            <GrSearch class='search__icon' />
+            <form method="get">
+                <input type="search" name="search" placeholder='Search' id="" />
+                <button type="submit" class="search__icon"><i
+                        class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
+            </form>
         </div>
     </header>
 
@@ -29,7 +39,7 @@
             <div class="left">
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li><a href="#" >Start Investing</a></li>
+                    <li><a href="#">Start Investing</a></li>
                     <li><a th:href="@{/register}">Raise Capital</a></li>
                     <li><a href="#">Company</a></li>
                     <li><a href="#">Learn</a></li>
@@ -41,7 +51,7 @@
                     <li><a th:href="@{/login}">Login</a></li>
                     <li><a th:href="@{/register}">Sign Up</a></li>
                 </ul>
-                
+
             </div>
         </nav>
     </div>
@@ -65,77 +75,262 @@
                     in its sole discretion.</p>
             </div>
             <div class="home__right">
-                <img th:src="@{'/photos/voklagyo.png'}" alt="heading" />
+                <img th:src="@{'/photos/voklagyoHome.png'}" alt="heading" />
             </div>
         </div>
     </section>
 
-<!-- How to Invest -->
-<section class='howtoinvest'>
-    <div class="container invest__container">
-        <h1>How to invest</h1>
-        <div class="howtoinvest__info">
-            <div class="invest__first">
-                <h2 class='gray'>1.</h2>
-                <h2 class='text-upper'>sign</h2>
-                <h2 class='text-upper'>up</h2>
-                <p class='invest__desc'>Securely create an account on Sanolagani.</p>
+    <!-- Most Momentum -->
+    <section class='momentum__section'>
+        <div class="container momentum__container">
+            <h2>Most momentum</h2>
+            <h5>Offerings that have raised the most money in the last few days</h5>
+
+            <div class="cards">
+
+                <div class="card">
+                    <a href="#"><img src="images/voklagyoHome.png" class='card__image' alt="card-image" /></a>
+
+                    <h3><a href="#">Timeplast</a></h3>
+                    <p class='desc'>The palstic that completely disintegrate...</p>
+
+                    <div class="card__score">
+                        <div class="raised">
+                            <h3>Rs. 81,341,576</h3>
+                            <p class='desc'>Raised</p>
+                        </div>
+                        <div class="investers">
+                            <h3>400</h3>
+                            <p class='desc'>Investers</p>
+                        </div>
+                        <div class="min__investment">
+                            <h3>Rs. 10,000</h3>
+                            <p class='desc'>Min. Investment</p>
+                        </div>
+                    </div>
+
+                    <div class="division">
+                        <p>Reg CF via Sanolagani Capital, Ltd.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="#"><img src="images/timeplast.webp" class='card__image' alt="card-image" /></a>
+
+                    <h3><a href="#">Timeplast</a></h3>
+                    <p class='desc'>The palstic that completely disintegrate...</p>
+
+                    <div class="card__score">
+                        <div class="raised">
+                            <h3>Rs. 81,341,576</h3>
+                            <p class='desc'>Raised</p>
+                        </div>
+                        <div class="investers">
+                            <h3>400</h3>
+                            <p class='desc'>Investers</p>
+                        </div>
+                        <div class="min__investment">
+                            <h3>Rs. 10,000</h3>
+                            <p class='desc'>Min. Investment</p>
+                        </div>
+                    </div>
+
+                    <div class="division">
+                        <p>Reg CF via Sanolagani Capital, Ltd.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="#"><img src="images/wigl.webp" class='card__image' alt="card-image" /></a>
+
+                    <h3><a href="#">Timeplast</a></h3>
+                    <p class='desc'>The palstic that completely disintegrate...</p>
+
+                    <div class="card__score">
+                        <div class="raised">
+                            <h3>Rs. 81,341,576</h3>
+                            <p class='desc'>Raised</p>
+                        </div>
+                        <div class="investers">
+                            <h3>400</h3>
+                            <p class='desc'>Investers</p>
+                        </div>
+                        <div class="min__investment">
+                            <h3>Rs. 10,000</h3>
+                            <p class='desc'>Min. Investment</p>
+                        </div>
+                    </div>
+
+                    <div class="division">
+                        <p>Reg CF via Sanolagani Capital, Ltd.</p>
+                    </div>
+                </div>
+
             </div>
-            <div class="invest__second">
-                <h2 class='gray'>2.</h2>
-                <h2 class='text-upper'>Browse</h2>
-                <h2 class='text-upper'>investment</h2>
-                <p class='invest__desc'>Review hundreds of investment opportunities, from Startups to Collectibles.</p>
+
+
+        </div>
+    </section>
+
+    <!-- Most Funded -->
+    <section class='mostfunded__section'>
+        <div class="container mostfunded__container">
+            <h2>Most momentum</h2>
+            <h5>Offerings that have raised the most money in the last few days</h5>
+
+            <div class="cards">
+                <div class="card">
+                    <a href="#"><img src="images/voklagyoHome.png" class='card__image' alt="card-image" /></a>
+
+                    <h3><a href="#">Timeplast</a></h3>
+                    <p class='desc'>The palstic that completely disintegrate...</p>
+
+                    <div class="card__score">
+                        <div class="raised">
+                            <h3>Rs. 81,341,576</h3>
+                            <p class='desc'>Raised</p>
+                        </div>
+                        <div class="investers">
+                            <h3>400</h3>
+                            <p class='desc'>Investers</p>
+                        </div>
+                        <div class="min__investment">
+                            <h3>Rs. 10,000</h3>
+                            <p class='desc'>Min. Investment</p>
+                        </div>
+                    </div>
+
+                    <div class="division">
+                        <p>Reg CF via Sanolagani Capital, Ltd.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <a href="#"><img src="images/timeplast.webp" class='card__image' alt="card-image" /></a>
+
+                    <h3><a href="#">Timeplast</a></h3>
+                    <p class='desc'>The palstic that completely disintegrate...</p>
+
+                    <div class="card__score">
+                        <div class="raised">
+                            <h3>Rs. 81,341,576</h3>
+                            <p class='desc'>Raised</p>
+                        </div>
+                        <div class="investers">
+                            <h3>400</h3>
+                            <p class='desc'>Investers</p>
+                        </div>
+                        <div class="min__investment">
+                            <h3>Rs. 10,000</h3>
+                            <p class='desc'>Min. Investment</p>
+                        </div>
+                    </div>
+
+                    <div class="division">
+                        <p>Reg CF via Sanolagani Capital, Ltd.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <a href="#"><img src="images/wigl.webp" class='card__image' alt="card-image" /></a>
+
+                    <h3><a href="#">Timeplast</a></h3>
+                    <p class='desc'>The palstic that completely disintegrate...</p>
+
+                    <div class="card__score">
+                        <div class="raised">
+                            <h3>Rs. 81,341,576</h3>
+                            <p class='desc'>Raised</p>
+                        </div>
+                        <div class="investers">
+                            <h3>400</h3>
+                            <p class='desc'>Investers</p>
+                        </div>
+                        <div class="min__investment">
+                            <h3>Rs. 10,000</h3>
+                            <p class='desc'>Min. Investment</p>
+                        </div>
+                    </div>
+
+                    <div class="division">
+                        <p>Reg CF via Sanolagani Capital, Ltd.</p>
+                    </div>
+                </div>
+
             </div>
-            <div class="invest__third">
-                <h2 class='gray'>3.</h2>
-                <h2 class='text-upper'>make</h2>
-                <h2 class='text-upper'>investment</h2>
-                <p class='invest__desc'>Submit your payment and own a financial stake in a Startup or Collectible.</p>
-            </div>
-            <div class="invest__fourth">
-                <h2 class='gray'>4.</h2>
-                <h2 class='text-upper'>hold</h2>
-                <h2 class='text-upper'>or sell</h2>
-                <p class='invest__desc'>You can continue to invest in future rounds, hold on to your investment, or sell eligible securities on Sanolagani’s investment platform.</p>
+
+
+        </div>
+    </section>
+
+    <!-- How to Invest -->
+    <section class='howtoinvest'>
+        <div class="container invest__container">
+            <h1>How to invest</h1>
+            <div class="howtoinvest__info">
+                <div class="invest__first">
+                    <h2 class='gray'>1.</h2>
+                    <h2 class='text-upper'>sign</h2>
+                    <h2 class='text-upper'>up</h2>
+                    <p class='invest__desc'>Securely create an account on Sanolagani.</p>
+                </div>
+                <div class="invest__second">
+                    <h2 class='gray'>2.</h2>
+                    <h2 class='text-upper'>Browse</h2>
+                    <h2 class='text-upper'>investment</h2>
+                    <p class='invest__desc'>Review hundreds of investment opportunities, from Startups to Collectibles.
+                    </p>
+                </div>
+                <div class="invest__third">
+                    <h2 class='gray'>3.</h2>
+                    <h2 class='text-upper'>make</h2>
+                    <h2 class='text-upper'>investment</h2>
+                    <p class='invest__desc'>Submit your payment and own a financial stake in a Startup or Collectible.
+                    </p>
+                </div>
+                <div class="invest__fourth">
+                    <h2 class='gray'>4.</h2>
+                    <h2 class='text-upper'>hold</h2>
+                    <h2 class='text-upper'>or sell</h2>
+                    <p class='invest__desc'>You can continue to invest in future rounds, hold on to your investment, or
+                        sell eligible securities on Sanolagani’s investment platform.</p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Footer -->
+    <!-- Footer -->
     <footer>
         <div class="container footer__container">
-          <div class="first">
-            <h1 class='logo'>Sanolagani</h1>
-            <h5>&copy; all rights are reserved 2023</h5>
-          </div>
-          <div class="second">
-            <h2>About us</h2>
-            <ul class='footer__list'>
-              <li><a href="#" class='about__link'>Our Team</a></li>
-              <li><a href="#" class='about__link'>Careers</a></li>
-              <li><a href="#" class='about__link'>Blog</a></li>
-            </ul>
-          </div>
-          <div class="third">
-            <h2>Wrok Together</h2>
-            <ul class='footer__list'>
-              <li><a href="#" class='about__link'>Raise Capital</a></li>
-              <li><a href="#" class='about__link'>Refer a friend</a></li>
-              <li><a href="#" class='about__link'>Success stories</a></li>
-              <li><a href="#" class='about__link'>Partnership</a></li>
-            </ul>
-          </div>
-          <div class="fourth">
-            <h2>Need help</h2>
-            <ul class='footer__list'>
-              <li><a href="#" class='about__link'>Contact us</a></li>
-              <li><a href="#" class='about__link'>Need Help</a></li>
-            </ul>
-          </div>
+            <div class="first">
+                <h1 class='logo'>Sanolagani</h1>
+                <h5>&copy; all rights are reserved 2023</h5>
+            </div>
+            <div class="second">
+                <h2>About us</h2>
+                <ul class='footer__list'>
+                    <li><a href="#" class='about__link'>Our Team</a></li>
+                    <li><a href="#" class='about__link'>Careers</a></li>
+                    <li><a href="#" class='about__link'>Blog</a></li>
+                </ul>
+            </div>
+            <div class="third">
+                <h2>Wrok Together</h2>
+                <ul class='footer__list'>
+                    <li><a href="#" class='about__link'>Raise Capital</a></li>
+                    <li><a href="#" class='about__link'>Refer a friend</a></li>
+                    <li><a href="#" class='about__link'>Success stories</a></li>
+                    <li><a href="#" class='about__link'>Partnership</a></li>
+                </ul>
+            </div>
+            <div class="fourth">
+                <h2>Need help</h2>
+                <ul class='footer__list'>
+                    <li><a href="#" class='about__link'>Contact us</a></li>
+                    <li><a href="#" class='about__link'>Need Help</a></li>
+                </ul>
+            </div>
         </div>
-      </footer>
+    </footer>
 </body>
 
 </html>
