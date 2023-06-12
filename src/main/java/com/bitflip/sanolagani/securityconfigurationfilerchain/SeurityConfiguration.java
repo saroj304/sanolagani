@@ -29,8 +29,8 @@ public class SeurityConfiguration extends WebSecurityConfigurerAdapter{
 	 http
 	    .authorizeRequests()
 	    .antMatchers("/login","/register","/otpverify").permitAll()
-	    .antMatchers("/admin/**").hasRole("ADMIN")
-	    .anyRequest().authenticated()
+	    .anyRequest()
+	    .authenticated()
 	    .and()
 	    .formLogin()
 	    .loginPage("/login")

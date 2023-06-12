@@ -16,7 +16,6 @@ public class LoginController {
 @GetMapping("/login")
 	public String loginPage() {
 	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    System.out.println(authentication.getName());
 	if (authentication == null|| authentication.getName().equals("anonymousUser")) {
 		return "user_login";
 	}else {
