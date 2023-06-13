@@ -32,28 +32,37 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@Column
-	@NotBlank
 	private String fname;
 	@Column
-	@NotBlank
 	private String lname;
 	@Email(message = "please insert valid email address")
-	@NotBlank
 	private String email;
 	@Column
-	@NotBlank
 	private String password;
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	@JoinTable(name = "user_role_tbl", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "role_id") })
-	private Set<Role> role = new HashSet<>();
+//	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+//	@JoinTable(name = "user_role_tbl", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
+//			@JoinColumn(name = "role_id") })
+//	private Set<Role> role = new HashSet<>();
 	
 	@OneToMany(mappedBy = "user")
 	private List<Investment> investments;
 	
 	@OneToOne(mappedBy = "user")
     private Portfolio portfolio;
+	
+	@Column
+	private String role;
+	
+	
+	public User() {
+		this.role = "USER";
+	}
 
+	public String getRole() {
+		return role;
+	}
+	
+	
 	public List<Investment> getInvestments() {
 		return investments;
 	}
@@ -102,16 +111,16 @@ public class User {
 		this.password = password;
 	}
 
-	public void setRole(Set<Role> role) {
-		this.role = role;
-	}
-
-	public Set<Role> getRole() {
-		return role;
-	}
-
-	public void addRole(Role r) {
-		this.role.add(r);
-	}
+//	public void setRole(Set<Role> role) {
+//		this.role = role;
+//	}
+//
+//	public Set<Role> getRole() {
+//		return role;
+//	}
+//
+//	public void addRole(Role r) {
+//		this.role.add(r);
+//	}
 
 }
