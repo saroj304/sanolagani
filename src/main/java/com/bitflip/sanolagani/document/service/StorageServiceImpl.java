@@ -2,6 +2,7 @@ package com.bitflip.sanolagani.document.service;
 
 import com.bitflip.sanolagani.document.models.Documents;
 import com.bitflip.sanolagani.document.repository.DocumentRepository;
+import com.bitflip.sanolagani.models.Company;
 import com.bitflip.sanolagani.repository.CompanyRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,8 +32,11 @@ public class StorageServiceImpl implements StorageService {
         dir.mkdir();
         file.transferTo(dir);
         int companyId = documentRepository.getCompanyId(companyName);
-        System.out.println(companyName);
-//        documents.setCompany();
+        Company company = companyRepo.getReferenceById(companyId);
+//        System.out.println(companyName);
+        documents.setCompany(company);
+        documents.setFilePath(dir.getAbsolutePath());
+
 
     }
 }

@@ -26,9 +26,10 @@ public class PDFDocumentUploadFormController {
 
     @PostMapping("/upload-document")
     public String uploadDocument(HttpServletRequest request, Documents document) throws IOException {
-       // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String companyName = "Test Company";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String companyName = auth.getName();
+        System.out.println(auth.getName());
         storageService.uploadDocument(request, companyName, document);
-        return "/";
+        return "index";
     }
 }

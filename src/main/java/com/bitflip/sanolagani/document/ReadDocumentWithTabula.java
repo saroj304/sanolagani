@@ -2,6 +2,7 @@ package com.bitflip.sanolagani.document;
 
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
+import org.springframework.web.multipart.MultipartFile;
 import technology.tabula.*;
 import technology.tabula.extractors.SpreadsheetExtractionAlgorithm;
 
@@ -12,22 +13,26 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class ReadDocumentWithTabula {
-    public static void main(String[] args) throws IOException {
+    PDDocument doc = null;
+    String filePath = null;
+    File file = null;
+    public ReadDocumentWithTabula(String filePath) throws IOException {
+         this.file = new File(filePath);
+         this.doc = Loader.loadPDF(file);
+         this.filePath = filePath;
 
-        PDDocument doc=null;
+    }
+
+    public void getAllTables() throws IOException {
         StringBuilder text= new StringBuilder();
+        String fileName = this.file.getName().replace(".pdf","");
+        String tsvDirectoryPath = "src/main/resources/tsvs/"+fileName;
 
-        String inputPath = "D:/sanolagani/documents/";
-        String documentName = "NRB";
-        String documentExtension = ".pdf";
-        String tsvDirectoryPath = "src/main/resources/output/" + documentName+"/";
-
-        doc = Loader.loadPDF(new File(inputPath+ documentName+documentExtension));
         File opdir = new File(tsvDirectoryPath);
         boolean directoryCreated = opdir.mkdir();
 
         SpreadsheetExtractionAlgorithm sea = new SpreadsheetExtractionAlgorithm();
-        PageIterator it = new ObjectExtractor(doc).extract();
+        PageIterator it = new ObjectExtractor(this.doc).extract();
 
         int i = 0;
         while (it.hasNext()) {
@@ -42,15 +47,17 @@ public class ReadDocumentWithTabula {
                 for(List<RectangularTextContainer> rows: table.getRows()){
 //                    Iterate over the cells in a table
                     for(RectangularTextContainer cells: rows){
-                        text.append(cells.getText().replace("\r", "").strip());
+                        String value = cells.getText().replace("\r", " ").strip();
+                        if(value==null){
+                            value = "-";
+                        }
+                        text.append(value);
                         text.append("\t");
                     }
                     text.append("\n");
 
                 }
-
-                PDDocument document = Loader.loadPDF(new File(inputPath+documentName+ documentExtension));
-                Files.write(Paths.get(tsvDirectoryPath+"table" + i+".tsv"), text.toString().getBytes());
+                Files.write(Paths.get(tsvDirectoryPath+"/table" + i+".tsv"), text.toString().getBytes());
                 text = new StringBuilder();
             }
             System.out.println("Found "+ j + "tables from "+ i + " page");

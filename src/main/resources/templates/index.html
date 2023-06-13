@@ -1,60 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanolagani</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/Nav.css">
-    <link rel="stylesheet" type="text/css" href="css/Header.css">
-    <link rel="stylesheet" type="text/css" href="css/Home.css">
-    <link rel="stylesheet" type="text/css" href="css/HowToInvest.css">
-    <link rel="stylesheet" type="text/css" href="css/Footer.css">
-    <link rel="stylesheet" type="text/css" href="css/MostMomentum.css">
-    <link rel="stylesheet" type="text/css" href="css/MostFunded.css">
-    <link rel="stylesheet" type="text/css" href="css/Invest.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment/head.html :: headerfiles"></head>
 
 <body>
-    <header class='container header__container'>
-        <div>
-            <h1><a href="/" class='logo hover_none'>Sanolagani</a> </h1>
-        </div>
-        <div class='search'>
-            <form method="get">
-                <input type="search" name="search" placeholder='Search' id="" />
-                <button type="submit" class="search__icon"><i
-                        class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
-            </form>
-        </div>
-    </header>
+    <header class='container header__container' th:replace="fragment/header.html :: header"></header>
 
-    <div class='full__width'>
-        <nav class='container nav__container'>
-            <div class="left">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="#">Start Investing</a></li>
-                    <li><a th:href="@{/register}">Raise Capital</a></li>
-                    <li><a href="#">Company</a></li>
-                    <li><a href="#">Learn</a></li>
-                </ul>
-            </div>
-
-            <div class="right">
-                <ul>
-                    <li><a th:href="@{/login}">Login</a></li>
-                    <li><a th:href="@{/register}">Sign Up</a></li>
-                </ul>
-
-            </div>
-        </nav>
-    </div>
+    <div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
 
     <section class='home'>
         <div class="container home__conatiner">
@@ -231,7 +182,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <a href="#"><img src="images/wigl.webp" class='card__image' alt="card-image" /></a>
+                    <a href="#"><img src="C:\Users\WannaCRY\Desktop\sanolagani\src\main\resources\images\img_1.png" class='card__image' alt="card-image" /></a>
 
                     <h3><a href="#">Timeplast</a></h3>
                     <p class='desc'>The palstic that completely disintegrate...</p>
@@ -257,8 +208,6 @@
                 </div>
 
             </div>
-
-
         </div>
     </section>
 
@@ -299,37 +248,8 @@
     </section>
 
     <!-- Footer -->
-    <footer>
-        <div class="container footer__container">
-            <div class="first">
-                <h1 class='logo'>Sanolagani</h1>
-                <h5>&copy; all rights are reserved 2023</h5>
-            </div>
-            <div class="second">
-                <h2>About us</h2>
-                <ul class='footer__list'>
-                    <li><a href="#" class='about__link'>Our Team</a></li>
-                    <li><a href="#" class='about__link'>Careers</a></li>
-                    <li><a href="#" class='about__link'>Blog</a></li>
-                </ul>
-            </div>
-            <div class="third">
-                <h2>Wrok Together</h2>
-                <ul class='footer__list'>
-                    <li><a href="#" class='about__link'>Raise Capital</a></li>
-                    <li><a href="#" class='about__link'>Refer a friend</a></li>
-                    <li><a href="#" class='about__link'>Success stories</a></li>
-                    <li><a href="#" class='about__link'>Partnership</a></li>
-                </ul>
-            </div>
-            <div class="fourth">
-                <h2>Need help</h2>
-                <ul class='footer__list'>
-                    <li><a href="#" class='about__link'>Contact us</a></li>
-                    <li><a href="#" class='about__link'>Need Help</a></li>
-                </ul>
-            </div>
-        </div>
+    <footer th:insert="fragment/footer.html :: footer">
+
     </footer>
 </body>
 
