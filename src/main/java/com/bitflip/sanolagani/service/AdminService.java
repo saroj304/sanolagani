@@ -10,5 +10,6 @@ public interface AdminService {
 	public List<UnverifiedCompanyDetails> fetchAll();
 	public void deleteData(int id);
 	public void saveVerifiedCompany(int id,Company company);
+	
    
 }
