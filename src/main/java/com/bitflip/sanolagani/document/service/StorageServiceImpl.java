@@ -25,9 +25,9 @@ public class StorageServiceImpl implements StorageService {
     public void uploadDocument(HttpServletRequest request, String companyName, Documents documents) throws IOException {
         MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
         MultipartFile file = multipartHttpServletRequest.getFile("document");
-        String path = "src/main/resources/documents/";
+        String path = "C:\\Users\\WannaCRY\\Desktop\\sanolagani\\src\\main\\resources\\documents\\";
         String documentName = file.getOriginalFilename().replace(".pdf","");
-        File dir = new File(path+documentName);
+        File dir = new File(path+documentName+"/");
         dir.mkdir();
         file.transferTo(dir);
         int companyId = documentRepository.getCompanyId(companyName);
