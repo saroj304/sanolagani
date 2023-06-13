@@ -47,8 +47,18 @@ public class EmailService {
         SimpleMailMessage message = new SimpleMailMessage();
         otp = Integer.toString(generateOtp());
         message.setTo(to);
-        message.setSubject("OTP for registration");
-        message.setText("your otp for the registration is "+ otp);
+        message.setSubject("One Time Password");
+        message.setText("Dear Sir/Madam,"
+        		+ "<br><br>ATTN : Please do not reply to this email.This mailbox is not monitored and you will not receive a response.\n"
+        		+ "<br><br>Your One Time Password (OTP ) is "+ otp+"."
+        		+ "If you have any queries, Please contact us at,\n"
+        		+ "\n"
+        		+ " sanolagani investment firm,\n"
+        		+ " guwarko,lalitpur, Nepal.\n"
+        		+ " Phone # 977-98123456789\n"
+        		+ " Email Id: support@sanolagani.com.np"
+        		+"Warm Regards,\n"
+        		+ "sanolagani investment firm.");
         mailSender.send(message);
         return otp;
     }

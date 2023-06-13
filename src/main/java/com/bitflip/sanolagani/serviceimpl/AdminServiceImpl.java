@@ -2,7 +2,6 @@ package com.bitflip.sanolagani.serviceimpl;
 
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -95,4 +94,11 @@ public class AdminServiceImpl implements AdminService {
 	        mailSender.send(message);
 	        
 	    }
+
+	@Override
+	public List<Company> getAllCompany() {
+		List<Company> companylist = company_repo.findAll();
+	
+		return companylist;
+	}
 }
