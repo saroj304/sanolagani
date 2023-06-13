@@ -25,7 +25,6 @@ public class ReadDocumentWithTabula {
         doc = Loader.loadPDF(new File(inputPath+ documentName+documentExtension));
         File opdir = new File(tsvDirectoryPath);
         boolean directoryCreated = opdir.mkdir();
-        System.out.println("Directory creation status: " + !directoryCreated);
 
         SpreadsheetExtractionAlgorithm sea = new SpreadsheetExtractionAlgorithm();
         PageIterator it = new ObjectExtractor(doc).extract();
@@ -35,9 +34,10 @@ public class ReadDocumentWithTabula {
             Page page = it.next();
             List<Table> tableList = sea.extract(page);
             ++i;
-
+            int j= 0;
 //            Iterate over the tables in a page
             for(Table table: tableList){
+                ++j;
 //                Iterate over the rows in a table
                 for(List<RectangularTextContainer> rows: table.getRows()){
 //                    Iterate over the cells in a table
@@ -53,6 +53,7 @@ public class ReadDocumentWithTabula {
                 Files.write(Paths.get(tsvDirectoryPath+"table" + i+".tsv"), text.toString().getBytes());
                 text = new StringBuilder();
             }
+            System.out.println("Found "+ j + "tables from "+ i + " page");
         }
     }
 }
