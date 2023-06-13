@@ -32,11 +32,13 @@ public class CustomUserDetail implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> authoritylist = new ArrayList<>();
 //		get the list of roles and add each to the grantedAuthority
-		Set<Role> authority = user.getRole();
-		for (Role r : authority) {
+		//Set<Role> authority = user.getRole();
+		//for (Role r : authority) {
+		String role = user.getRole();
 //		convert the authority in the form of implementation of GrantedAuthority  i.e simple granted authority and it take the rolename as the argument 
-			authoritylist.add(new SimpleGrantedAuthority(r.getName()));
-		}
+			//authoritylist.add(new SimpleGrantedAuthority(r.getName()));
+		authoritylist.add(new SimpleGrantedAuthority(role));
+	//}
 		return authoritylist;
 	}
 

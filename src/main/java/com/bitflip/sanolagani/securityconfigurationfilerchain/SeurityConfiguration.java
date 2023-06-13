@@ -28,9 +28,11 @@ public class SeurityConfiguration extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 	 http
 	    .authorizeRequests()
-	    .antMatchers("/login","/register","/otpverify").permitAll()
-	    .anyRequest()
-	    .authenticated()
+	    .antMatchers("/login","/register","/otpverify","/companyregister","/companyverify",
+	    		"/tables","/addCompany","/tables/edit/**").permitAll()
+	    .antMatchers("/admin/**").hasRole("ADMIN")
+	    .anyRequest().authenticated()
+
 	    .and()
 	    .formLogin()
 	    .loginPage("/login")

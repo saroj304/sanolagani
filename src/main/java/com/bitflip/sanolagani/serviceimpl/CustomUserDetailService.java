@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import com.bitflip.sanolagani.models.CustomUserDetail;
-import com.bitflip.sanolagani.models.Role;
+
 import com.bitflip.sanolagani.models.User;
 
 import com.bitflip.sanolagani.repository.UserRepo;
@@ -22,9 +22,10 @@ public class CustomUserDetailService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userrepo.findByEmail(username);
-		for(Role r:user.getRole()) {
-			System.out.println(r.getName());
-		}
+//		for(Role r:user.getRole()) {
+//			System.out.println(r.getName());
+//		}
+		System.out.println(user.getRole());
 		if (user == null) {
 			throw new UsernameNotFoundException("user does not exist");
 		}
