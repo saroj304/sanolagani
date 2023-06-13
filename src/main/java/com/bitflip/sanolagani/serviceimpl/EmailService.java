@@ -92,8 +92,8 @@ public class EmailService {
     		byte[] citizen_b= citizen_back.getBytes();
     		byte[] register = register_photo.getBytes();
     		
-    		String pdf_path = "/home/seetal/Desktop/sanolagani/src/main/resources/static/unverified_details/"+pdf_name;
-    		String path = "/home/seetal/Desktop/sanolagani/src/main/resources/static/unverified_details/";
+    		String pdf_path = "C:\\Users\\WannaCRY\\Desktop\\sanolagani\\src\\main\\resources\\images\\scaled\\"+pdf_name;
+    		String path = "C:\\Users\\WannaCRY\\Desktop\\sanolagani\\src\\main\\resources\\images\\scaled\\";
     		
     		File dest = new File(pdf_path);
     		pdfFile.transferTo(dest);
