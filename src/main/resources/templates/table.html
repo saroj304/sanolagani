@@ -83,10 +83,10 @@
                     <th>file name</th>
                     <th>timespan</th>
                     <th>price_per_share</th>
-                   <!-- <th>Amount to be raised</th>
+                   <th>Amount to be raised</th>
                     <th>PAN image name</th>
                     <th>Front citizenship image name</th>
-                    <th>Back citizenship image name</th> -->
+                    <th>Back citizenship image name</th>
                 </tr>
                 <tr th:each="detail: ${UnverfiedCompanies}">
                         <td th:text="${detail.id}"/>
@@ -97,10 +97,10 @@
                         <td th:text="${detail.filename}" />
                         <td th:text="${detail.timespanforraisingcapital}" />
                         <td th:text="${detail.price_per_share}" />
-                     <!--   <td th:text="${detail.raisedcapital}" />
+                      <td th:text="${detail.raisedcapital}" />
                         <td th:text="${detail.pan_image_name}" />
                         <td th:text="${detail.citizenship_fname}" />
-                        <td th:text="${detail.citizenship_bname}" /> -->
+                        <td th:text="${detail.citizenship_bname}" /> 
                         <td><button type="submit" class="btn" th:onclick="|window.location.href='/tables/edit/save/${detail.id}'|">Add</button></td>
                         <td><button class="btn btn-danger" th:onclick="|window.location.href='/tables/edit/${detail.id}'|">Delete</button></td>
                 </tr>

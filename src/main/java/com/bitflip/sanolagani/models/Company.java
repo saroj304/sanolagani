@@ -18,6 +18,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+@Component
 @Entity
 @Table(name = "company")
 public class Company {
@@ -32,6 +34,8 @@ public class Company {
 	private String companyname;
 	@Column
 	private String email;
+	@Column
+	private String password;
 	@Column
 	private String phnum;
 	@Column
@@ -203,6 +207,12 @@ public class Company {
 	}
 	public void setMaximum_quantity(int maximum_quantity) {
 		this.maximum_quantity = maximum_quantity;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 }

@@ -29,7 +29,8 @@ public class SeurityConfiguration extends WebSecurityConfigurerAdapter{
 	 http
 	    .authorizeRequests()
 	    .antMatchers("/login","/register","/otpverify","/companyregister","/companyverify",
-	    		"/tables","/addCompany","/tables/edit/**").permitAll()
+	    		"/tables","/addCompany","/tables/edit/**","/forgotpassword",
+	    		"/changepassword","/resetpassword","/updatepassword").permitAll()
 	    .antMatchers("/admin/**").hasRole("ADMIN")
 	    .anyRequest().authenticated()
 
@@ -73,6 +74,7 @@ public BCryptPasswordEncoder passwordEncoder() {
 protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     auth.userDetailsService(customuserdetailservice)
         .passwordEncoder(passwordEncoder());
+    
    
     
 }
