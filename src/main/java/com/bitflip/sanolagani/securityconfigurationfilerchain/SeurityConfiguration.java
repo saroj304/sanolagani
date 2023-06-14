@@ -71,6 +71,7 @@ public BCryptPasswordEncoder passwordEncoder() {
 protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     auth.userDetailsService(customuserdetailservice)
         .passwordEncoder(passwordEncoder());
+    
    
     
 }
