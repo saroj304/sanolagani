@@ -106,23 +106,6 @@
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 
-<<<<<<< HEAD
-		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jetbrains</groupId>
-			<artifactId>annotations</artifactId>
-			<version>RELEASE</version>
-			<scope>compile</scope>
-		</dependency>
-=======
       <dependency>
         <groupId>commons-codec</groupId>
         <artifactId>commons-codec</artifactId>
@@ -131,8 +114,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
->>>>>>> 4f89d8a7995d1a97036425b9fa5e1292152a84fc
-
 
 	</dependencies>
 
