@@ -5,7 +5,7 @@
       <ul>
         <li><a href="/">Home</a></li>
         <li><a href="#">Start Investing</a></li>
-        <li><a th:href="@{/register}">Raise Capital</a></li>
+        <li><a th:href="@{/companyregister}">Raise Capital</a></li>
         <li><a href="#">Company</a></li>
         <li><a href="#">Learn</a></li>
       </ul>
@@ -13,8 +13,15 @@
 
     <div class="right">
       <ul>
-        <li><a th:href="@{/login}">Login</a></li>
-        <li><a th:href="@{/register}">Sign Up</a></li>
+          <li sec:authorize="hasRole('Anonymous')">
+          <li><a th:href="@{/login}">Login</a></li>
+          <li><a th:href="@{/register}">Sign Up</a></li>
+          </li>
+
+          <li sec:authorize="hasRole('ROLE_USER')">
+          <li><a th:href="@{/login}">portfolio</a></li>
+          <li><a th:href="@{/register}">logout</a></li>
+          </li>
       </ul>
     </div>
   </nav>

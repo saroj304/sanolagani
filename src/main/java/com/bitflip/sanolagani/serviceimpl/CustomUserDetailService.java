@@ -15,18 +15,24 @@ import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.repository.CompanyRepo;
 import com.bitflip.sanolagani.repository.UserRepo;
 
+import javax.annotation.PostConstruct;
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class CustomUserDetailService implements UserDetailsService {
+	private final Map<String, CustomUserDetail> userRegistry = new HashMap<>();
 	@Autowired
 	UserRepo userrepo;
 	@Autowired
 	CompanyRepo company_repo;
-    
+	private Company company;
+	private User user;
   
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userrepo.findByEmail(username);
-		Company company = company_repo.findByEmail(username);
+		this.user = userrepo.findByEmail(username);
+		 this.company = company_repo.findByEmail(username);
 		if (user != null) {
 			return new CustomUserDetail(user);
 		}else if(company != null)
@@ -38,4 +44,5 @@ public class CustomUserDetailService implements UserDetailsService {
 	  
 	   
 	}
+
 }

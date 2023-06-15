@@ -1,5 +1,6 @@
 package com.bitflip.sanolagani.securityconfigurationfilerchain;
 
+import com.bitflip.sanolagani.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,12 +24,15 @@ import com.bitflip.sanolagani.serviceimpl.CustomUserDetailService;
 public class SeurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Autowired
 	CustomUserDetailService customuserdetailservice;
+
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 	 http
 	    .authorizeRequests()
-	    .antMatchers("/login","/register","/otpverify","/home","/","/table","/upload-document").permitAll()
+			 .antMatchers("/login","/register","/otpverify","/companyregister","/companyverify",
+					 "/tables","/addCompany","/tables/edit/**","/forgotpassword",
+					 "/changepassword","/resetpassword","/updatepassword","/").permitAll()
 	    .anyRequest()
 	    .authenticated()
 	    .and()
@@ -52,35 +56,25 @@ public BCryptPasswordEncoder passwordEncoder() {
 	return new BCryptPasswordEncoder();
 }
 
-//@Bean
-//public DaoAuthenticationProvider daoAuthenticationProvider() {
-//	DaoAuthenticationProvider daoauth=new DaoAuthenticationProvider();
-//	daoauth.setUserDetailsService(customuserdetailservice);
-//	daoauth.setPasswordEncoder(passwordEncoder());
-//	return daoauth;
-//}
-//
-//@Override
-//protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//auth.authenticationProvider(daoAuthenticationProvider());
-//
-//}
+
 
 
 @Override
 protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     auth.userDetailsService(customuserdetailservice)
         .passwordEncoder(passwordEncoder());
-    
-   
+
+
     
 }
 
 @Override
 public void configure(WebSecurity web) throws Exception {
 	web.ignoring()
-	.antMatchers("/resources/**","/static/**","/css/**","/photos/**");
+	.antMatchers("/resources/**","/static/**","/css/**","/photos/**", "D/**");
 }
+
+
 
 }
 

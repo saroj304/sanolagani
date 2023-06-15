@@ -18,6 +18,7 @@ import com.bitflip.sanolagani.models.User;
 
 @Service
 public class CustomUserDetail implements UserDetails {
+	String ROLE_PREFIX = "ROLE_";
 	@Autowired
 	User user;
 
@@ -32,7 +33,7 @@ public class CustomUserDetail implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> authoritylist = new ArrayList<>();
-		String role = user.getRole();
+		String role = ROLE_PREFIX+user.getRole();
 		authoritylist.add(new SimpleGrantedAuthority(role));
 		return authoritylist;
 	}

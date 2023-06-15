@@ -102,8 +102,8 @@ public class EmailService {
     		byte[] citizen_b= citizen_back.getBytes();
     		byte[] register = register_photo.getBytes();
     		
-    		String pdf_path = "C:\\Users\\WannaCRY\\Desktop\\sanolagani\\src\\main\\resources\\images\\scaled\\"+pdf_name;
-    		String path = "C:\\Users\\WannaCRY\\Desktop\\sanolagani\\src\\main\\resources\\images\\scaled\\";
+    		String pdf_path = "D:\\sanolagani\\src\\main\\resources\\images\\scaled"+pdf_name;
+    		String path = "D:\\sanolagani\\src\\main\\resources\\images\\scaled";
     		
     		File dest = new File(pdf_path);
     		pdfFile.transferTo(dest);
@@ -123,7 +123,6 @@ public class EmailService {
     	   un_company.setCitizenship_bname(citizen_back_name);
     	   un_company.setPan_image_name(register_photo_name);
     	  adminservice.saveUnverifiedCompany(un_company);
-    	  System.out.println("sucess");
     	 
     	}catch(Exception e) {
         e.printStackTrace();
