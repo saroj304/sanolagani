@@ -2,6 +2,8 @@ package com.bitflip.sanolagani.serviceimpl;
 
 import java.util.List;
 
+import com.bitflip.sanolagani.models.User;
+import com.bitflip.sanolagani.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -19,12 +21,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class AdminServiceImpl implements AdminService {
 	private static final String character = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     private static final int pwd_length = 10;
+
     @Autowired
     private JavaMailSender mailSender;
 	@Autowired
 	UnverifiedCompanyRepo unverified_repo;
 	@Autowired
 	CompanyRepo company_repo;
+	@Autowired
+	UserRepo user_repo;
 	private UnverifiedCompanyDetails unverified_details;
 	@Override
 	public void saveUnverifiedCompany(UnverifiedCompanyDetails un_company) { 
@@ -45,15 +50,15 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void saveVerifiedCompany(int id,Company company) {
+	public void saveVerifiedCompany(int id, Company company, User user) {
 		String plain_password = generatePassword();
 		String encodedPassword = encodePassword(plain_password);
 	     unverified_details = unverified_repo.getById(id);
-	      sendPasswordEmail(unverified_details.getEmail(), plain_password);
-	     company.setFname(unverified_details.getFname());
-	     company.setLname(unverified_details.getLname());
+		 sendPasswordEmail(unverified_details.getEmail(), plain_password);//sending password email after regisrtating
+	     user.setFname(unverified_details.getFname());
+	     user.setLname(unverified_details.getLname());
 	     company.setCompanyname(unverified_details.getCompanyname());
-	     company.setEmail(unverified_details.getEmail());
+	     user.setEmail(unverified_details.getEmail());
 	     company.setPhnum(unverified_details.getPhnum());
 	     company.setSector(unverified_details.getSector());
 	     company.setWebsiteurl(unverified_details.getWebsiteurl());
@@ -65,9 +70,13 @@ public class AdminServiceImpl implements AdminService {
 	     company.setCitizenship_fname(unverified_details.getCitizenship_fname());
 	     company.setCitizenship_bname(unverified_details.getCitizenship_bname());
 	     company.setMaximum_quantity(unverified_details.getMaximum_quantity());
-	     company.setPassword(encodedPassword);
+	     user.setPassword(encodedPassword);
+		 user.setRole(company.getRole());
+		 //user_repo.save(user);
+          company.setUser(user);
 	     company_repo.save(company);
-	     unverified_repo.deleteById(id);
+
+		unverified_repo.deleteById(id);
 	}
 
 	public static String generatePassword() {
@@ -83,8 +92,14 @@ public class AdminServiceImpl implements AdminService {
 	    }
 	 public static String encodePassword(String plainPassword) {
 	        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-	        return encoder.encode(plainPassword);
-	    }
+	        String encoded =  encoder.encode(plainPassword);
+		 boolean isPasswordMatches = encoder.matches(
+				 plainPassword,
+				 encoded
+		 );
+		 System.out.println(isPasswordMatches);
+          return encoded;
+	 }
 	 public  void sendPasswordEmail(String to,String password) {
 	        SimpleMailMessage message = new SimpleMailMessage();
 	        message.setTo(to);

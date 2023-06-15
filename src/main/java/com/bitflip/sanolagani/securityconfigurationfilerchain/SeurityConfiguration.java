@@ -33,6 +33,8 @@ public class SeurityConfiguration extends WebSecurityConfigurerAdapter{
 			 .antMatchers("/login","/register","/otpverify","/companyregister","/companyverify",
 					 "/tables","/addCompany","/tables/edit/**","/forgotpassword",
 					 "/changepassword","/resetpassword","/updatepassword","/").permitAll()
+			 .antMatchers()
+			 .hasAnyRole("USER","COMPANY")
 	    .anyRequest()
 	    .authenticated()
 	    .and()
@@ -61,10 +63,8 @@ public BCryptPasswordEncoder passwordEncoder() {
 
 @Override
 protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.userDetailsService(customuserdetailservice)
+	auth.userDetailsService(customuserdetailservice)
         .passwordEncoder(passwordEncoder());
-
-
     
 }
 

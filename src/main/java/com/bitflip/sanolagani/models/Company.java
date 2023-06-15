@@ -5,18 +5,7 @@ import java.util.List;
 //import java.util.Set;
 //
 //import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.springframework.stereotype.Component;
 @Component
@@ -27,15 +16,8 @@ public class Company {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@Column
-	private String fname;
-	@Column
-	private String lname;
-	@Column
 	private String companyname;
-	@Column
-	private String email;
-	@Column
-	private String password;
+
 	@Column
 	private String phnum;
 	@Column
@@ -58,10 +40,12 @@ public class Company {
 	private String citizenship_fname;
 	@Column
 	private String citizenship_bname;
-	@Column
     private String role;
 	@Column
 	private int maximum_quantity;
+	@OneToOne(cascade= CascadeType.ALL)
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private User user;
     
 	@OneToOne(mappedBy = "company")
     private Portfolio portfolio;
@@ -112,36 +96,20 @@ public class Company {
 		this.companyname = companyname;
 	}
 
-	public String getFname() {
-		return fname;
-	}
-
-	public void setFname(String fname) {
-		this.fname = fname;
-	}
-
-	public String getLname() {
-		return lname;
-	}
-
-	public void setLname(String lname) {
-		this.lname = lname;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getPhnum() {
 		return phnum;
 	}
 
 	public void setPhnum(String phnum) {
 		this.phnum = phnum;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public void setSector(String sector) {
@@ -208,11 +176,4 @@ public class Company {
 	public void setMaximum_quantity(int maximum_quantity) {
 		this.maximum_quantity = maximum_quantity;
 	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
 }

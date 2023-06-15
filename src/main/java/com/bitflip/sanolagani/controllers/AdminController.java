@@ -51,10 +51,10 @@ public class AdminController {
 	
 	
 	@GetMapping("/tables/edit/save/{id}")
-	public String addVerifiedCompany(@PathVariable("id") String ids,Company  company) {
+	public String addVerifiedCompany(@PathVariable("id") String ids,Company  company,User user) {
 		int id = Integer.parseInt(ids);
 		System.out.println(id);
-		admin_service.saveVerifiedCompany(id,company);
+		admin_service.saveVerifiedCompany(id,company,user);
 		return "redirect:/tables";
 	}
 }

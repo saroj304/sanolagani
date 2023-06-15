@@ -21,7 +21,6 @@ import java.util.Map;
 
 @Service
 public class CustomUserDetailService implements UserDetailsService {
-	private final Map<String, CustomUserDetail> userRegistry = new HashMap<>();
 	@Autowired
 	UserRepo userrepo;
 	@Autowired
@@ -32,12 +31,11 @@ public class CustomUserDetailService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		this.user = userrepo.findByEmail(username);
-		 this.company = company_repo.findByEmail(username);
+		System.out.println(user.getEmail() + " " + user.getPassword());
 		if (user != null) {
 			return new CustomUserDetail(user);
-		}else if(company != null)
-			return new CustomCompanyDetail(company);
-		else {
+		}
+	 else {
 			throw new UsernameNotFoundException("user does not exist");
 
 		}
