@@ -32,24 +32,13 @@ public class SeurityConfiguration extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 	 http
 	    .authorizeRequests()
-<<<<<<< HEAD
+
 	    .antMatchers("/login","/register","/otpverify","/companyregister","/companyverify",
 	    		"/tables","/addCompany","/tables/edit/**","/forgotpassword",
 	    		"/changepassword","/resetpassword","/updatepassword","/",
 	    		"/raisecapital").permitAll()
 	    .antMatchers("/admin/**").hasRole("ADMIN")
 	    .anyRequest().authenticated()
-
-
-=======
-			 .antMatchers("/login","/register","/otpverify","/companyregister","/companyverify",
-					 "/tables","/addCompany","/tables/edit/**","/forgotpassword",
-					 "/changepassword","/resetpassword","/updatepassword","/","/logout","/company/**").permitAll()
-			 .antMatchers()
-			 .hasAnyRole("USER","COMPANY")
-	    .anyRequest()
-	    .authenticated()
->>>>>>> 7fba46f5d3eef9f9e466dd5e7bf08d81f4407eb4
 	    .and()
 	    .formLogin()
 	    .loginPage("/login")
@@ -71,10 +60,6 @@ public BCryptPasswordEncoder passwordEncoder() {
 	return new BCryptPasswordEncoder();
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 7fba46f5d3eef9f9e466dd5e7bf08d81f4407eb4
 
 
 @Override

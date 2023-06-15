@@ -28,12 +28,7 @@ public class HomeController {
 		Optional<List<Company>> result = Optional.ofNullable(companylist);
 		if (result != null) {
 			model.addAttribute("companylist", companylist);
-<<<<<<< HEAD
 			return "index";
-=======
-			for (Company company : companylist)
-				return "index";
->>>>>>> 7fba46f5d3eef9f9e466dd5e7bf08d81f4407eb4
 		}
 		return "index";
 	}
