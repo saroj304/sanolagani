@@ -1,13 +1,9 @@
 package com.bitflip.sanolagani.controllers;
 
-import java.net.http.HttpRequest;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,16 +26,14 @@ public class HomeController {
 		recommedationinit.getAuthenticUser();
 		List<Company> companylist = adminservice.getAllCompany();
 		Optional<List<Company>> result = Optional.ofNullable(companylist);
-		if(result==null) {
-			return "index";
-		}else {
+		if (result != null) {
 			model.addAttribute("companylist", companylist);
-			for(Company company:companylist)
-				System.out.println(company.getMinimumQuantity());
-			return "index";
+			for (Company company : companylist)
+				return "index";
 		}
-		}
-		@GetMapping("/logout")
+		return "index";
+	}
+	@GetMapping("/logout")
 	public String logout(HttpServletRequest request){
 			//HttpStatusReturningLogoutSuccessHandler hs=new HttpStatusReturningLogoutSuccessHandler();
 			request.getSession(false).invalidate();
