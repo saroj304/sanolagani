@@ -35,6 +35,7 @@ public class SeurityConfiguration extends WebSecurityConfigurerAdapter{
 	    .antMatchers("/admin/**").hasRole("ADMIN")
 	    .anyRequest().authenticated()
 
+
 	    .and()
 	    .formLogin()
 	    .loginPage("/login")
@@ -72,7 +73,6 @@ public void configure(WebSecurity web) throws Exception {
 	web.ignoring()
 	.antMatchers("/resources/**","/static/**","/css/**","/photos/**");
 }
-
 
 }
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,6 +14,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+<<<<<<< HEAD
 	<header class='container header__container'>
 		<div>
 			<h1>
@@ -21,6 +22,10 @@
 			</h1>
 		</div>
 	</header>
+=======
+	<header class='container header__container' th:replace="fragment/header.html :: header"></header>
+
+>>>>>>> 15e5783830e377a6b47edc7c883b0c69487871da
 	<section>
 		<div class="container login__container">
 			<div class="login__left">
@@ -47,38 +52,10 @@
 	</section>
 
 	    <!-- Footer -->
-		<footer>
-			<div class="container footer__container">
-				<div class="first">
-					<h1 class='logo'>Sanolagani</h1>
-					<h5>&copy; all rights are reserved 2023</h5>
-				</div>
-				<div class="second">
-					<h2>About Us</h2>
-					<ul class='footer__list'>
-						<li><a href="#" class='about__link'>Our Team</a></li>
-						<li><a href="#" class='about__link'>Careers</a></li>
-						<li><a href="#" class='about__link'>Blog</a></li>
-					</ul>
-				</div>
-				<div class="third">
-					<h2>Wrok Together</h2>
-					<ul class='footer__list'>
-						<li><a href="#" class='about__link'>Raise Capital</a></li>
-						<li><a href="#" class='about__link'>Refer a friend</a></li>
-						<li><a href="#" class='about__link'>Success stories</a></li>
-						<li><a href="#" class='about__link'>Partnership</a></li>
-					</ul>
-				</div>
-				<div class="fourth">
-					<h2>Need Help</h2>
-					<ul class='footer__list'>
-						<li><a href="#" class='about__link'>Contact us</a></li>
-						<li><a href="#" class='about__link'>Need Help</a></li>
-					</ul>
-				</div>
-			</div>
-		</footer>
+
+	<footer th:insert="fragment/footer.html :: footer">
+
+	</footer>
    
 </body>
 </html>
