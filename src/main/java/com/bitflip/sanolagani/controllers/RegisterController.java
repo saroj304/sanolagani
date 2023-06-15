@@ -165,7 +165,17 @@ public class RegisterController {
         public String updatePassword(@RequestParam("email") String email,@RequestParam("password") String password) {
         	userservice.updatePassword(email,password);
         	return "redirect:/login";
-        	
+        }
+        @GetMapping("/raisecapital")
+        public String companyRegister() {
+        	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    		if (authentication == null|| authentication.getName().equals("anonymousUser")) {
+        	return "company_registration";
+    		}
+    		else {
+    			
+    			return "redirect:/home";
+    		}
         }
         
 }

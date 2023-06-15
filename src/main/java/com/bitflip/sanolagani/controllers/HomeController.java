@@ -28,8 +28,6 @@ public class HomeController {
 			return "index";
 		}else {
 			model.addAttribute("companylist", companylist);
-			for(Company company:companylist)
-				System.out.println(company.getMinimumQuantity());
 			return "index";
 		}
 		}

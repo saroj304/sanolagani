@@ -41,7 +41,7 @@
                     </p>
 
                     <form th:action="@{/otpverify}" method="post">
-                        <input class="otp__input" type="email" th:placeholder="${email}" name="email" th:value="${email}" hidden readonly>
+                        <input class="otp__input" type="email" th:placeholder="email" name="email" th:value="${email}" hidden readonly>
                         <input class="otp__input" type="number" placeholder="OTP" name="otp">
                         <input type="submit" class="btn" value="Validate OTP">
                     </form>

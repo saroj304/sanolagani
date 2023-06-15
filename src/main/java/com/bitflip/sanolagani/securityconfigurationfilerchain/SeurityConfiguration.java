@@ -30,7 +30,8 @@ public class SeurityConfiguration extends WebSecurityConfigurerAdapter{
 	    .authorizeRequests()
 	    .antMatchers("/login","/register","/otpverify","/companyregister","/companyverify",
 	    		"/tables","/addCompany","/tables/edit/**","/forgotpassword",
-	    		"/changepassword","/resetpassword","/updatepassword").permitAll()
+	    		"/changepassword","/resetpassword","/updatepassword","/",
+	    		"/raisecapital").permitAll()
 	    .antMatchers("/admin/**").hasRole("ADMIN")
 	    .anyRequest().authenticated()
 
@@ -55,19 +56,6 @@ public BCryptPasswordEncoder passwordEncoder() {
 	return new BCryptPasswordEncoder();
 }
 
-//@Bean
-//public DaoAuthenticationProvider daoAuthenticationProvider() {
-//	DaoAuthenticationProvider daoauth=new DaoAuthenticationProvider();
-//	daoauth.setUserDetailsService(customuserdetailservice);
-//	daoauth.setPasswordEncoder(passwordEncoder());
-//	return daoauth;
-//}
-//
-//@Override
-//protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//auth.authenticationProvider(daoAuthenticationProvider());
-//
-//}
 
 
 @Override
@@ -85,11 +73,6 @@ public void configure(WebSecurity web) throws Exception {
 	.antMatchers("/resources/**","/static/**","/css/**","/photos/**");
 }
 
-//private AuthenticationSuccessHandler successHandler() {
-//    return (request, response, authentication) -> {
-//        // Redirect the user to the originally requested page
-//       response.sendRedirect(request.getRequestURI());
-//   };
-//}
+
 }
 

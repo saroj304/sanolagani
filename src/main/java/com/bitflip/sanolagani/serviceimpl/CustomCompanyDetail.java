@@ -14,7 +14,8 @@ import com.bitflip.sanolagani.models.Company;
 
 @Service
 public class CustomCompanyDetail implements UserDetails{
-	
+	String ROLE_PREFIX = "ROLE_";
+
 	@Autowired
 	Company company;
 	
@@ -31,7 +32,7 @@ public class CustomCompanyDetail implements UserDetails{
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> authoritylist = new ArrayList<>();
-		String role = company.getRole();
+		String role = ROLE_PREFIX+company.getRole();
 		authoritylist.add(new SimpleGrantedAuthority(role));
 			return authoritylist;
 	}
