@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <style>
         #customers {
@@ -37,8 +36,6 @@
     <link rel="stylesheet" href="css/Nav.css">
     <link rel="stylesheet" href="css/company_table.css">
 </head>
-
-
     <!-- main header -->
     <header class='container header__container'>
         <div>
@@ -75,34 +72,37 @@
 
             <table id="customers">
                 <tr>
-                    <th>id</th>
-                    <th>first name</th>
-                    <th>last name</th>
-                    <th>company name</th>
+                    <th>company</th>
                     <th>phone</th>
-                    <th>file name</th>
-                    <th>timespan</th>
-                    <th>price_per_share</th>
-                   <th>Amount to be raised</th>
-                    <th>PAN image name</th>
-                    <th>Front citizenship image name</th>
-                    <th>Back citizenship image name</th>
+                    <th>file</th>
+                    <th>time</th>
+                    <th>PPS</th>
+                   <th>Amount</th>
+                    <th>PAN</th>
+                    <th>Cit front</th>
+                    <th>Cit back</th>
+                    <th>Action</th>
                 </tr>
                 <tr th:each="detail: ${UnverfiedCompanies}">
-                        <td th:text="${detail.id}"/>
-                        <td th:text="${detail.fname}" />
-                        <td th:text="${detail.lname}" />
-                        <td th:text="${detail.companyname}" />
-                        <td th:text="${detail.phnum}" />
-                        <td th:text="${detail.filename}" />
-                        <td th:text="${detail.timespanforraisingcapital}" />
-                        <td th:text="${detail.price_per_share}" />
-                      <td th:text="${detail.raisedcapital}" />
-                        <td th:text="${detail.pan_image_name}" />
-                        <td th:text="${detail.citizenship_fname}" />
-                        <td th:text="${detail.citizenship_bname}" /> 
-                        <td><button type="submit" class="btn" th:onclick="|window.location.href='/tables/edit/save/${detail.id}'|">Add</button></td>
-                        <td><button class="btn btn-danger" th:onclick="|window.location.href='/tables/edit/${detail.id}'|">Delete</button></td>
+                    <td> <a th:text="${detail.companyname}"></a></td>
+                    <td> <a th:text="${detail.phnum}"></a></td>
+                    <td><a th:text="${detail.filename}" th:href="@{D:\sanolagani\src\main\resources\images\{pan} (pan=${detail.pan_image_name}) }"></a></td>
+                    <td><p th:text="${detail.timespanforraisingcapital}"></p></td>
+                    <td><p th:text="${detail.price_per_share}" ></p></td>
+                    <td><p th:text="${detail.raisedcapital}"></p></td>
+                    <td>
+                        <a th:text="${detail.pan_image_name}" th:href="@{D:\sanolagani\src\main\resources\images\{pan} (pan=${detail.pan_image_name}) }"></a>
+                    </td>
+                    <td>
+                        <a th:text="${detail.citizenship_fname}" th:href="@{D:\sanolagani\src\main\resources\images\{pan} (pan=${detail.citizenship_fname}) }"></a>
+                    </td>
+                    <td>
+                        <a th:text="${detail.citizenship_bname}" th:href="@{D:\sanolagani\src\main\resources\images\{pan} (pan=${detail.citizenship_bname}) }"> </a>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn" th:onclick="|window.location.href='/tables/edit/save/${detail.id}'|">Add</button>
+                        <button class="btn btn-danger" th:onclick="|window.location.href='/tables/edit/${detail.id}'|">Delete</button>
+                    </td>
                 </tr>
             </table>
         </div>

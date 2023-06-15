@@ -26,7 +26,7 @@ import org.springframework.stereotype.Component;
 @Component
 
 @Entity
-@Table(name = "user_tbl")
+@Table(name = "user")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,17 +43,19 @@ public class User {
 //	@JoinTable(name = "user_role_tbl", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
 //			@JoinColumn(name = "role_id") })
 //	private Set<Role> role = new HashSet<>();
-	
-	@OneToMany(mappedBy = "user")
+	@OneToOne(mappedBy = "user")
+	private Company company;
+
+@OneToMany(mappedBy = "user")
 	private List<Investment> investments;
 	
 	@OneToOne(mappedBy = "user")
     private Portfolio portfolio;
-	
+
 	@Column
 	private String role;
-	
-	
+
+
 	public User() {
 		this.role = "USER";
 	}
@@ -91,6 +93,10 @@ public class User {
 		return lname;
 	}
 
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	public void setLname(String lname) {
 		this.lname = lname;
 	}
@@ -111,7 +117,14 @@ public class User {
 		this.password = password;
 	}
 
-//	public void setRole(Set<Role> role) {
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+	//	public void setRole(Set<Role> role) {
 //		this.role = role;
 //	}
 //

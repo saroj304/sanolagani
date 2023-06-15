@@ -7,8 +7,10 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,7 @@ import com.bitflip.sanolagani.models.User;
 
 @Service
 public class CustomUserDetail implements UserDetails {
+	String ROLE_PREFIX = "ROLE_";
 	@Autowired
 	User user;
 
@@ -32,7 +35,7 @@ public class CustomUserDetail implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> authoritylist = new ArrayList<>();
-		String role = user.getRole();
+		String role = ROLE_PREFIX+user.getRole();
 		authoritylist.add(new SimpleGrantedAuthority(role));
 		return authoritylist;
 	}
@@ -45,7 +48,7 @@ public class CustomUserDetail implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
+
 		return user.getEmail();
 	}
 
@@ -72,5 +75,7 @@ public class CustomUserDetail implements UserDetails {
 		// TODO Auto-generated method stub
 		return true;
 	}
-
+	public String getRole(){
+		return user.getRole();
+	}
 }
