@@ -12,6 +12,8 @@ import com.bitflip.sanolagani.models.Company;
 import com.bitflip.sanolagani.service.AdminService;
 import com.bitflip.sanolagani.serviceimpl.RecommendationInitializer;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class HomeController {
 	@Autowired
@@ -24,11 +26,23 @@ public class HomeController {
 		recommedationinit.getAuthenticUser();
 		List<Company> companylist = adminservice.getAllCompany();
 		Optional<List<Company>> result = Optional.ofNullable(companylist);
-		if(result==null) {
-			return "index";
-		}else {
+		if (result != null) {
 			model.addAttribute("companylist", companylist);
+<<<<<<< HEAD
 			return "index";
+=======
+			for (Company company : companylist)
+				return "index";
+>>>>>>> 7fba46f5d3eef9f9e466dd5e7bf08d81f4407eb4
 		}
+		return "index";
+	}
+	@GetMapping("/logout")
+	public String logout(HttpServletRequest request){
+			//HttpStatusReturningLogoutSuccessHandler hs=new HttpStatusReturningLogoutSuccessHandler();
+			request.getSession(false).invalidate();
+
+			return "redirect:/home";
 		}
+
 }

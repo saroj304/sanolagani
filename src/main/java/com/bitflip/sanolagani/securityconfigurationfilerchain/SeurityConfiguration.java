@@ -1,5 +1,6 @@
 package com.bitflip.sanolagani.securityconfigurationfilerchain;
 
+import com.bitflip.sanolagani.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,16 +19,20 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 import com.bitflip.sanolagani.serviceimpl.CustomUserDetailService;
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
+
 @Configuration
 @EnableWebSecurity
 public class SeurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Autowired
 	CustomUserDetailService customuserdetailservice;
+
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 	 http
 	    .authorizeRequests()
+<<<<<<< HEAD
 	    .antMatchers("/login","/register","/otpverify","/companyregister","/companyverify",
 	    		"/tables","/addCompany","/tables/edit/**","/forgotpassword",
 	    		"/changepassword","/resetpassword","/updatepassword","/",
@@ -36,6 +41,15 @@ public class SeurityConfiguration extends WebSecurityConfigurerAdapter{
 	    .anyRequest().authenticated()
 
 
+=======
+			 .antMatchers("/login","/register","/otpverify","/companyregister","/companyverify",
+					 "/tables","/addCompany","/tables/edit/**","/forgotpassword",
+					 "/changepassword","/resetpassword","/updatepassword","/","/logout","/company/**").permitAll()
+			 .antMatchers()
+			 .hasAnyRole("USER","COMPANY")
+	    .anyRequest()
+	    .authenticated()
+>>>>>>> 7fba46f5d3eef9f9e466dd5e7bf08d81f4407eb4
 	    .and()
 	    .formLogin()
 	    .loginPage("/login")
@@ -46,8 +60,8 @@ public class SeurityConfiguration extends WebSecurityConfigurerAdapter{
 	    .loginProcessingUrl("/processlogin")
 	    .permitAll()
 	    .and()
-	    .logout()
-	    .logoutUrl("/logout")
+			 .logout()
+			 .logoutSuccessUrl("/logout")
 	    .and()
 	    .exceptionHandling();
 	     
@@ -57,22 +71,26 @@ public BCryptPasswordEncoder passwordEncoder() {
 	return new BCryptPasswordEncoder();
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7fba46f5d3eef9f9e466dd5e7bf08d81f4407eb4
 
 
 @Override
 protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.userDetailsService(customuserdetailservice)
+	auth.userDetailsService(customuserdetailservice)
         .passwordEncoder(passwordEncoder());
-    
-   
     
 }
 
 @Override
 public void configure(WebSecurity web) throws Exception {
 	web.ignoring()
-	.antMatchers("/resources/**","/static/**","/css/**","/photos/**");
+	.antMatchers("/resources/**","/static/**","/css/**","/photos/**", "D/**");
 }
+
+
 
 }
 
