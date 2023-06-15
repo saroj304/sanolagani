@@ -37,6 +37,5 @@ public class StorageServiceImpl implements StorageService {
         documents.setCompany(company);
         documents.setFilePath(dir.getAbsolutePath());
 
-
     }
 }
