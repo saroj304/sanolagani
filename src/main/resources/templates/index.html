@@ -7,30 +7,6 @@
 
     <div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
 
-    <section class='home'>
-        <div class="container home__conatiner">
-            <div class="home__left">
-                <div class="heading__info">
-                    <h1>Invest in Voklagyo</h1>
-                    <h5 class='gray'>Feeding the distanced customer with taste.</h5>
-                </div>
-
-                <a href="#" class='btn mt-20 mb-20'> Invest Now</a>
-
-                <p class='gray f-13'>This Reg A+ offering is made available through Sanolagani Primary.
-                    This investment is speculative, illiquid, and involves a high degree of
-                    risk, including possible loss of your entire investment. For more
-                    information about this offering, please view Bhoklagyo’s Offering Circular
-                    and Related Risks. In addition, as described in the Offering Circular,
-                    the Company retains the right to continue the offering beyond the Termination Date.
-                    in its sole discretion.</p>
-            </div>
-            <div class="home__right">
-                <img th:src="@{'/photos/voklagyoHome.png'}" alt="heading" />
-            </div>
-        </div>
-    </section>
-
     <!-- Most Momentum -->
     <section class='momentum__section'>
         <div class="container momentum__container">
@@ -40,9 +16,10 @@
             <div class="cards">
 
                 <div class="card">
-                    <a href="#"><img src="images/voklagyoHome.png" class='card__image' alt="card-image" /></a>
-
-                    <h3><a href="#">Timeplast</a></h3>
+                    <a href="">
+                        <img src="images/voklagyoHome.png" class='card__image' alt="card-image" />
+                        <h3>Timeplast</h3>
+                    </a>
                     <p class='desc'>The palstic that completely disintegrate...</p>
 
                     <div class="card__score">
@@ -247,11 +224,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer th:insert="fragment/footer.html :: footer">
 
-    </footer>
 </body>
-
->>>>>>> c3f61885db5e63133e72fafe71a786814d16036e
 </html>
