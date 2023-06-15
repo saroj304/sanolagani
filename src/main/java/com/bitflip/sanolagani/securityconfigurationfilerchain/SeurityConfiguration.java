@@ -19,6 +19,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 import com.bitflip.sanolagani.serviceimpl.CustomUserDetailService;
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
+
 @Configuration
 @EnableWebSecurity
 public class SeurityConfiguration extends WebSecurityConfigurerAdapter{
@@ -32,7 +34,7 @@ public class SeurityConfiguration extends WebSecurityConfigurerAdapter{
 	    .authorizeRequests()
 			 .antMatchers("/login","/register","/otpverify","/companyregister","/companyverify",
 					 "/tables","/addCompany","/tables/edit/**","/forgotpassword",
-					 "/changepassword","/resetpassword","/updatepassword","/").permitAll()
+					 "/changepassword","/resetpassword","/updatepassword","/","/logout").permitAll()
 			 .antMatchers()
 			 .hasAnyRole("USER","COMPANY")
 	    .anyRequest()
@@ -47,8 +49,8 @@ public class SeurityConfiguration extends WebSecurityConfigurerAdapter{
 	    .loginProcessingUrl("/processlogin")
 	    .permitAll()
 	    .and()
-	    .logout()
-	    .logoutUrl("/logout")
+			 .logout()
+			 .logoutSuccessUrl("/logout")
 	    .and()
 	    .exceptionHandling();
 	     
