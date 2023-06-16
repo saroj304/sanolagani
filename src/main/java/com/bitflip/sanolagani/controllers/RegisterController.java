@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -107,24 +108,33 @@ public class RegisterController {
 
 
 		@GetMapping("/companyregister")
-		public String companySignupPage() {
+		public String companySignupPage(@ModelAttribute("un_company") UnverifiedCompanyDetails un_company) {
 			return "company_registration";
 		}
 		@PostMapping("/companyverify")
-		public String verifyCompany(@Valid @ModelAttribute("company") UnverifiedCompanyDetails un_company,
-				                  HttpServletRequest request,
-				                  BindingResult result) {
+		public String verifyCompany(@Valid @ModelAttribute("un_company") UnverifiedCompanyDetails un_company, BindingResult result,
+				                  HttpServletRequest request,Model model
+				                 ) {
+		
+			if(result.hasErrors()) {
+				model.addAttribute("error","*Please fill all the fields!!");
+				List<ObjectError> ERR=result.getAllErrors();
+				for(ObjectError o:ERR) {
+				System.err.println(o);
+				}
+				return "company_registration";
+			}
 			try {
-			String results=emailservice.verifyCompanyDetails(un_company, request, result);
-			if(results.equalsIgnoreCase("success")) {
-				return "user_login";
-			}
-			else {
-				return "user_signup";
-			}
-			}catch(Exception e ) {
-				e.printStackTrace();
-			}
+				String results=emailservice.verifyCompanyDetails(un_company, request, result);
+					if(results.equalsIgnoreCase("success")) {
+						return "user_login";
+					}
+					else {
+						return "user_signup";
+					}
+					}catch(Exception e ) {
+						e.printStackTrace();
+					}
 			return null;
 }
 		@GetMapping("/forgotpassword")

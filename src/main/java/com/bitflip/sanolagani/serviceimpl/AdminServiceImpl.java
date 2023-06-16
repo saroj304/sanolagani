@@ -106,8 +106,7 @@ public class AdminServiceImpl implements AdminService {
 	        message.setSubject("Company Registered Sucessfully");
 	        message.setText("your company is sucessfully registered and the authentication details is email:"
 	        		      +to+" password:"+ password+". Regards:seetal raya from sanolagani project");
-	        mailSender.send(message);
-	        
+	        mailSender.send(message);   
 	    }
 
 	@Override

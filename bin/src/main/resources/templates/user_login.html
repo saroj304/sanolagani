@@ -1,42 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="css/Login.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/Header.css">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+<link rel="stylesheet" type="text/css" href="css/LoginSignup.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/Header.css">
+<link rel="stylesheet" type="text/css" href="css/Footer.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <header class='container header__container'>
-        <div>
-            <h1><a href="/" class='logo hover_none'>Sanolagani</a> </h1>
-        </div>
-        <div class='search'>
-            <input type="search" name="search" placeholder='Search' id="" />
-            <GrSearch class='search__icon' />
-        </div>
-    </header>
-    <section>
-        <div class="container login__container">
-            <div class="login__left">
-                <img th:src="@{'photos/register.png'}" alt="image" />
-            </div>
-            <div class="login__right">
-                <div class="heading__background">
-                    <a th:href="@{/login}" class='active'><h2>Login</h2></a>
-                    <a th:href="@{/register}"><h2>Sign Up</h2></a>
-                </div>
-                <form th:action="@{/login}" method="post">
-                    <input class='input__box' type="email" placeholder='Email' name="email" required/>
-                    <input class='input__box' type="password" placeholder='Password' name="password" required/>
-                    <input class='btn btn__login' type="submit" value='Log In' required/>
-                </form>
-                <h5 class='forgot__password'><a href="#">Forgot Password?</a></h5>
-            </div>
-        </div>
-    </section>
+	<header class='container header__container' th:replace="fragment/header.html :: header"></header>
+
+	<section>
+		<div class="container login__container">
+			<div class="login__left">
+				<img th:src="@{'photos/register.png'}" alt="image" />
+			</div>
+			<div class="login__right">
+				<div th:if="${param.error}" class="alert alert-error text-danger">
+					Invalid username or password.</div>
+				<div class="heading__background">
+					<a th:href="@{/login}" class='active'><h2>Login</h2></a> <a
+						th:href="@{/register}"><h2>Sign Up</h2></a>
+				</div>
+				<form th:action="@{/processlogin}" method="post">
+					<input class='input__box' type="email" placeholder='Email'
+						name="email" required /> <input class='input__box' type="password"
+						placeholder='Password' name="password" required /> <input
+						class='btn btn__login' type="submit" value='Log In' required />
+				</form>
+				<h5 class='forgot__password'>
+					<a th:href="@{/forgotpassword}">Forgot Password?</a>
+				</h5>
+			</div>
+		</div>
+	</section>
+
+	    <!-- Footer -->
+
+	<footer th:insert="fragment/footer.html :: footer">
+
+	</footer>
+   
 </body>
 </html>
