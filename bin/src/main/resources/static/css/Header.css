@@ -22,10 +22,14 @@
     position: relative;
 }
 .search__icon{
-    padding: 5px;
+    /* padding: 5px; */
     width: 35px;
     height: 40px;
     background: var(--color-blue);
     color: #fff;
     cursor: pointer;
+    border: none;
+    /* margin-left: -20px; */
+    /* z-index: 99; */
+    position: absolute;
 }

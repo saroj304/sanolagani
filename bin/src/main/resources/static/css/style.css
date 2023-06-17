@@ -36,7 +36,7 @@ html {
 }
 
 ::-webkit-scrollbar {
-  display: none;
+  /* display: none; */
 }
 
 body {
@@ -86,8 +86,8 @@ a {
   font-size: 18px;
 }
 
-a:hover {
-  /* color: var(--color-white); */
+.nav__link:hover {
+  color: var(--color-white);
 }
 
 .btn {
@@ -125,7 +125,9 @@ img {
 .mb-20{
   margin-bottom: 20px;
 }
-
+.hide-overflow{
+  overflow: hidden;
+}
 
 /* =========================== FONTS ================================ */
 .f-13{

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #customers td,
+        #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: var(--color-blue);
+            color: white;
+        }
+    </style>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/Home.css">
+    <link rel="stylesheet" href="css/Nav.css">
+    <link rel="stylesheet" href="css/company_table.css">
+</head>
+    <!-- main header -->
+    <header class='container header__container'>
+        <div>
+            <h1><a href="/" class='logo hover_none'>Sanolagani</a> </h1>
+        </div>
+    </header>
+
+    <!-- navigation -->
+    <div class='full__width'>
+        <nav class='container nav__container'>
+            <div class="left">
+                <ul>
+                    <li><a href="/" class="nav__link">Home</a></li>
+                    <li><a href="#" class="nav__link">Start Investing</a></li>
+                    <li><a href="#" class="nav__link">Raise Capital</a></li>
+                    <li><a href="company_registration.html" class="nav__link">Register Company</a></li>
+                    <li><a href="invest.html" class="nav__link">Invest</a></li>
+                </ul>
+            </div>
+
+            <div class="right">
+                <ul>
+                    <li><a href="user_login.html" class="nav__link">Login</a></li>
+                    <li><a href="user_signup.html" class="nav__link">Sign Up</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <!-- table -->
+    <section>
+        
+            <h1>Company Table</h1>
+
+            <table id="customers">
+                <tr>
+                    <th>company</th>
+                    <th>phone</th>
+                    <th>file</th>
+                    <th>time</th>
+                    <th>PPS</th>
+                   <th>Amount</th>
+                    <th>PAN</th>
+                    <th>Cit front</th>
+                    <th>Cit back</th>
+                    <th>Action</th>
+                </tr>
+                <tr th:each="detail: ${UnverfiedCompanies}">
+                    <td> <a th:text="${detail.companyname}"></a></td>
+                    <td> <a th:text="${detail.phnum}"></a></td>
+                    <td><a th:text="${detail.filename}" th:href="@{D:\sanolagani\src\main\resources\images\{pan} (pan=${detail.pan_image_name}) }"></a></td>
+                    <td><p th:text="${detail.timespanforraisingcapital}"></p></td>
+                    <td><p th:text="${detail.price_per_share}" ></p></td>
+                    <td><p th:text="${detail.raisedcapital}"></p></td>
+                    <td>
+                        <a th:text="${detail.pan_image_name}" th:href="@{D:\sanolagani\src\main\resources\images\{pan} (pan=${detail.pan_image_name}) }"></a>
+                    </td>
+                    <td>
+                        <a th:text="${detail.citizenship_fname}" th:href="@{D:\sanolagani\src\main\resources\images\{pan} (pan=${detail.citizenship_fname}) }"></a>
+                    </td>
+                    <td>
+                        <a th:text="${detail.citizenship_bname}" th:href="@{D:\sanolagani\src\main\resources\images\{pan} (pan=${detail.citizenship_bname}) }"> </a>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn" th:onclick="|window.location.href='/tables/edit/save/${detail.id}'|">Add</button>
+                        <button class="btn btn-danger" th:onclick="|window.location.href='/tables/edit/${detail.id}'|">Delete</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+</body>
+
+</html>

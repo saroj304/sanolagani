@@ -23,5 +23,7 @@
     color: var(--color-gray);
     line-height: 1.2rem;
     margin-top: 15px;
+    overflow: hidden;
 }
+
   

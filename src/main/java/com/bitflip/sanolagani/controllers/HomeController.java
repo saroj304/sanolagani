@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.bitflip.sanolagani.models.Company;
 import com.bitflip.sanolagani.service.AdminService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,14 @@ public class HomeController {
 
 	@GetMapping({"/","/home"})
 	public String homePage(Model model) {
-		
+		List<Company> companylist = adminservice.getAllCompany();
+		Optional<List<Company>> result = Optional.ofNullable(companylist);
+		if (result != null) {
+		List<Company> companybasedoncapital=adminservice.listingBasedonRaisedCapital(companylist);
+		model.addAttribute("companybasedoncapital", companybasedoncapital);
+			return "index";
+				 		 
+		}			
 		return "index";
 	}
 	@GetMapping("/logout")

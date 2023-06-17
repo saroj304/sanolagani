@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class CompanyDetailsController {
-    @GetMapping("/company")
+    @GetMapping("/company/info")
     public String getCompany(){
         return "company-info";
     }
@@ -13,4 +13,5 @@ public class CompanyDetailsController {
     public String getCompanys(){
         return "dashboard1";
     }
+
 }

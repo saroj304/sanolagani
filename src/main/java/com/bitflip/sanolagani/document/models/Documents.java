@@ -28,8 +28,6 @@ public class Documents {
         this.uploadOn = LocalDateTime.now();
         this.company = company;
     }
-
-
     public UUID getId() {
         return id;
     }
