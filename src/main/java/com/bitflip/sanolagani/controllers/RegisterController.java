@@ -76,7 +76,6 @@ public class RegisterController {
 	@PostMapping("/otpverify")
 	public String otpVerify(@RequestParam("otp") int otp, @RequestParam("email") String email,RedirectAttributes redirectAttributes) {
 		boolean result = userservice.checkEmail(email);
-		
 		String useremail = email;
 		String userotp = Integer.toString(otp);
 		if (otpStore.containsKey(email)) {

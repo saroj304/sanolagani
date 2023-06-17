@@ -9,4 +9,8 @@ public class CompanyDetailsController {
     public String getCompany(){
         return "company-info";
     }
+    @GetMapping("/dashboard")
+    public String getCompanys(){
+        return "dashboard1";
+    }
 }

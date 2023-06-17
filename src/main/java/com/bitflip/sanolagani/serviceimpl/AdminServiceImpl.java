@@ -70,6 +70,7 @@ public class AdminServiceImpl implements AdminService {
 	     company.setCitizenship_fname(unverified_details.getCitizenship_fname());
 	     company.setCitizenship_bname(unverified_details.getCitizenship_bname());
 	     company.setMaximum_quantity(unverified_details.getMaximum_quantity());
+	     company.setImage(unverified_details.getImage());
 	     user.setPassword(encodedPassword);
 		 user.setRole(company.getRole());
 		 //user_repo.save(user);
