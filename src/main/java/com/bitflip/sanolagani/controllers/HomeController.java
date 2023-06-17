@@ -27,8 +27,14 @@ public class HomeController {
 		List<Company> companylist = adminservice.getAllCompany();
 		Optional<List<Company>> result = Optional.ofNullable(companylist);
 		if (result != null) {
-			model.addAttribute("companylist", companylist);
-			for (Company company : companylist)
+		List<Company> companybasedoncapital=adminservice.listingBasedonRaisedCapital(companylist);
+		model.addAttribute("companybasedoncapital", companybasedoncapital);
+			for (Company company : companylist) {
+				
+			}
+				 		 
+						 
+						 
 				return "index";
 		}
 		return "index";

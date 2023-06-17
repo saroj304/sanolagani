@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import org.springframework.stereotype.Component;
+
 @Component
 @Entity
 @Table(name = "company")
@@ -40,35 +41,41 @@ public class Company {
 	private String citizenship_fname;
 	@Column
 	private String citizenship_bname;
-    private String role;
+	private String role;
 	@Column
 	private int maximum_quantity;
-	@OneToOne(cascade= CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
-    
+
 	@OneToOne(mappedBy = "company")
-    private Portfolio portfolio;
-	
+	private Portfolio portfolio;
+
 	public Company() {
-		this.minimum_quantity=1;
-		this.role="COMPANY";
+		this.minimum_quantity = 1;
+		this.role = "COMPANY";
 	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getRole() {
 		return role;
 	}
+
 	public int getMinimumQuantity() {
 		return minimum_quantity;
 	}
+
 	public String getSector() {
 		return sector;
 	}
+
 	public double getPrice_per_share() {
 		return price_per_share;
 	}
@@ -81,12 +88,20 @@ public class Company {
 		return investments;
 	}
 
+	public int getMinimum_quantity() {
+		return minimum_quantity;
+	}
+
+	public void setMinimum_quantity(int minimum_quantity) {
+		this.minimum_quantity = minimum_quantity;
+	}
+
 	public void setInvestments(List<Investment> investments) {
 		this.investments = investments;
 	}
-	@OneToMany(mappedBy = "company")
-    private List<Investment> investments;
 
+	@OneToMany(mappedBy = "company")
+	private List<Investment> investments;
 
 	public String getCompanyname() {
 		return companyname;
@@ -123,6 +138,7 @@ public class Company {
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
+
 	public String getWebsiteurl() {
 		return websiteurl;
 	}
@@ -146,33 +162,43 @@ public class Company {
 	public void setTimespanforraisingcapital(String timespanforraisingcapital) {
 		this.timespanforraisingcapital = timespanforraisingcapital;
 	}
+
 	public String getPan_image_name() {
 		return pan_image_name;
 	}
+
 	public void setPan_image_name(String pan_image_name) {
 		this.pan_image_name = pan_image_name;
 	}
+
 	public String getCitizenship_fname() {
 		return citizenship_fname;
 	}
+
 	public void setCitizenship_fname(String citizenship_name) {
 		this.citizenship_fname = citizenship_name;
 	}
+
 	public Portfolio getPortfolio() {
 		return portfolio;
 	}
+
 	public void setPortfolio(Portfolio portfolio) {
 		this.portfolio = portfolio;
 	}
-	 public String getCitizenship_bname() {
-			return citizenship_bname;
+
+	public String getCitizenship_bname() {
+		return citizenship_bname;
 	}
+
 	public void setCitizenship_bname(String citizenship_bname) {
-			this.citizenship_bname = citizenship_bname;
+		this.citizenship_bname = citizenship_bname;
 	}
+
 	public int getMaximum_quantity() {
 		return maximum_quantity;
 	}
+
 	public void setMaximum_quantity(int maximum_quantity) {
 		this.maximum_quantity = maximum_quantity;
 	}
