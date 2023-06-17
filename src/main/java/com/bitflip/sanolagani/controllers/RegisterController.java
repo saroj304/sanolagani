@@ -77,7 +77,6 @@ public class RegisterController {
 	@PostMapping("/otpverify")
 	public String otpVerify(@RequestParam("otp") int otp, @RequestParam("email") String email,RedirectAttributes redirectAttributes) {
 		boolean result = userservice.checkEmail(email);
-		
 		String useremail = email;
 		String userotp = Integer.toString(otp);
 		if (otpStore.containsKey(email)) {
@@ -172,7 +171,17 @@ public class RegisterController {
         public String updatePassword(@RequestParam("email") String email,@RequestParam("password") String password) {
         	userservice.updatePassword(email,password);
         	return "redirect:/login";
-        	
+        }
+        @GetMapping("/raisecapital")
+        public String companyRegister() {
+        	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    		if (authentication == null|| authentication.getName().equals("anonymousUser")) {
+        	return "company_registration";
+    		}
+    		else {
+    			
+    			return "redirect:/home";
+    		}
         }
         
 }

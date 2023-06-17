@@ -61,28 +61,30 @@ public class AdminServiceImpl implements AdminService {
 	public void saveVerifiedCompany(int id, Company company, User user) {
 		String plain_password = generatePassword();
 		String encodedPassword = encodePassword(plain_password);
-		unverified_details = unverified_repo.getById(id);
-		sendPasswordEmail(unverified_details.getEmail(), plain_password);// sending password email after regisrtating
-		user.setFname(unverified_details.getFname());
-		user.setLname(unverified_details.getLname());
-		company.setCompanyname(unverified_details.getCompanyname());
-		user.setEmail(unverified_details.getEmail());
-		company.setPhnum(unverified_details.getPhnum());
-		company.setSector(unverified_details.getSector());
-		company.setWebsiteurl(unverified_details.getWebsiteurl());
-		company.setPreviouslyraisedcapital(unverified_details.getRaisedcapital());
-		company.setPrice_per_share(unverified_details.getPrice_per_share());
-		company.setTimespanforraisingcapital(unverified_details.getTimespanforraisingcapital());
-		company.setFilename(unverified_details.getFilename());
-		company.setPan_image_name(unverified_details.getPan_image_name());
-		company.setCitizenship_fname(unverified_details.getCitizenship_fname());
-		company.setCitizenship_bname(unverified_details.getCitizenship_bname());
-		company.setMaximum_quantity(unverified_details.getMaximum_quantity());
-		user.setPassword(encodedPassword);
-		user.setRole(company.getRole());
-		// user_repo.save(user);
-		company.setUser(user);
-		company_repo.save(company);
+	     unverified_details = unverified_repo.getById(id);
+		 sendPasswordEmail(unverified_details.getEmail(), plain_password);//sending password email after regisrtating
+	     user.setFname(unverified_details.getFname());
+	     user.setLname(unverified_details.getLname());
+	     company.setCompanyname(unverified_details.getCompanyname());
+	     user.setEmail(unverified_details.getEmail());
+	     company.setPhnum(unverified_details.getPhnum());
+	     company.setSector(unverified_details.getSector());
+	     company.setWebsiteurl(unverified_details.getWebsiteurl());
+	     company.setPreviouslyraisedcapital(unverified_details.getRaisedcapital());
+	     company.setPrice_per_share(unverified_details.getPrice_per_share());
+	     company.setTimespanforraisingcapital(unverified_details.getTimespanforraisingcapital());
+	     company.setFilename(unverified_details.getFilename());
+	     company.setPan_image_name(unverified_details.getPan_image_name());
+	     company.setCitizenship_fname(unverified_details.getCitizenship_fname());
+	     company.setCitizenship_bname(unverified_details.getCitizenship_bname());
+	     company.setMaximum_quantity(unverified_details.getMaximum_quantity());
+	     company.setImage(unverified_details.getImage());
+	     user.setPassword(encodedPassword);
+		 user.setRole(company.getRole());
+		 //user_repo.save(user);
+          company.setUser(user);
+	     company_repo.save(company);
+
 
 		unverified_repo.deleteById(id);
 	}

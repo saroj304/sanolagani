@@ -58,13 +58,22 @@ public class UnverifiedCompanyDetails {
 	@Column
 	
 	private String phnum;
+
 	@Column
+	private String image;
+
 	
 	private String citizenship_bname;
 	@Column
 	@NotBlank
 	private String raisedcapital;
 
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
 	public int getId() {
 		return id;
 	}

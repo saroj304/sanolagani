@@ -41,6 +41,9 @@ public class Company {
 	private String citizenship_fname;
 	@Column
 	private String citizenship_bname;
+	@Column
+	private String image;
+ 
 	private String role;
 	@Column
 	private int maximum_quantity;
@@ -202,4 +205,11 @@ public class Company {
 	public void setMaximum_quantity(int maximum_quantity) {
 		this.maximum_quantity = maximum_quantity;
 	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
 }

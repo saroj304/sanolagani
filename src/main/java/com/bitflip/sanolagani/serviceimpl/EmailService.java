@@ -49,17 +49,17 @@ public class EmailService {
         message.setTo(to);
         message.setSubject("One Time Password");
         message.setText("Dear Sir/Madam,"
-        		+ "<br><br>ATTN : Please do not reply to this email.This mailbox is not monitored and you will not receive a response.\n"
-        		+ "<br><br>Your One Time Password (OTP ) is "+ otp+"."
+        		+ "\n \n ATTN : Please do not reply to this email.This mailbox is not monitored and you will not receive a response.\n"
+        		+ "\n \n Your One Time Password (OTP ) is "+ otp+"."
         		+ "If you have any queries, Please contact us at,\n"
         		+ "\n"
         		+ " sanolagani investment firm,\n"
         		+ " guwarko,lalitpur, Nepal.\n"
         		+ " Phone # 977-98123456789\n"
-        		+ " Email Id: support@sanolagani.com.np"
-        		+"Warm Regards,\n"
-        		+ "sanolagani investment firm.");
-        mailSender.send(message);
+        		+ " Email Id: support@sanolagani.com.np\n"
+        		+ " Warm Regards,\n"
+        		+ " sanolagani investment firm.");
+      //  mailSender.send(message);
         return otp;
     }
 
@@ -77,6 +77,22 @@ public class EmailService {
       MultipartFile citizen_front = multipartRequest.getFile("citizen_front");
       MultipartFile citizen_back = multipartRequest.getFile("citizen_back");
       MultipartFile register_photo = multipartRequest.getFile("companypan");
+      MultipartFile company_image  = multipartRequest.getFile("com_image");
+      
+
+      //to store on the secondary memory  
+      String pdf_name = un_company.getCompanyname()+"_"+un_company.getId()+"_"+ pdfFile.getOriginalFilename();
+      String citizen_front_name = un_company.getCompanyname()+"_"+un_company.getId()+"_"+citizen_front.getOriginalFilename();
+      String citizen_back_name = un_company.getCompanyname()+"_"+un_company.getId()+"_"+citizen_back.getOriginalFilename();
+      String register_photo_name = un_company.getCompanyname()+"_"+un_company.getId()+"_"+register_photo.getOriginalFilename();
+      String company_img = un_company.getCompanyname()+"_"+un_company.getId()+"_"+company_image.getOriginalFilename();
+      
+      //to retrieve extension
+      String citizen_front_name_extension = citizen_front_name.substring(citizen_front_name.lastIndexOf(".") + 1);
+      String citizen_back_name_extension = citizen_back_name.substring(citizen_back_name.lastIndexOf(".") + 1);
+      String register_photo_name_extension = register_photo_name.substring(register_photo_name.lastIndexOf(".")+1);
+      //String company_photo_name_extension = company_img.substring(company_img.lastIndexOf(".")+1);
+
       
       MimeMessage message = mailSender.createMimeMessage();
       MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -85,29 +101,28 @@ public class EmailService {
       helper.setSubject("company registration details");
       helper.setText("Registration request for the company having name :"+un_company.getCompanyname());
 
-      helper.addAttachment("company_audit_report", pdfFile);
-      helper.addAttachment("citizenship_front", citizen_front);
-      helper.addAttachment("citizenship_back", citizen_back);
-      helper.addAttachment("company_register_details", register_photo);
-      mailSender.send(message);
+      helper.addAttachment("company_audit_report.pdf", pdfFile);
+      helper.addAttachment("citizenship_front."+citizen_front_name_extension.toLowerCase(), citizen_front);
+      helper.addAttachment("citizenship_back."+citizen_back_name_extension, citizen_back);
+      helper.addAttachment("company_register_details."+register_photo_name_extension, register_photo);
+      //mailSender.send(message);
       
-      //to store on the secondary memory  
-      String pdf_name = un_company.getCompanyname()+"_"+un_company.getId()+"_"+ pdfFile.getOriginalFilename();
-      String citizen_front_name = un_company.getCompanyname()+"_"+un_company.getId()+"_"+citizen_front.getOriginalFilename();
-      String citizen_back_name = un_company.getCompanyname()+"_"+un_company.getId()+"_"+citizen_back.getOriginalFilename();
-      String register_photo_name = un_company.getCompanyname()+"_"+un_company.getId()+"_"+register_photo.getOriginalFilename();
+     
       try {
 
     		byte[] citizen_f = citizen_front.getBytes();
     		byte[] citizen_b= citizen_back.getBytes();
     		byte[] register = register_photo.getBytes();
+    		byte[] com_image = company_image.getBytes();
     		
-    		String pdf_path = "C:\\Users\\WannaCRY\\Desktop\\sanolagani\\src\\main\\resources\\static\\unverified_details"+pdf_name;
-    		String path = "C:\\Users\\WannaCRY\\Desktop\\sanolagani\\src\\main\\resources\\static\\unverified_details";
+    		String pdf_path = "/home/seetal/Desktop/sanolagani/src/main/resources/static/unverified_details"+pdf_name;
+    		String path = "/home/seetal/Desktop/sanolagani/src/main/resources/static/unverified_details";
     		
     		File dest = new File(pdf_path);
     		pdfFile.transferTo(dest);
     		
+    	   Path company_i_path = Paths.get(path+company_img);
+    	   Files.write(company_i_path, com_image);
     	   
     	   Path citizenf_path = Paths.get(path+citizen_front_name);
     	   Files.write(citizenf_path, citizen_f);
@@ -122,6 +137,7 @@ public class EmailService {
     	   un_company.setCitizenship_fname(citizen_front_name);
     	   un_company.setCitizenship_bname(citizen_back_name);
     	   un_company.setPan_image_name(register_photo_name);
+    	   un_company.setImage(company_img);
     	  adminservice.saveUnverifiedCompany(un_company);
     	 
     	}catch(Exception e) {
