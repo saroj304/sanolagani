@@ -11,7 +11,7 @@ public class CompanyDetailsController {
     }
     @GetMapping("/dashboard")
     public String getCompanys(){
-        return "dashboard1";
+        return "dashboard";
     }
 
 }
