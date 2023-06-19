@@ -22,9 +22,6 @@ public class RecommendationContoller {
 		//Optional<List<Company>> result = Optional.ofNullable(recommedationinit.getRecommendCompanies());
 		//if (!result.isEmpty()) {
 			List<Company> companylist = recommedationinit.getRecommendCompanies();
-		
-
-			System.out.println(companylist);
 			
 	//	}
 		return "index";

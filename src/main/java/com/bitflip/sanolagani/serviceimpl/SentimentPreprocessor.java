@@ -111,12 +111,10 @@ public class SentimentPreprocessor {
 	        for (Map.Entry<Company, Double> entry : sentimentScores.entrySet()) {
 	            Company company = entry.getKey();
 	            double sentimentScore = entry.getValue();
-	            System.out.println("company "+company.getCompanyname() +" "+"sentiment-score"+sentimentScore);
 	            
 	            // Check if the sentiment score is above the threshold
 	            if (sentimentScore >= threshold) {
 	                companiesWithGoodSentiment.add(company);
-	                System.out.println(companiesWithGoodSentiment);
 	            }
 	        }
 	 

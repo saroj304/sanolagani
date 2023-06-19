@@ -80,11 +80,6 @@ public class RiskDiversificationImpl implements RiskDiversificationService{
 			    }
 			}		
 		
-        
-		//}     
-        for(Company company:recommendedCompanies) {
-        	System.out.println(company.getCompanyname());
-        }
        return recommendedCompanies;
    }
 
@@ -104,18 +99,11 @@ public class RiskDiversificationImpl implements RiskDiversificationService{
 		
 		}
 		       }
-		       
-		       for(int iddd:company_ids) {
-		    	   //System.out.println(iddd);
-		       }
-		       
-		       
-		       
+		      
 		       
 		   for(int company_id:company_ids) {
 
 		   Company company = company_repo.getById(company_id);
-		   //System.out.println(company.getCompanyname());
 
 		   company_list.add(company);
 		     
