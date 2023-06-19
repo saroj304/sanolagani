@@ -35,7 +35,7 @@ public class StorageServiceImpl implements StorageService {
         Company company = companyRepo.getReferenceById(companyId);
 //        System.out.println(companyName);
         documents.setCompany(company);
-        documents.setFilePath(dir.getAbsolutePath());
+        documents.setFilePath(dir.getPath());
 
     }
 }

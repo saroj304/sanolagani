@@ -10,7 +10,7 @@ import java.util.UUID;
 @Table(name = "documents")
 public class Documents {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Column(name = "path")
