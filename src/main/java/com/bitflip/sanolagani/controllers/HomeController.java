@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bitflip.sanolagani.models.Company;
+import com.bitflip.sanolagani.repository.CompanyRepo;
 import com.bitflip.sanolagani.service.AdminService;
+import com.bitflip.sanolagani.serviceimpl.SentimentPreprocessor;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,7 +21,12 @@ public class HomeController {
 	
 	@Autowired
 	AdminService adminservice;
-
+	@Autowired
+    private CompanyRepo company_repo; // Assuming you have a CompanyRepository to fetch companies
+    @Autowired
+    private SentimentPreprocessor pre;
+	
+  
 	@GetMapping({"/","/home"})
 	public String homePage(Model model) {
 		List<Company> companylist = adminservice.getAllCompany();
@@ -42,5 +50,19 @@ public class HomeController {
 	public String investNow() {
 		return "details";
 	}
+	
+	//Sentiment analysis based on the feedback of the company
+	
+	
+	@GetMapping("/text")
+	public String analysis() {
+		List<Company> c_list = pre.getCompaniesWithGoodSentiment();
+		for(Company com:c_list) {
+			System.out.println(com.getCompanyname());
+		}
+		return "index";
+	}
+	
+	
 
 }

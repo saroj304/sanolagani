@@ -12,7 +12,7 @@ import com.bitflip.sanolagani.models.Company;
 import com.bitflip.sanolagani.serviceimpl.RecommendationInitializer;
 
 @Controller
-public class RecommendationComponent {
+public class RecommendationContoller {
 	@Autowired
     RecommendationInitializer recommedationinit;
 	

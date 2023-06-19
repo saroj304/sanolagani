@@ -46,8 +46,11 @@ public class User {
 	@OneToOne(mappedBy = "user")
 	private Company company;
 
-@OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user")
 	private List<Investment> investments;
+    
+    @OneToMany(mappedBy = "user")
+	private List<Feedback> feedbacklist;
 	
 	@OneToOne(mappedBy = "user")
     private Portfolio portfolio;
@@ -124,16 +127,13 @@ public class User {
 	public void setCompany(Company company) {
 		this.company = company;
 	}
-	//	public void setRole(Set<Role> role) {
-//		this.role = role;
-//	}
-//
-//	public Set<Role> getRole() {
-//		return role;
-//	}
-//
-//	public void addRole(Role r) {
-//		this.role.add(r);
-//	}
+
+	public List<Feedback> getFeedbacklist() {
+		return feedbacklist;
+	}
+
+	public void setFeedbacklist(List<Feedback> feedbacklist) {
+		this.feedbacklist = feedbacklist;
+	}
 
 }
