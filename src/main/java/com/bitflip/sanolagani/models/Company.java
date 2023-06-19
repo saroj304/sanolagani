@@ -53,6 +53,12 @@ public class Company {
 
 	@OneToOne(mappedBy = "company")
 	private Portfolio portfolio;
+	
+	@OneToMany(mappedBy = "company")
+	private List<Investment> investments;
+	
+	@OneToMany(mappedBy = "company")
+	private List<Feedback> feedbacklist;
 
 	public Company() {
 		this.minimum_quantity = 1;
@@ -103,8 +109,7 @@ public class Company {
 		this.investments = investments;
 	}
 
-	@OneToMany(mappedBy = "company")
-	private List<Investment> investments;
+	
 
 	public String getCompanyname() {
 		return companyname;
@@ -210,6 +215,14 @@ public class Company {
 	}
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public List<Feedback> getFeedbacklist() {
+		return feedbacklist;
+	}
+
+	public void setFeedbacklist(List<Feedback> feedbacklist) {
+		this.feedbacklist = feedbacklist;
 	}
 	
 }

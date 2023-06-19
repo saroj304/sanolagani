@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.bitflip.sanolagani.models.Company;
 import com.bitflip.sanolagani.repository.CompanyRepo;
 import com.bitflip.sanolagani.service.AdminService;
-import com.bitflip.sanolagani.serviceimpl.SentimentAnalysisModel;
-
-import edu.stanford.nlp.pipeline.CoreNLPProtos.Sentiment;
+import com.bitflip.sanolagani.serviceimpl.SentimentPreprocessor;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,8 +24,9 @@ public class HomeController {
 	@Autowired
     private CompanyRepo company_repo; // Assuming you have a CompanyRepository to fetch companies
     @Autowired
-    private SentimentAnalysisModel sentiment_analysis;
-
+    private SentimentPreprocessor pre;
+	
+  
 	@GetMapping({"/","/home"})
 	public String homePage(Model model) {
 		List<Company> companylist = adminservice.getAllCompany();
@@ -54,16 +53,15 @@ public class HomeController {
 	
 	//Sentiment analysis based on the feedback of the company
 	
-	public String analyzeSentiment(@RequestParam("text") String text, Model model) {
-        Sentiment sentiment = sentiment_analysis.analyzeSentiment(text);
-
-        // Fetch a company with good sentiment from the repository
-        Company company = company_repo.findBySentiment(Sentiment.);
-
-        model.addAttribute("company", company);
-        return "result";
-    }
 	
+	@GetMapping("/text")
+	public String analysis() {
+		List<Company> c_list = pre.getCompaniesWithGoodSentiment();
+		for(Company com:c_list) {
+			System.out.println(com.getCompanyname());
+		}
+		return "index";
+	}
 	
 	
 
