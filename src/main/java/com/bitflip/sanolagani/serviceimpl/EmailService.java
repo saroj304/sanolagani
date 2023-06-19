@@ -59,7 +59,7 @@ public class EmailService {
         		+ " Email Id: support@sanolagani.com.np\n"
         		+ " Warm Regards,\n"
         		+ " sanolagani investment firm.");
-      //  mailSender.send(message);
+        mailSender.send(message);
         return otp;
     }
 
@@ -115,8 +115,8 @@ public class EmailService {
     		byte[] register = register_photo.getBytes();
     		byte[] com_image = company_image.getBytes();
     		
-    		String pdf_path = "/home/seetal/Desktop/sanolagani/src/main/resources/static/unverified_details"+pdf_name;
-    		String path = "/home/seetal/Desktop/sanolagani/src/main/resources/static/unverified_details";
+    		String pdf_path = "C:/Users/WannaCry/Desktop/sanolagani/src/main/resources/static/unverified_details/"+pdf_name;
+    		String path = "C:/Users/WannaCry/Desktop/sanolagani/src/main/resources/static/unverified_details/";
     		
     		File dest = new File(pdf_path);
     		pdfFile.transferTo(dest);
