@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragment/head.html :: headerfiles"></head>
+<head th:include="fragment/head.html :: headerfiles">
+</head>
 
 <body>
-	<header class='container header__container'
-		th:replace="fragment/header.html :: header"></header>
+	<header class='container header__container' th:replace="fragment/header.html :: header"></header>
 
 	<div class='full__width' th:insert="fragment/nav.html :: navbar">
 	</div>
@@ -19,9 +19,8 @@
 			<div class="cards row">
 
 				<div class="card " th:each="company : ${companybasedoncapital}">
-					<a href=""> <img
-						src="/unverified_detatils/unverified_detailsqweqw_0_citiz back.jpg"
-						class='card__image' alt="card-image" />
+					<a href="#">
+						<img th:src="@{/photos/timeplast.webp}" class='card__image' alt="card-image" />
 						<h3>Timeplast</h3>
 					</a>
 					<p class='desc'>The palstic that completely disintegrate...</p>
@@ -185,7 +184,6 @@
 			</div>
 		</div>
 	</section>
-
 
 </body>
 </html>
