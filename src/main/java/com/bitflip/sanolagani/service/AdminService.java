@@ -12,6 +12,6 @@ public interface AdminService {
 	public void deleteData(int id);
 	public void saveVerifiedCompany(int id, Company company, User user);
 	public List<Company> getAllCompany();
-	public List<Company>listingBasedonRaisedCapital(List<Company> company);
-   
+	public List<Company> listingBasedonRaisedCapital(List<Company> company);
+	public List<Company>listingBasedonRecentDate(List<Company> company);
 }

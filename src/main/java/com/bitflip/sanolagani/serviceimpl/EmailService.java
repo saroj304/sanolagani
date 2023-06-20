@@ -115,8 +115,8 @@ public class EmailService {
     		byte[] register = register_photo.getBytes();
     		byte[] com_image = company_image.getBytes();
     		
-    		String pdf_path = "/home/seetal/Desktop/sanolagani/src/main/resources/static/unverified_details"+pdf_name;
-    		String path = "/home/seetal/Desktop/sanolagani/src/main/resources/static/unverified_details";
+    		String pdf_path = "/home/saroj/Documents/workspace of major project/major project/sanolagani/src/main/resources/static/unverified_details"+pdf_name;
+    		String path = "/home/saroj/Documents/workspace of major project/major project/sanolagani/src/main/resources/static/unverified_details";
     		
     		File dest = new File(pdf_path);
     		pdfFile.transferTo(dest);
@@ -138,7 +138,9 @@ public class EmailService {
     	   un_company.setCitizenship_bname(citizen_back_name);
     	   un_company.setPan_image_name(register_photo_name);
     	   un_company.setImage(company_img);
-    	  adminservice.saveUnverifiedCompany(un_company);
+    	   System.out.println("unverified company is going to be registered");
+    	   System.out.println(un_company);
+    	   adminservice.saveUnverifiedCompany(un_company);
     	 
     	}catch(Exception e) {
         e.printStackTrace();

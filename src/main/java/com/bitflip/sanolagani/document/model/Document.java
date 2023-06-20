@@ -1,6 +1,5 @@
 package com.bitflip.sanolagani.document.model;
 
-
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -9,50 +8,51 @@ import java.time.LocalDateTime;
 @Table(name = "document")
 @Entity
 public class Document {
-    public long getFileId() {
-        return fileId;
-    }
 
-    public void setFileId(long fileId) {
-        this.fileId = fileId;
-    }
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "file_id", unique = true, nullable = false)
+	private long fileId;
 
-    public String getFilePath() {
-        return filePath;
-    }
+	@Column(name = "path", unique = true, nullable = false, updatable = true)
+	private String filePath;
 
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
+	@Column(name = "company_name")
+	private String companyName;
 
-    public String getCompanyName() {
-        return companyName;
-    }
+	@Column(name = "upload_date")
+	@CreationTimestamp
+	private LocalDateTime uploadDate;
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
+	public long getFileId() {
+		return fileId;
+	}
 
-    public LocalDateTime getUploadDate() {
-        return uploadDate;
-    }
+	public void setFileId(long fileId) {
+		this.fileId = fileId;
+	}
 
-    public void setUploadDate(LocalDateTime uploadDate) {
-        this.uploadDate = uploadDate;
-    }
+	public String getFilePath() {
+		return filePath;
+	}
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "file_id", unique = true, nullable = false)
-    private long fileId;
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
 
-    @Column(name = "path", unique = true, nullable = false, updatable = true)
-    private String filePath;
+	public String getCompanyName() {
+		return companyName;
+	}
 
-    @Column(name = "company_name")
-    private String companyName;
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
 
-    @Column(name = "upload_date")
-    @CreationTimestamp
-    private LocalDateTime uploadDate;
+	public LocalDateTime getUploadDate() {
+		return uploadDate;
+	}
+
+	public void setUploadDate(LocalDateTime uploadDate) {
+		this.uploadDate = uploadDate;
+	}
 }
