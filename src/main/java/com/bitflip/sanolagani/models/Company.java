@@ -6,6 +6,7 @@ import java.util.List;
 //
 //import javax.persistence.CascadeType;
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 import org.springframework.stereotype.Component;
 
@@ -20,7 +21,6 @@ public class Company {
 	private String companyname;
 	@Column
 	private String address;
-
 	@Column
 	private String phnum;
 	@Column
@@ -234,5 +234,5 @@ public class Company {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+
 }
