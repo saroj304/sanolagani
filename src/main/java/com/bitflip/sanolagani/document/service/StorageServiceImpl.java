@@ -33,7 +33,7 @@ public class StorageServiceImpl implements StorageService {
         file.transferTo(dir);
         int companyId = documentRepository.getCompanyId(companyName);
         Company company = companyRepo.getReferenceById(companyId);
-//        System.out.println(companyName);
+        System.out.println(companyName + " "+ companyId);
         documents.setCompany(company);
         documents.setFilePath(dir.getPath());
 

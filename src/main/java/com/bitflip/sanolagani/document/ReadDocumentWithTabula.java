@@ -2,6 +2,7 @@ package com.bitflip.sanolagani.document;
 
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import technology.tabula.*;
 import technology.tabula.extractors.SpreadsheetExtractionAlgorithm;
@@ -12,21 +13,22 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+@Service
 public class ReadDocumentWithTabula {
     PDDocument doc = null;
     String filePath = null;
     File file = null;
-    public ReadDocumentWithTabula(String filePath) throws IOException {
-         this.file = new File(filePath);
-         this.doc = Loader.loadPDF(file);
-         this.filePath = filePath;
 
-    }
 
-    public void getAllTables() throws IOException {
+    public void getAllTables(String filename) throws IOException {
+        String filePath = "src/main/resources/documents/"+filename.split("_")[0];
+        this.file = new File(filePath);
+        this.doc = Loader.loadPDF(file);
+        this.filePath = filePath;
+
         StringBuilder text= new StringBuilder();
         String fileName = this.file.getName().replace(".pdf","");
-        String tsvDirectoryPath = "src/main/resources/tsvs/"+fileName;
+        String tsvDirectoryPath = "src/main/resources/tsvs/"+filename.split("_")[0];
 
         File opdir = new File(tsvDirectoryPath);
         boolean directoryCreated = opdir.mkdir();

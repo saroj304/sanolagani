@@ -1,6 +1,7 @@
 package com.bitflip.sanolagani.document.controller;
 
 import com.bitflip.sanolagani.document.models.Documents;
+import com.bitflip.sanolagani.document.service.ExtractTablesFromPDF;
 import com.bitflip.sanolagani.document.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -28,8 +29,9 @@ public class PDFDocumentUploadFormController {
     public String uploadDocument(HttpServletRequest request, Documents document) throws IOException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String companyName = auth.getName();
-        System.out.println(auth.getName());
         storageService.uploadDocument(request, companyName, document);
+        ExtractTablesFromPDF tablesExtractor = new ExtractTablesFromPDF(document.getFilePath());
+        tablesExtractor.extractAllTables();
         return "index";
     }
 }

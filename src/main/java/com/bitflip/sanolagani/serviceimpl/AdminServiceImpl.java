@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import com.bitflip.sanolagani.document.ReadDocumentWithTabula;
+import com.bitflip.sanolagani.document.service.StorageService;
 import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,13 @@ public class AdminServiceImpl implements AdminService {
 	CompanyRepo company_repo;
 	@Autowired
 	UserRepo user_repo;
+
+	@Autowired
+	StorageService storageService;
+
+	@Autowired
+	ReadDocumentWithTabula readDocumentWithTabula;
+
 	private UnverifiedCompanyDetails unverified_details;
 	List<Company> moneyList = new ArrayList<>();
 
@@ -84,7 +93,7 @@ public class AdminServiceImpl implements AdminService {
 		 //user_repo.save(user);
           company.setUser(user);
 	     company_repo.save(company);
-
+		readDocumentWithTabula.getAllTables();
 
 		unverified_repo.deleteById(id);
 	}

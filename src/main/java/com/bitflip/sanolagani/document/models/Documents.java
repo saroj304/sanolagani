@@ -51,4 +51,5 @@ public class Documents {
     public void setCompany(Company company) {
         this.company = company;
     }
+
 }
