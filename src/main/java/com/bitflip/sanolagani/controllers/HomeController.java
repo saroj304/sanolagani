@@ -1,21 +1,19 @@
 package com.bitflip.sanolagani.controllers;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bitflip.sanolagani.models.Company;
 import com.bitflip.sanolagani.repository.CompanyRepo;
 import com.bitflip.sanolagani.service.AdminService;
 import com.bitflip.sanolagani.serviceimpl.SentimentPreprocessor;
-
-import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class HomeController {
@@ -78,9 +76,11 @@ public class HomeController {
 	@GetMapping("/text")
 	public String analysis() {
 		List<Company> c_list = pre.getCompaniesWithGoodSentiment();
+
 		for (Company com : c_list) {
 			System.out.println(com.getCompanyname());
 		}
+
 		return "index";
 	}
 

@@ -31,6 +31,8 @@ public class Company {
 	private int id;
 	@Column
 	private String companyname;
+	@Column
+	private String address;
 
 	@Column
 	private String phnum;
@@ -289,6 +291,7 @@ public class Company {
 		this.feedbacklist = feedbacklist;
 	}
 
+
 	public LocalDateTime getCreated() {
 		return created;
 	}
@@ -296,4 +299,13 @@ public class Company {
 	public void setCreated(LocalDateTime created) {
 		this.created = created;
 	}
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+
 }

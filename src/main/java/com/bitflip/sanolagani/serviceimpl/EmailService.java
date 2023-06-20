@@ -49,9 +49,9 @@ public class EmailService {
         message.setTo(to);
         message.setSubject("One Time Password");
         message.setText("Dear Sir/Madam,"
-        		+ "\n \n ATTN : Please do not reply to this email.This mailbox is not monitored and you will not receive a response.\n"
-        		+ "\n \n Your One Time Password (OTP ) is "+ otp+"."
-        		+ "If you have any queries, Please contact us at,\n"
+        		+ "\n \nATTN : Please do not reply to this email.This mailbox is not monitored and you will not receive a response.\n"
+        		+ "\n \nYour One Time Password (OTP ) is "+ otp+"."
+        		+ " If you have any queries, Please contact us at,\n"
         		+ "\n"
         		+ " sanolagani investment firm,\n"
         		+ " guwarko,lalitpur, Nepal.\n"
@@ -59,7 +59,11 @@ public class EmailService {
         		+ " Email Id: support@sanolagani.com.np\n"
         		+ " Warm Regards,\n"
         		+ " sanolagani investment firm.");
+
         mailSender.send(message);
+
+       //mailSender.send(message);
+
         return otp;
     }
 
@@ -148,7 +152,6 @@ public class EmailService {
       return "success";
 }
     
-
 }
 
 

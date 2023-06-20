@@ -1,26 +1,17 @@
 package com.bitflip.sanolagani.models;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 
-import org.hibernate.annotations.ManyToAny;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -56,7 +47,17 @@ public class User {
     private Portfolio portfolio;
 	@Column
 	private String role;
+	@Column
+	private String address;
 
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 	public User() {
 		this.role = "USER";
