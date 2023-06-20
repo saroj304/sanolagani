@@ -56,8 +56,7 @@
 					placeholder="Company Name" name="companyname"
 					th:field="*{companyname}">
 
-                <input class="register_input register_input_full" type="text"
-					placeholder="Address" name="address">
+
 				<div>
 					<input class="register_input" type="email"
 						placeholder="Company Email" name="email" th:field="*{email}">
@@ -66,21 +65,18 @@
 				</div>
 				<div>
 					<input class="register_input" type="text" placeholder="Website URL"
-						name="websiteurl" th:field="*{websiteurl}"> 
-					<input class="register_input" type="number" placeholder="Raised Capital"
+						name="websiteurl" th:field="*{websiteurl}"> <input
+						class="register_input" type="number" placeholder="Raised Capital"
 						name="raisedcapital" th:field="*{raisedcapital}">
 				</div>
 				<div>
 					<input class="register_input" type="text" placeholder=" sector"
-						name="sector" th:field="*{sector}"> 
-					<input class="register_input" type="number" placeholder=" maximum quantity" name="maximum_quantity"
-						th:field="*{maximum_quantity}">
+						name="sector" th:field="*{sector}"> < <input
+						class="register_input" type="number"
+						placeholder=" maximum quantity" name="maximum_quantity">
 				</div>
-				<input class="register_input register" type="text"
-					placeholder="Time Span For Raising Capital" name="timespanforraisingcapital" th:field="*{timespanforraisingcapital}"> 
-				<input class="register_input" type="number" placeholder=" per share price"
-					name="price_per_share" th:field="*{price_per_share}"> <br>
 
+<<<<<<< HEAD
 				<div>
 					<label for="companyimg">Company image</label> <input
 						class="register_input" id="companypan" type="file"
@@ -94,16 +90,28 @@
 					th:field="*{timespanforraisingcapital}"> <input
 					class="register_input" type="number" placeholder=" per share price"
 					name="price_per_share" th:field="*{price_per_share}"> <br>
-
+=======
+				
+				<input class="register_input register" type="text"
+					placeholder="Time Span For Raising Capital"
+					name="timespanforraisingcapital" th:field="*{timespanforraisingcapital}"> <input
+					class="register_input" type="number" placeholder=" per share price"
+					name="price_per_share"> <br>
 				<div class="doc_file">
+						<div>
+                        <label for="companyimg">Company image</label>
+                        <input class="register_input" id="companypan" type="file" placeholder="Company image" name="com_image">
+                    </div>
+>>>>>>> 02a537dd0fc43579ae6494cfe5e50e26d3eaf24d
+
 					<div>
 						<label for="pdfFile">Company Document PDF including tax
 							clearance: </label> <input class="register_input" id="pdfFile"
 							type="file" placeholder="Company PDF" name="pdfFile">
 					</div>
 					<div>
-						<label for="companypan">Company PAN Card/VAT Card: </label> 
-						<input class="register_input" id="companypan" type="file"
+						<label for="companypan">Company PAN Card/VAT Card: </label> <input
+							class="register_input" id="companypan" type="file"
 							placeholder="CompanyPDF" name="companypan" />
 					</div>
 

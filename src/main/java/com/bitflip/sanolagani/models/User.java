@@ -30,10 +30,7 @@ public class User {
 	private String email;
 	@Column
 	private String password;
-//	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-//	@JoinTable(name = "user_role_tbl", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
-//			@JoinColumn(name = "role_id") })
-//	private Set<Role> role = new HashSet<>();
+
 	@OneToOne(mappedBy = "user")
 	private Company company;
 

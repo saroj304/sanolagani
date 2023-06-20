@@ -74,6 +74,8 @@ UserRepo userrepo;
 	    
 	    //return diversificationLevel;
         model.addAttribute("diversificationlevel", diversificationLevel);
+        model.addAttribute("user", user.getFname());
+
          System.out.println(diversificationLevel);
 		return "diversificationgraph";
 	}

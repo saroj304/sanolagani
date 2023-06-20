@@ -77,10 +77,14 @@ public class HomeController {
 	public String analysis() {
 		List<Company> c_list = pre.getCompaniesWithGoodSentiment();
 
+
 		for (Company com : c_list) {
 			System.out.println(com.getCompanyname());
 		}
 
+		for(Company c:c_list) {
+			System.out.println(c.getCompanyname());
+		}
 		return "index";
 	}
 
