@@ -55,12 +55,9 @@ public class UnverifiedCompanyDetails {
 	private String citizenship_fname;
 	@Column
 	private String phnum;
-
 	@Column
 	private String image;
-
 	@Column
-	@NotBlank
 	private String citizenship_bname;
 	@Column
 	private String address;
