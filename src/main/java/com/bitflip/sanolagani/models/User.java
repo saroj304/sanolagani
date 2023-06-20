@@ -57,7 +57,17 @@ public class User {
 
 	@Column
 	private String role;
+	@Column
+	private String address;
 
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 	public User() {
 		this.role = "USER";

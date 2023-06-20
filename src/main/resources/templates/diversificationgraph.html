@@ -1,0 +1,64 @@
+<html>
+	    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  
+
+<body>
+    
+<div class="chart-container">
+  <canvas id="ruler-chart"></canvas>
+</div>
+
+</div>
+
+</div>
+<script>
+const activeValue = [[${diversificationlevel}]]; // Replace with the active value received from Spring Boot
+
+const chartData = {
+  labels: Array.from({ length: 10 }, (_, i) => i + 1),
+  datasets: [
+    {
+      data: Array.from({ length: 10 }, (_, i) => i + 1 === activeValue ? 1 : null),
+      borderColor: 'black',
+      borderWidth: 1,
+      pointBackgroundColor: 'red',
+      pointBorderColor: 'red',
+      pointRadius: 5,
+      pointHoverRadius: 7,
+      pointHitRadius: 10,
+    },
+  ],
+};
+
+const chartOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  legend: { display: false },
+  scales: {
+    xAxes: [
+      {
+        display: true,
+        ticks: {
+          beginAtZero: true,
+          stepSize: 1,
+        },
+      },
+    ],
+    yAxes: [
+      {
+        display: false,
+      },
+    ],
+  },
+};
+
+const ctx = document.getElementById('ruler-chart').getContext('2d');
+const rulerChart = new Chart(ctx, {
+  type: 'line',
+  data: chartData,
+  options: chartOptions,
+});
+
+  
+    </script>
+</body>
+</html>

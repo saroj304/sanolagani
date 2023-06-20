@@ -18,6 +18,8 @@ public class Company {
 	private int id;
 	@Column
 	private String companyname;
+	@Column
+	private String address;
 
 	@Column
 	private String phnum;
@@ -223,6 +225,14 @@ public class Company {
 
 	public void setFeedbacklist(List<Feedback> feedbacklist) {
 		this.feedbacklist = feedbacklist;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 }
