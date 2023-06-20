@@ -61,7 +61,7 @@ public class UnverifiedCompanyDetails {
 
 	@Column
 	private String image;
-
+    @Column
 	private String citizenship_bname;
 	@Column
 	@NotBlank

@@ -59,7 +59,7 @@ public class EmailService {
         		+ " Email Id: support@sanolagani.com.np\n"
         		+ " Warm Regards,\n"
         		+ " sanolagani investment firm.");
-      //  mailSender.send(message);
+        mailSender.send(message);
         return otp;
     }
 
