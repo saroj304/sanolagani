@@ -11,9 +11,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.nio.file.Files;
 import java.io.File;
+import java.io.FileOutputStream;
+
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 import com.bitflip.sanolagani.models.Company;
 import com.bitflip.sanolagani.models.UnverifiedCompanyDetails;
@@ -49,9 +52,9 @@ public class EmailService {
         message.setTo(to);
         message.setSubject("One Time Password");
         message.setText("Dear Sir/Madam,"
-        		+ "\n \n ATTN : Please do not reply to this email.This mailbox is not monitored and you will not receive a response.\n"
-        		+ "\n \n Your One Time Password (OTP ) is "+ otp+"."
-        		+ "If you have any queries, Please contact us at,\n"
+        		+ "\n \nATTN : Please do not reply to this email.This mailbox is not monitored and you will not receive a response.\n"
+        		+ "\n \nYour One Time Password (OTP ) is "+ otp+"."
+        		+ " If you have any queries, Please contact us at,\n"
         		+ "\n"
         		+ " sanolagani investment firm,\n"
         		+ " guwarko,lalitpur, Nepal.\n"
@@ -59,7 +62,9 @@ public class EmailService {
         		+ " Email Id: support@sanolagani.com.np\n"
         		+ " Warm Regards,\n"
         		+ " sanolagani investment firm.");
-        mailSender.send(message);
+
+       //mailSender.send(message);
+
         return otp;
     }
 
@@ -68,7 +73,7 @@ public class EmailService {
     	int randomNum = rand.nextInt(999999 - 111111 + 1) + 111111;
     	return randomNum;
     }
-    public String verifyCompanyDetails(@Valid @ModelAttribute("company")UnverifiedCompanyDetails un_company,
+    public String verifyCompanyDetails(@Valid @ModelAttribute("unverifiedcompany")UnverifiedCompanyDetails un_company,
                               HttpServletRequest request,
                               BindingResult result)  throws MessagingException, IOException {
 
@@ -81,11 +86,11 @@ public class EmailService {
       
 
       //to store on the secondary memory  
-      String pdf_name = un_company.getCompanyname()+"_"+un_company.getId()+"_"+ pdfFile.getOriginalFilename();
-      String citizen_front_name = un_company.getCompanyname()+"_"+un_company.getId()+"_"+citizen_front.getOriginalFilename();
-      String citizen_back_name = un_company.getCompanyname()+"_"+un_company.getId()+"_"+citizen_back.getOriginalFilename();
-      String register_photo_name = un_company.getCompanyname()+"_"+un_company.getId()+"_"+register_photo.getOriginalFilename();
-      String company_img = un_company.getCompanyname()+"_"+un_company.getId()+"_"+company_image.getOriginalFilename();
+      String pdf_name = un_company.getCompanyname()+"_"+pdfFile.getOriginalFilename();
+      String citizen_front_name = un_company.getCompanyname()+"_"+citizen_front.getOriginalFilename();
+      String citizen_back_name = un_company.getCompanyname()+"_"+citizen_back.getOriginalFilename();
+      String register_photo_name = un_company.getCompanyname()+"_"+register_photo.getOriginalFilename();
+      String company_img = un_company.getCompanyname()+"_"+company_image.getOriginalFilename();
       
       //to retrieve extension
       String citizen_front_name_extension = citizen_front_name.substring(citizen_front_name.lastIndexOf(".") + 1);
@@ -115,11 +120,16 @@ public class EmailService {
     		byte[] register = register_photo.getBytes();
     		byte[] com_image = company_image.getBytes();
     		
-    		String pdf_path = "C:/Users/WannaCry/Desktop/sanolagani/src/main/resources/static/unverified_details/"+pdf_name;
-    		String path = "C:/Users/WannaCry/Desktop/sanolagani/src/main/resources/static/unverified_details/";
-    		
-    		File dest = new File(pdf_path);
-    		pdfFile.transferTo(dest);
+
+    		String path = "../sanolagani/src/main/resources/static/unverified_details/";
+            File uploadedFile = new File("../sanolagani/src/main/resources/static/unverified_details/" + pdf_name);
+
+            FileOutputStream fileOutputStream = new FileOutputStream(uploadedFile);
+            fileOutputStream.write(pdfFile.getBytes());
+            fileOutputStream.close();
+
+          
+
     		
     	   Path company_i_path = Paths.get(path+company_img);
     	   Files.write(company_i_path, com_image);
@@ -138,7 +148,7 @@ public class EmailService {
     	   un_company.setCitizenship_bname(citizen_back_name);
     	   un_company.setPan_image_name(register_photo_name);
     	   un_company.setImage(company_img);
-    	  adminservice.saveUnverifiedCompany(un_company);
+    	   adminservice.saveUnverifiedCompany(un_company);
     	 
     	}catch(Exception e) {
         e.printStackTrace();

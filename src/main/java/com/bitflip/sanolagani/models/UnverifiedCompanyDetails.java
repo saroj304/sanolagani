@@ -50,20 +50,18 @@ public class UnverifiedCompanyDetails {
 	@Column
 	private String filename;
 	@Column
-	
 	private String pan_image_name;
 	@Column
-	
 	private String citizenship_fname;
 	@Column
-	
 	private String phnum;
-
 	@Column
 	private String image;
-
-	
+	@Column
 	private String citizenship_bname;
+	@Column
+	private String address;
+
 	@Column
 	@NotBlank
 	private String raisedcapital;
@@ -201,5 +199,10 @@ public class UnverifiedCompanyDetails {
 	public void setMaximum_quantity(int maximum_quantity) {
 		this.maximum_quantity = maximum_quantity;
 	}
-
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 }

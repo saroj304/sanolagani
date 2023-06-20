@@ -5,9 +5,46 @@
 
 </head>
 
-<body>
-<header class='container header__container' th:replace="fragment/header.html :: header"></header>
-<div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
+
+        <!-- Dashboard -->
+        <section class="dashboard">
+            <div class=" dashboard__container">
+                <div class="left__dashboard board">
+                    <div>
+                        <a href="#">Sanolagani Dashboard</a>
+                        <a href="#">My Information</a>
+                        <div class="dropdown">
+                            <button onclick="fundManagement()" class="drop-btn">Fund Management</button>
+                            <div id="fundManagement" class="fundManagementContent">
+                                <a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Collateral Management</a>
+                                <a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Transfer History</a>
+                                <a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Settlement</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="center__dashboard board">
+                     <canvas id="myChart2"></canvas>
+                </div>
+                <div class="right__dashboard">
+                    <div class="turnover board">
+                        <h2>Welcome,User</h2>
+                        <a th:href="@{/riskinfo}">
+                        <div>
+                            <p>Total investment</p></a>
+                            <p>0</p>
+                        </div>
+                        <div>
+                            <p>Total company</p>
+                            <p>0</p>
+                        </div>
+                        <div>
+                            <p>Total share</p>
+                            <p>0</p>
+                        </div>
+                       
+                    </div>
+
 
     <!-- Dashboard -->
     <section class="dashboard">

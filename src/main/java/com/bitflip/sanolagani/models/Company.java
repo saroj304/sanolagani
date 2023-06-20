@@ -6,6 +6,7 @@ import java.util.List;
 //
 //import javax.persistence.CascadeType;
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 import org.springframework.stereotype.Component;
 
@@ -18,7 +19,8 @@ public class Company {
 	private int id;
 	@Column
 	private String companyname;
-
+	@Column
+	private String address;
 	@Column
 	private String phnum;
 	@Column
@@ -224,5 +226,13 @@ public class Company {
 	public void setFeedbacklist(List<Feedback> feedbacklist) {
 		this.feedbacklist = feedbacklist;
 	}
-	
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 }
