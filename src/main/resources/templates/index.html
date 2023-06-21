@@ -19,24 +19,24 @@
 			<div class="cards row">
 
 				<div class="card " th:each="company : ${companybasedoncapital}">
-					<a href="#">
-						<img th:src="@{/photos/timeplast.webp}" class='card__image' alt="card-image" />
-						<h3>Timeplast</h3>
+					<a th:href="@{/company/{id}/ (id=${company.id})}">
+						<img th:src="@{/photos/{id}/{image} (image=${company.image}, id= ${company.id})}" class='card__image' alt="card-image" />
+						<h3 th:text="${company.companyname}"/>
 					</a>
 					<p class='desc'>The palstic that completely disintegrate...</p>
 
 					<div class="card__score">
 						<div class="raised">
 							<h3 th:text="${company.previouslyraisedcapital}" />
-							<p class='desc'>Raised</p>
+							<p class='desc'>Capital To Raise</p>
 						</div>
 						<div class="investers">
 							<h3>400</h3>
-							<p class='desc'>Investers</p>
+							<p class='desc'>Price per Unit</p>
 						</div>
 						<div class="min__investment">
 							<h3 th:text="${company.maximum_quantity}" />
-							<p class='desc'>Min. Investment</p>
+							<p class='desc'>Max. Quantity</p>
 						</div>
 					</div>
 
