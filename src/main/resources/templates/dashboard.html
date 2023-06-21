@@ -37,19 +37,19 @@
                 </div>
                 <div class="right__dashboard">
                     <div class="turnover board">
-                        <h2>Welcome,User</h2>
+                        <h2>Welcome,[[${user}]]</h2>
                         <a th:href="@{/riskinfo}">
                         <div>
                             <p>Total investment</p></a>
-                            <p>0</p>
+                            <p>[[${totalInvestment}]]</p>
                         </div>
                         <div>
                             <p>Total company</p>
-                            <p>0</p>
+                            <p>[[${size}]]</p>
                         </div>
                         <div>
                             <p>Total share</p>
-                            <p>0</p>
+                            <p>[[${totalshare}]]</p>
                         </div>
                        
                     </div>
@@ -79,14 +79,10 @@
         </footer>
         
         <!-- Fund Management Dropdown Script -->
-        <script>
+        <script input th:inline="javascript">
             function fundManagement(){
                 document.getElementById("fundManagement").classList.toggle("show");
             }
-            //datapoints should be list of data fetch from database 
-			//and sent it using model attribute
-			//labels should be the investment or transaction month
-			//values should be the transacted amount
 			
 		// Extract labels and values from dataPoints		
         //var labels = dataPoints.map(dp => dp.label);
@@ -97,18 +93,19 @@
 
     if (canvas) {
         var ctx = canvas.getContext("2d");
-
-        // Sample data
-        var companies = ["Company A", "Company B", "Company C", "Company D"]; // Replace with your actual company names
-        var shares = [250, 500, 300, 150]; // Replace with your actual number of shares data
-        var investments = [10000, 20000, 15000, 8000]; // Replace with your additional data
-
+        
+        
+       var companies =[[${companynamelist}]]; // Replace with your actual company names
+        console.log(companies);
+        var shares = [2,3,4] // Replace with your actual number of shares data
+        var investments = [[${totalamountlist}]]; // Replace with your additional data
+   
         // Chart data
         var chartData = {
             labels: companies,
             datasets: [
                 {
-                    label: "Number of Shares",
+                    label: "investments",
                     data: investments,
                     type: 'line', // Bar chart for number of shares
                     backgroundColor: "#007bff",

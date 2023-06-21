@@ -123,10 +123,7 @@ public class Company {
 		return role;
 	}
 
-	public int getMinimumQuantity() {
-		return minimum_quantity;
-	}
-
+	
 	public String getSector() {
 		return sector;
 	}
