@@ -43,7 +43,6 @@
 		<div class="container comapany__container">
 			<h2>Register your company</h2>
 			<p class="error" th:text="${error}"></p>
-
 			<form th:action="@{/companyverify}" th:object="${un_company}"
 				class="company_registration" method="POST"
 				enctype="multipart/form-data">
@@ -77,22 +76,28 @@
 						placeholder=" maximum quantity" name="maximum_quantity">
 				</div>
 
-				
+
+			
+
 				<input class="register_input register" type="text"
 					placeholder="Time Span For Raising Capital"
-					name="timespanforraisingcapital" th:field="*{timespanforraisingcapital}"> <input
+					name="timespanforraisingcapital"
+					th:field="*{timespanforraisingcapital}"> <input
 					class="register_input" type="number" placeholder=" per share price"
-					name="price_per_share"> <br>
+					name="price_per_share" th:field="*{price_per_share}"> <br>
+
+				
 				<div class="doc_file">
 						<div>
                         <label for="companyimg">Company image</label>
                         <input class="register_input" id="companypan" type="file" placeholder="Company image" name="com_image">
                     </div>
 
+
 					<div>
 						<label for="pdfFile">Company Document PDF including tax
 							clearance: </label> <input class="register_input" id="pdfFile"
-							type="file" placeholder="Company PDF" name="pdfFile" >
+							type="file" placeholder="Company PDF" name="pdfFile">
 					</div>
 					<div>
 						<label for="companypan">Company PAN Card/VAT Card: </label> <input
@@ -103,7 +108,7 @@
 					<div>
 						<label for="citizen_front">Citizen Front:</label> <input
 							class="register_input" id="citizen_front" type="file"
-							placeholder="Citizen Front" name="citizen_front" >
+							placeholder="Citizen Front" name="citizen_front">
 					</div>
 
 					<div>
@@ -122,9 +127,7 @@
 
 	<!-- Footer -->
 	<footer>
-		        <footer th:insert="fragment/footer.html :: footer">
-
-	</footer>
+		<footer th:insert="fragment/footer.html :: footer"> </footer>
 </body>
 
 </html>

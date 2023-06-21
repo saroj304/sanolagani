@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.bitflip.sanolagani.models.Company;
 import com.bitflip.sanolagani.models.CompanyAmountComparator;
+import com.bitflip.sanolagani.models.CompanyDateComparator;
 import com.bitflip.sanolagani.models.UnverifiedCompanyDetails;
 import com.bitflip.sanolagani.repository.CompanyRepo;
 import com.bitflip.sanolagani.repository.UnverifiedCompanyRepo;
@@ -110,6 +111,7 @@ public class AdminServiceImpl implements AdminService {
 	     company.setCitizenship_bname(unverified_details.getCitizenship_bname());
 	     company.setMaximum_quantity(unverified_details.getMaximum_quantity());
 	     company.setImage(unverified_details.getImage());
+	     System.out.println("the verified image name is"+unverified_details.getImage());
 	     user.setPassword(encodedPassword);
 		 user.setRole(company.getRole());
 		 //user_repo.save(user);
@@ -201,16 +203,31 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Company> listingBasedonRaisedCapital(List<Company> company) {
 		// Sort the companies based on raised capital in descending order     
-        Collections.sort(company,new CompanyAmountComparator());
-        int a =0;
+      Collections.sort(company,new CompanyAmountComparator());
+     /*   int a =0;
         for(Company c:company) {
         	a+=1;
+        	System.out.println("iam inside Adminserviceimpl class and inside listingbasedonraisedapital method");
         	System.out.println(a);
         	System.out.println(c.getCompanyname());
         	System.out.println(c.getPreviouslyraisedcapital());
         	System.out.println(c.getMaximum_quantity());
         	System.out.println(c.getFilename());
         }
+        */
         return company;
 }
+	public List<Company>listingBasedonRecentDate(List<Company> company){
+		Collections.sort(company,new CompanyDateComparator());
+		/* int a =0;
+	        for(Company c:company) {
+	        	System.out.println("iam inside Adminserviceimpl class and inside listingbasedonrecentdate method");
+	        	a+=1;
+	        	System.out.println(a);
+	           	System.out.println(c.getPreviouslyraisedcapital());
+	        	System.out.println(c.getCreated());
+	        }
+	        */
+		return company;
+	}
 }

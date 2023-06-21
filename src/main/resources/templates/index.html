@@ -13,14 +13,12 @@
 	<section class='momentum__section'>
 		<div class="container momentum__container">
 			<h2>Most momentum</h2>
-			<h5>Offerings that have raised the most money in the last few
-				days</h5>
-
+			<h5>Offerings that have raised the highest money</h5>
 			<div class="cards row">
-
-				<div class="card " th:each="company : ${companybasedoncapital}">
+				<div class="card " th:each="companycap : ${companybasedoncapital}" >
+				
 					<a href=""> <img
-						src="/unverified_detatils/unverified_detailsqweqw_0_citiz back.jpg"
+						th:src="@{'/unverified_details/'+'unverified_details'+${companycap.image}}"
 						class='card__image' alt="card-image" />
 						<h3>Timeplast</h3>
 					</a>
@@ -28,15 +26,15 @@
 
 					<div class="card__score">
 						<div class="raised">
-							<h3 th:text="${company.previouslyraisedcapital}" />
+							<h3 th:text="${companycap.previouslyraisedcapital}"></h3>
 							<p class='desc'>Raised</p>
 						</div>
 						<div class="investers">
-							<h3>400</h3>
-							<p class='desc'>Investers</p>
+							<h3 th:text="${companycap.companyname}"></h3>
+							<p class='desc'>CompanyName</p>
 						</div>
 						<div class="min__investment">
-							<h3 th:text="${company.maximum_quantity}" />
+							<h3 th:text="${companycap.maximum_quantity}"></h3>
 							<p class='desc'>Min. Investment</p>
 						</div>
 					</div>
@@ -46,7 +44,7 @@
 					</div>
 				</div>
 			</div>
-			</div>
+		</div>
 	</section>
 
 	<!-- Most Funded -->
@@ -56,85 +54,26 @@
 			<h5>Offerings that have raised the most money in the last few
 				days</h5>
 
-			<div class="cards">
-				<div class="card">
-					<a href="#"><img src="images/voklagyoHome.png"
-						class='card__image' alt="card-image" /></a>
-
-					<h3>
-						<a href="#">Timeplast</a>
-					</h3>
+			<div class="cards row">
+				<div class="card " th:each="company : ${companybasedondate}">
+					<a href=""> <img
+						th:src="@{'/unverified_details/'+'unverified_details'+${company.image}}"
+						class='card__image' alt="card-image" />
+						<h3>Timeplast</h3>
+					</a>
 					<p class='desc'>The palstic that completely disintegrate...</p>
 
 					<div class="card__score">
 						<div class="raised">
-							<h3>Rs. 81,341,576</h3>
+							<h3 th:text="${company.previouslyraisedcapital}"></h3>
 							<p class='desc'>Raised</p>
 						</div>
 						<div class="investers">
-							<h3>400</h3>
-							<p class='desc'>Investers</p>
+							<h3 th:text="${company.companyname}"></h3>
+							<p class='desc'>CompanyName</p>
 						</div>
 						<div class="min__investment">
-							<h3>Rs. 10,000</h3>
-							<p class='desc'>Min. Investment</p>
-						</div>
-					</div>
-
-					<div class="division">
-						<p>Reg CF via Sanolagani Capital, Ltd.</p>
-					</div>
-				</div>
-
-				<div class="card">
-					<a href="#"><img src="images/timeplast.webp"
-						class='card__image' alt="card-image" /></a>
-
-					<h3>
-						<a href="#">Timeplast</a>
-					</h3>
-					<p class='desc'>The palstic that completely disintegrate...</p>
-
-					<div class="card__score">
-						<div class="raised">
-							<h3>Rs. 81,341,576</h3>
-							<p class='desc'>Raised</p>
-						</div>
-						<div class="investers">
-							<h3>400</h3>
-							<p class='desc'>Investers</p>
-						</div>
-						<div class="min__investment">
-							<h3>Rs. 10,000</h3>
-							<p class='desc'>Min. Investment</p>
-						</div>
-					</div>
-
-					<div class="division">
-						<p>Reg CF via Sanolagani Capital, Ltd.</p>
-					</div>
-				</div>
-				<div class="card">
-					<a href="#"><img
-						src="C:\Users\WannaCRY\Desktop\sanolagani\src\main\resources\images\img_1.png"
-						class='card__image' alt="card-image" /></a>
-
-					<h3>
-						<a href="#">Timeplast</a>
-					</h3>
-					<p class='desc'>The palstic that completely disintegrate...</p>
-
-					<div class="card__score">
-						<div class="raised">
-							<h3>Rs. 81,341,576</h3>
-							<p class='desc'>Raised</p>
-						</div>
-						<div class="investers">
-							<h3>400</h3>
-							<p class='desc'>Investers</p>
-						</div>
-						<div class="min__investment">
-							<h3>Rs. 10,000</h3>
+							<h3 th:text="${company.maximum_quantity}" />
 							<p class='desc'>Min. Investment</p>
 						</div>
 					</div>
@@ -185,7 +124,5 @@
 			</div>
 		</div>
 	</section>
-
-
 </body>
 </html>

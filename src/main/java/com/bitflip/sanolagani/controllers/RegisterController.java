@@ -125,6 +125,7 @@ public class RegisterController {
 			}
 			try {
 				String results=emailservice.verifyCompanyDetails(un_company, request, result);
+				System.out.println(results);
 					if(results.equalsIgnoreCase("success")) {
 						return "user_login";
 					}

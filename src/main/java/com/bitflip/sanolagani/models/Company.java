@@ -1,19 +1,35 @@
 package com.bitflip.sanolagani.models;
 
+import java.time.LocalDateTime;
 //import java.util.HashSet;
 import java.util.List;
+
 //import java.util.Set;
 //
 //import javax.persistence.CascadeType;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 
+
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.stereotype.Component;
 
 @Component
 @Entity
 @Table(name = "company")
 public class Company {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -45,7 +61,7 @@ public class Company {
 	private String citizenship_bname;
 	@Column
 	private String image;
- 
+
 	private String role;
 	@Column
 	private int maximum_quantity;
@@ -55,16 +71,44 @@ public class Company {
 
 	@OneToOne(mappedBy = "company")
 	private Portfolio portfolio;
-	
+
 	@OneToMany(mappedBy = "company")
 	private List<Investment> investments;
-	
+
 	@OneToMany(mappedBy = "company")
 	private List<Feedback> feedbacklist;
-
+	@CreationTimestamp
+	private LocalDateTime created;
+	
 	public Company() {
 		this.minimum_quantity = 1;
 		this.role = "COMPANY";
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		
+		builder.append(id);
+		builder.append(", companyname=");
+		builder.append(companyname);
+		
+		builder.append(", previouslyraisedcapital=");
+		builder.append(previouslyraisedcapital);
+		builder.append(", price_per_share=");
+		builder.append(price_per_share);
+		builder.append(", minimum_quantity=");
+		builder.append(minimum_quantity);
+		builder.append(", timespanforraisingcapital=");
+		builder.append(timespanforraisingcapital);
+		builder.append(", filename=");
+		builder.append(filename);
+		builder.append(", pan_image_name=");
+		builder.append(pan_image_name);
+		builder.append(", citizenship_fname=");
+		builder.append(citizenship_fname);
+		builder.append(", citizenship_bname=");
+		return builder.toString();
 	}
 
 	public int getId() {
@@ -107,8 +151,6 @@ public class Company {
 	public void setInvestments(List<Investment> investments) {
 		this.investments = investments;
 	}
-
-	
 
 	public String getCompanyname() {
 		return companyname;
@@ -209,9 +251,11 @@ public class Company {
 	public void setMaximum_quantity(int maximum_quantity) {
 		this.maximum_quantity = maximum_quantity;
 	}
+
 	public String getImage() {
 		return image;
 	}
+
 	public void setImage(String image) {
 		this.image = image;
 	}
@@ -224,6 +268,14 @@ public class Company {
 		this.feedbacklist = feedbacklist;
 	}
 
+
+	public LocalDateTime getCreated() {
+		return created;
+	}
+
+	public void setCreated(LocalDateTime created) {
+		this.created = created;
+	}
 	public String getAddress() {
 		return address;
 	}
@@ -231,5 +283,6 @@ public class Company {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 
 }
