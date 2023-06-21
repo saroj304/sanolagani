@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.bitflip.sanolagani.models.Company;
@@ -30,29 +31,11 @@ public class HomeController {
 		List<Company> companylist = adminservice.getAllCompany();
 		Optional<List<Company>> result = Optional.ofNullable(companylist);
 		if (result != null) {
-			for (Company cmp : companylist)
-
-			{
-				System.out.println("iam inside homecontroller in /home url");
-				System.out.println(cmp.getCreated());
-				System.out.println(cmp.getCompanyname());
-				System.out.println("fuck you" + cmp.getImage());
-			}
 			List<Company> companybasedoncapital = adminservice.listingBasedonRaisedCapital(companylist);
-
-			for (Company cmp : companybasedoncapital) {
-				System.out.println(cmp);
-				System.out.println("iam inside homecontroller in /home url ");
-				System.out.println(cmp.getCompanyname());
-				System.out.println(cmp.getPreviouslyraisedcapital());
-			}
-			List<Company> companybasedonDate = adminservice.listingBasedonRecentDate(companylist);
-
-			model.addAttribute("companybasedondate", companybasedonDate);
-			model.addAllAttributes(companybasedoncapital);
 			model.addAttribute("companybasedoncapital", companybasedoncapital);
+			List<Company> companybasedondate = adminservice.listingBasedonRecentDate(companylist);
+			model.addAttribute("companybasedondate", companybasedondate);
 			return "index";
-
 		}
 		return "index";
 	}

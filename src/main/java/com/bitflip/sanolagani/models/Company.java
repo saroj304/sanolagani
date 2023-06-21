@@ -88,16 +88,11 @@ public class Company {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Company [id=");
+		
 		builder.append(id);
 		builder.append(", companyname=");
 		builder.append(companyname);
-		builder.append(", phnum=");
-		builder.append(phnum);
-		builder.append(", sector=");
-		builder.append(sector);
-		builder.append(", websiteurl=");
-		builder.append(websiteurl);
+		
 		builder.append(", previouslyraisedcapital=");
 		builder.append(previouslyraisedcapital);
 		builder.append(", price_per_share=");
@@ -113,24 +108,6 @@ public class Company {
 		builder.append(", citizenship_fname=");
 		builder.append(citizenship_fname);
 		builder.append(", citizenship_bname=");
-		builder.append(citizenship_bname);
-		builder.append(", image=");
-		builder.append(image);
-		builder.append(", role=");
-		builder.append(role);
-		builder.append(", maximum_quantity=");
-		builder.append(maximum_quantity);
-		builder.append(", user=");
-		builder.append(user);
-		builder.append(", portfolio=");
-		builder.append(portfolio);
-		builder.append(", investments=");
-		builder.append(investments);
-		builder.append(", feedbacklist=");
-		builder.append(feedbacklist);
-		builder.append(", created=");
-		builder.append(created);
-		builder.append("]");
 		return builder.toString();
 	}
 

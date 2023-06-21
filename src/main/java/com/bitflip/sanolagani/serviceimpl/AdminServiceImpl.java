@@ -204,7 +204,7 @@ public class AdminServiceImpl implements AdminService {
 	public List<Company> listingBasedonRaisedCapital(List<Company> company) {
 		// Sort the companies based on raised capital in descending order     
       Collections.sort(company,new CompanyAmountComparator());
-        int a =0;
+     /*   int a =0;
         for(Company c:company) {
         	a+=1;
         	System.out.println("iam inside Adminserviceimpl class and inside listingbasedonraisedapital method");
@@ -214,11 +214,12 @@ public class AdminServiceImpl implements AdminService {
         	System.out.println(c.getMaximum_quantity());
         	System.out.println(c.getFilename());
         }
+        */
         return company;
 }
 	public List<Company>listingBasedonRecentDate(List<Company> company){
 		Collections.sort(company,new CompanyDateComparator());
-		 int a =0;
+		/* int a =0;
 	        for(Company c:company) {
 	        	System.out.println("iam inside Adminserviceimpl class and inside listingbasedonrecentdate method");
 	        	a+=1;
@@ -226,6 +227,7 @@ public class AdminServiceImpl implements AdminService {
 	           	System.out.println(c.getPreviouslyraisedcapital());
 	        	System.out.println(c.getCreated());
 	        }
+	        */
 		return company;
 	}
 }
