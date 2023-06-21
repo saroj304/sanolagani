@@ -1,5 +1,6 @@
 package com.bitflip.sanolagani.document.service;
 
+import com.bitflip.sanolagani.models.Company;
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.springframework.stereotype.Service;
@@ -22,18 +23,19 @@ public class ExtractTablesFromPDF {
 
     public ExtractTablesFromPDF(){}
     public ExtractTablesFromPDF(String path) throws IOException {
-        this.path = path;
+
+
+    }
+
+    public void extractAllTables(Company company) throws IOException {
+        this.path = "src/main/resources/documents/"+company.getId()+"/"+company.getFilename();
         this.documentName = new File(path).getName().split("\\.")[0];
-        this.tsvDirectoryPath = "src/main/resources/output/" + this.documentName+"/";
+        this.tsvDirectoryPath = "src/main/resources/output/" + company.getId()+"/";
         this.doc = Loader.loadPDF(new File(this.path));
         File opdir = new File(this.tsvDirectoryPath);
         boolean directoryCreated = opdir.mkdir();
 
         this.sea = new SpreadsheetExtractionAlgorithm();
-
-    }
-
-    public void extractAllTables() throws IOException {
         StringBuilder text = new StringBuilder();
         PageIterator it = new ObjectExtractor(this.doc).extract();
         int i = 0;
