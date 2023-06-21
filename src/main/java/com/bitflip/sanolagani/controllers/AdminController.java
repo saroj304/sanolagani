@@ -19,7 +19,6 @@ import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.service.AdminService;
 
 
-
 @Controller
 public class AdminController {
 	@Autowired
@@ -38,7 +37,6 @@ public class AdminController {
 		}else {
 			return "redirect:/home";
 		}
-
 	}
 	
 	@GetMapping("/tables/edit/{id}")

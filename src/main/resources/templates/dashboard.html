@@ -28,19 +28,19 @@
                 </div>
                 <div class="right__dashboard">
                     <div class="turnover board">
-                        <h2>Welcome,User</h2>
+                        <h2>Welcome,[[${user}]]</h2>
                         <a th:href="@{/riskinfo}">
                         <div>
                             <p>Total investment</p></a>
-                            <p>0</p>
+                            <p>[[${totalInvestment}]]</p>
                         </div>
                         <div>
                             <p>Total company</p>
-                            <p>0</p>
+                            <p>[[${size}]]</p>
                         </div>
                         <div>
                             <p>Total share</p>
-                            <p>0</p>
+                            <p>[[${totalshare}]]</p>
                         </div>
                        
                     </div>
@@ -85,6 +85,7 @@
 
                 </div>
 
+<<<<<<< HEAD
                 <div class="collateral__summary board">
                     <h2 class="">MY COLLATERAL SUMMARY</h2>
                     <h3 class="bold">Rs. <span>23,707.89</span></h3>
@@ -166,6 +167,64 @@ if (canvas) {
     });
 
 }
+=======
+        </footer>
+        
+        <!-- Fund Management Dropdown Script -->
+        <script input th:inline="javascript">
+            function fundManagement(){
+                document.getElementById("fundManagement").classList.toggle("show");
+            }
+			
+		// Extract labels and values from dataPoints		
+        //var labels = dataPoints.map(dp => dp.label);
+        //var values = dataPoints.map(dp => dp.value);
+      
+       document.addEventListener("DOMContentLoaded", function() {
+        var canvas = document.getElementById("myChart2");
+
+    if (canvas) {
+        var ctx = canvas.getContext("2d");
+        
+        
+       var companies =[[${companynamelist}]]; // Replace with your actual company names
+        console.log(companies);
+        var shares = [2,3,4] // Replace with your actual number of shares data
+        var investments = [[${totalamountlist}]]; // Replace with your additional data
+   
+        // Chart data
+        var chartData = {
+            labels: companies,
+            datasets: [
+                {
+                    label: "investments",
+                    data: investments,
+                    type: 'line', // Bar chart for number of shares
+                    backgroundColor: "#007bff",
+                    borderWidth: 1
+                },
+                
+            ]
+        };
+        // Chart options
+        var chartOptions = {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        // Create combination chart
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: chartData,
+            options: chartOptions
+        });
+      
+    }
+>>>>>>> 35675fae439840e4157fdfccf4de4cfa88020d7d
 });
 
     </script>

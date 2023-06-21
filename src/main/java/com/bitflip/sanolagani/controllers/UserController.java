@@ -7,9 +7,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.bitflip.sanolagani.models.Company;
 import com.bitflip.sanolagani.models.Investment;
 import com.bitflip.sanolagani.models.User;
+import com.bitflip.sanolagani.repository.CompanyRepo;
+import com.bitflip.sanolagani.repository.InvestmentRepo;
 import com.bitflip.sanolagani.repository.UserRepo;
 
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+
+
 import java.util.Map;
 import java.util.HashMap;
 
@@ -26,16 +32,50 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class UserController {
 @Autowired
 UserRepo userrepo;
+@Autowired
+InvestmentRepo invest_repo;
+@Autowired
+CompanyRepo company_repo;
 	
-	@GetMapping("/myDashboard")
-	public String myDashboard() {
+	@GetMapping("/dashboard")
+	public String myDashboard(Model model) {
+		User user = getCurrentUser();
+		List<Investment> investment_list = user.getInvestments();
+		if(investment_list!=null) {
+		List<Object> totalsharelist = new ArrayList<>();
+		List<String> companynamelist = new ArrayList<>();
+		List<Object> totalamountlist = new ArrayList<>();
+		List<Object[]> investmentlist = invest_repo.getTotalSharesPerCompany(user.getId());
+	    for(Object[] obj:investmentlist) {
+	    	String companyname = company_repo.getCompanyName(obj[0]);
+	    	companynamelist.add(companyname);
+	    	totalsharelist.add(obj[1]);
+	    	totalamountlist.add(obj[2]);
+	    	System.out.println(obj[2]);
+		}
 		
+		double totalInvestment = investment_list.stream()
+	            .mapToDouble(Investment::getAmount)
+	            .sum();
+         int size = investmentlist.size();
+         int totalshare = investment_list.stream()
+        		     .mapToInt(Investment::getQuantity).sum();
+         
+  		model.addAttribute("totalshare", totalshare);
+ 		model.addAttribute("size", size);
+		model.addAttribute("user", user.getFname());
+		model.addAttribute("totalInvestment", totalInvestment);
+		model.addAttribute("totalsharelist",totalsharelist);
+		model.addAttribute("companynamelist",companynamelist);
+		model.addAttribute("totalamountlist",totalamountlist);
+		return "dashboard";
+		}
 		return "dashboard";
 	}
 	
 	@GetMapping("/riskinfo")
 	public String riskInformation(Model model) {
-		List<Company> companylist = new ArrayList();
+		//List<Company> companylist = new ArrayList();
 		Map<String, Double> sectorInvestments = new HashMap<>();
 		User user = getCurrentUser();
 		
@@ -75,6 +115,7 @@ UserRepo userrepo;
 	    //return diversificationLevel;
         model.addAttribute("diversificationlevel", diversificationLevel);
         model.addAttribute("user", user.getFname());
+        
 
          System.out.println(diversificationLevel);
 		return "diversificationgraph";

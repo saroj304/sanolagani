@@ -22,9 +22,6 @@ public class CompanyDetailsController {
 //        model.addAttribute("id", id);
         return "company-info";
     }
-    @GetMapping("/dashboard")
-    public String getCompanys(){
-        return "dashboard";
-    }
+   
 
 }
