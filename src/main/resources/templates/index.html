@@ -27,7 +27,7 @@
 
 					<div class="card__score">
 						<div class="raised">
-							<h3 th:text="${company.previouslyraisedcapital}" />
+							<h3 th:text="Rs{#numbers.formatCurrency(company.previouslyraisedcapital)}" />
 							<p class='desc'>Capital To Raise</p>
 						</div>
 						<div class="investers">
