@@ -141,7 +141,7 @@ public class SentimentPreprocessor {
     }
 
     private String removeStopwords(String text) {
-        String[] stopwords = {"a", "an", "the", "in", "on", "at", "is", "are", "and", "but", "not"};
+        String[] stopwords = {"a", "an", "the", "in", "on", "at", "is", "are", "and", "but", "."};
 
         // Create a regex pattern of all stopwords
         String pattern = "\\b(" + String.join("|", stopwords) + ")\\b";

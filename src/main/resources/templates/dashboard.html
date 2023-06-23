@@ -1,140 +1,143 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Sanolagani</title>
-       <head th:replace="fragment/head.html :: headerfiles"></head>
-       <link rel="stylesheet" href="css/dashboard.css">
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  
-       
-    </head>
-    <body>
-    <header class='container header__container' th:replace="fragment/header.html :: header"></header>
-    <div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sanolagani</title>
 
-        <!-- Dashboard -->
-        <section class="dashboard">
-            <div class=" dashboard__container">
-                <div class="left__dashboard board">
-                    <div>
-                        <a href="#">Sanolagani Dashboard</a>
-                        <a href="#">My Information</a>
-                        <div class="dropdown">
-                            <button onclick="fundManagement()" class="drop-btn">Fund Management</button>
-                            <div id="fundManagement" class="fundManagementContent">
-                                <a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Collateral Management</a>
-                                <a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Transfer History</a>
-                                <a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Settlement</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="center__dashboard board">
-                     <canvas id="myChart2"></canvas>
-                </div>
-                <div class="right__dashboard">
-                    <div class="turnover board">
-                        <h2>Welcome,[[${user}]]</h2>
-                        <a th:href="@{/riskinfo}">
-                        <div>
-                            <p>Total investment</p></a>
-                            <p>[[${totalInvestment}]]</p>
-                        </div>
-                        <div>
-                            <p>Total company</p>
-                            <p>[[${size}]]</p>
-                        </div>
-                        <div>
-                            <p>Total share</p>
-                            <p>[[${totalshare}]]</p>
-                        </div>
-                       
-                    </div>
+	<head th:replace="fragment/head.html :: headerfiles"></head>
+	<link rel="stylesheet" href="css/dashboard.css">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-                    <div class="collateral__summary board">
-                        <h2 class="">MY COLLATERAL SUMMARY</h2>
-                        <h3 class="bold">Rs. <span>23,707.89</span></h3>
+</head>
 
-                        <div>
-                            <p>Collateral Utilized</p>
-                            <p>0</p>
-                        </div>
-                        <div>
-                            <p>Collateral Available</p>
-                            <p>0</p>
-                        </div>
-                        <a href="#" class="load">Load Collateral</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+<body>
+	<header class='container header__container' th:replace="fragment/header.html :: header"></header>
+	<div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
 
-        <!-- Footer -->
-        <footer>
-        <footer th:insert="fragment/footer.html :: footer">
+	<!-- Dashboard -->
+	<section class="dashboard">
+		<div class=" dashboard__container">
+			<div class="left__dashboard board">
+				<div>
+					<a href="#">Sanolagani Dashboard</a>
+					<a href="#">My Information</a>
+					<div class="dropdown">
+						<button onclick="fundManagement()" class="drop-btn">Fund Management</button>
+						<div id="fundManagement" class="fundManagementContent">
+							<a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Collateral Management</a>
+							<a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Transfer History</a>
+							<a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Settlement</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="center__dashboard board">
+				<canvas id="myChart2"></canvas>
+			</div>
+			<div class="right__dashboard">
+				<div class="turnover board">
+					<h2>Welcome,[[${user}]]</h2>
+					<a th:href="@{/riskinfo}">
+						<div>
+							<p>Total investment</p>
+					</a>
+					<p>[[${totalInvestment}]]</p>
+				</div>
+				<div>
+					<p>Total company</p>
+					<p>[[${size}]]</p>
+				</div>
+				<div>
+					<p>Total share</p>
+					<p>[[${totalshare}]]</p>
+				</div>
 
-        </footer>
-        
-        <!-- Fund Management Dropdown Script -->
-        <script input th:inline="javascript">
-            function fundManagement(){
-                document.getElementById("fundManagement").classList.toggle("show");
-            }
-			
-		// Extract labels and values from dataPoints		
-        //var labels = dataPoints.map(dp => dp.label);
-        //var values = dataPoints.map(dp => dp.value);
-      
-       document.addEventListener("DOMContentLoaded", function() {
-        var canvas = document.getElementById("myChart2");
+			</div>
 
-    if (canvas) {
-        var ctx = canvas.getContext("2d");
-        
-        
-       var companies =[[${companynamelist}]]; // Replace with your actual company names
-        console.log(companies);
-        var shares = [2,3,4] // Replace with your actual number of shares data
-        var investments = [[${totalamountlist}]]; // Replace with your additional data
-   
-        // Chart data
-        var chartData = {
-            labels: companies,
-            datasets: [
-                {
-                    label: "investments",
-                    data: investments,
-                    type: 'line', // Bar chart for number of shares
-                    backgroundColor: "#007bff",
-                    borderWidth: 1
-                },
-                
-            ]
-        };
-        // Chart options
-        var chartOptions = {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        };
+			<div class="collateral__summary board">
+				<h2 class="">MY COLLATERAL SUMMARY</h2>
+				<h3 class="bold">Rs. <span>23,707.89</span></h3>
 
-        // Create combination chart
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: chartData,
-            options: chartOptions
-        });
-      
-    }
-});
+				<div>
+					<p>Collateral Utilized</p>
+					<p>0</p>
+				</div>
+				<div>
+					<p>Collateral Available</p>
+					<p>0</p>
+				</div>
+				<a href="#" class="load">Load Collateral</a>
+			</div>
+		</div>
+		</div>
+	</section>
 
-        </script>
-    </body>
+	<!-- Footer -->
+	<footer>
+		<footer th:insert="fragment/footer.html :: footer">
+
+		</footer>
+
+		<!-- Fund Management Dropdown Script -->
+		<script input th:inline="javascript">
+			function fundManagement() {
+				document.getElementById("fundManagement").classList.toggle("show");
+			}
+
+			// Extract labels and values from dataPoints		
+			//var labels = dataPoints.map(dp => dp.label);
+			//var values = dataPoints.map(dp => dp.value);
+
+			document.addEventListener("DOMContentLoaded", function () {
+				var canvas = document.getElementById("myChart2");
+
+				if (canvas) {
+					var ctx = canvas.getContext("2d");
+
+
+					var companies = [[${companynamelist}]]; // Replace with your actual company names
+					console.log(companies);
+					var shares = [2, 3, 4] // Replace with your actual number of shares data
+					var investments = [[${totalamountlist}]]; // Replace with your additional data
+
+					// Chart data
+					var chartData = {
+						labels: companies,
+						datasets: [
+							{
+								label: "investments",
+								data: investments,
+								type: 'line', // Bar chart for number of shares
+								backgroundColor: "#007bff",
+								borderWidth: 1
+							},
+
+						]
+					};
+					// Chart options
+					var chartOptions = {
+						responsive: true,
+						scales: {
+							y: {
+								beginAtZero: true
+							}
+						}
+					};
+
+					// Create combination chart
+					var myChart = new Chart(ctx, {
+						type: 'line',
+						data: chartData,
+						options: chartOptions
+					});
+
+				}
+			});
+
+		</script>
+</body>
 
 </html>
