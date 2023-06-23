@@ -1,83 +1,87 @@
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Sanolagani</title>
-       <head th:replace="fragment/head.html :: headerfiles"></head>
-       <link rel="stylesheet" href="css/diversificationgraph.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
-       
-    </head>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sanolagani</title>
+
+  <head th:replace="fragment/head.html :: headerfiles"></head>
+  <link rel="stylesheet" href="css/diversificationgraph.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+
+</head>
+
 <body>
-	<header class='container header__container' th:replace="fragment/header.html :: header"></header>
-    <div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
-    <h1>Welcome, [[${user}]]</h1>
-    <div class="left__dashboard">
-               <div class="turnover board">
-                      <span> Diversification Level</span> 
-                       
-                        <div>
-                           
-                        </div>
-                       
-                    </div>  
- <div class="chart-container">
-       <canvas id="ruler-chart"></canvas>
-  </div>
-      
+  <header class='container header__container' th:replace="fragment/header.html :: header"></header>
+  <div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
+  <h1>Welcome, [[${user}]]</h1>
+  <div class="left__dashboard">
+    <div class="turnover board">
+      <span> Diversification Level</span>
+
+      <div>
+
+      </div>
+
+    </div>
+    <div class="chart-container">
+      <canvas id="ruler-chart"></canvas>
+    </div>
 
 
-<script>
-const activeValue = [[${diversificationlevel}]]; // Replace with the active value received from Spring Boot
 
-const chartData = {
-  labels: Array.from({ length: 10 }, (_, i) => i + 1),
-  datasets: [
-    {
-      data: Array.from({ length: 10 }, (_, i) => i + 1 === activeValue ? 1 : null),
-      borderColor: 'black',
-      borderWidth: 1,
-      pointBackgroundColor: 'black',
-      pointBorderColor: 'black',
-      pointRadius: 5,
-      pointHoverRadius: 7,
-      pointHitRadius: 10,
-    },
-  ],
-};
+    <script>
+      const activeValue = [[${ diversificationlevel }]]; // Replace with the active value received from Spring Boot
 
-const chartOptions = {
-  responsive: true,
-  maintainAspectRatio: false,
-  legend: { display: false },
-  scales: {
-    xAxes: [
-      {
-        display: true,
-        ticks: {
-          beginAtZero: true,
-          stepSize: 1,
+      const chartData = {
+        labels: Array.from({ length: 10 }, (_, i) => i + 1),
+        datasets: [
+          {
+            data: Array.from({ length: 10 }, (_, i) => i + 1 === activeValue ? 1 : null),
+            borderColor: 'black',
+            borderWidth: 1,
+            pointBackgroundColor: 'black',
+            pointBorderColor: 'black',
+            pointRadius: 5,
+            pointHoverRadius: 7,
+            pointHitRadius: 10,
+          },
+        ],
+      };
+
+      const chartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: { display: false },
+        scales: {
+          xAxes: [
+            {
+              display: true,
+              ticks: {
+                beginAtZero: true,
+                stepSize: 1,
+              },
+            },
+          ],
+          yAxes: [
+            {
+              display: false,
+            },
+          ],
         },
-      },
-    ],
-    yAxes: [
-      {
-        display: false,
-      },
-    ],
-  },
-};
+      };
 
-const ctx = document.getElementById('ruler-chart').getContext('2d');
+      const ctx = document.getElementById('ruler-chart').getContext('2d');
 
-const rulerChart = new Chart(ctx, {
-  type: 'line',
-  data: chartData,
-  options: chartOptions,
-});
+      const rulerChart = new Chart(ctx, {
+        type: 'line',
+        data: chartData,
+        options: chartOptions,
+      });
 
-  
+
     </script>
 </body>
+
 </html>

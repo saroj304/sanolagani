@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="fragment/head.html :: headerfiles"></head>
 
 <body>
@@ -15,13 +16,15 @@
 				<div th:if="${param.error}" class="alert alert-error text-danger">
 					Invalid username or password.</div>
 				<div class="heading__background">
-					<a th:href="@{/login}" class='active'><h2>Login</h2></a> <a
-						th:href="@{/register}"><h2>Sign Up</h2></a>
+					<a th:href="@{/login}" class='active'>
+						<h2>Login</h2>
+					</a> <a th:href="@{/register}">
+						<h2>Sign Up</h2>
+					</a>
 				</div>
 				<form th:action="@{/processlogin}" method="post">
-					<input class='input__box' type="email" placeholder='Email'
-						name="email" required /> <input class='input__box' type="password"
-						placeholder='Password' name="password" required /> <input
+					<input class='input__box' type="email" placeholder='Email' name="email" required /> <input
+						class='input__box' type="password" placeholder='Password' name="password" required /> <input
 						class='btn btn__login' type="submit" value='Log In' required />
 				</form>
 				<h5 class='forgot__password'>
@@ -31,11 +34,12 @@
 		</div>
 	</section>
 
-	    <!-- Footer -->
+	<!-- Footer -->
 
 	<footer th:insert="fragment/footer.html :: footer">
 
 	</footer>
-   
+
 </body>
+
 </html>

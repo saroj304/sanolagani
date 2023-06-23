@@ -1,141 +1,142 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head th:insert="fragment/head.html :: headerfiles"></head>
 
 
-    <body>
-        <!-- main header -->
-        <header class='container header__container'>
-            <div>
-                <h1><a href="/" class='logo hover_none'>Sanolagani</a> </h1>
-            </div>
-            <div class='search'>
-                <form method="get">
-                    <input type="search" name="search" placeholder='Search' id />
-                    <button type="submit" class="search__icon"><i
-                            class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
-                </form>
-            </div>
-        </header>
-
-        <!-- navigation -->
-        <div class='full__width'>
-            <nav class='container nav__container'>
-                <div class="left">
-                    <ul>
-                        <li><a href="/" class="nav__link">Home</a></li>
-                        <li><a href="#" class="nav__link">Start Investing</a></li>
-                        <li><a href="#" class="nav__link">Raise Capital</a></li>
-                        <li><a href="company_registration.html"
-                                class="nav__link">Register Company</a></li>
-                        <li><a href="invest.html" class="nav__link">Invest</a></li>
-                    </ul>
-                </div>
-
-                <div class="right">
-                    <ul>
-                        <li><a href="user_login.html" class="nav__link">Login</a></li>
-                        <li><a href="user_signup.html" class="nav__link">Sign Up</a></li>
-                    </ul>
-                </div>
-            </nav>
+<body>
+    <!-- main header -->
+    <header class='container header__container'>
+        <div>
+            <h1><a href="/" class='logo hover_none'>Sanolagani</a> </h1>
         </div>
+        <div class='search'>
+            <form method="get">
+                <input type="search" name="search" placeholder='Search' id />
+                <button type="submit" class="search__icon">
+                    <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+                </button>
+            </form>
+        </div>
+    </header>
 
-        <!-- Details -->
-        <section>
-            <div class="container details__container">
-                <!-- left details -->
-                <div class="left__detail">
-                    <div class="left__detail-main">
-                        <h5><span>Bhoklagyo</span> &nbsp; Rs. <span>100</span> per
-                            share</h5>
-                        <h2>Bhoklagyo - Feeding the distanced customer with taste.</h2>
-    
-                        <form action="#" class="detail__form">
-                            <div class="details__buttons">
-                                <button class="btn btn-light">Rs. <span>100,000</span></button>
-                                <button class="btn btn-light">Rs. <span>100,000</span></button>
-                                <button class="btn btn-light">Rs. <span>100,000</span></button>
-                            </div>
-                            <div class="detail__amount">
-                                <span>Amount: Rs.&nbsp;<input type="number"
-                                        class="detail__input" name="invest" required oninput="this.value = 
+    <!-- navigation -->
+    <div class='full__width'>
+        <nav class='container nav__container'>
+            <div class="left">
+                <ul>
+                    <li><a href="/" class="nav__link">Home</a></li>
+                    <li><a href="#" class="nav__link">Start Investing</a></li>
+                    <li><a href="#" class="nav__link">Raise Capital</a></li>
+                    <li><a href="company_registration.html" class="nav__link">Register Company</a></li>
+                    <li><a href="invest.html" class="nav__link">Invest</a></li>
+                </ul>
+            </div>
+
+            <div class="right">
+                <ul>
+                    <li><a href="user_login.html" class="nav__link">Login</a></li>
+                    <li><a href="user_signup.html" class="nav__link">Sign Up</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Details -->
+    <section>
+        <div class="container details__container">
+            <!-- left details -->
+            <div class="left__detail">
+                <div class="left__detail-main">
+                    <h5><span>Bhoklagyo</span> &nbsp; Rs. <span>100</span> per
+                        share</h5>
+                    <h2>Bhoklagyo - Feeding the distanced customer with taste.</h2>
+
+                    <form action="#" class="detail__form">
+                        <div class="details__buttons">
+                            <button class="btn btn-light">Rs. <span>100,000</span></button>
+                            <button class="btn btn-light">Rs. <span>100,000</span></button>
+                            <button class="btn btn-light">Rs. <span>100,000</span></button>
+                        </div>
+                        <div class="detail__amount">
+                            <span>Amount: Rs.&nbsp;<input type="number" class="detail__input" name="invest" required
+                                    oninput="this.value = 
                                         !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"></span>
-                                <button type="submit" class="btn ">Continue</button>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="left__detail-bottom">
-                        <a href="#">Add Payment Method</a>
-                    </div>
+                            <button type="submit" class="btn ">Continue</button>
+                        </div>
+                    </form>
                 </div>
 
-                <!-- right details -->
-                <div class="right__detail">
-                    <h2>1,103 Shares</h2>
-                    <div class="detail__shares">
-                        <p>Investment Amount</p>
-                        <p>Rs.<span>1,60,000</span></p>
-                    </div>
-                    <div class="detail__shares">
-                        <p>Fees</p>
-                        <p>Rs.<span>5,600</span></p>
-                    </div>
-                    <div class="detail__shares bold">
-                        <p>Total Amount</p>
-                        <p>Rs.<span>1,60,000</span></p>
-                    </div>
-                    <br>
-                    <div class="detail__shares">
-                        <p>Base Shares (Rounded Up)</p>
-                        <p>1014</p>
-                    </div>
-                    <div class="detail__shares bold">
-                        <p>Total Shares</p>
-                        <p>1014</p>
-                    </div>
-                    <div class="detail__info">
-                        <p>I acknowledge that clicking "Submit Investment" below
-                            represents an e-signatures as detailed in our <a
-                                href="#" class="additinoal__info">terms of use</a>. I acknowledge that my
-                            account and payment informatino will be saved to
-                            file
-                            for future transactions on my account. I acknowledge
-                            that I have reviewed and understand the educatinoal
-                            materials. I understand that the entire amount of my
-                            investment is at risk and may be lost, and aim in a
-                            financial positin to bear the loss of the
-                            investment.</p>
-
-                        <p>I confirm that this purchase price is not more than
-                            the
-                            greater of 10% of my annual income or net worth (or
-                            no
-                            more than the greater of 10% of revenue or net
-                            assets
-                            for a business), unless I am an accredited investor.</p>
-
-                        <p>I have read and agreee to the terms set in the <a
-                                href="#" class="additinoal__info">Subscription Agreement</a>.</p>
-
-                        <p>By clicking "Submit Investment" you agree with our <a
-                                href="#" class="additinoal__info">Trems and Conditinos</a> & <a href="#">Privacy
-                                Policy</a></p>
-                    </div>
-
-                    <button type="submit" class="btn btn-success">Submit
-                        Investment</button>
-
+                <div class="left__detail-bottom">
+                    <a href="#">Add Payment Method</a>
                 </div>
             </div>
-        </section>
 
-        <!-- Footer -->
-        <footer>
-                   <footer th:insert="fragment/footer.html :: footer">
+            <!-- right details -->
+            <div class="right__detail">
+                <h2>1,103 Shares</h2>
+                <div class="detail__shares">
+                    <p>Investment Amount</p>
+                    <p>Rs.<span>1,60,000</span></p>
+                </div>
+                <div class="detail__shares">
+                    <p>Fees</p>
+                    <p>Rs.<span>5,600</span></p>
+                </div>
+                <div class="detail__shares bold">
+                    <p>Total Amount</p>
+                    <p>Rs.<span>1,60,000</span></p>
+                </div>
+                <br>
+                <div class="detail__shares">
+                    <p>Base Shares (Rounded Up)</p>
+                    <p>1014</p>
+                </div>
+                <div class="detail__shares bold">
+                    <p>Total Shares</p>
+                    <p>1014</p>
+                </div>
+                <div class="detail__info">
+                    <p>I acknowledge that clicking "Submit Investment" below
+                        represents an e-signatures as detailed in our <a href="#" class="additinoal__info">terms of
+                            use</a>. I acknowledge that my
+                        account and payment informatino will be saved to
+                        file
+                        for future transactions on my account. I acknowledge
+                        that I have reviewed and understand the educatinoal
+                        materials. I understand that the entire amount of my
+                        investment is at risk and may be lost, and aim in a
+                        financial positin to bear the loss of the
+                        investment.</p>
+
+                    <p>I confirm that this purchase price is not more than
+                        the
+                        greater of 10% of my annual income or net worth (or
+                        no
+                        more than the greater of 10% of revenue or net
+                        assets
+                        for a business), unless I am an accredited investor.</p>
+
+                    <p>I have read and agreee to the terms set in the <a href="#" class="additinoal__info">Subscription
+                            Agreement</a>.</p>
+
+                    <p>By clicking "Submit Investment" you agree with our <a href="#" class="additinoal__info">Trems and
+                            Conditinos</a> & <a href="#">Privacy
+                            Policy</a></p>
+                </div>
+
+                <button type="submit" class="btn btn-success">Submit
+                    Investment</button>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <footer th:insert="fragment/footer.html :: footer">
 
         </footer>
-    </body>
+</body>
 
 </html>
