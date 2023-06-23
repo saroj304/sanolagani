@@ -68,6 +68,7 @@ public class RegisterController {
 		}
 		user.setPassword(passwordencoder.encode(user.getPassword()));
 		String otp = emailservice.sendEmail(user.getEmail());
+		System.out.println(otp);
 		otpStore.put(user.getEmail(), hashOTP(otp));
 		redirectAttributes.addFlashAttribute("email", user.getEmail());
 		return "redirect:/otpverify";
@@ -125,6 +126,7 @@ public class RegisterController {
 			}
 			try {
 				String results=emailservice.verifyCompanyDetails(un_company, request, result);
+				System.out.println(results);
 					if(results.equalsIgnoreCase("success")) {
 						return "user_login";
 					}

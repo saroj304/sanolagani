@@ -63,6 +63,11 @@ public class EmailService {
         		+ " Warm Regards,\n"
         		+ " sanolagani investment firm.");
 
+<<<<<<< HEAD
+=======
+        mailSender.send(message);
+
+>>>>>>> 35675fae439840e4157fdfccf4de4cfa88020d7d
        //mailSender.send(message);
 
         return otp;
@@ -121,6 +126,10 @@ public class EmailService {
     		byte[] com_image = company_image.getBytes();
     		
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 35675fae439840e4157fdfccf4de4cfa88020d7d
     		String path = "../sanolagani/src/main/resources/static/unverified_details/";
             File uploadedFile = new File("../sanolagani/src/main/resources/static/unverified_details/" + pdf_name);
 
@@ -128,7 +137,10 @@ public class EmailService {
             fileOutputStream.write(pdfFile.getBytes());
             fileOutputStream.close();
 
+<<<<<<< HEAD
           
+=======
+>>>>>>> 35675fae439840e4157fdfccf4de4cfa88020d7d
 
     		
     	   Path company_i_path = Paths.get(path+company_img);
@@ -148,6 +160,10 @@ public class EmailService {
     	   un_company.setCitizenship_bname(citizen_back_name);
     	   un_company.setPan_image_name(register_photo_name);
     	   un_company.setImage(company_img);
+
+    	   System.out.println("unverified company is going to be registered");
+    	   System.out.println(un_company);
+
     	   adminservice.saveUnverifiedCompany(un_company);
     	 
     	}catch(Exception e) {
@@ -156,7 +172,6 @@ public class EmailService {
       return "success";
 }
     
-
 }
 
 
