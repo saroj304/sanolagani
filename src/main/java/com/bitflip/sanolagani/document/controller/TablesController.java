@@ -41,10 +41,12 @@ public class TablesController {
         return jsonList;
     }
 
-    @GetMapping("/table/{firm}")
-    public String getTable(@PathVariable("firm") String firm, Model model) throws IOException {
-        String filePath = "src/main/resources/output/" + firm + "/";
-        List<Map<String, String>> table = convertTsvToJson(filePath + "table47.tsv");
+    @GetMapping("/table/{firm}/{id}")
+    public String getTable(@PathVariable("firm") String firm,
+                           @PathVariable("id") String id,
+                           Model model) throws IOException {
+        String filePath = "src/main/resources/output/" + firm + "/" + "table"+id+".tsv";
+        List<Map<String, String>> table = convertTsvToJson(filePath);
         model.addAttribute("table", table);
         return "documents/table";
     }

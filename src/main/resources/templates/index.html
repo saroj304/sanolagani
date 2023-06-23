@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragment/head.html :: headerfiles"></head>
+<head th:include="fragment/head.html :: headerfiles">
+</head>
 
 <body>
-	<header class='container header__container'
-		th:replace="fragment/header.html :: header"></header>
+	<header class='container header__container' th:replace="fragment/header.html :: header"></header>
 
 	<div class='full__width' th:insert="fragment/nav.html :: navbar">
 	</div>
@@ -15,27 +15,26 @@
 			<h2>Most momentum</h2>
 			<h5>Offerings that have raised the highest money</h5>
 			<div class="cards row">
-				<div class="card " th:each="companycap : ${companybasedoncapital}" >
-				
-					<a href=""> <img
-						th:src="@{'/unverified_details/'+'unverified_details'+${companycap.image}}"
-						class='card__image' alt="card-image" />
-						<h3>Timeplast</h3>
+
+				<div class="card " th:each="company : ${companybasedoncapital}">
+					<a th:href="@{/company/{id}/ (id=${company.id})}">
+						<img th:src="@{/photos/{id}/{image} (image=${company.image}, id= ${company.id})}" class='card__image' alt="card-image" />
+						<h3 th:text="${company.companyname}"/>
 					</a>
 					<p class='desc'>The palstic that completely disintegrate...</p>
 
 					<div class="card__score">
 						<div class="raised">
-							<h3 th:text="${companycap.previouslyraisedcapital}"></h3>
-							<p class='desc'>Raised</p>
+							<h3 th:text="Rs{#numbers.formatCurrency(company.previouslyraisedcapital)}" />
+							<p class='desc'>Capital To Raise</p>
 						</div>
 						<div class="investers">
-							<h3 th:text="${companycap.companyname}"></h3>
-							<p class='desc'>CompanyName</p>
+							<h3>400</h3>
+							<p class='desc'>Price per Unit</p>
 						</div>
 						<div class="min__investment">
-							<h3 th:text="${companycap.maximum_quantity}"></h3>
-							<p class='desc'>Min. Investment</p>
+							<h3 th:text="${company.maximum_quantity}" />
+							<p class='desc'>Max. Quantity</p>
 						</div>
 					</div>
 
@@ -54,6 +53,16 @@
 			<h5>Offerings that have raised the most money in the last few
 				days</h5>
 
+<<<<<<< HEAD
+			<div class="cards">
+				<div class="card">
+					<a href="#"><img src="@{/photos/wigl.webp}"
+						class='card__image' alt="card-image" /></a>
+
+					<h3>
+						<a href="#">Timeplast</a>
+					</h3>
+=======
 			<div class="cards row">
 				<div class="card " th:each="company : ${companybasedondate}">
 					<a href=""> <img
@@ -61,6 +70,7 @@
 						class='card__image' alt="card-image" />
 						<h3>Timeplast</h3>
 					</a>
+>>>>>>> 35675fae439840e4157fdfccf4de4cfa88020d7d
 					<p class='desc'>The palstic that completely disintegrate...</p>
 
 					<div class="card__score">
@@ -124,5 +134,9 @@
 			</div>
 		</div>
 	</section>
+<<<<<<< HEAD
+
+=======
+>>>>>>> 35675fae439840e4157fdfccf4de4cfa88020d7d
 </body>
 </html>
