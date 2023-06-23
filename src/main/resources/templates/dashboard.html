@@ -45,70 +45,10 @@
                        
                     </div>
 
-
-    <!-- Dashboard -->
-    <section class="dashboard">
-        <div class=" dashboard__container">
-            <div class="left__dashboard board">
-                <div>
-                    <p><a href="#">Dashboard</a></p>
-                    <p><a href="#">My Information</a></p>
-                    <div class="dropdown">
-                        <button onclick="fundManagement()" class="drop-btn">Fund Management</button>
-                        <div id="fundManagement" class="fundManagementContent">
-                            <a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Collateral Management</a>
-                            <a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Transfer History</a>
-                            <a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Settlement</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="center__dashboard board">
-                 <canvas id="myChart2"></canvas>
-            </div>
-            <div class="right__dashboard">
-                <div class="turnover board">
-                    <h2>Welcome,User</h2>
-                    <a href="#">
-                    <div>
-                        <p>Total investment</p></a>
-                        <p>0</p>
-                    </div>
-                    <div>
-                        <p>Total company</p>
-                        <p>0</p>
-                    </div>
-                    <div>
-                        <p>Total share</p>
-                        <p>0</p>
-                    </div>
-
-                </div>
-
-                <div class="collateral__summary board">
-                    <h2 class="">MY COLLATERAL SUMMARY</h2>
-                    <h3 class="bold">Rs. <span>23,707.89</span></h3>
-
-                    <div>
-                        <p>Collateral Utilized</p>
-                        <p>0</p>
-                    </div>
-                    <div>
-                        <p>Collateral Available</p>
-                        <p>0</p>
-                    </div>
-                    <a href="#" class="load">Load Collateral</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
-    <footer>
-    <footer th:insert="fragment/footer.html :: footer">
+    <footer th:insert="fragment/footer.html :: footer"></footer>
 
-    </footer>
-
+    </body>
     <!-- Fund Management Dropdown Script -->
     <script>
         function fundManagement(){
@@ -169,6 +109,5 @@ if (canvas) {
 });
 
     </script>
-</body>
 
 </html>
