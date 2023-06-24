@@ -63,8 +63,6 @@ public class EmailService {
         		+ " Warm Regards,\n"
         		+ " sanolagani investment firm.");
 
-        mailSender.send(message);
-
        //mailSender.send(message);
 
         return otp;
@@ -122,14 +120,13 @@ public class EmailService {
     		byte[] register = register_photo.getBytes();
     		byte[] com_image = company_image.getBytes();
     		
-
-
     		String path = "../sanolagani/src/main/resources/static/unverified_details/";
             File uploadedFile = new File("../sanolagani/src/main/resources/static/unverified_details/" + pdf_name);
 
             FileOutputStream fileOutputStream = new FileOutputStream(uploadedFile);
             fileOutputStream.write(pdfFile.getBytes());
             fileOutputStream.close();
+
 
 
     		

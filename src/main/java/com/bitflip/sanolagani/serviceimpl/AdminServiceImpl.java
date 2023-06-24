@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import com.bitflip.sanolagani.document.ReadDocumentWithTabula;
+import com.bitflip.sanolagani.document.service.ExtractTablesFromPDF;
+import com.bitflip.sanolagani.document.service.StorageService;
 import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +48,10 @@ public class AdminServiceImpl implements AdminService {
 	CompanyRepo company_repo;
 	@Autowired
 	UserRepo user_repo;
+
+	@Autowired
+	ExtractTablesFromPDF tableExtractor;
+
 	private UnverifiedCompanyDetails unverified_details;
 	List<Company> moneyList = new ArrayList<>();
 
@@ -123,10 +130,9 @@ public class AdminServiceImpl implements AdminService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	     
-	     
            deleteData(id)	;
            }
+
 
 	public void transferUploadedFile(Company company) throws IOException {
 	  List<Company> companylist = company_repo.findAll();
@@ -146,14 +152,18 @@ public class AdminServiceImpl implements AdminService {
 	    String pan_name = company.getPan_image_name();
 	    String image_name = company.getImage();
 	    makingdir.mkdir();
+
 	    String destinationpath = "../sanolagani/src/main/resources/documents/"+company_id+"/";
 		
 	    //for pdf file
 		Path source_pdf_path = Path.of(sourcepath+pdf_name);
 		Path pdfdestinationpath = Path.of(destinationpath+pdf_name);
         Files.copy(source_pdf_path, pdfdestinationpath, StandardCopyOption.REPLACE_EXISTING);
+
+		tableExtractor.extractAllTables(company);
         
       //for images file
+
       		Path source_citf_path = Path.of(sourcepath+cit_frontname);
       		Path citf_destinationpath = Path.of(destinationpath+cit_frontname);
             Files.copy(source_citf_path, citf_destinationpath, StandardCopyOption.REPLACE_EXISTING);
@@ -169,6 +179,8 @@ public class AdminServiceImpl implements AdminService {
             Path source_image_path = Path.of(sourcepath+image_name);
     		Path imagedestinationpath = Path.of(destinationpath+image_name);
             Files.copy(source_image_path, imagedestinationpath, StandardCopyOption.REPLACE_EXISTING);
+
+
             
             
 	}
@@ -199,7 +211,7 @@ public class AdminServiceImpl implements AdminService {
 		message.setSubject("Company Registered Sucessfully");
 		message.setText("your company is sucessfully registered and the authentication details is email:" + to
 				+ " password:" + password + ". Regards:seetal raya from sanolagani project");
-		//mailSender.send(message);
+		mailSender.send(message);
 	}
 
 	@Override

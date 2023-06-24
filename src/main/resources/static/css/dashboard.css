@@ -9,13 +9,14 @@
     padding: 0 1rem;
 }
 .board{
-    background: var(--color-background);
+    background:#e8eaef;
     height: fit-content;
     border-radius: 10px;
     padding: 10px;
 }
 .left__dashborad{
     font-size: 15px;
+
 }
 .left__dashboard div a:hover{
     margin-left: 10px;
