@@ -31,8 +31,8 @@ public class HomeController {
 		List<Company> companylist = adminservice.getAllCompany();
 		Optional<List<Company>> result = Optional.ofNullable(companylist);
 		if (result != null) {
-			List<Company> companybasedoncapital = adminservice.listingBasedonRaisedCapital(companylist);
-			model.addAttribute("companybasedoncapital", companybasedoncapital);
+		//	List<Company> companybasedoncapital = adminservice.listingBasedonRaisedCapital(companylist);
+			//model.addAttribute("companybasedoncapital", companybasedoncapital);
 			List<Company> companybasedondate = adminservice.listingBasedonRecentDate(companylist);
 			model.addAttribute("companybasedondate", companybasedondate);
 			return "index";

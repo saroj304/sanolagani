@@ -56,8 +56,7 @@
 
 			<div class="cards row">
 				<div class="card " th:each="company : ${companybasedondate}">
-					<a href=""> <img
-						th:src="@{'/unverified_details/'+'unverified_details'+${company.image}}"
+					<a href=""> <img th:src="@{'../documents/'+${company.id}+'/'+${company.image}}"
 						class='card__image' alt="card-image" />
 						<h3>Timeplast</h3>
 					</a>
