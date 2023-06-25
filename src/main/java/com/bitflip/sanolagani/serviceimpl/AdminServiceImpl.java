@@ -118,7 +118,7 @@ public class AdminServiceImpl implements AdminService {
 	     company.setCitizenship_bname(unverified_details.getCitizenship_bname());
 	     company.setMaximum_quantity(unverified_details.getMaximum_quantity());
 	     company.setImage(unverified_details.getImage());
-	     System.out.println("the verified image name is"+unverified_details.getImage());
+	     user.setAddress(unverified_details.getAddress());
 	     user.setPassword(encodedPassword);
 		 user.setRole(company.getRole());
 		 //user_repo.save(user);
@@ -135,7 +135,16 @@ public class AdminServiceImpl implements AdminService {
 
 
 	public void transferUploadedFile(Company company) throws IOException {
-		File makingdir = new File("../sanolagani/src/main/resources/documents/"+company.getId());
+	  List<Company> companylist = company_repo.findAll();
+	  int company_id=0;;
+		  for(Company companies:companylist) {
+			  if(companies.getUser().getEmail().equals(company.getUser().getEmail())) {
+				  company_id = companies.getId();
+				  break;
+			  }
+		  }
+	  
+		File makingdir = new File("../sanolagani/src/main/resources/documents/"+company_id);
 	    String sourcepath = "../sanolagani/src/main/resources/static/unverified_details/";
 		String pdf_name = company.getFilename();
 	    String cit_frontname = company.getCitizenship_fname();
@@ -143,10 +152,9 @@ public class AdminServiceImpl implements AdminService {
 	    String pan_name = company.getPan_image_name();
 	    String image_name = company.getImage();
 	    makingdir.mkdir();
-	    String destinationpath = "../sanolagani/src/main/resources/static/photos/"+company.getId()+"/";
-		File image = new File(destinationpath);
-		image.mkdir();
 
+	    String destinationpath = "../sanolagani/src/main/resources/documents/"+company_id+"/";
+		
 	    //for pdf file
 		Path source_pdf_path = Path.of(sourcepath+pdf_name);
 		Path pdfdestinationpath = Path.of(destinationpath+pdf_name);
@@ -155,21 +163,24 @@ public class AdminServiceImpl implements AdminService {
 		tableExtractor.extractAllTables(company);
         
       //for images file
-		Path source_citf_path = Path.of(sourcepath+cit_frontname);
-		Path citf_destinationpath = Path.of(destinationpath+cit_frontname);
-		Files.copy(source_citf_path, citf_destinationpath, StandardCopyOption.REPLACE_EXISTING);
 
-		Path source_citb_path = Path.of(sourcepath+cit_backname);
-		Path citb_destinationpath = Path.of(destinationpath+cit_backname);
-		Files.copy(source_citb_path, citb_destinationpath, StandardCopyOption.REPLACE_EXISTING);
+      		Path source_citf_path = Path.of(sourcepath+cit_frontname);
+      		Path citf_destinationpath = Path.of(destinationpath+cit_frontname);
+            Files.copy(source_citf_path, citf_destinationpath, StandardCopyOption.REPLACE_EXISTING);
+           
+            Path source_citb_path = Path.of(sourcepath+cit_backname);
+      		Path citb_destinationpath = Path.of(destinationpath+cit_backname);
+            Files.copy(source_citb_path, citb_destinationpath, StandardCopyOption.REPLACE_EXISTING);
+           
+            Path source_pan_path = Path.of(sourcepath+pan_name);
+    		Path pandestinationpath = Path.of(destinationpath+pan_name);
+            Files.copy(source_pan_path, pandestinationpath, StandardCopyOption.REPLACE_EXISTING);
+            
+            Path source_image_path = Path.of(sourcepath+image_name);
+    		Path imagedestinationpath = Path.of(destinationpath+image_name);
+            Files.copy(source_image_path, imagedestinationpath, StandardCopyOption.REPLACE_EXISTING);
 
-		Path source_pan_path = Path.of(sourcepath+pan_name);
-		Path pandestinationpath = Path.of(destinationpath+pan_name);
-		Files.copy(source_pan_path, pandestinationpath, StandardCopyOption.REPLACE_EXISTING);
 
-		Path source_image_path = Path.of(sourcepath+image_name);
-		Path imagedestinationpath = Path.of(destinationpath+image_name);
-		Files.copy(source_image_path, imagedestinationpath, StandardCopyOption.REPLACE_EXISTING);
             
             
 	}

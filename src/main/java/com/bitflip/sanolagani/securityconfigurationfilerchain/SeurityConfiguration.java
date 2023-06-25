@@ -20,6 +20,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.bitflip.sanolagani.serviceimpl.CustomUserDetailService;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -35,8 +36,7 @@ public class SeurityConfiguration extends WebSecurityConfigurerAdapter{
 
 	    .antMatchers("/login","/register","/otpverify","/companyregister","/companyverify",
 	    		"/tables","/addCompany","/tables/edit/**","/forgotpassword",
-	    		"/changepassword","/resetpassword","/updatepassword","/",
-	    		"/raisecapital").permitAll()
+	    		"/changepassword","/resetpassword","/updatepassword","/","/raisecapital").permitAll()
 	    .antMatchers("/admin/**").hasRole("ADMIN")
 	    .anyRequest().authenticated()
 	    .and()
@@ -72,7 +72,7 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 @Override
 public void configure(WebSecurity web) throws Exception {
 	web.ignoring()
-	.antMatchers("/resources/**","/static/**","/css/**","/photos/**", "D/**");
+	.antMatchers("/resources/**","/static/**","/css/**","/photos/**","/documents/**");
 }
 
 

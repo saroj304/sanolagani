@@ -36,8 +36,6 @@ public class Company {
 	@Column
 	private String companyname;
 	@Column
-	private String address;
-	@Column
 	private String phnum;
 	@Column
 	private String sector;
@@ -276,13 +274,5 @@ public class Company {
 	public void setCreated(LocalDateTime created) {
 		this.created = created;
 	}
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
 
 }

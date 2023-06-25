@@ -53,24 +53,13 @@
 			<h5>Offerings that have raised the most money in the last few
 				days</h5>
 
-<<<<<<< HEAD
-			<div class="cards">
-				<div class="card">
-					<a href="#"><img src="@{/photos/wigl.webp}"
-						class='card__image' alt="card-image" /></a>
-
-					<h3>
-						<a href="#">Timeplast</a>
-					</h3>
-=======
 			<div class="cards row">
 				<div class="card " th:each="company : ${companybasedondate}">
-					<a href=""> <img
-						th:src="@{'/unverified_details/'+'unverified_details'+${company.image}}"
+					<a href=""> <img th:src="@{'../documents/'+${company.id}+'/'+${company.image}}"
 						class='card__image' alt="card-image" />
 						<h3>Timeplast</h3>
 					</a>
->>>>>>> 35675fae439840e4157fdfccf4de4cfa88020d7d
+
 					<p class='desc'>The palstic that completely disintegrate...</p>
 
 					<div class="card__score">
@@ -134,9 +123,6 @@
 			</div>
 		</div>
 	</section>
-<<<<<<< HEAD
 
-=======
->>>>>>> 35675fae439840e4157fdfccf4de4cfa88020d7d
 </body>
 </html>

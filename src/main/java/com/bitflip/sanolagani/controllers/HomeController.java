@@ -31,8 +31,8 @@ public class HomeController {
 		List<Company> companylist = adminservice.getAllCompany();
 		Optional<List<Company>> result = Optional.ofNullable(companylist);
 		if (result != null) {
-			List<Company> companybasedoncapital = adminservice.listingBasedonRaisedCapital(companylist);
-			model.addAttribute("companybasedoncapital", companybasedoncapital);
+		//	List<Company> companybasedoncapital = adminservice.listingBasedonRaisedCapital(companylist);
+			//model.addAttribute("companybasedoncapital", companybasedoncapital);
 			List<Company> companybasedondate = adminservice.listingBasedonRecentDate(companylist);
 			model.addAttribute("companybasedondate", companybasedondate);
 			return "index";
@@ -60,14 +60,6 @@ public class HomeController {
 	public String analysis() {
 		List<Company> c_list = pre.getCompaniesWithGoodSentiment();
 
-
-		for (Company com : c_list) {
-			System.out.println(com.getCompanyname());
-		}
-
-		for(Company c:c_list) {
-			System.out.println(c.getCompanyname());
-		}
 		return "index";
 	}
 

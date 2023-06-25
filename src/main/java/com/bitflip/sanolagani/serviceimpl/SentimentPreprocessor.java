@@ -37,7 +37,7 @@ public class SentimentPreprocessor {
     public SentimentPreprocessor() {
        
     	Properties props = new Properties();
-        props.setProperty("annotators", "tokenize, ssplit, parse, sentiment");
+        props.setProperty("annotators", "tokenize, ssplit,pos, lemma, parse, sentiment");
         this.pipeline = new StanfordCoreNLP(props);
 
     }
@@ -71,8 +71,10 @@ public class SentimentPreprocessor {
 	            
 	            
 	            for (Feedback feedback : feedbacks) {
+	        
 	                if (feedback.getCompany().getId()== company.getId()) {
-	                    double sentimentScore = performSentimentAnalysis(feedback.getFeedbacktext());
+	                	String text = preprocessText(feedback.getFeedbacktext());
+	                    double sentimentScore = performSentimentAnalysis(text);
 
 	                    totalScore += sentimentScore;
 	                    count++;
@@ -80,10 +82,10 @@ public class SentimentPreprocessor {
 	            }
 	            
 	            double averageScore = (count > 0) ? totalScore / count : 0.0;
-	           
+	
 	            sentimentScores.put(company, averageScore);
 	        }
-	        
+	       
 	        return sentimentScores;
 	    }
 	        
@@ -93,11 +95,11 @@ public class SentimentPreprocessor {
 	        double sentimentScore=0.0;
 	        Annotation annotation = new Annotation(feedbackText);
 	        pipeline.annotate(annotation);
-
 	        for (CoreMap sentence : annotation.get(CoreAnnotations.SentencesAnnotation.class)) {
-	            sentimentScore += sentence.get(SentimentCoreAnnotations.SentimentClass.class).equalsIgnoreCase("positive") ? 1.0 : -1.0;
+	           sentimentScore = sentence.get(SentimentCoreAnnotations.SentimentClass.class).equalsIgnoreCase("positive") ? 1.0 : -1.0;
+	           System.out.println(sentimentScore);
+	           return sentimentScore;
 	        }
-
 	        return sentimentScore;
 	    } 
 	        
@@ -124,31 +126,31 @@ public class SentimentPreprocessor {
 	
 	        
 	        
-} 
+
 	        
 	        
 
-//    public String preprocessText(String text) {
-//       
-//        text = text.replaceAll("[^a-zA-Z ]", "");
-//        text = text.toLowerCase();
-//        text = text.trim().replaceAll(" +", " ");
-//        text = removeStopwords(text);
-//
-//        return text;
-//    }
-//
-//    private String removeStopwords(String text) {
-//        String[] stopwords = {"a", "an", "the", "in", "on", "at", "is", "are", "and", "but", "not"};
-//
-//        // Create a regex pattern of all stopwords
-//        String pattern = "\\b(" + String.join("|", stopwords) + ")\\b";
-//
-//        // Remove stopwords from the text
-//        text = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(text).replaceAll("");
-//
-//        return text;
-//    }
-//}
-//
+    public String preprocessText(String text) {
+       
+        text = text.replaceAll("[^a-zA-Z ]", "");
+        text = text.toLowerCase();
+        text = text.trim().replaceAll(" +", " ");
+        text = removeStopwords(text);
+
+        return text;
+    }
+
+    private String removeStopwords(String text) {
+        String[] stopwords = {"a", "an", "the", "in", "on", "at", "is", "are", "and", "but", "."};
+
+        // Create a regex pattern of all stopwords
+        String pattern = "\\b(" + String.join("|", stopwords) + ")\\b";
+
+        // Remove stopwords from the text
+        text = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(text).replaceAll("");
+
+        return text;
+    }
+}
+
 
