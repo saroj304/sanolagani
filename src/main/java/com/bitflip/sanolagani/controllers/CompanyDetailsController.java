@@ -18,10 +18,6 @@ public class CompanyDetailsController {
         String name = company.getCompanyname();
         String image = company.getImage();
         model.addAttribute("company", company);
-//        model.addAttribute("image", image);
-//        model.addAttribute("id", id);
         return "company-info";
     }
-   
-
 }

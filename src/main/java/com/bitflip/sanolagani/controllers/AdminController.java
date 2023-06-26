@@ -18,7 +18,6 @@ import com.bitflip.sanolagani.models.UnverifiedCompanyDetails;
 import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.service.AdminService;
 
-
 @Controller
 public class AdminController {
 	@Autowired
@@ -27,30 +26,29 @@ public class AdminController {
 	@GetMapping("/tables")
 	public String getunverifiedcompany(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication == null|| authentication.getName().equals("anonymousUser")) {
+		if (authentication == null || authentication.getName().equals("anonymousUser")) {
 			List<UnverifiedCompanyDetails> details = admin_service.fetchAll();
-			if(details!=null) {
-					model.addAttribute("UnverfiedCompanies",details);
-					return "table";	
+			if (details != null) {
+				model.addAttribute("UnverfiedCompanies", details);
+				return "table";
 			}
 			return "table";
-		}else {
+		} else {
 			return "redirect:/home";
 		}
 	}
-	
+
 	@GetMapping("/tables/edit/{id}")
 	public String deleteUnverifiedData(@PathVariable("id") String ids) {
 		int id = Integer.parseInt(ids);
 		admin_service.deleteData(id);
 		return "redirect:/tables";
 	}
-	
-	
+
 	@GetMapping("/tables/edit/save/{id}")
-	public String addVerifiedCompany(@PathVariable("id") String ids,Company  company,User user) {
+	public String addVerifiedCompany(@PathVariable("id") String ids, Company company, User user) {
 		int id = Integer.parseInt(ids);
-		admin_service.saveVerifiedCompany(id,company,user);
+		admin_service.saveVerifiedCompany(id, company, user);
 		return "redirect:/tables";
 	}
 }

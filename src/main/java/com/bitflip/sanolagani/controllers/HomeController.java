@@ -59,15 +59,9 @@ public class HomeController {
 	@GetMapping("/text")
 	public String analysis() {
 		List<Company> c_list = pre.getCompaniesWithGoodSentiment();
+		System.out.println(c_list);
 
 
-		for (Company com : c_list) {
-			System.out.println(com.getCompanyname());
-		}
-
-		for(Company c:c_list) {
-			System.out.println(c.getCompanyname());
-		}
 		return "index";
 	}
 

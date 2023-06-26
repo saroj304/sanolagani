@@ -10,20 +10,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.bitflip.sanolagani.models.Company;
 import com.bitflip.sanolagani.serviceimpl.RecommendationInitializer;
+import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 public class RecommendationContoller {
 	@Autowired
     RecommendationInitializer recommedationinit;
 	
-	@GetMapping("/recommend")
+	@GetMapping("/recommends" )
 	public String homePage(Model model) {
-		
-		//Optional<List<Company>> result = Optional.ofNullable(recommedationinit.getRecommendCompanies());
-		//if (!result.isEmpty()) {
-			List<Company> companylist = recommedationinit.getRecommendCompanies();
-			
-	//	}
+		List<Company> companylist = recommedationinit.getRecommendCompanies();
+		System.out.println(companylist);
 		return "index";
 	}
 
