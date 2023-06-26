@@ -20,4 +20,25 @@ public class CompanyDetailsController {
         model.addAttribute("company", company);
         return "company-info";
     }
+<<<<<<< HEAD
+=======
+   
+    @GetMapping("/company/details/{id}")
+    public String getInvestCompanyDetails(@PathVariable("id") int id,Model model) {
+    	Company company = companyRepo.getReferenceById(id);
+    	model.addAttribute("company",company);
+    	return "details";
+    }
+
+    
+    @GetMapping("/company/invest/{id}")
+    public String investCompany(@PathVariable("id") int id,Model model) {
+    	
+    	return "details";
+    }
+    @GetMapping("/khalti")
+    public String getKhaltiPage() {
+    	return "khaltiPayment";
+    }
+>>>>>>> 6c18287d761bc8ce34aa903283ca11223ec6942a
 }

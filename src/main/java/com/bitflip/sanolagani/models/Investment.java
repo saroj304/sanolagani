@@ -29,6 +29,8 @@ public class Investment {
 	@Column
 	private int quantity;
 	@Column
+	private String status;
+	@Column
 	private LocalDateTime investment_date_time;
 	@OneToOne(mappedBy = "investment")
 	private Transaction transaction;
@@ -74,6 +76,12 @@ public class Investment {
 	}
 	public void setTransaction(Transaction transaction) {
 		this.transaction = transaction;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	
