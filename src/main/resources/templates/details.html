@@ -4,42 +4,11 @@
 
 
     <body>
-        <!-- main header -->
-        <header class='container header__container'>
-            <div>
-                <h1><a href="/" class='logo hover_none'>Sanolagani</a> </h1>
-            </div>
-            <div class='search'>
-                <form method="get">
-                    <input type="search" name="search" placeholder='Search' id />
-                    <button type="submit" class="search__icon"><i
-                            class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
-                </form>
-            </div>
-        </header>
+       	<header class='container header__container' th:replace="fragment/header.html :: header"></header>
+       <div class='full__width' th:insert="fragment/nav.html :: navbar">
+	   </div>
 
-        <!-- navigation -->
-        <div class='full__width'>
-            <nav class='container nav__container'>
-                <div class="left">
-                    <ul>
-                        <li><a href="/" class="nav__link">Home</a></li>
-                        <li><a href="#" class="nav__link">Start Investing</a></li>
-                        <li><a href="#" class="nav__link">Raise Capital</a></li>
-                        <li><a href="company_registration.html"
-                                class="nav__link">Register Company</a></li>
-                        <li><a href="invest.html" class="nav__link">Invest</a></li>
-                    </ul>
-                </div>
-
-                <div class="right">
-                    <ul>
-                        <li><a href="user_login.html" class="nav__link">Login</a></li>
-                        <li><a href="user_signup.html" class="nav__link">Sign Up</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
+  
 
         <!-- Details -->
         <section>
@@ -47,15 +16,15 @@
                 <!-- left details -->
                 <div class="left__detail">
                     <div class="left__detail-main">
-                        <h5><span>Bhoklagyo</span> &nbsp; Rs. <span>100</span> per
+                        <h5><span>Bhoklagyo</span> &nbsp; Rs. <span>[[${company.price_per_share}]]</span> per
                             share</h5>
                         <h2>Bhoklagyo - Feeding the distanced customer with taste.</h2>
     
-                        <form action="#" class="detail__form">
+                        <form th:action="@{'company/invest/'+${company.id}}" class="detail__form">
                             <div class="details__buttons">
-                                <button class="btn btn-light">Rs. <span>100,000</span></button>
-                                <button class="btn btn-light">Rs. <span>100,000</span></button>
-                                <button class="btn btn-light">Rs. <span>100,000</span></button>
+                                <button class="btn btn-light">Rs. <span>[[${company.price_per_share}*50]]</span></button>
+                                <button class="btn btn-light">Rs. <span>[[${company.price_per_share}*100]]</span></button>
+                                <button class="btn btn-light">Rs. <span>[[${company.price_per_share}*1000]]</span></button>
                             </div>
                             <div class="detail__amount">
                                 <span>Amount: Rs.&nbsp;<input type="number"

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.bitflip.sanolagani.models.Company;
 import com.bitflip.sanolagani.repository.CompanyRepo;
 import com.bitflip.sanolagani.service.AdminService;
+import com.bitflip.sanolagani.serviceimpl.RecommendationInitializer;
 import com.bitflip.sanolagani.serviceimpl.SentimentPreprocessor;
 
 @Controller
@@ -25,6 +26,8 @@ public class HomeController {
 	private CompanyRepo company_repo; // Assuming you have a CompanyRepository to fetch companies
 	@Autowired
 	private SentimentPreprocessor pre;
+	@Autowired
+    RecommendationInitializer recommedationinit;
 
 	@GetMapping({ "/", "/home" })
 	public String homePage(Model model) {
@@ -33,8 +36,19 @@ public class HomeController {
 		if (result != null) {
 		//	List<Company> companybasedoncapital = adminservice.listingBasedonRaisedCapital(companylist);
 			//model.addAttribute("companybasedoncapital", companybasedoncapital);
+			
+			
 			List<Company> companybasedondate = adminservice.listingBasedonRecentDate(companylist);
 			model.addAttribute("companybasedondate", companybasedondate);
+			
+			List<Company> diversifiedcompanylist = recommedationinit.getRecommendCompanies();
+			model.addAttribute("diversifiedcompanylist", diversifiedcompanylist);
+			
+			
+			List<Company> c_list = pre.getCompaniesWithGoodSentiment();
+			model.addAttribute("c_list", c_list);
+			
+			
 			return "index";
 		}
 		return "index";
