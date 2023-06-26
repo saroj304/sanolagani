@@ -1,9 +1,8 @@
-package com.bitflip.sanolagani.document;
+package com.bitflip.sanolagani.document.service;
 
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 import technology.tabula.*;
 import technology.tabula.extractors.SpreadsheetExtractionAlgorithm;
 

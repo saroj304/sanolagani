@@ -1,4 +1,4 @@
-package com.bitflip.sanolagani.document;
+package com.bitflip.sanolagani.document.service;
 
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -29,15 +29,5 @@ public class PDF2PNG {
                     bim, String.format("src/main/resources/output/NRB/page-%d.%s", page + 1, this.fileExtension), 300);
         }
         document.close();
-    }
-
-    public static void main(String[] args) {
-
-        PDF2PNG converter = new PDF2PNG("src/main/java/sanolagani/documents/NRB.pdf", "png");
-        try {
-            converter.generateImageFromPDF();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
     }
 }

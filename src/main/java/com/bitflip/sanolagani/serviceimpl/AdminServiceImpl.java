@@ -2,12 +2,9 @@ package com.bitflip.sanolagani.serviceimpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
-import com.bitflip.sanolagani.document.ReadDocumentWithTabula;
 import com.bitflip.sanolagani.document.service.ExtractTablesFromPDF;
-import com.bitflip.sanolagani.document.service.StorageService;
 import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +20,13 @@ import com.bitflip.sanolagani.repository.CompanyRepo;
 import com.bitflip.sanolagani.repository.UnverifiedCompanyRepo;
 import com.bitflip.sanolagani.service.AdminService;
 
-import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.security.SecureRandom;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.FileInputStream;
 
 
 @Service

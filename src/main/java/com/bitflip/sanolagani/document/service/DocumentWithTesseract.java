@@ -1,4 +1,4 @@
-package com.bitflip.sanolagani.document;
+package com.bitflip.sanolagani.document.service;
 
 
 import java.io.File;

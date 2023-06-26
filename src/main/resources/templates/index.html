@@ -25,7 +25,7 @@
 
 					<div class="card__score">
 						<div class="raised">
-							<h3 th:text="Rs{#numbers.formatCurrency(company.previouslyraisedcapital)}" />
+							<h3>Rs. [[${#numbers.formatInteger(company.previouslyraisedcapital, 3, 'COMMA')}]]</h3>
 							<p class='desc'>Capital To Raise</p>
 						</div>
 						<div class="investers">

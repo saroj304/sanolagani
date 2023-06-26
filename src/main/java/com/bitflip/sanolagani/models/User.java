@@ -15,7 +15,6 @@ import javax.validation.constraints.Email;
 import org.springframework.stereotype.Component;
 
 @Component
-
 @Entity
 @Table(name = "user")
 public class User {
