@@ -23,5 +23,21 @@ public class CompanyDetailsController {
         return "company-info";
     }
    
+    @GetMapping("/company/details/{id}")
+    public String getInvestCompanyDetails(@PathVariable("id") int id,Model model) {
+    	Company company = companyRepo.getReferenceById(id);
+    	model.addAttribute("company",company);
+    	return "details";
+    }
 
+    
+    @GetMapping("/company/invest/{id}")
+    public String investCompany(@PathVariable("id") int id,Model model) {
+    	
+    	return "details";
+    }
+    @GetMapping("/khalti")
+    public String getKhaltiPage() {
+    	return "khaltiPayment";
+    }
 }
