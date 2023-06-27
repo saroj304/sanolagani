@@ -1,6 +1,6 @@
 var config = {
     // replace the publicKey with yours
-    "publicKey": "test_public_key_ee8f489a141a44c0b7922037df48d668",
+    "publicKey": "test_public_key_46b3052e00e145b5b2d988d17359b3a4",
     "transactionID": "1234567890",
     "productIdentity": "10",
     "productName": "Company Name",
@@ -31,23 +31,16 @@ var config = {
 var checkout = new KhaltiCheckout(config);
 var btn = document.getElementById("payment-button");
 btn.onclick = function () {
-    // minimum transaction amount must be 10, i.e 1000 in paisa.
-    checkout.show({amount: 1000});
+          var amountInput = document.getElementById("paymentAmount");
+            var amount = amountInput.value;
+            if (amount) {
+                var amountInPaisa = amount * 100; // Convert amount from rupees to paisa
+                config.amount = amountInPaisa;
+                btn.innerHTML = "Pay " + amount + " Rupees"; // Update button text
+                checkout.show({popupMobile: true});
+            } else {
+                alert("Please enter the amount.");
+            }
+       
 }
 
-function verifyPayment(payload) {
-    let verifyUrl = 'https://cors-anywhere.herokuapp.com/'+'https://khalti.com/api/v2/payment/verify/';
-    let token = payload.token;
-    let amount = payload.amount;
-    let data = {token: token, amount: amount};
-
-    axios.get( verifyUrl, 
-                data, 
-                {'Authorization':'Key test_secret_key_4e85bb4e70114300844afa1e59abfb00'})
-        .then(function(response) {
-            console.log(response);
-        })
-        .catch(function(error) {
-            console.log(error);
-        });
-}
