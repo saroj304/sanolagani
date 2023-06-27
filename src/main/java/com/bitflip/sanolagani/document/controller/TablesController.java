@@ -6,12 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class TablesController {
@@ -41,10 +39,25 @@ public class TablesController {
         return jsonList;
     }
 
+    @GetMapping("/table/{firm}/{id}")
+    public String getTable(@PathVariable("firm") String firm,
+                           @PathVariable("id") String id,
+                           Model model) throws IOException {
+        String filePath = "src/main/resources/output/" + firm + "/" + "table"+id+".tsv";
+        List<Map<String, String>> table = convertTsvToJson(filePath);
+        model.addAttribute("table", table);
+        return "documents/table";
+    }
+
     @GetMapping("/table/{firm}")
-    public String getTable(@PathVariable("firm") String firm, Model model) throws IOException {
+    public String getTable(@PathVariable("firm") String firm,
+                           Model model) throws IOException {
+
         String filePath = "src/main/resources/output/" + firm + "/";
-        List<Map<String, String>> table = convertTsvToJson(filePath + "table47.tsv");
+        File directory = new File(filePath);
+        List<File> tables = Arrays.asList(Objects.requireNonNull(directory.listFiles()));
+        System.out.println(tables);
+        List<Map<String, String>> table = convertTsvToJson(filePath);
         model.addAttribute("table", table);
         return "documents/table";
     }

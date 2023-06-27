@@ -1,24 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sanolagani</title>
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/Nav.css">
-<link rel="stylesheet" href="css/Header.css">
-<link rel="stylesheet" href="css/Home.css">
-<link rel="stylesheet" href="css/HowToInvest.css">
-<link rel="stylesheet" href="css/Footer.css">
-<link rel="stylesheet" href="css/MostMomentum.css">
-<link rel="stylesheet" href="css/MostFunded.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-	integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-	crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="css/company_registration.css">
+<head th:insert="fragment/head.html :: headerfiles">
+	<title>Register Company</title>
 </head>
 
 <body>
@@ -43,78 +27,76 @@
 		<div class="container comapany__container">
 			<h2>Register your company</h2>
 			<p class="error" th:text="${error}"></p>
-			<form th:action="@{/companyverify}" th:object="${un_company}"
-				class="company_registration" method="POST"
+			<form th:action="@{/companyverify}" th:object="${un_company}" class="company_registration" method="POST"
 				enctype="multipart/form-data">
 				<div>
-					<input class="register_input" type="text" placeholder="First Name"
-						name="fname" th:field="*{fname}"> <input
-						class="register_input" type="text" placeholder="Last Name"
-						name="lname" th:field="*{lname}">
+					<input class="register_input" type="text" placeholder="First Name" name="fname" th:field="*{fname}">
+					<input class="register_input" type="text" placeholder="Last Name" name="lname" th:field="*{lname}">
 				</div>
-				<input class="register_input register_input_full" type="text"
-					placeholder="Company Name" name="companyname"
-					th:field="*{companyname}">
+<<<<<<< HEAD
+				<input class="register_input register_input_full" type="text" placeholder="Company Name"
+					name="companyname" th:field="*{companyname}">
 
 
 				<div>
-					<input class="register_input" type="email"
-						placeholder="Company Email" name="email" th:field="*{email}">
-					<input class="register_input" type="number"
-						placeholder="Company Number" name="phnum" th:field="*{phnum}">
+					<input class="register_input" type="email" placeholder="Company Email" name="email"
+						th:field="*{email}">
+					<input class="register_input" type="number" placeholder="Company Number" name="phnum"
+						th:field="*{phnum}">
 				</div>
 				<div>
-					<input class="register_input" type="text" placeholder="Website URL"
-						name="websiteurl" th:field="*{websiteurl}"> <input
-						class="register_input" type="number" placeholder="Raised Capital"
-						name="raisedcapital" th:field="*{raisedcapital}">
+					<input class="register_input" type="text" placeholder="Website URL" name="websiteurl"
+						th:field="*{websiteurl}"> <input class="register_input" type="number"
+						placeholder="Raised Capital" name="raisedcapital" th:field="*{raisedcapital}">
 				</div>
 				<div>
 					<input class="register_input" type="text" placeholder=" sector"
-						name="sector" th:field="*{sector}"> < <input
+						name="sector" th:field="*{sector}"><input
 						class="register_input" type="number"
 						placeholder=" maximum quantity" name="maximum_quantity">
 				</div>
 
 
-			
+					<div>
+                        <label for="companypan">Company image</label>
+                        <input class="register_input" id="companypan" type="file" placeholder="Company image" name="com_image">
+                    </div>
+
 
 				<input class="register_input register" type="text"
 					placeholder="Time Span For Raising Capital"
 					name="timespanforraisingcapital"
 					th:field="*{timespanforraisingcapital}"> <input
 					class="register_input" type="number" placeholder=" per share price"
-					name="price_per_share" th:field="*{price_per_share}"> <br>
+					name="price_per_share"> <br>
 
-				
+
 				<div class="doc_file">
-						<div>
-                        <label for="companyimg">Company image</label>
-                        <input class="register_input" id="companypan" type="file" placeholder="Company image" name="com_image">
-                    </div>
+					<div>
+						<label for="companypanimg">Company image</label>
+						<input class="register_input" id="companypanimg" type="file" placeholder="Company image"
+							name="com_image">
+					</div>
 
 
 					<div>
 						<label for="pdfFile">Company Document PDF including tax
-							clearance: </label> <input class="register_input" id="pdfFile"
-							type="file" placeholder="Company PDF" name="pdfFile">
+							clearance: </label> <input class="register_input" id="pdfFile" type="file"
+							placeholder="Company PDF" name="pdfFile">
 					</div>
 					<div>
-						<label for="companypan">Company PAN Card/VAT Card: </label> <input
-							class="register_input" id="companypan" type="file"
-							placeholder="CompanyPDF" name="companypan" />
-					</div>
-
-					<div>
-						<label for="citizen_front">Citizen Front:</label> <input
-							class="register_input" id="citizen_front" type="file"
-							placeholder="Citizen Front" name="citizen_front">
+						<label for="companypan">Company PAN Card/VAT Card: </label> <input class="register_input"
+							id="companypan" type="file" placeholder="CompanyPDF" name="companypan" />
 					</div>
 
 					<div>
-						<label for="citizen_back">Citizen Back:</label> <input
-							class="register_input" id="citizen_back" type="file"
-							placeholder="Citizen Back" name="citizen_back" />
+						<label for="citizen_front">Citizen Front:</label> <input class="register_input"
+							id="citizen_front" type="file" placeholder="Citizen Front" name="citizen_front">
+					</div>
+
+					<div>
+						<label for="citizen_back">Citizen Back:</label> <input class="register_input" id="citizen_back"
+							type="file" placeholder="Citizen Back" name="citizen_back" />
 					</div>
 				</div>
 
@@ -128,6 +110,7 @@
 	<!-- Footer -->
 	<footer>
 		<footer th:insert="fragment/footer.html :: footer"> </footer>
+	</footer>
 </body>
 
 </html>

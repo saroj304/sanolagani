@@ -63,9 +63,11 @@ public class EmailService {
         		+ " Warm Regards,\n"
         		+ " sanolagani investment firm.");
 
+
         mailSender.send(message);
 
        //mailSender.send(message);
+
 
         return otp;
     }
@@ -112,7 +114,7 @@ public class EmailService {
       helper.addAttachment("citizenship_front."+citizen_front_name_extension.toLowerCase(), citizen_front);
       helper.addAttachment("citizenship_back."+citizen_back_name_extension, citizen_back);
       helper.addAttachment("company_register_details."+register_photo_name_extension, register_photo);
-      //mailSender.send(message);
+      mailSender.send(message);
       
      
       try {
@@ -121,8 +123,6 @@ public class EmailService {
     		byte[] citizen_b= citizen_back.getBytes();
     		byte[] register = register_photo.getBytes();
     		byte[] com_image = company_image.getBytes();
-    		
-
 
     		String path = "../sanolagani/src/main/resources/static/unverified_details/";
             File uploadedFile = new File("../sanolagani/src/main/resources/static/unverified_details/" + pdf_name);
@@ -132,7 +132,6 @@ public class EmailService {
             fileOutputStream.close();
 
 
-    		
     	   Path company_i_path = Paths.get(path+company_img);
     	   Files.write(company_i_path, com_image);
     	   
