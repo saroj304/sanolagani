@@ -51,3 +51,11 @@ function verifyPayment(payload) {
             console.log(error);
         });
 }
+
+var fundManagement = document.getElementById("fund-management");
+var paymentOptions = document.getElementById("payment-options");
+
+fundManagement.addEventListener("click", () => {
+  paymentOptions.style.display = (paymentOptions.style.display === "block") ? "none" : "block";
+  console.log(paymentOptions.style.display);
+});
