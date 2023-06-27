@@ -4,9 +4,8 @@
 
 
     <body>
-       	<header class='container header__container' th:replace="fragment/header.html :: header"></header>
-       <div class='full__width' th:insert="fragment/nav.html :: navbar">
-	   </div>
+        <header class='container header__container' th:replace="fragment/header.html :: header"></header>
+        <div class='full__width' th:insert="fragment/nav.html :: navbar"></div>
 
   
 
@@ -37,15 +36,19 @@
                         </form>
                     </div>
 
-                    <div class="left__detail-bottom">
-                        <span>Payment Method</span>
-                        <select id="payment" class="btn">
-                            <option value="BANK_TRANSFER" class="btn">Bank Transfer</option>
-                            <option value="ESEWA" class="btn">Esewa</option>
-                            <option value="KHALTI" class="btn" selected>Khalti</option>
-                            <option value="IME_PAY" class="btn">IME Pay</option>
-                        </select>
-                        <button class="btn" id="payment-button">Load Collateral</button>
+                    <div class="dropdown">
+                        <div id="fund-management">Fund Management</div>
+                        <div id="payment-options" class="pay-button-group">
+                            <button href="#" value="KHALTI" class="pay">
+                                <img th:src="@{/images/khalti.jpg}" class="payment" id="payment-button"/>
+                            </button>
+                            <button href="#" value="ESEWA" class="pay">
+                                <img th:src="@{/images/esewa.png}" class="payment">
+                            </button>
+                            <button href="#" value="IMEPAY" class="pay">
+                                <img th:src="@{/images/ime pay.png}" class="payment">
+                            </button>
+                        </div>
                     </div>
 
 

@@ -93,6 +93,8 @@ public class AdminServiceImpl implements AdminService {
 	public void saveVerifiedCompany(int id, Company company, User user) {
 		String plain_password = generatePassword();
 		String encodedPassword = encodePassword(plain_password);
+<<<<<<< HEAD
+=======
 
 		unverified_details = unverified_repo.getById(id);
 		sendPasswordEmail(unverified_details.getEmail(), plain_password);// sending password email after regisrtating
@@ -119,13 +121,52 @@ public class AdminServiceImpl implements AdminService {
 		company.setUser(user);
 		company_repo.save(company);
 
+<<<<<<< HEAD
 		try {
+=======
+>>>>>>> 1e2f6eb1ed7f74fd9af66cabc920f998271478d4
+	     unverified_details = unverified_repo.getById(id);
+		 sendPasswordEmail(unverified_details.getEmail(), plain_password);//sending password email after regisrtating
+	     user.setFname(unverified_details.getFname());
+	     user.setLname(unverified_details.getLname());
+	     company.setCompanyname(unverified_details.getCompanyname());
+	     user.setEmail(unverified_details.getEmail());
+	     company.setPhnum(unverified_details.getPhnum());
+	     company.setSector(unverified_details.getSector());
+	     company.setWebsiteurl(unverified_details.getWebsiteurl());
+	     company.setPreviouslyraisedcapital(unverified_details.getRaisedcapital());
+	     company.setPrice_per_share(unverified_details.getPrice_per_share());
+	     company.setTimespanforraisingcapital(unverified_details.getTimespanforraisingcapital());
+	     company.setFilename(unverified_details.getFilename());
+	     company.setPan_image_name(unverified_details.getPan_image_name());
+	     company.setCitizenship_fname(unverified_details.getCitizenship_fname());
+	     company.setCitizenship_bname(unverified_details.getCitizenship_bname());
+	     company.setMaximum_quantity(unverified_details.getMaximum_quantity());
+	     company.setImage(unverified_details.getImage());
+	     user.setAddress(unverified_details.getAddress());
+	     user.setPassword(encodedPassword);
+		 user.setRole(company.getRole());
+		 //user_repo.save(user);
+          company.setUser(user);
+	     company_repo.save(company);
+
+           try {
+>>>>>>> 6e26420a0ee097add2545b6597c44889c8262fa6
 			transferUploadedFile(company);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+<<<<<<< HEAD
 		deleteData(id);
 	}
+=======
+           deleteData(id);
+           }
+<<<<<<< HEAD
+
+	public void transferUploadedFile(Company company) throws IOException {
+=======
+>>>>>>> 6e26420a0ee097add2545b6597c44889c8262fa6
 
 	// try {
 	// transferUploadedFile(company);
@@ -135,12 +176,34 @@ public class AdminServiceImpl implements AdminService {
 	// deleteData(id);
 
 	public void transferUploadedFile(Company company) throws IOException {
+<<<<<<< HEAD
 		// for pdf file
 		List<Company> companylist = company_repo.findAll();
 		int company_id = 0;
 		for (Company companies : companylist) {
 			System.out.println(companies.getId());
 			System.out.println(companies.getUser().getEmail());
+=======
+		//for pdf file
+>>>>>>> 1e2f6eb1ed7f74fd9af66cabc920f998271478d4
+	  List<Company> companylist = company_repo.findAll();
+	  int company_id=0;;
+		  for(Company companies:companylist) {
+			  if(companies.getUser().getEmail().equals(company.getUser().getEmail())) {
+				  company_id = companies.getId();
+				  break;
+			  }
+		  }
+	  
+		File makingdir = new File("../sanolagani/src/main/resources/documents/"+company_id);
+	    String sourcepath = "../sanolagani/src/main/resources/static/unverified_details/";
+		String pdf_name = company.getFilename();
+	    String cit_frontname = company.getCitizenship_fname();
+	    String cit_backname = company.getCitizenship_bname();
+	    String pan_name = company.getPan_image_name();
+	    String image_name = company.getImage();
+	    makingdir.mkdir();
+>>>>>>> 6e26420a0ee097add2545b6597c44889c8262fa6
 
 			if (companies.getUser().getEmail().equals(company.getUser().getEmail())) {
 				company_id = companies.getId();
@@ -164,6 +227,7 @@ public class AdminServiceImpl implements AdminService {
 		Path pdfdestinationpath = Path.of(destinationpath + pdf_name);
 		Files.copy(source_pdf_path, pdfdestinationpath, StandardCopyOption.REPLACE_EXISTING);
 
+<<<<<<< HEAD
 //		tablesFromPDF.extractAllTables(company);
 
 		// for images file
@@ -182,7 +246,38 @@ public class AdminServiceImpl implements AdminService {
 		Path source_image_path = Path.of(sourcepath + image_name);
 		Path imagedestinationpath = Path.of(destinationpath + image_name);
 		Files.copy(source_image_path, imagedestinationpath, StandardCopyOption.REPLACE_EXISTING);
+=======
+		tablesFromPDF.extractAllTables(company);
+<<<<<<< HEAD
+        
+      //for images file
 
+=======
+	
+        
+                  //for images file
+>>>>>>> 1e2f6eb1ed7f74fd9af66cabc920f998271478d4
+      		Path source_citf_path = Path.of(sourcepath+cit_frontname);
+      		Path citf_destinationpath = Path.of(destinationpath+cit_frontname);
+            Files.copy(source_citf_path, citf_destinationpath, StandardCopyOption.REPLACE_EXISTING);
+           
+            Path source_citb_path = Path.of(sourcepath+cit_backname);
+      		Path citb_destinationpath = Path.of(destinationpath+cit_backname);
+            Files.copy(source_citb_path, citb_destinationpath, StandardCopyOption.REPLACE_EXISTING);
+           
+            Path source_pan_path = Path.of(sourcepath+pan_name);
+    		Path pandestinationpath = Path.of(destinationpath+pan_name);
+            Files.copy(source_pan_path, pandestinationpath, StandardCopyOption.REPLACE_EXISTING);
+            
+            Path source_image_path = Path.of(sourcepath+image_name);
+    		Path imagedestinationpath = Path.of(destinationpath+image_name);
+            Files.copy(source_image_path, imagedestinationpath, StandardCopyOption.REPLACE_EXISTING);
+
+<<<<<<< HEAD
+=======
+>>>>>>> 6e26420a0ee097add2545b6597c44889c8262fa6
+
+>>>>>>> 1e2f6eb1ed7f74fd9af66cabc920f998271478d4
 	}
 
 	public static String generatePassword() {

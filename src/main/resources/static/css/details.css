@@ -51,6 +51,7 @@
     background: var(--color-light-gray);
     border-radius: 10px;
     text-align: center;
+    margin-left: 16px;
 }
 .right__detail h2{
     color: var(--color-blue);
@@ -76,4 +77,54 @@
 .additinoal__info{
     font-size: 13px;
     color: var(--color-blue-variant);
+}
+.dropdown{
+  background:#efefef;
+  padding: 10px;
+  width: -webkit-fill-available;
+  margin-top:20px;
+}
+
+.payment-btn-group{
+    display:inline-block;
+}
+
+#payment-options {
+  display: none;
+  background-color: #f8f8f8;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 10px;
+  text-align: center;
+  transition: opacity 0.3s ease;
+  width: 100%;
+}
+
+#fund-management {
+  cursor: pointer;
+  text-decoration: underline;
+  text-align: center;
+  background: #fafafa;
+  color: #337ab7;
+  margin: 10px 30px;
+  width: 75%;
+  background: #efefef;
+
+}
+
+.pay{
+    width:90px;
+    height: 45px;
+    border: none;
+    margin: 10px 20px;
+    cursor: pointer;
+    overflow:hidden;
+
+}
+
+img{
+    width: inherit;
+    height: inherit;
+    object-fit: fill;
 }

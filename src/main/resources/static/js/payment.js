@@ -44,3 +44,27 @@ btn.onclick = function () {
        
 }
 
+function verifyPayment(payload) {
+    let verifyUrl = 'https://cors-anywhere.herokuapp.com/'+'https://khalti.com/api/v2/payment/verify/';
+    let token = payload.token;
+    let amount = payload.amount;
+    let data = {token: token, amount: amount};
+
+    axios.get( verifyUrl, 
+                data, 
+                {'Authorization':'Key test_secret_key_4e85bb4e70114300844afa1e59abfb00'})
+        .then(function(response) {
+            console.log(response);
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+}
+
+var fundManagement = document.getElementById("fund-management");
+var paymentOptions = document.getElementById("payment-options");
+
+fundManagement.addEventListener("click", () => {
+  paymentOptions.style.display = (paymentOptions.style.display === "block") ? "none" : "block";
+  console.log(paymentOptions.style.display);
+});

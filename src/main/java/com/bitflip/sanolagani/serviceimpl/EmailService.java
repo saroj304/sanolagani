@@ -57,7 +57,14 @@ public class EmailService {
 
 		mailSender.send(message);
 
+<<<<<<< HEAD
 		// mailSender.send(message);
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> 1e2f6eb1ed7f74fd9af66cabc920f998271478d4
+>>>>>>> 6e26420a0ee097add2545b6597c44889c8262fa6
 
 		mailSender.send(message);
 

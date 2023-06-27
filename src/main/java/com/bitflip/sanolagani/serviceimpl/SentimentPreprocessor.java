@@ -155,5 +155,12 @@ public class SentimentPreprocessor {
 		return text;
 	}
 }
+<<<<<<< HEAD
+=======
 
 
+<<<<<<< HEAD
+=======
+>>>>>>> 1e2f6eb1ed7f74fd9af66cabc920f998271478d4
+
+>>>>>>> 6e26420a0ee097add2545b6597c44889c8262fa6
