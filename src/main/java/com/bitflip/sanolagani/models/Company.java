@@ -67,8 +67,6 @@ public class Company {
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
 
-	@OneToOne(mappedBy = "company")
-	private Portfolio portfolio;
 
 	@OneToMany(mappedBy = "company")
 	private List<Investment> investments;
@@ -226,13 +224,7 @@ public class Company {
 		this.citizenship_fname = citizenship_name;
 	}
 
-	public Portfolio getPortfolio() {
-		return portfolio;
-	}
 
-	public void setPortfolio(Portfolio portfolio) {
-		this.portfolio = portfolio;
-	}
 
 	public String getCitizenship_bname() {
 		return citizenship_bname;

@@ -8,26 +8,33 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+@Component
 @Entity
 @Table(name = "transaction")
 public class Transaction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@OneToOne
-    @JoinColumn(name = "investment_id")
+	@OneToOne(mappedBy = "transaction")
     private Investment investment;
+	@OneToOne(mappedBy = "transaction")
+    private Collateral collateral;
 	@Column
 	private String payment_token;
-	@Column
-	private int quantity;
+	@ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 	@Column
 	private double amount;
 	@Column
 	private LocalDateTime transaction_date_time;
+	@Column
+	private String transaction_type;
 	public int getId() {
 		return id;
 	}
@@ -41,12 +48,6 @@ public class Transaction {
 		this.investment = investment;
 	}
 
-	public int getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
 	
 	public LocalDateTime getTransaction_date_time() {
 		return transaction_date_time;
@@ -65,6 +66,24 @@ public class Transaction {
 	}
 	public void setAmount(double amount) {
 		this.amount = amount;
+	}
+	public String getTransaction_type() {
+		return transaction_type;
+	}
+	public void setTransaction_type(String transaction_type) {
+		this.transaction_type = transaction_type;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public Collateral getCollateral() {
+		return collateral;
+	}
+	public void setCollateral(Collateral collateral) {
+		this.collateral = collateral;
 	}
 	
 }

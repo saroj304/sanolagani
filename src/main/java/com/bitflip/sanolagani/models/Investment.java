@@ -11,7 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
 
+@Component
 @Entity
 @Table(name = "investment")
 public class Investment {
@@ -32,7 +34,8 @@ public class Investment {
 	private String status;
 	@Column
 	private LocalDateTime investment_date_time;
-	@OneToOne(mappedBy = "investment")
+	@OneToOne
+	@JoinColumn(name = "transaction_id")
 	private Transaction transaction;
 	
 	public int getId() {

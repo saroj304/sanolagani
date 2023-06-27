@@ -37,10 +37,13 @@ public class User {
 	private List<Investment> investments;
     
     @OneToMany(mappedBy = "user")
+	private List<Transaction> transaction;
+    
+    @OneToMany(mappedBy = "user")
 	private List<Feedback> feedbacklist;
 	
 	@OneToOne(mappedBy = "user")
-    private Portfolio portfolio;
+    private Collateral collateral;
 	@Column
 	private String role;
 	@Column
@@ -130,6 +133,22 @@ public class User {
 
 	public void setFeedbacklist(List<Feedback> feedbacklist) {
 		this.feedbacklist = feedbacklist;
+	}
+
+	public List<Transaction> getTransaction() {
+		return transaction;
+	}
+
+	public void setTransaction(List<Transaction> transaction) {
+		this.transaction = transaction;
+	}
+
+	public Collateral getCollateral() {
+		return collateral;
+	}
+
+	public void setCollateral(Collateral collateral) {
+		this.collateral = collateral;
 	}
 
 }
