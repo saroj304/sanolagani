@@ -21,12 +21,6 @@ public class ExtractTablesFromPDF {
     PDDocument doc = null;
     SpreadsheetExtractionAlgorithm sea = null;
 
-    public ExtractTablesFromPDF(){}
-    public ExtractTablesFromPDF(String path) throws IOException {
-
-
-    }
-
     public void extractAllTables(Company company) throws IOException {
         this.path = "src/main/resources/documents/"+company.getId()+"/"+company.getFilename();
         this.documentName = new File(path).getName().split("\\.")[0];

@@ -51,7 +51,6 @@ CompanyRepo company_repo;
 	    	companynamelist.add(companyname);
 	    	totalsharelist.add(obj[1]);
 	    	totalamountlist.add(obj[2]);
-	    	System.out.println(obj[2]);
 		}
 		
 		double totalInvestment = investment_list.stream()
