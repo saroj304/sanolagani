@@ -17,4 +17,3 @@ public interface PaymentService {
 			                          Transaction transaction,String remarks,
 			                          Investment investment,Collateral collateral);
 }
-

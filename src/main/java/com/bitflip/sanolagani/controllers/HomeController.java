@@ -27,28 +27,30 @@ public class HomeController {
 	@Autowired
 	private SentimentPreprocessor pre;
 	@Autowired
-    RecommendationInitializer recommedationinit;
+	RecommendationInitializer recommedationinit;
 
 	@GetMapping({ "/", "/home" })
 	public String homePage(Model model) {
 		List<Company> companylist = adminservice.getAllCompany();
 		Optional<List<Company>> result = Optional.ofNullable(companylist);
 		if (result != null) {
-		//	List<Company> companybasedoncapital = adminservice.listingBasedonRaisedCapital(companylist);
-			//model.addAttribute("companybasedoncapital", companybasedoncapital);
-			
-			
+
+			List<Company> companybasedoncapital = adminservice.listingBasedonRaisedCapital(companylist);
+			model.addAttribute("companybasedoncapital", companybasedoncapital);
+
+			// List<Company> companybasedoncapital =
+			// adminservice.listingBasedonRaisedCapital(companylist);
+			// model.addAttribute("companybasedoncapital", companybasedoncapital);
+
 			List<Company> companybasedondate = adminservice.listingBasedonRecentDate(companylist);
 			model.addAttribute("companybasedondate", companybasedondate);
-			
+
 			List<Company> diversifiedcompanylist = recommedationinit.getRecommendCompanies();
 			model.addAttribute("diversifiedcompanylist", diversifiedcompanylist);
-			
-			
+
 			List<Company> c_list = pre.getCompaniesWithGoodSentiment();
 			model.addAttribute("c_list", c_list);
-			
-			
+
 			return "index";
 		}
 		return "index";
@@ -74,6 +76,7 @@ public class HomeController {
 	public String analysis() {
 		List<Company> c_list = pre.getCompaniesWithGoodSentiment();
 		System.out.println(c_list);
+
 		return "index";
 	}
 

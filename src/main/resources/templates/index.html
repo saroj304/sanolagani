@@ -5,7 +5,8 @@
 </head>
 
 <body>
-	<header class='container header__container' th:replace="fragment/header.html :: header"></header>
+	<header class='container header__container'
+		th:replace="fragment/header.html :: header"></header>
 
 	<div class='full__width' th:insert="fragment/nav.html :: navbar">
 	</div>
@@ -18,17 +19,20 @@
 			<div class="cards row">
 
 				<div class="card " th:each="company : ${companybasedoncapital}">
-					<!--					<span th:text="${company.previouslyraisedcapital}"></span>-->
-					<a th:href="@{/company/{id}/ (id=${company.id})}">
-						<img th:src="@{/photos/{id}/{image} (image=${company.image}, id= ${company.id})}"
-							class='card__image' alt="card-image" />
+					<span th:text="${company.id}"></span>
+					<!-- 	<span th:text="${company.image}"></span> -->
+					<a th:href="@{/company/{id}/ (id=${company.id})}"> <img
+						th:src="@{'/documents/' + ${company.id} + '/' + ${company.image}}"
+						class='card__image' alt="card-image" />
 						<h3 th:text="${company.companyname}" />
 					</a>
 					<p class='desc'>The palstic that completely disintegrate...</p>
 
 					<div class="card__score">
 						<div class="raised">
-							<h3>Rs. [[${#numbers.formatInteger(company.previouslyraisedcapital, 3, 'COMMA')}]]</h3>
+							<h3>Rs.
+								[[${#numbers.formatInteger(company.previouslyraisedcapital, 3,
+								'COMMA')}]]</h3>
 							<p class='desc'>Capital To Raise</p>
 						</div>
 						<div class="investers">
@@ -55,93 +59,59 @@
 			<h2>Most Funded</h2>
 			<h5>Offerings that have raised the most money in the last few
 				days</h5>
+
 			<div class="cards">
 				<div class="card">
-					<a href="#"><img src="@{/photos/wigl.webp}" class='card__image' alt="card-image" /></a>
+					<a href="#"><img src="" class='card__image' alt="card-image" /></a>
 
 					<h3>
 						<a href="#">Timeplast</a>
 					</h3>
 					<div class="cards row">
 						<div class="card " th:each="company : ${companybasedondate}">
-							<a th:href="@{/company/{id}/ (id=${company.id})}">
-								<img th:src="@{/photos/{id}/{image} (image=${company.image}, id= ${company.id})}"
-									class='card__image' alt="card-image" />
+							<a th:href="@{'/company/'+${company.id}+'/'}"> <img
+								th:src="@{'/documents/' + ${company.id} + '/' + ${company.image}}"
+								class='card__image' alt="card-image" />
 								<h3>Timeplast</h3>
 							</a>
 							<p class='desc'>The palstic that completely disintegrate...</p>
 
-					<div class="card__score">
-						<div class="raised">
-							<h3 th:text="${company.previouslyraisedcapital}"></h3>
-							<p class='desc'>Raised</p>
+							<div class="card__score">
+								<div class="raised">
+									<h3 th:text="${company.previouslyraisedcapital}"></h3>
+									<p class='desc'>Raised</p>
+								</div>
+								<div class="investers">
+									<h3 th:text="${company.companyname}"></h3>
+									<p class='desc'>CompanyName</p>
+								</div>
+								<div class="min__investment">
+									<h3 th:text="${company.maximum_quantity}" />
+									<p class='desc'>Min. Investment</p>
+								</div>
+
+							</div>
+
+							<div class="division">
+								<p>Reg CF via Sanolagani Capital, Ltd.</p>
+							</div>
 						</div>
-						<div class="investers">
-							<h3 th:text="${company.companyname}"></h3>
-							<p class='desc'>CompanyName</p>
-						</div>
-						<div class="min__investment">
-							<h3 th:text="${company.maximum_quantity}" />
-							<p class='desc'>Min. Investment</p>
-						</div>
-
-					</div>
-
-					<div class="division">
-						<p>Reg CF via Sanolagani Capital, Ltd.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section><!-- Recommend based on diverisification -->
-	<section class='momentum__section' sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_COMPANY')">
-		<div class="container momentum__container">
-			<h2>Diversification</h2>
-			<h5>Recommend companies based on Diversification</h5>
-			<div class="cards row">
-
-				<div class="card " th:each="company : ${c_list}">
-					<a th:href="@{'/company/'+${company.id}+'/'}"> <img th:src="@{'../documents/'+${company.id}+'/'+${company.image}}"
-						class='card__image' alt="card-image" />
-						<h3>Timeplast</h3>
-					</a>
-
-					<p class='desc'>The palstic that completely disintegrate...</p>
-
-					<div class="card__score">
-						<div class="raised">
-							<h3 th:text="${company.previouslyraisedcapital}"></h3>
-							<p class='desc'>Raised</p>
-						</div>
-						<div class="investers">
-							<h3 th:text="${company.companyname}"></h3>
-							<p class='desc'>CompanyName</p>
-						</div>
-						<div class="min__investment">
-							<h3 th:text="${company.maximum_quantity}" />
-							<p class='desc'>Min. Investment</p>
-						</div>
-
-					</div>
-
-					<div class="division">
-						<p>Reg CF via Sanolagani Capital, Ltd.</p>
 					</div>
 				</div>
-			</div>
-		</div>
 	</section>
-	
+
 
 	<!-- Recommend based on feedback -->
-	<section class='momentum__section' sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_COMPANY')">
+	<section class='momentum__section'
+		sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_COMPANY')">
 		<div class="container momentum__container">
 			<h2>Feedback</h2>
 			<h5>Recommend companies based on feedback</h5>
 			<div class="cards row">
 
 				<div class="card " th:each="company : ${c_list}">
-					<a th:href="@{'/company/'+${company.id}+'/'}"> <img th:src="@{'../documents/'+${company.id}+'/'+${company.image}}"
+					<a th:href="@{'/company/'+${company.id}+'/'}"> <img
+						th:src="@{'../documents/'+${company.id}+'/'+${company.image}}"
 						class='card__image' alt="card-image" />
 						<h3>Timeplast</h3>
 					</a>

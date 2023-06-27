@@ -21,7 +21,6 @@ public class CompanyDetailsController {
         return "company-info";
     }
 
-   
     @GetMapping("/company/details/{id}")
     public String getInvestCompanyDetails(@PathVariable("id") int id,Model model) {
     	Company company = companyRepo.getReferenceById(id);
@@ -34,4 +33,5 @@ public class CompanyDetailsController {
     public String getKhaltiPage() {
     	return "khaltiPayment";
     }
+
 }
