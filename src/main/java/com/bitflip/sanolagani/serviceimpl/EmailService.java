@@ -63,16 +63,9 @@ public class EmailService {
         		+ " Warm Regards,\n"
         		+ " sanolagani investment firm.");
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 6fe5254ad5c23402ee91f373707a89aa316a0d6a
         mailSender.send(message);
 
-=======
-       //mailSender.send(message);
->>>>>>> 6c18287d761bc8ce34aa903283ca11223ec6942a
+
 
         return otp;
     }
@@ -128,11 +121,7 @@ public class EmailService {
     		byte[] citizen_b= citizen_back.getBytes();
     		byte[] register = register_photo.getBytes();
     		byte[] com_image = company_image.getBytes();
-<<<<<<< HEAD
 
-=======
-    		
->>>>>>> 6c18287d761bc8ce34aa903283ca11223ec6942a
     		String path = "../sanolagani/src/main/resources/static/unverified_details/";
             File uploadedFile = new File("../sanolagani/src/main/resources/static/unverified_details/" + pdf_name);
 
@@ -140,12 +129,6 @@ public class EmailService {
             fileOutputStream.write(pdfFile.getBytes());
             fileOutputStream.close();
 
-<<<<<<< HEAD
-=======
-
-
-    		
->>>>>>> 6c18287d761bc8ce34aa903283ca11223ec6942a
     	   Path company_i_path = Paths.get(path+company_img);
     	   Files.write(company_i_path, com_image);
     	   

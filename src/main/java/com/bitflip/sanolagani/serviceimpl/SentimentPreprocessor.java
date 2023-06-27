@@ -32,7 +32,6 @@ public class SentimentPreprocessor {
 	@Autowired
 	FeedbackRepo f_repo;
 
-<<<<<<< HEAD
 	private final StanfordCoreNLP pipeline;
 
 	public SentimentPreprocessor() {
@@ -42,13 +41,7 @@ public class SentimentPreprocessor {
 		this.pipeline = new StanfordCoreNLP(props);
 
 	}
-=======
-    public SentimentPreprocessor() {
-       
-    	Properties props = new Properties();
-        props.setProperty("annotators", "tokenize, ssplit,pos, lemma, parse, sentiment");
-        this.pipeline = new StanfordCoreNLP(props);
->>>>>>> 6c18287d761bc8ce34aa903283ca11223ec6942a
+
 
 	public List<Company> getCompaniesWithGoodSentiment() {
 		List<Company> companies= new ArrayList<>();
@@ -68,7 +61,6 @@ public class SentimentPreprocessor {
 		return companiesWithGoodSentiment;
 	}
 
-<<<<<<< HEAD
 
 	public Map<Company, Double> calculateSentimentScores(List<Company> companies, List<Feedback> feedbacks) {
 		Map<Company, Double> sentimentScores = new HashMap<>();
@@ -164,95 +156,4 @@ public class SentimentPreprocessor {
 		return text;
 	}
 }
-=======
-	        // Iterate over each company
-	        for (Company company : companies) {
-	            double totalScore = 0.0;
-	            int count = 0;
-	            
-	            
-	            for (Feedback feedback : feedbacks) {
-	        
-	                if (feedback.getCompany().getId()== company.getId()) {
-	                	String text = preprocessText(feedback.getFeedbacktext());
-	                    double sentimentScore = performSentimentAnalysis(text);
-
-	                    totalScore += sentimentScore;
-	                    count++;
-	                }
-	            }
-	            
-	            double averageScore = (count > 0) ? totalScore / count : 0.0;
-	
-	            sentimentScores.put(company, averageScore);
-	        }
-	       
-	        return sentimentScores;
-	    }
-	        
-	        
-	    public double performSentimentAnalysis(String feedbackText) {
-	      
-	        double sentimentScore=0.0;
-	        Annotation annotation = new Annotation(feedbackText);
-	        pipeline.annotate(annotation);
-	        for (CoreMap sentence : annotation.get(CoreAnnotations.SentencesAnnotation.class)) {
-	           sentimentScore = sentence.get(SentimentCoreAnnotations.SentimentClass.class).equalsIgnoreCase("positive") ? 1.0 : -1.0;
-	           System.out.println(sentimentScore);
-	           return sentimentScore;
-	        }
-	        return sentimentScore;
-	    } 
-	        
-	    private List<Company> filterCompaniesWithGoodSentiment(Map<Company, Double> sentimentScores) {
-	        List<Company> companiesWithGoodSentiment = new ArrayList<>();
-	        
-	        // Define the threshold for good sentiment
-	        double threshold = 0.7;
-	        
-	        // Iterate over the sentiment scores
-	        for (Map.Entry<Company, Double> entry : sentimentScores.entrySet()) {
-	            Company company = entry.getKey();
-	            double sentimentScore = entry.getValue();
-	            
-	            // Check if the sentiment score is above the threshold
-	            if (sentimentScore >= threshold) {
-	                companiesWithGoodSentiment.add(company);
-	            }
-	        }
-	 
-	        return companiesWithGoodSentiment;
-	    }
-
-	
-	        
-	        
-
-	        
-	        
-
-    public String preprocessText(String text) {
-       
-        text = text.replaceAll("[^a-zA-Z ]", "");
-        text = text.toLowerCase();
-        text = text.trim().replaceAll(" +", " ");
-        text = removeStopwords(text);
-
-        return text;
-    }
-
-    private String removeStopwords(String text) {
-        String[] stopwords = {"a", "an", "the", "in", "on", "at", "is", "are", "and", "but", "."};
-
-        // Create a regex pattern of all stopwords
-        String pattern = "\\b(" + String.join("|", stopwords) + ")\\b";
-
-        // Remove stopwords from the text
-        text = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(text).replaceAll("");
-
-        return text;
-    }
-}
-
->>>>>>> 6c18287d761bc8ce34aa903283ca11223ec6942a
 

@@ -95,31 +95,6 @@ public class AdminServiceImpl implements AdminService {
 	public void saveVerifiedCompany(int id, Company company, User user) {
 		String plain_password = generatePassword();
 		String encodedPassword = encodePassword(plain_password);
-<<<<<<< HEAD
-		unverified_details = unverified_repo.getById(id);
-		// sendPasswordEmail(unverified_details.getEmail(), plain_password);//sending password email after regisrtating
-		user.setFname(unverified_details.getFname());
-		user.setLname(unverified_details.getLname());
-		company.setCompanyname(unverified_details.getCompanyname());
-		user.setEmail(unverified_details.getEmail());
-		company.setPhnum(unverified_details.getPhnum());
-		company.setSector(unverified_details.getSector());
-		company.setWebsiteurl(unverified_details.getWebsiteurl());
-		company.setPreviouslyraisedcapital(unverified_details.getRaisedcapital());
-		company.setPrice_per_share(unverified_details.getPrice_per_share());
-		company.setTimespanforraisingcapital(unverified_details.getTimespanforraisingcapital());
-		company.setFilename(unverified_details.getFilename());
-		company.setPan_image_name(unverified_details.getPan_image_name());
-		company.setCitizenship_fname(unverified_details.getCitizenship_fname());
-		company.setCitizenship_bname(unverified_details.getCitizenship_bname());
-		company.setMaximum_quantity(unverified_details.getMaximum_quantity());
-		company.setImage(unverified_details.getImage());
-		user.setPassword(encodedPassword);
-		user.setRole(company.getRole());
-		company.setUser(user);
-		System.out.println(company.getId());
-		// company_repo.save(company);
-=======
 	     unverified_details = unverified_repo.getById(id);
 		 sendPasswordEmail(unverified_details.getEmail(), plain_password);//sending password email after regisrtating
 	     user.setFname(unverified_details.getFname());
@@ -152,31 +127,8 @@ public class AdminServiceImpl implements AdminService {
 		}
            deleteData(id)	;
            }
->>>>>>> 6c18287d761bc8ce34aa903283ca11223ec6942a
-
-		// try {
-		// 	transferUploadedFile(company);
-		// } catch (IOException e) {
-		// 	e.printStackTrace();
-		// }
-		// deleteData(id);
-	}
 
 	public void transferUploadedFile(Company company) throws IOException {
-<<<<<<< HEAD
-		File makingdir = new File("../sanolagani/src/main/resources/documents/"+company.getId());
-		String sourcepath = "../sanolagani/src/main/resources/static/unverified_details/";
-		String pdf_name = company.getFilename();
-		String cit_frontname = company.getCitizenship_fname();
-		String cit_backname = company.getCitizenship_bname();
-		String pan_name = company.getPan_image_name();
-		String image_name = company.getImage();
-		makingdir.mkdir();
-		String destinationpath = makingdir.getPath()+"/";
-
-
-		//for pdf file
-=======
 	  List<Company> companylist = company_repo.findAll();
 	  int company_id=0;;
 		  for(Company companies:companylist) {
@@ -198,22 +150,13 @@ public class AdminServiceImpl implements AdminService {
 	    String destinationpath = "../sanolagani/src/main/resources/documents/"+company_id+"/";
 		
 	    //for pdf file
->>>>>>> 6c18287d761bc8ce34aa903283ca11223ec6942a
 		Path source_pdf_path = Path.of(sourcepath+pdf_name);
 		Path pdfdestinationpath = Path.of(destinationpath+pdf_name);
 		Files.copy(source_pdf_path, pdfdestinationpath, StandardCopyOption.REPLACE_EXISTING);
 
-<<<<<<< HEAD
 		tablesFromPDF.extractAllTables(company);
-		//for images file
-		Path source_citf_path = Path.of(sourcepath+cit_frontname);
-		Path citf_destinationpath = Path.of(destinationpath+cit_frontname);
-		Files.copy(source_citf_path, citf_destinationpath, StandardCopyOption.REPLACE_EXISTING);
-=======
-		tableExtractor.extractAllTables(company);
         
       //for images file
->>>>>>> 6c18287d761bc8ce34aa903283ca11223ec6942a
 
       		Path source_citf_path = Path.of(sourcepath+cit_frontname);
       		Path citf_destinationpath = Path.of(destinationpath+cit_frontname);
@@ -231,17 +174,6 @@ public class AdminServiceImpl implements AdminService {
     		Path imagedestinationpath = Path.of(destinationpath+image_name);
             Files.copy(source_image_path, imagedestinationpath, StandardCopyOption.REPLACE_EXISTING);
 
-
-<<<<<<< HEAD
-		Path source_image_path = Path.of(sourcepath+pan_name);
-		Path imagedestinationpath = Path.of(destinationpath+pan_name);
-		Files.copy(source_image_path, imagedestinationpath, StandardCopyOption.REPLACE_EXISTING);
-
-
-=======
-            
-            
->>>>>>> 6c18287d761bc8ce34aa903283ca11223ec6942a
 	}
 
 	public static String generatePassword() {

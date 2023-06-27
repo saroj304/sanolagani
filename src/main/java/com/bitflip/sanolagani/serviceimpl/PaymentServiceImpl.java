@@ -16,7 +16,6 @@ import java.util.Map;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
-  @Autowired
     private HttpHeaders headers;
     @Override
     public void savePaymentDetails() {
