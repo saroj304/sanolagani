@@ -16,7 +16,6 @@ import java.util.Map;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
-  @Autowired
     private HttpHeaders headers;
     @Override
     public void savePaymentDetails() {
@@ -40,19 +39,21 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     @CrossOrigin
-    public void verifyPayment(Map<String, String> paymentDetails) throws JsonProcessingException {
+    public void verifyPayment(Map<String, String> paymentDetails,String token,String amount) throws JsonProcessingException {
         final String uri = "https://khalti.com/api/v2/payment/verify/";
         RestTemplate restTemplate = new RestTemplate();
         headers = new HttpHeaders();
-        headers.set("Authorization", "Key test_secret_key_4e85bb4e70114300844afa1e59abfb00");
+        headers.set("Authorization", "Key test_secret_key_1bc9f938dc3e46369f019527b8acb15b");
 
         String json = new ObjectMapper().writeValueAsString(paymentDetails);
 
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<>(json, headers);
-//        URI response = restTemplate.postForLocation(uri, entity);
         ResponseEntity resp = restTemplate.exchange(uri, HttpMethod.POST, entity, String.class);
-
-
+        int status = resp.getStatusCodeValue();
+        if(status==200) {
+//        	saveInvestmentdata(token,amount);
+        }
     }
+
 }

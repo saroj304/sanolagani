@@ -28,12 +28,7 @@ public class CompanyDetailsController {
     	return "details";
     }
 
-    
-    @GetMapping("/company/invest/{id}")
-    public String investCompany(@PathVariable("id") int id,Model model) {
-    	
-    	return "details";
-    }
+   
     @GetMapping("/khalti")
     public String getKhaltiPage() {
     	return "khaltiPayment";
