@@ -23,7 +23,7 @@ public class PaymentController {
         Map<String, String>  details = new HashMap<>();
         details.put("token", token);
         details.put("amount", amount);
-        paymentService.verifyPayment(details);
-        return "index";
+        paymentService.verifyPayment(details,token,amount);
+        return "redirect:/home";
     }
 }
