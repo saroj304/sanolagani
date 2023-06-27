@@ -20,7 +20,10 @@ public class CompanyDetailsController {
         model.addAttribute("company", company);
         return "company-info";
     }
+<<<<<<< HEAD
+=======
 
+>>>>>>> 1e2f6eb1ed7f74fd9af66cabc920f998271478d4
    
     @GetMapping("/company/details/{id}")
     public String getInvestCompanyDetails(@PathVariable("id") int id,Model model) {

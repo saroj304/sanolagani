@@ -95,8 +95,11 @@ public class AdminServiceImpl implements AdminService {
 	public void saveVerifiedCompany(int id, Company company, User user) {
 		String plain_password = generatePassword();
 		String encodedPassword = encodePassword(plain_password);
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> 1e2f6eb1ed7f74fd9af66cabc920f998271478d4
 	     unverified_details = unverified_repo.getById(id);
 		 sendPasswordEmail(unverified_details.getEmail(), plain_password);//sending password email after regisrtating
 	     user.setFname(unverified_details.getFname());
@@ -129,6 +132,10 @@ public class AdminServiceImpl implements AdminService {
 		}
            deleteData(id);
            }
+<<<<<<< HEAD
+
+	public void transferUploadedFile(Company company) throws IOException {
+=======
 
 
 		// try {
@@ -141,6 +148,7 @@ public class AdminServiceImpl implements AdminService {
 
 	public void transferUploadedFile(Company company) throws IOException {
 		//for pdf file
+>>>>>>> 1e2f6eb1ed7f74fd9af66cabc920f998271478d4
 	  List<Company> companylist = company_repo.findAll();
 	  int company_id=0;;
 		  for(Company companies:companylist) {
@@ -167,9 +175,15 @@ public class AdminServiceImpl implements AdminService {
 		Files.copy(source_pdf_path, pdfdestinationpath, StandardCopyOption.REPLACE_EXISTING);
 
 		tablesFromPDF.extractAllTables(company);
+<<<<<<< HEAD
+        
+      //for images file
+
+=======
 	
         
                   //for images file
+>>>>>>> 1e2f6eb1ed7f74fd9af66cabc920f998271478d4
       		Path source_citf_path = Path.of(sourcepath+cit_frontname);
       		Path citf_destinationpath = Path.of(destinationpath+cit_frontname);
             Files.copy(source_citf_path, citf_destinationpath, StandardCopyOption.REPLACE_EXISTING);
@@ -186,7 +200,10 @@ public class AdminServiceImpl implements AdminService {
     		Path imagedestinationpath = Path.of(destinationpath+image_name);
             Files.copy(source_image_path, imagedestinationpath, StandardCopyOption.REPLACE_EXISTING);
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 1e2f6eb1ed7f74fd9af66cabc920f998271478d4
 	}
 
 	public static String generatePassword() {
