@@ -14,7 +14,6 @@ public class CompanyAmountComparator implements Comparator<Company>{
 		Double c2=Double.parseDouble (o2.getPreviouslyraisedcapital());
 		Integer a2=Integer.parseInt(o2.getPreviouslyraisedcapital());
 //        System.out.println(c2);
-		System.out.println( Double.compare(a1, a2));
-		return Integer.compare(a2, a1);
+		return Double.compare(c2, c1);
 	}
 }

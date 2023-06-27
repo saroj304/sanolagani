@@ -22,22 +22,34 @@
     
                         <form th:action="@{'company/invest/'+${company.id}}" class="detail__form">
                             <div class="details__buttons">
-                                <button class="btn btn-light">Rs. <span>[[${company.price_per_share}*50]]</span></button>
-                                <button class="btn btn-light">Rs. <span>[[${company.price_per_share}*100]]</span></button>
-                                <button class="btn btn-light">Rs. <span>[[${company.price_per_share}*1000]]</span></button>
+                                <button class="btn btn-light">Rs. <span class="amount">100,000</span></button>
+                                <button class="btn btn-light">Rs. <span class="amount">100,000</span></button>
+                                <button class="btn btn-light">Rs. <span class="amount">100,000</span></button>
                             </div>
                             <div class="detail__amount">
-                                <span>Amount: Rs.&nbsp;<input type="number"
-                                        class="detail__input" name="invest" required oninput="this.value = 
-                                        !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"></span>
-                                <button type="submit" class="btn ">Continue</button>
+                                <span>Amount: Rs.&nbsp;
+                                    <input type="number"
+                                            class="detail__input" name="invest" oninput="this.value = 
+                                            !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" id="paymentAmount">
+                                </span>
+                                <button class="btn" id="pay">Continue</button>
                             </div>
                         </form>
                     </div>
 
                     <div class="left__detail-bottom">
-                        <a href="#">Add Payment Method</a>
+                        <span>Payment Method</span>
+                        <select id="payment" class="btn">
+                            <option value="BANK_TRANSFER" class="btn">Bank Transfer</option>
+                            <option value="ESEWA" class="btn">Esewa</option>
+                            <option value="KHALTI" class="btn" selected>Khalti</option>
+                            <option value="IME_PAY" class="btn">IME Pay</option>
+                        </select>
+                        <button class="btn" id="payment-button">Load Collateral</button>
                     </div>
+
+
+
                 </div>
 
                 <!-- right details -->
@@ -102,9 +114,11 @@
 
         <!-- Footer -->
         <footer>
-                   <footer th:insert="fragment/footer.html :: footer">
-
+            <footer th:insert="fragment/footer.html :: footer"></footer>
         </footer>
-    </body>
+</body>
 
+    <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script th:src="@{/js/payment.js}"></script>
 </html>
