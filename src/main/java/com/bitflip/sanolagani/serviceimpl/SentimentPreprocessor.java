@@ -121,17 +121,16 @@ public class SentimentPreprocessor {
 		}
 
 		return companiesWithGoodSentiment;
-	}
+	}        
+    public String preprocessText(String text) {
+       
+        text = text.replaceAll("[^a-zA-Z ]", "");
+        text = text.toLowerCase();
+        text = text.trim().replaceAll(" +", " ");
+        text = removeStopwords(text);
 
-	public String preprocessText(String text) {
-
-		text = text.replaceAll("[^a-zA-Z ]", "");
-		text = text.toLowerCase();
-		text = text.trim().replaceAll(" +", " ");
-		text = removeStopwords(text);
-
-		return text;
-	}
+        return text;
+    }
 
 	private String removeStopwords(String text) {
 		String[] stopwords = {"her", "then", "before", "ourselves", "below", "down", "too", "because", "are",
@@ -156,4 +155,9 @@ public class SentimentPreprocessor {
 		return text;
 	}
 }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 1e2f6eb1ed7f74fd9af66cabc920f998271478d4
 

@@ -65,7 +65,10 @@ public class EmailService {
 
         mailSender.send(message);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1e2f6eb1ed7f74fd9af66cabc920f998271478d4
 
         return otp;
     }
