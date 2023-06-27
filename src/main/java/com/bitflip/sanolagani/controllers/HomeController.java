@@ -76,10 +76,7 @@ public class HomeController {
 	public String analysis() {
 		List<Company> c_list = pre.getCompaniesWithGoodSentiment();
 		System.out.println(c_list);
-<<<<<<< HEAD
 
-=======
->>>>>>> 1e2f6eb1ed7f74fd9af66cabc920f998271478d4
 		return "index";
 	}
 
