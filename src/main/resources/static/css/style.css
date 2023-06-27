@@ -21,10 +21,15 @@
 :root {
 	--color-blue: #007BFF;
 	--color-blue-variant: #2372c7;
+
 	--color-gray: #6C757D;
-	--color-red: #DC3545;
-	--color-bg: #D5F5FD;
 	--color-light-gray: #B7BDBE;
+
+	--color-red: #DC3545;
+
+	--color-bg: #D5F5FD;
+	--color-background: #f3f3f3;
+	
 	--color-dark: #000;
 	--color-white: #fff;
 	--transition: all 400ms ease;
