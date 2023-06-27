@@ -20,7 +20,7 @@
 				<div class="card " th:each="company : ${companybasedoncapital}">
 					<!--					<span th:text="${company.previouslyraisedcapital}"></span>-->
 					<a th:href="@{/company/{id}/ (id=${company.id})}">
-						<img th:src="@{/photos/{id}/{image} (image=${company.image}, id= ${company.id})}"
+						<img th:src="@{../documents/{id}/{image} (image=${company.image}, id= ${company.id})}"
 							class='card__image' alt="card-image" />
 						<h3 th:text="${company.companyname}" />
 					</a>
@@ -56,18 +56,17 @@
 			<h5>Offerings that have raised the most money in the last few
 				days</h5>
 
-<<<<<<< HEAD
 			<div class="cards">
 				<div class="card">
-					<a href="#"><img src="@{/photos/wigl.webp}" class='card__image' alt="card-image" /></a>
+					<a href="#"><img src="" class='card__image' alt="card-image" /></a>
 
 					<h3>
 						<a href="#">Timeplast</a>
 					</h3>
 					<div class="cards row">
 						<div class="card " th:each="company : ${companybasedondate}">
-							<a href="@{/company/{id}/ (id=${company.id})}">
-								<img th:src="@{/photos/{id}/{image} (image=${company.image}, id= ${company.id})}"
+							<a th:href="@{'/company/'+${company.id}+'/'}">
+								<img th:src="@{/documents/{id}/{image} (image=${company.image}, id= ${company.id})}"
 									class='card__image' alt="card-image" />
 								<h3>Timeplast</h3>
 							</a>

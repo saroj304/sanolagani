@@ -20,8 +20,6 @@ public class CompanyDetailsController {
         model.addAttribute("company", company);
         return "company-info";
     }
-<<<<<<< HEAD
-=======
    
     @GetMapping("/company/details/{id}")
     public String getInvestCompanyDetails(@PathVariable("id") int id,Model model) {
@@ -40,5 +38,4 @@ public class CompanyDetailsController {
     public String getKhaltiPage() {
     	return "khaltiPayment";
     }
->>>>>>> 6c18287d761bc8ce34aa903283ca11223ec6942a
 }
