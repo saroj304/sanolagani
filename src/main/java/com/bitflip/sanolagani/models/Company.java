@@ -1,5 +1,6 @@
 package com.bitflip.sanolagani.models;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 //import java.util.HashSet;
 import java.util.List;
@@ -42,7 +43,7 @@ public class Company {
 	@Column
 	private String websiteurl;
 	@Column
-	private String previouslyraisedcapital;
+	private BigInteger previouslyraisedcapital;
 	@Column
 	private double price_per_share;
 	@Column
@@ -194,11 +195,11 @@ public class Company {
 		this.websiteurl = websiteurl;
 	}
 
-	public String getPreviouslyraisedcapital() {
+	public BigInteger getPreviouslyraisedcapital() {
 		return previouslyraisedcapital;
 	}
 
-	public void setPreviouslyraisedcapital(String previouslyraisedcapital) {
+	public void setPreviouslyraisedcapital(BigInteger previouslyraisedcapital) {
 		this.previouslyraisedcapital = previouslyraisedcapital;
 	}
 

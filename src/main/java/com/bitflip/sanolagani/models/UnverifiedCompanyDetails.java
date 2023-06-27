@@ -1,5 +1,7 @@
 package com.bitflip.sanolagani.models;
 
+import java.math.BigInteger;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -61,8 +63,8 @@ public class UnverifiedCompanyDetails {
 	private String address;
 
 	@Column
-	@NotBlank
-	private String raisedcapital;
+	@NotNull
+	private BigInteger raisedcapital;
 
 	public String getImage() {
 		return image;
@@ -182,11 +184,11 @@ public class UnverifiedCompanyDetails {
 		this.websiteurl = websiteurl;
 	}
 
-	public String getRaisedcapital() {
+	public BigInteger getRaisedcapital() {
 		return raisedcapital;
 	}
 
-	public void setRaisedcapital(String raisedcapital) {
+	public void setRaisedcapital(BigInteger raisedcapital) {
 		this.raisedcapital = raisedcapital;
 	}
 
