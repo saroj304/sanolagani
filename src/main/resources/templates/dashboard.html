@@ -23,13 +23,14 @@
 		<div class=" dashboard__container">
 			<div class="left__dashboard board">
 				<div>
-					<a href="#">Sanolagani Dashboard</a>
-					<a href="#">My Information</a>
+					<p><a th:href="@{/riskinfo}">Sanolagani Dashboard</a></p>
+					<p><a href="#">My Information</a></p>
+					<a href="#">My Investment</a>
 					<div class="dropdown">
 						<button onclick="fundManagement()" class="drop-btn">Fund Management</button>
 						<div id="fundManagement" class="fundManagementContent">
-							<a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Collateral Management</a>
-							<a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Transfer History</a>
+							<a th:href="@{'/collateralsummery/'+${id}+'/'}"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Collateral History</a>
+							<a th:href="@{'/fundhistory/'+${id}+'/'}"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Transfer History</a>
 							<a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Settlement</a>
 						</div>
 					</div>
@@ -41,10 +42,8 @@
 			<div class="right__dashboard">
 				<div class="turnover board">
 					<h2>Welcome,[[${user}]]</h2>
-					<a th:href="@{/riskinfo}">
 						<div>
 							<p>Total investment</p>
-					</a>
 					<p>[[${totalInvestment}]]</p>
 				</div>
 				<div>
@@ -63,15 +62,14 @@
 				<h3 class="bold">Rs. <span id="amount"></span></h3>
 
 				<div>
-					<p>Collateral Utilized</p>
-					<p></p>
+					<p>Collateral balance</p>
+					<p>[[${totalcollateralamount}]]</p>
 				</div>
+				
 				<div>
-					<p>Collateral Available</p>
-					<p>0</p>
+				<a th:href="@{/loadfund}">Load</a>
+				<a href="">Refund</a>
 				</div>
-				 <input type="number" id="paymentAmount" placeholder="Enter amount" />
-				<button id="payment-button">Load collateral</button>
 			</div>
 		</div>
 		</div>
@@ -89,9 +87,6 @@
 				document.getElementById("fundManagement").classList.toggle("show");
 			}
 
-			// Extract labels and values from dataPoints		
-			//var labels = dataPoints.map(dp => dp.label);
-			//var values = dataPoints.map(dp => dp.value);
 
 			document.addEventListener("DOMContentLoaded", function () {
 				var canvas = document.getElementById("myChart2");
@@ -140,7 +135,6 @@
 	
 		</script>
 </body>
-  <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script th:src="@{/js/payment.js}"></script
+  
+   
 </html>

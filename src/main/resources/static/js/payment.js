@@ -15,8 +15,9 @@ var config = {
     "eventHandler": {
         onSuccess (payload) {
             // hit merchant api for initiating verfication
-
-            window.location.href = "/verifypayment?token="+payload.token+"&amount="+payload.amount;
+            var companyId = document.getElementById("companyId").value;
+            console.log(companyId);
+            window.location.href = "/verifypayment?token="+payload.token+"&amount="+payload.amount+"&companyid="+companyId;
 //            verifyPayment(payload);
         },
         onError (error) {
@@ -32,10 +33,11 @@ var checkout = new KhaltiCheckout(config);
 var btn = document.getElementById("payment-button");
 btn.onclick = function () {
           var amountInput = document.getElementById("paymentAmount");
-            var amount = amountInput.value;
+          
+            var amount = amountInput.value*100;
             if (amount) {
-                var amountInPaisa = amount * 100; // Convert amount from rupees to paisa
-                config.amount = amountInPaisa;
+                 // Convert amount from rupees to paisa
+                config.amount = amount;
                 btn.innerHTML = "Pay " + amount + " Rupees"; // Update button text
                 checkout.show({popupMobile: true});
             } else {
@@ -43,4 +45,11 @@ btn.onclick = function () {
             }
        
 }
+var fund = document.getElementById("fund-management");
+var paymentOptions = document.getElementById("payment-options");
+
+fund.addEventListener("click", () => {
+  paymentOptions.style.display = (paymentOptions.style.display === "block") ? "none" : "block";
+  console.log(paymentOptions.style.display);
+});
 

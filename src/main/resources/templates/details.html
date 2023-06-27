@@ -4,9 +4,8 @@
 
 
     <body>
-       	<header class='container header__container' th:replace="fragment/header.html :: header"></header>
-       <div class='full__width' th:insert="fragment/nav.html :: navbar">
-	   </div>
+        <header class='container header__container' th:replace="fragment/header.html :: header"></header>
+        <div class='full__width' th:insert="fragment/nav.html :: navbar"></div>
 
   
 
@@ -27,6 +26,7 @@
                                 <button class="btn btn-light">Rs. <span class="amount">100,000</span></button>
                             </div>
                             <div class="detail__amount">
+								<input type="hidden" id="companyId" name="companyId" th:value="${company.id}">
                                 <span>Amount: Rs.&nbsp;
                                     <input type="number"
                                             class="detail__input" name="invest" oninput="this.value = 
@@ -37,15 +37,19 @@
                         </form>
                     </div>
 
-                    <div class="left__detail-bottom">
-                        <span>Payment Method</span>
-                        <select id="payment" class="btn">
-                            <option value="BANK_TRANSFER" class="btn">Bank Transfer</option>
-                            <option value="ESEWA" class="btn">Esewa</option>
-                            <option value="KHALTI" class="btn" selected>Khalti</option>
-                            <option value="IME_PAY" class="btn">IME Pay</option>
-                        </select>
-                        <button class="btn" id="payment-button">Load Collateral</button>
+                    <div class="dropdown">
+                        <div id="fund-management">Fund Management</div>
+                        <div id="payment-options" class="pay-button-group">
+                            <button href="#" value="KHALTI" class="pay" id="payment-button">
+                                <img th:src="@{/photos/khalti.jpg}" class="payment" />
+                            </button>
+                            <button href="#" value="ESEWA" class="pay">
+                                <img th:src="@{/photos/esewa.png}" class="payment">
+                            </button>
+                            <button href="#" value="IMEPAY" class="pay">
+                                <img th:src="@{/photos/imepay.png}" class="payment">
+                            </button>
+                        </div>
                     </div>
 
 
@@ -117,8 +121,8 @@
             <footer th:insert="fragment/footer.html :: footer"></footer>
         </footer>
 </body>
-
     <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script th:src="@{/js/payment.js}"></script>
+    
 </html>

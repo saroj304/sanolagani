@@ -9,16 +9,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableWebMvc
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-    @Override
+	@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(
+                        "/documents/**",
                         "/photos/**",
                         "/css/**",
                         "/js/**")
                 .addResourceLocations(
-                        "classpath:/static/photos/",
+                        "classpath:/documents/**",
                         "classpath:/static/css/",
-                        "classpath:/static/js/");
-    }
-
+                        "classpath:/static/js/",
+                        "classpath:/static/photos/");
+	}
 }
