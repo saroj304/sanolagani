@@ -22,6 +22,7 @@ public class Transaction {
 	private int id;
 	@OneToOne(mappedBy = "transaction")
     private Investment investment;
+	
 	@OneToOne(mappedBy = "transaction")
     private Collateral collateral;
 	@Column
@@ -35,6 +36,8 @@ public class Transaction {
 	private LocalDateTime transaction_date_time;
 	@Column
 	private String transaction_type;
+	@OneToOne(mappedBy = "transaction")
+    private RefundRequestData refundrequest;
 	public int getId() {
 		return id;
 	}
@@ -84,6 +87,12 @@ public class Transaction {
 	}
 	public void setCollateral(Collateral collateral) {
 		this.collateral = collateral;
+	}
+	public RefundRequestData getRefundrequest() {
+		return refundrequest;
+	}
+	public void setRefundrequest(RefundRequestData refundrequest) {
+		this.refundrequest = refundrequest;
 	}
 	
 }

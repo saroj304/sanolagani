@@ -72,6 +72,9 @@ public class Company {
 	private List<Investment> investments;
 
 	@OneToMany(mappedBy = "company")
+	private List<RefundRequestData> refundrequest;
+
+	@OneToMany(mappedBy = "company")
 	private List<Feedback> feedbacklist;
 	@CreationTimestamp
 	private LocalDateTime created;
@@ -265,6 +268,14 @@ public class Company {
 
 	public void setCreated(LocalDateTime created) {
 		this.created = created;
+	}
+
+	public List<RefundRequestData> getRefundrequest() {
+		return refundrequest;
+	}
+
+	public void setRefundrequest(List<RefundRequestData> refundrequest) {
+		this.refundrequest = refundrequest;
 	}
 
 }

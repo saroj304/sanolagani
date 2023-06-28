@@ -40,6 +40,9 @@ public class User {
 	private List<Transaction> transaction;
     
     @OneToMany(mappedBy = "user")
+   	private List<RefundRequestData> refundrequest;;
+    
+    @OneToMany(mappedBy = "user")
 	private List<Feedback> feedbacklist;
 	
 	@OneToOne(mappedBy = "user")
@@ -149,6 +152,14 @@ public class User {
 
 	public void setCollateral(Collateral collateral) {
 		this.collateral = collateral;
+	}
+
+	public List<RefundRequestData> getRefundrequest() {
+		return refundrequest;
+	}
+
+	public void setRefundrequest(List<RefundRequestData> refundrequest) {
+		this.refundrequest = refundrequest;
 	}
 
 }
