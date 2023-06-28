@@ -9,6 +9,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
@@ -37,5 +39,15 @@ public class PaymentController {
     	   paymentService.saveTransactionDetails(token,amount,companyid,transaction,remarks,investment,collateral);
        }
         return "redirect:/home";
+    }
+    
+    @PostMapping("/paywithcollateral")
+    public String payWithCollateral(@RequestParam(value = "companyId") int id,@RequestParam("amount") double amount,
+    							Transaction transaction,Investment investment,
+    							Collateral collateral) {
+    	String amounts = String.valueOf(amount);
+    	paymentService.saveTransactionDetails("collateral", amounts,id, transaction, 
+    											"paying with collateral", investment, collateral);
+    	return "redirect:/home";
     }
 }
