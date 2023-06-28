@@ -15,29 +15,41 @@
                 <!-- left details -->
                 <div class="left__detail">
                     <div class="left__detail-main">
-                        <h5><span>Bhoklagyo</span> &nbsp; Rs. <span>[[${company.price_per_share}]]</span> per
-                            share</h5>
+                        <h5><span>Bhoklagyo</span> &nbsp; Rs. <span>[[${company.price_per_share}]]</span> per share</h5>
                         <h2>Bhoklagyo - Feeding the distanced customer with taste.</h2>
-    
-                        <form th:action="@{'company/invest/'+${company.id}}" class="detail__form">
-                            <div class="details__buttons">
-                                <button class="btn btn-light">Rs. <span class="amount">100,000</span></button>
-                                <button class="btn btn-light">Rs. <span class="amount">100,000</span></button>
-                                <button class="btn btn-light">Rs. <span class="amount">100,000</span></button>
-                            </div>
-                            <div class="detail__amount">
-                                <span>Amount: Rs.&nbsp;
-                                    <input type="number"
-                                            class="detail__input" name="invest" oninput="this.value = 
-                                            !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" id="paymentAmount">
-                                </span>
-                                <button class="btn" id="pay">Continue</button>
-                            </div>
-                        </form>
+                        <span id="company-id" hidden>[[${company.id}]]</span>
+                        <span id="pps" hidden>[[${company.price_per_share}]]</span>
+                        <span id="maxq" hidden>[[${company.maximum_quantity}]]</span>
+
+                        <div class="details__buttons">
+                            <button class="btn btn-light amount" th:with="min=${company.maximum_quantity * 0.1 * company.price_per_share}">
+                                Rs. [[${#numbers.formatInteger(min, 3, 'COMMA')}]]
+                            </button>
+                            <button class="btn btn-light amount" th:with="mid=${company.maximum_quantity * 0.5 * company.price_per_share}">
+                                Rs. [[${#numbers.formatInteger(mid, 3, 'COMMA')}]]
+                            </button>
+                            <button class="btn btn-light amount" th:with="max=${company.maximum_quantity * company.price_per_share}">
+                                Rs. [[${#numbers.formatInteger(max, 3, 'COMMA')}]]
+                            </button>
+                        </div>
+
+                        <div class="detail__amount">
+                            <span>Amount: Rs.&nbsp;
+                                <input type="number" class="detail__input" name="invest" id="paymentAmount">
+                            </span>
+<!--                                <button class="btn" id="pay">Continue</button>-->
+                            <span id="message" style="color:red; background-color: #ff22gg"></span>
+
+                            <button type="button" class="btn" id="confirm">Confirm</button>
+                        </div>
                     </div>
 
                     <div class="dropdown">
-                        <div id="fund-management">Fund Management</div>
+                        <div id="payment-error-message" th:if="${message}">
+                            Transaction [[${message}]] !
+                        </div>
+
+                        <div id="fund-management">Choose Payment Option</div>
                         <div id="payment-options" class="pay-button-group">
                             <button href="#" value="KHALTI" class="pay">
                                 <img th:src="@{/images/khalti.jpg}" class="payment" id="payment-button"/>
@@ -57,28 +69,24 @@
 
                 <!-- right details -->
                 <div class="right__detail">
-                    <h2>1,103 Shares</h2>
+                    <h2><span id="units"></span>&nbsp;Units</h2>
                     <div class="detail__shares">
                         <p>Investment Amount</p>
-                        <p>Rs.<span>1,60,000</span></p>
+                        <p>Rs.<span id="amount">0</span></p>
                     </div>
                     <div class="detail__shares">
                         <p>Fees</p>
-                        <p>Rs.<span>5,600</span></p>
+                        <p>Rs.<span id="fees">0</span></p>
                     </div>
                     <div class="detail__shares bold">
                         <p>Total Amount</p>
-                        <p>Rs.<span>1,60,000</span></p>
+                        <p>Rs.<span id="total">0</span></p>
                     </div>
                     <br>
-                    <div class="detail__shares">
-                        <p>Base Shares (Rounded Up)</p>
-                        <p>1014</p>
-                    </div>
-                    <div class="detail__shares bold">
-                        <p>Total Shares</p>
-                        <p>1014</p>
-                    </div>
+<!--                    <div class="detail__shares bold">-->
+<!--                        <p>Total Share Units</p>-->
+<!--                        <p id="units">0</p>-->
+<!--                    </div>-->
                     <div class="detail__info">
                         <p>I acknowledge that clicking "Submit Investment" below
                             represents an e-signatures as detailed in our <a
@@ -108,8 +116,7 @@
                                 Policy</a></p>
                     </div>
 
-                    <button type="submit" class="btn btn-success">Submit
-                        Investment</button>
+                    <button type="submit" class="btn btn-success" disabled id="submit">Submit Investment</button>
 
                 </div>
             </div>
@@ -124,4 +131,9 @@
     <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script th:src="@{/js/payment.js}"></script>
+
+    <script th:inline="javascript" th:src="@{/js/amount.js}">
+
+
+    </script>
 </html>
