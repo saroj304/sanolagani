@@ -95,11 +95,6 @@ public class AdminServiceImpl implements AdminService {
 	public void saveVerifiedCompany(int id, Company company, User user) {
 		String plain_password = generatePassword();
 		String encodedPassword = encodePassword(plain_password);
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 1e2f6eb1ed7f74fd9af66cabc920f998271478d4
 	     unverified_details = unverified_repo.getById(id);
 		 sendPasswordEmail(unverified_details.getEmail(), plain_password);//sending password email after regisrtating
 	     user.setFname(unverified_details.getFname());
@@ -132,23 +127,11 @@ public class AdminServiceImpl implements AdminService {
 		}
            deleteData(id);
            }
-<<<<<<< HEAD
 
-	public void transferUploadedFile(Company company) throws IOException {
-=======
-
-
-		// try {
-		// 	transferUploadedFile(company);
-		// } catch (IOException e) {
-		// 	e.printStackTrace();
-		// }
-		// deleteData(id);
 	
 
 	public void transferUploadedFile(Company company) throws IOException {
 		//for pdf file
->>>>>>> 1e2f6eb1ed7f74fd9af66cabc920f998271478d4
 	  List<Company> companylist = company_repo.findAll();
 	  int company_id=0;;
 		  for(Company companies:companylist) {
@@ -175,35 +158,23 @@ public class AdminServiceImpl implements AdminService {
 		Files.copy(source_pdf_path, pdfdestinationpath, StandardCopyOption.REPLACE_EXISTING);
 
 		tablesFromPDF.extractAllTables(company);
-<<<<<<< HEAD
-        
-      //for images file
 
-=======
-	
-        
-                  //for images file
->>>>>>> 1e2f6eb1ed7f74fd9af66cabc920f998271478d4
-      		Path source_citf_path = Path.of(sourcepath+cit_frontname);
-      		Path citf_destinationpath = Path.of(destinationpath+cit_frontname);
-            Files.copy(source_citf_path, citf_destinationpath, StandardCopyOption.REPLACE_EXISTING);
-           
-            Path source_citb_path = Path.of(sourcepath+cit_backname);
-      		Path citb_destinationpath = Path.of(destinationpath+cit_backname);
-            Files.copy(source_citb_path, citb_destinationpath, StandardCopyOption.REPLACE_EXISTING);
-           
-            Path source_pan_path = Path.of(sourcepath+pan_name);
-    		Path pandestinationpath = Path.of(destinationpath+pan_name);
-            Files.copy(source_pan_path, pandestinationpath, StandardCopyOption.REPLACE_EXISTING);
-            
-            Path source_image_path = Path.of(sourcepath+image_name);
-    		Path imagedestinationpath = Path.of(destinationpath+image_name);
-            Files.copy(source_image_path, imagedestinationpath, StandardCopyOption.REPLACE_EXISTING);
+		Path source_citf_path = Path.of(sourcepath+cit_frontname);
+		Path citf_destinationpath = Path.of(destinationpath+cit_frontname);
+		Files.copy(source_citf_path, citf_destinationpath, StandardCopyOption.REPLACE_EXISTING);
 
-<<<<<<< HEAD
-=======
+		Path source_citb_path = Path.of(sourcepath+cit_backname);
+		Path citb_destinationpath = Path.of(destinationpath+cit_backname);
+		Files.copy(source_citb_path, citb_destinationpath, StandardCopyOption.REPLACE_EXISTING);
 
->>>>>>> 1e2f6eb1ed7f74fd9af66cabc920f998271478d4
+		Path source_pan_path = Path.of(sourcepath+pan_name);
+		Path pandestinationpath = Path.of(destinationpath+pan_name);
+		Files.copy(source_pan_path, pandestinationpath, StandardCopyOption.REPLACE_EXISTING);
+
+		Path source_image_path = Path.of(sourcepath+image_name);
+		Path imagedestinationpath = Path.of(destinationpath+image_name);
+		Files.copy(source_image_path, imagedestinationpath, StandardCopyOption.REPLACE_EXISTING);
+
 	}
 
 	public static String generatePassword() {
