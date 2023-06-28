@@ -1,3 +1,4 @@
+
 package com.bitflip.sanolagani.securityconfigurationfilerchain;
 
 import org.springframework.context.annotation.Configuration;
@@ -9,17 +10,19 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableWebMvc
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-	@Override
+    @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(
                         "/documents/**",
-                        "/photos/**",
+                        "/images/**",
                         "/css/**",
                         "/js/**")
                 .addResourceLocations(
-                        "classpath:/documents/**",
+                        "classpath:/documents/",
                         "classpath:/static/css/",
                         "classpath:/static/js/",
-                        "classpath:/static/photos/");
-	}
+                        "classpath:/static/images/");
+    }
+
+ 
 }
