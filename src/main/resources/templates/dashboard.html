@@ -25,7 +25,7 @@
 				<div>
 					<p><a th:href="@{/riskinfo}">Sanolagani Dashboard</a></p>
 					<p><a href="#">My Information</a></p>
-					<a href="#">My Investment</a>
+					<a th:href="@{'/investmenthistory/'}">My Investment</a>
 					<div class="dropdown">
 						<button onclick="fundManagement()" class="drop-btn">Fund Management</button>
 						<div id="fundManagement" class="fundManagementContent">
@@ -68,7 +68,7 @@
 				
 				<div>
 				<a th:href="@{/loadfund}">Load</a>
-				<a href="">Refund</a>
+				<a th:href="@{'/refund/collateral/'+${id}+'/'}">Refund</a>
 				</div>
 			</div>
 		</div>

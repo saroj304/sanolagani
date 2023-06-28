@@ -59,7 +59,7 @@
 	 display: flex;
     justify-content: space-between;
     width: 100%;
-    max-width: 800px; /* Adjust the max-width as needed */
+    max-width: 1000px; /* Adjust the max-width as needed */
 
 }
 .right__dashboard{
