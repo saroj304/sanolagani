@@ -18,7 +18,9 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 import com.bitflip.sanolagani.models.Company;
+import com.bitflip.sanolagani.models.Investment;
 import com.bitflip.sanolagani.models.UnverifiedCompanyDetails;
+import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.repository.UnverifiedCompanyRepo;
 import com.bitflip.sanolagani.service.AdminService;
 
@@ -55,10 +57,7 @@ public class EmailService {
 				+ " guwarko,lalitpur, Nepal.\n" + " Phone # 977-98123456789\n"
 				+ " Email Id: support@sanolagani.com.np\n" + " Warm Regards,\n" + " sanolagani investment firm.");
 
-		mailSender.send(message);
-
-
-		// mailSender.send(message);
+	
 
 
 		mailSender.send(message);
@@ -151,6 +150,18 @@ public class EmailService {
 			e.printStackTrace();
 		}
 		return "success";
+	}
+
+	public void sendRefundMail(User user,Investment investment, Company company) {
+		
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setTo(user.getEmail(),"raayaseetal@gmail.com");
+		message.setSubject("Refund Request");
+		message.setText("Dear "+user.getFname()+", has done a refund request of the invested"
+				       + " amount rs :"+investment.getAmount()+"\n"
+				       + " having company name :"+company.getCompanyname()+".");
+	
+		mailSender.send(message);
 	}
 
 }
