@@ -84,6 +84,7 @@ public class PaymentServiceImpl implements PaymentService {
 	public void saveTransactionDetails(String token, String amounts,
 										int companyid, Transaction transaction,
 										String remarks,Investment investment,Collateral collateral) {
+		
 		User user = user_controller.getCurrentUser();
 		LocalDateTime dateTime = LocalDateTime.now();
 		double amount = Double.parseDouble(amounts);
