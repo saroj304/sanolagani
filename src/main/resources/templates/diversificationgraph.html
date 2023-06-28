@@ -28,10 +28,13 @@
     <div class="chart-container">
       <canvas id="ruler-chart"></canvas>
     </div>
+    <div class="center__dashboard board">
+				<canvas id="myChart2"></canvas>
+			</div>
 
 
 
-    <script>
+    <script input th:inline="javascript">
       const activeValue = [[${ diversificationlevel }]]; // Replace with the active value received from Spring Boot
 
       const chartData = {
@@ -80,6 +83,52 @@
         options: chartOptions,
       });
 
+
+           document.addEventListener("DOMContentLoaded", function () {
+				var canvas = document.getElementById("myChart2");
+
+				if (canvas) {
+					var ctx = canvas.getContext("2d");
+
+
+					var companies =[[${companynamelist}]]; // Replace with your actual company names
+					console.log(companies);
+					var investments = [[${totalamountlist}]]; // Replace with your additional data
+
+					// Chart data
+					var chartData = {
+						labels: companies,
+						datasets: [
+							{
+								label: "investments",
+								data: investments,
+								type: 'line', // Bar chart for number of shares
+								backgroundColor: "#007bff",
+								borderWidth: 1
+							},
+
+						]
+					};
+					// Chart options
+					var chartOptions = {
+						responsive: true,
+						scales: {
+							y: {
+								beginAtZero: true
+							}
+						}
+					};
+
+					// Create combination chart
+					var myChart = new Chart(ctx, {
+						type: 'line',
+						data: chartData,
+						options: chartOptions
+					});
+
+				}
+			});
+	
 
     </script>
 </body>

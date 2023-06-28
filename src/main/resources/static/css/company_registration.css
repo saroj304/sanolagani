@@ -1,5 +1,5 @@
 .comapany__container {
-    background: var(--color-gray-variant);
+    background: var(--color-background-variant);
     margin-bottom: 80px;
     padding: 20px;
 }
@@ -22,7 +22,8 @@
     width: 300px;
     margin-bottom: 10px;
     border-radius: 5px;
-    border: none;
+    border: 1px solid gray;
+    background: var(--color-background);
 }
 
 .register_input_full {

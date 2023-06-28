@@ -33,10 +33,9 @@ public class SeurityConfiguration extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 	 http
 	    .authorizeRequests()
-
 	    .antMatchers("/login","/register","/otpverify","/companyregister","/companyverify",
 	    		"/tables","/addCompany","/tables/edit/**","/forgotpassword",
-	    		"/changepassword","/resetpassword","/updatepassword","/","/raisecapital").permitAll()
+	    		"/changepassword","/resetpassword","/updatepassword","/","/raisecapital","/documents").permitAll()
 	    .antMatchers("/admin/**").hasRole("ADMIN")
 	    .anyRequest().authenticated()
 	    .and()
@@ -72,7 +71,7 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 @Override
 public void configure(WebSecurity web) throws Exception {
 	web.ignoring()
-	.antMatchers("/resources/**","/static/**","/css/**","/photos/**","/documents/**");
+	.antMatchers("/resources/**","/static/**","/css/**","/photos/**","/documents/**","classpath:/static/documents/**");
 }
 
 

@@ -9,9 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
 
+@Component
 @Entity
 @Table(name = "investment")
 public class Investment {
@@ -32,8 +35,11 @@ public class Investment {
 	private String status;
 	@Column
 	private LocalDateTime investment_date_time;
-	@OneToOne(mappedBy = "investment")
+	@OneToOne
+	@JoinColumn(name = "transaction_id")
 	private Transaction transaction;
+	@Column
+	private LocalDateTime refundableUntil;
 	
 	public int getId() {
 		return id;
@@ -84,7 +90,16 @@ public class Investment {
 		this.status = status;
 	}
 	
-	
+    public LocalDateTime getRefundableUntil() {
+		return refundableUntil;
+	}
+	public void setRefundableUntil(LocalDateTime refundableUntil) {
+		this.refundableUntil = refundableUntil;
+	}
+	@PrePersist
+    public void setRefundableUntil() {
+        this.refundableUntil = this.investment_date_time.plusHours(24);
+    }
 	
 	
 }

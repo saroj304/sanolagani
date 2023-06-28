@@ -1,35 +1,30 @@
 package com.bitflip.sanolagani.serviceimpl;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import com.bitflip.sanolagani.document.service.ExtractTablesFromPDF;
-import com.bitflip.sanolagani.models.User;
-import com.bitflip.sanolagani.repository.UserRepo;
-import com.giaybac.traprange.PDFTableExtractor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.stereotype.Service;
-
-import com.bitflip.sanolagani.models.Company;
-import com.bitflip.sanolagani.models.CompanyAmountComparator;
-import com.bitflip.sanolagani.models.CompanyDateComparator;
-import com.bitflip.sanolagani.models.UnverifiedCompanyDetails;
-import com.bitflip.sanolagani.repository.CompanyRepo;
-import com.bitflip.sanolagani.repository.UnverifiedCompanyRepo;
-import com.bitflip.sanolagani.service.AdminService;
-
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.security.SecureRandom;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-import javax.swing.*;
-import java.io.File;
-import java.io.IOException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.bitflip.sanolagani.document.service.ExtractTablesFromPDF;
+import com.bitflip.sanolagani.models.Company;
+
+import com.bitflip.sanolagani.models.UnverifiedCompanyDetails;
+import com.bitflip.sanolagani.models.User;
+import com.bitflip.sanolagani.repository.CompanyRepo;
+import com.bitflip.sanolagani.repository.UnverifiedCompanyRepo;
+import com.bitflip.sanolagani.repository.UserRepo;
+import com.bitflip.sanolagani.service.AdminService;
 
 
 @Service
@@ -212,15 +207,4 @@ public class AdminServiceImpl implements AdminService {
 		return companylist;
 	}
 
-	@Override
-	public List<Company> listingBasedonRaisedCapital(List<Company> company) {
-		// Sort the companies based on raised capital in descending order     
-		Collections.sort(company,new CompanyAmountComparator());
-		return company;
-	}
-	public List<Company>listingBasedonRecentDate(List<Company> company){
-		Collections.sort(company,new CompanyDateComparator());
-
-		return company;
-	}
 }

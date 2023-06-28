@@ -7,8 +7,6 @@
         <header class='container header__container' th:replace="fragment/header.html :: header"></header>
         <div class='full__width' th:insert="fragment/nav.html :: navbar"></div>
 
-  
-
         <!-- Details -->
         <section>
             <div class="container details__container">
@@ -17,6 +15,7 @@
                     <div class="left__detail-main">
                         <h5><span>Bhoklagyo</span> &nbsp; Rs. <span>[[${company.price_per_share}]]</span> per share</h5>
                         <h2>Bhoklagyo - Feeding the distanced customer with taste.</h2>
+<<<<<<< HEAD
                         <span id="company-id" hidden>[[${company.id}]]</span>
                         <span id="pps" hidden>[[${company.price_per_share}]]</span>
                         <span id="maxq" hidden>[[${company.maximum_quantity}]]</span>
@@ -42,6 +41,25 @@
 
                             <button type="button" class="btn" id="confirm">Confirm</button>
                         </div>
+=======
+    
+                        <form th:action="@{'company/invest/'+${company.id}}" class="detail__form">
+                            <div class="details__buttons">
+                                <button class="btn btn-light">Rs. <span class="amount">100,000</span></button>
+                                <button class="btn btn-light">Rs. <span class="amount">100,000</span></button>
+                                <button class="btn btn-light">Rs. <span class="amount">100,000</span></button>
+                            </div>
+                            <div class="detail__amount">
+								<input type="hidden" id="companyId" name="companyId" th:value="${company.id}">
+                                <span>Amount: Rs.&nbsp;
+                                    <input type="number"
+                                            class="detail__input" name="invest" oninput="this.value = 
+                                            !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" id="paymentAmount">
+                                </span>
+                                <button class="btn" id="pay">Continue</button>
+                            </div>
+                        </form>
+>>>>>>> 4ff590dc79e0fd1bf78347fd97308bdd63ba5f59
                     </div>
 
                     <div class="dropdown">
@@ -51,14 +69,16 @@
 
                         <div id="fund-management">Choose Payment Option</div>
                         <div id="payment-options" class="pay-button-group">
-                            <button href="#" value="KHALTI" class="pay">
-                                <img th:src="@{/images/khalti.jpg}" class="payment" id="payment-button"/>
+
+                            <button href="#" value="KHALTI" class="pay" id="payment-button">
+                                <img th:src="@{/photos/khalti.jpg}" class="payment" />
                             </button>
                             <button href="#" value="ESEWA" class="pay">
-                                <img th:src="@{/images/esewa.png}" class="payment">
+                                <img th:src="@{/photos/esewa.png}" class="payment">
                             </button>
                             <button href="#" value="IMEPAY" class="pay">
-                                <img th:src="@{/images/ime pay.png}" class="payment">
+                                <img th:src="@{/photos/imepay.png}" class="payment">
+
                             </button>
                         </div>
                     </div>
@@ -127,13 +147,16 @@
             <footer th:insert="fragment/footer.html :: footer"></footer>
         </footer>
 </body>
-
     <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script th:src="@{/js/payment.js}"></script>
+<<<<<<< HEAD
 
     <script th:inline="javascript" th:src="@{/js/amount.js}">
 
 
     </script>
+=======
+    
+>>>>>>> 4ff590dc79e0fd1bf78347fd97308bdd63ba5f59
 </html>

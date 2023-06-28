@@ -1,6 +1,9 @@
 package com.bitflip.sanolagani.controllers;
 
 
+import com.bitflip.sanolagani.models.Collateral;
+import com.bitflip.sanolagani.models.Investment;
+import com.bitflip.sanolagani.models.Transaction;
 import com.bitflip.sanolagani.service.PaymentService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +22,21 @@ public class PaymentController {
     PaymentService paymentService;
 
     @GetMapping("/verifypayment")
-    public String verifyPayment(@RequestParam("token") String token, @RequestParam("amount") String amount, @RequestParam("cId") String id, Model model) throws JsonProcessingException {
-        System.out.println(token + " " + amount);
+    public String verifyPayment(@RequestParam("token") String token, 
+    		                    @RequestParam("amount") String amount,
+    		                    @RequestParam(value = "companyid") int companyid,
+    		                    @RequestParam(value="remarks" ,required = false) String remarks,
+    		                    Transaction transaction,Investment investment,Collateral collateral) 
+    		                    throws JsonProcessingException {
+        System.out.println(token + " " + amount+" "+companyid);
         Map<String, String>  details = new HashMap<>();
         details.put("token", token);
         details.put("amount", amount);
-        boolean status = paymentService.verifyPayment(details,token,amount);
-        double amountRs = Double.parseDouble(amount)/100;
-        model = status ? model.addAttribute("message", "success") : model.addAttribute("message", "failed!");
-        return "redirect:/company/details/"+id +"/";
+       boolean result = paymentService.verifyPayment(details);
+       System.out.println(result);
+       if(result) {
+    	   paymentService.saveTransactionDetails(token,amount,companyid,transaction,remarks,investment,collateral);
+       }
+        return "redirect:/home";
     }
 }

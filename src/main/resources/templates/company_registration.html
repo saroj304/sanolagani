@@ -21,6 +21,8 @@
             </form>
         </div> -->
 	</header>
+	<div class='full__width' th:insert="fragment/nav.html :: navbar">
+	</div>
 
 	<!-- Company Registration -->
 	<section class="company">
@@ -59,14 +61,18 @@
 						class="register_input" type="number"
 						placeholder=" maximum quantity" name="maximum_quantity">
 				</div>
+<<<<<<< HEAD
 
+=======
+		<div>
+>>>>>>> 4ff590dc79e0fd1bf78347fd97308bdd63ba5f59
 				<input class="register_input register" type="text"
 					placeholder="Time Span For Raising Capital"
 					name="timespanforraisingcapital"
 					th:field="*{timespanforraisingcapital}"> <input
 					class="register_input" type="number" placeholder=" per share price"
 					name="price_per_share"> <br>
-
+</div>
 
 				<div class="doc_file">
 					<div>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	<link rel="stylesheet" href="css/load_fund.css">
+
+    <title>Sanolagani</title>
+    <head th:replace="fragment/head.html :: headerfiles"></head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+ 
+</head>
+
+<body>
+
+ <header class='container header__container' th:replace="fragment/header.html :: header"></header>
+	<div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
+
+    <!-- Dashboard -->
+    <section class="dashboard">
+        <div class=" dashboard__container">
+            <!-- left dashboard -->
+            <div class="left__dashboard board">
+                <div><a href="#">Sanolagani Dashboard</a></div>
+                <div><a href="#">My Information</a></div>
+                     <div><a href="#">My Investment</a></div>
+                <div class="dropdown">
+                    <button onclick="fundManagement()" class="drop-btn">Fund Management</button>
+                    <div id="fundManagement" class="fundManagementContent">
+                        <a href=""><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Collateral Management</a>
+						<a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Transfer History</a>
+						<a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Settlement</a>
+						</div>
+                </div>
+            </div>
+            <!-- center dashboard -->
+            <div class="center__dashboard board">
+                <form action="#">
+                    <div class="bank_row">
+                        <label class="load-title" for="bank">BANK <span style="color: red">*</span></label>
+                        <select class="load_input" name="bank" id="bank" required>
+                            <option class="disable" value="">Select Bank</option>
+                            <option value="Khalti">Khalti</option>
+                        </select>
+                        <p class="load-error"></p>
+                    </div>
+                    <div class="bank_row">
+                        <label class="load-title" for="web">PAYMENT METHOD <span style="color: red">*</span></label>
+                        <select class="load_input" name="web" id="web" required>
+                            <option class="disable" value="">Select Payment Method</option>
+                            <option value="web">Web</option>
+                        </select>
+                    </div>
+                    <div class="bank_row">
+                        <label class="load-title" for="amount">AMOUNT <span style="color: red">*</span></label>
+                        <input id="paymentAmount" class="load_input" type="number" min="1" oninput="validity.valid||(value='')"
+                            required>
+                    </div>
+                    <input type="hidden" id="companyId" name="companyId" value=0>
+                    <div class="bank_row">
+                        <label class="load-title" for="remarks">REMARKS <span style="color: red">*</span></label>
+                        <input class="load_input" id="remarks" type="text" name="remarks" required>
+                    </div>
+                    <div>
+                        <input type="button" class="btn" id="payment-button" value="continue"></input>
+                        <button type="reset" class="btn btn-danger">Reset</button>
+                    </div>
+                </form>
+
+
+            </div>
+            <!-- right dashboard -->
+            <div class="right__dashboard">
+                <!-- total collateral -->
+                <div class="load board">
+                    <div>
+                        <p class="collateral-title">NPR &nbsp;<span>0.0</span></p>
+                        <p class="collateral-sub-tile">Total Collateral</p>
+                    </div>
+                </div>
+                <!-- total collateral -->
+                <div class="load board">
+                    <div>
+                        <p class="collateral-title">NPR &nbsp;<span>0.0</span></p>
+                        <p class="collateral-sub-tile">Available Collateral</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+<footer>
+		<footer th:insert="fragment/footer.html :: footer">
+
+		</footer>
+
+    <!-- Fund Management Dropdown Script -->
+    <script>
+        function fundManagement() {
+            document.getElementById("fundManagement").classList.toggle("show");
+        }
+
+    </script>
+</body>
+<script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script th:src="@{/js/payment.js}"></script>
+</html>
