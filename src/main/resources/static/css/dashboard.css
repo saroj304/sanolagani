@@ -1,6 +1,7 @@
 .dashboard{
     margin-top: 1rem;
     margin-bottom: 2rem;
+    min-height: 50vh;
 }
 .dashboard__container{
     display: grid;
@@ -9,14 +10,17 @@
     padding: 0 1rem;
 }
 .board{
-    background:#e8eaef;
+    background: var(--color-background);
     height: fit-content;
     border-radius: 10px;
     padding: 10px;
 }
 .left__dashborad{
     font-size: 15px;
-
+}
+.left_dashborad div{
+    display: flex;
+    flex-direction: column;
 }
 .left__dashboard div a:hover{
     margin-left: 10px;
@@ -55,7 +59,7 @@
 	 display: flex;
     justify-content: space-between;
     width: 100%;
-    max-width: 800px; /* Adjust the max-width as needed */
+    max-width: 1000px; /* Adjust the max-width as needed */
 
 }
 .right__dashboard{

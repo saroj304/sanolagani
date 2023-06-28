@@ -18,7 +18,9 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 import com.bitflip.sanolagani.models.Company;
+import com.bitflip.sanolagani.models.Investment;
 import com.bitflip.sanolagani.models.UnverifiedCompanyDetails;
+import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.repository.UnverifiedCompanyRepo;
 import com.bitflip.sanolagani.service.AdminService;
 
@@ -55,10 +57,7 @@ public class EmailService {
 				+ " guwarko,lalitpur, Nepal.\n" + " Phone # 977-98123456789\n"
 				+ " Email Id: support@sanolagani.com.np\n" + " Warm Regards,\n" + " sanolagani investment firm.");
 
-		mailSender.send(message);
-
-
-		// mailSender.send(message);
+	
 
 
 		mailSender.send(message);
@@ -82,12 +81,14 @@ public class EmailService {
 		MultipartFile register_photo = multipartRequest.getFile("companypan");
 		MultipartFile company_image = multipartRequest.getFile("com_image");
 
+      try {
 		// to store on the secondary memory
 		String pdf_name = un_company.getCompanyname() + "_" + pdfFile.getOriginalFilename();
 		String citizen_front_name = un_company.getCompanyname() + "_" + citizen_front.getOriginalFilename();
 		String citizen_back_name = un_company.getCompanyname() + "_" + citizen_back.getOriginalFilename();
 		String register_photo_name = un_company.getCompanyname() + "_" + register_photo.getOriginalFilename();
 		String company_img = un_company.getCompanyname() + "_" + company_image.getOriginalFilename();
+
 
 		// to retrieve extension
 		String citizen_front_name_extension = citizen_front_name.substring(citizen_front_name.lastIndexOf(".") + 1);
@@ -109,7 +110,6 @@ public class EmailService {
 		helper.addAttachment("company_register_details." + register_photo_name_extension, register_photo);
 //		mailSender.send(message);
 
-		try {
 
 			byte[] citizen_f = citizen_front.getBytes();
 			byte[] citizen_b = citizen_back.getBytes();
@@ -150,6 +150,18 @@ public class EmailService {
 			e.printStackTrace();
 		}
 		return "success";
+	}
+
+	public void sendRefundMail(User user,Investment investment, Company company) {
+		
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setTo(user.getEmail(),"raayaseetal@gmail.com");
+		message.setSubject("Refund Request");
+		message.setText("Dear "+user.getFname()+", has done a refund request of the invested"
+				       + " amount rs :"+investment.getAmount()+"\n"
+				       + " having company name :"+company.getCompanyname()+".");
+	
+		mailSender.send(message);
 	}
 
 }

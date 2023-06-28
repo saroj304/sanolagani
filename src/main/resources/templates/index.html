@@ -103,11 +103,50 @@
 
 
 	<!-- Recommend based on feedback -->
-	<section class='momentum__section'
-		sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_COMPANY')">
+	<section class='momentum__section'>
 		<div class="container momentum__container">
 			<h2>Feedback</h2>
 			<h5>Recommend companies based on feedback</h5>
+			<div class="cards row">
+
+				<div class="card " th:each="company : ${c_list}">
+					<a th:href="@{'/company/'+${company.id}+'/'}"> <img
+						th:src="@{'../documents/'+${company.id}+'/'+${company.image}}"
+						class='card__image' alt="card-image" />
+						<h3>Timeplast</h3>
+					</a>
+
+					<p class='desc'>The palstic that completely disintegrate...</p>
+
+					<div class="card__score">
+						<div class="raised">
+							<h3 th:text="${company.previouslyraisedcapital}"></h3>
+							<p class='desc'>Raised</p>
+						</div>
+						<div class="investers">
+							<h3 th:text="${company.companyname}"></h3>
+							<p class='desc'>CompanyName</p>
+						</div>
+						<div class="min__investment">
+							<h3 th:text="${company.maximum_quantity}" />
+							<p class='desc'>Min. Investment</p>
+						</div>
+
+					</div>
+
+					<div class="division">
+						<p>Reg CF via Sanolagani Capital, Ltd.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+<section class='momentum__section'
+		sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_COMPANY')">
+		<div class="container momentum__container">
+			<h2>Diversification</h2>
+			<h5>Recommend companies based on diversification</h5>
 			<div class="cards row">
 
 				<div class="card " th:each="company : ${c_list}">

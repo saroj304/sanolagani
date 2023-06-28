@@ -31,24 +31,15 @@ public class HomeController {
 
 	@GetMapping({ "/", "/home" })
 	public String homePage(Model model) {
-//		List<Company> companylist = adminservice.getAllCompany();
-//		Optional<List<Company>> result = Optional.ofNullable(companylist);
-//		if (result != null) {
 
-		/*
-		 * List<Company> companybasedoncapital =
-		 * adminservice.listingBasedonRaisedCapital(companylist);
-		 * model.addAttribute("companybasedoncapital", companybasedoncapital);
-		 */
 		List<Company> companybasedoncapital = company_repo.findAllCompanyBasesOnRaidedCapitalDesc();
-		List<Company> companybasedondate = company_repo.findAllCompanyBasesOnCreationalDates();
 		Optional<List<Company>> result = Optional.ofNullable(companybasedoncapital);
+		model.addAttribute("companybasedoncapital", companybasedoncapital);
+		
+		List<Company> companybasedondate = company_repo.findAllCompanyBasesOnCreationalDates();
 		Optional<List<Company>> result1 = Optional.ofNullable(companybasedondate);
+		
 		if (result != null & result1 != null) {
-			for (Company company : companybasedoncapital) {
-				System.out.println(company.getPreviouslyraisedcapital());
-			}
-			model.addAttribute("companybasedoncapital", companybasedoncapital);
 			model.addAttribute("companybasedondate", companybasedondate);
 
 			List<Company> diversifiedcompanylist = recommedationinit.getRecommendCompanies();

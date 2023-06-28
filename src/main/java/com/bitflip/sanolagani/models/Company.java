@@ -68,11 +68,12 @@ public class Company {
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
 
-	@OneToOne(mappedBy = "company")
-	private Portfolio portfolio;
 
 	@OneToMany(mappedBy = "company")
 	private List<Investment> investments;
+
+	@OneToMany(mappedBy = "company")
+	private List<RefundRequestData> refundrequest;
 
 	@OneToMany(mappedBy = "company")
 	private List<Feedback> feedbacklist;
@@ -227,13 +228,7 @@ public class Company {
 		this.citizenship_fname = citizenship_name;
 	}
 
-	public Portfolio getPortfolio() {
-		return portfolio;
-	}
 
-	public void setPortfolio(Portfolio portfolio) {
-		this.portfolio = portfolio;
-	}
 
 	public String getCitizenship_bname() {
 		return citizenship_bname;
@@ -274,6 +269,14 @@ public class Company {
 
 	public void setCreated(LocalDateTime created) {
 		this.created = created;
+	}
+
+	public List<RefundRequestData> getRefundrequest() {
+		return refundrequest;
+	}
+
+	public void setRefundrequest(List<RefundRequestData> refundrequest) {
+		this.refundrequest = refundrequest;
 	}
 
 }

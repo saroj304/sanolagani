@@ -161,9 +161,7 @@ public class AdminServiceImpl implements AdminService {
 		Path pdfdestinationpath = Path.of(destinationpath+pdf_name);
 		Files.copy(source_pdf_path, pdfdestinationpath, StandardCopyOption.REPLACE_EXISTING);
 
-//		tablesFromPDF.extractAllTables(company);
 	
-        
                   //for images file
       		Path source_citf_path = Path.of(sourcepath+cit_frontname);
       		Path citf_destinationpath = Path.of(destinationpath+cit_frontname);
