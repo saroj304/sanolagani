@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.bitflip.sanolagani.models.Collateral;
 import com.bitflip.sanolagani.models.Company;
 import com.bitflip.sanolagani.models.Investment;
+import com.bitflip.sanolagani.models.RefundRequestData;
 import com.bitflip.sanolagani.models.Transaction;
 import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.repository.CompanyRepo;
 import com.bitflip.sanolagani.repository.InvestmentRepo;
 import com.bitflip.sanolagani.repository.UserRepo;
+import com.bitflip.sanolagani.serviceimpl.EmailService;
 import com.bitflip.sanolagani.serviceimpl.UserServiceImpl;
 
 import java.util.List;
@@ -42,6 +44,7 @@ InvestmentRepo invest_repo;
 CompanyRepo company_repo;
 @Autowired
 UserServiceImpl userservice;
+
 	
 	@GetMapping("/dashboard")
 	public String myDashboard(Model model) {
@@ -169,6 +172,41 @@ UserServiceImpl userservice;
 		model.addAttribute("transactionlist", transactionlist);
 		return "fundhistory";
 	}
+	
+	
+	@GetMapping("/refund/collateral/{id}")
+	public String getCollateralRefund(@PathVariable("id") int  id) {
+		return "refund";
+	}
+	@GetMapping("/investmenthistory")
+	public String getInvestmentHistory(Model model) {
+		User user = getCurrentUser();
+		List<Investment> investmentlist = user.getInvestments();
+	     if(investmentlist.isEmpty()) {
+	    	 return "redirect:/dashboard";
+	     }
+	     for(Investment investment:investmentlist) {
+	    	 System.out.println("count");
+	    	 userservice.changeStatus(investment);
+	     }
+	     model.addAttribute("name", user.getFname());
+	     model.addAttribute("investmentlist", investmentlist);
+		return "n";
+	}
+	
+	@GetMapping("/tables/refund/{id}")
+	public String refundInvestment(@PathVariable("id") int id,RefundRequestData refundrequest) {
+		User user = getCurrentUser();
+		boolean result = userservice.processRefundRequest(id,refundrequest,user);
+		if(result) {
+		return "redirect:/investmenthistory";
+	}
+		return "redirect:/dashboard";
+	}
+	
+	
+	
+	
 	
 	
 	public User getCurrentUser() {

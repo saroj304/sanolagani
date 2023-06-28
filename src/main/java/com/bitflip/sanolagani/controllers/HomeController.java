@@ -35,8 +35,8 @@ public class HomeController {
 		Optional<List<Company>> result = Optional.ofNullable(companylist);
 		if (result != null) {
 
-			List<Company> companybasedoncapital = adminservice.listingBasedonRaisedCapital(companylist);
-			model.addAttribute("companybasedoncapital", companybasedoncapital);
+//			List<Company> companybasedoncapital = adminservice.listingBasedonRaisedCapital(companylist);
+//			model.addAttribute("companybasedoncapital", companybasedoncapital);
 
 			// List<Company> companybasedoncapital =
 			// adminservice.listingBasedonRaisedCapital(companylist);
