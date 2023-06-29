@@ -111,7 +111,7 @@
 
 				<div class="card " th:each="company : ${c_list}">
 					<a th:href="@{'/company/'+${company.id}+'/'}"> <img
-						th:src="@{'../documents/'+${company.id}+'/'+${company.image}}"
+						th:src="@{'/documents/'+${company.id}+'/'+${company.image}}"
 						class='card__image' alt="card-image" />
 						<h3>Timeplast</h3>
 					</a>
@@ -149,9 +149,9 @@
 			<h5>Recommend companies based on diversification</h5>
 			<div class="cards row">
 
-				<div class="card " th:each="company : ${c_list}">
+				<div class="card " th:each="company : ${diversifiedcompanylist}">
 					<a th:href="@{'/company/'+${company.id}+'/'}"> <img
-						th:src="@{'../documents/'+${company.id}+'/'+${company.image}}"
+						th:src="@{'/documents/'+${company.id}+'/'+${company.image}}"
 						class='card__image' alt="card-image" />
 						<h3>Timeplast</h3>
 					</a>

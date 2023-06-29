@@ -25,7 +25,7 @@
         in its sole discretion.</p>
     </div>
     <div class="home__right">
-      <img th:src="@{/photos/{id}/{image} (image=${company.image}, id= ${company.id}) }" alt="heading" />
+      <img th:src="@{'/documents/' + ${company.id} + '/' + ${company.image}}" alt="heading" />
     </div>
   </div>
   <!-- Footer -->

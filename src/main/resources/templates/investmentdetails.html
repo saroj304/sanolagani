@@ -52,8 +52,6 @@
                           <td><p th:text="${investment.status}"></p></td>
                           <td> <p th:text="${#temporals.format(investment.refundableUntil, 'yyyy-MM-dd') + ' ' + #temporals.format(investment.refundableUntil, 'HH:mm:ss')}"></p></td>
                           <td th:if="${investment.status eq 'refundable'}">
-                              <button type="submit" class="btn"
-                               th:onclick="|window.location.href='/tables/edit/${investment.id}/'|">Edit</button>
                               <button class="btn btn-danger"
                                th:onclick="|window.location.href='/tables/refund/${investment.id}/'|">Refund</button>
                           </td>

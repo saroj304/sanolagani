@@ -39,12 +39,11 @@ public class HomeController {
 		List<Company> companybasedondate = company_repo.findAllCompanyBasesOnCreationalDates();
 		Optional<List<Company>> result1 = Optional.ofNullable(companybasedondate);
 		
+		List<Company> diversifiedcompanylist = recommedationinit.getRecommendCompanies();
 		if (result != null & result1 != null) {
 			model.addAttribute("companybasedondate", companybasedondate);
 
-			List<Company> diversifiedcompanylist = recommedationinit.getRecommendCompanies();
 			model.addAttribute("diversifiedcompanylist", diversifiedcompanylist);
-
 			List<Company> c_list = pre.getCompaniesWithGoodSentiment();
 			model.addAttribute("c_list", c_list);
 
