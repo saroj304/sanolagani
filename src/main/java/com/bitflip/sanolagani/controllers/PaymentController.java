@@ -49,9 +49,11 @@ public class PaymentController {
     }
     
     @PostMapping("/paywithcollateral")
-    public String payWithCollateral(@RequestParam(value = "companyId") int id,@RequestParam("amount") double amount,
-    							Transaction transaction,Investment investment,
-    							Collateral collaterals) {
+    public String payWithCollateral(@RequestParam(value = "companyId") int id,
+                                    @RequestParam("amount") double amount,
+    							    Transaction transaction,
+                                    Investment investment,
+    							    Collateral collaterals) {
         User user = user_controller.getCurrentUser();
     	Collateral collateral = user.getCollateral();
     	if(collateral.getCollateral_amount()>=amount) {
@@ -64,7 +66,7 @@ public class PaymentController {
     	collaretal_repo.save(collateral);
     	return "redirect:/dashboard";
     	}
-    	
+
     	
     	return "redirect:/home";
     }

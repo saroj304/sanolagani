@@ -51,6 +51,10 @@ UserServiceImpl userservice;
 		User user = getCurrentUser();
 		List<Investment> investment_list = user.getInvestments();
 		Collateral collateral = user.getCollateral();
+		if(collateral ==null){
+			model.addAttribute("id", user.getId());
+			return "dashboard";
+		}
 		if(investment_list!=null) {
 		List<Object> totalsharelist = new ArrayList<>();
 		List<String> companynamelist = new ArrayList<>();
