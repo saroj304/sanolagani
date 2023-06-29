@@ -59,7 +59,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     @CrossOrigin
-    public boolean verifyPayment(Map<String, String> paymentDetails,String token,String amount) throws JsonProcessingException {
+    public boolean verifyPayment(Map<String, String> paymentDetails) throws JsonProcessingException {
 
         final String uri = "https://khalti.com/api/v2/payment/verify/";
         RestTemplate restTemplate = new RestTemplate();
