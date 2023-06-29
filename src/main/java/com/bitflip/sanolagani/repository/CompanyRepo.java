@@ -15,4 +15,6 @@ public interface CompanyRepo extends JpaRepository<Company, Integer> {
 	public List<Company> findAllCompanyBasesOnRaidedCapitalDesc();
     @Query(value = "SELECT * FROM company ORDER BY created desc", nativeQuery = true)
 	public List<Company> findAllCompanyBasesOnCreationalDates();
+    @Query("SELECT COUNT(u) FROM User u where role='COMPANY'")
+    Long getTotalcompany();
 }
