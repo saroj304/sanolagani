@@ -6,6 +6,8 @@ let totalAmountElement = document.querySelector("#total");
 let unitsElement = document.querySelector("#units");
 let confirmBtn = document.querySelector("#confirm");
 let submitBtn = document.getElementById("submit");
+let totalAmountPayable = document.getElementById("totalAmount");
+
 
 let minInvestment = parseFloat(document.getElementById("pps").innerText.replaceAll(" ",""));
 let maxInvestment = parseFloat(document.getElementById("pps").innerText.replaceAll(" ","")) * parseFloat(document.getElementById("maxq").innerText.replaceAll(" ",""));
@@ -27,13 +29,13 @@ for(let i=0; i < amountBtn.length; i++){
 
 function updateDetails(budget){
         amt = parseFloat(budget);
-        fees = 0.02*amt;
+        fees = Math.round(0.02*amt,2);
         totalAmount = amt + fees;
 
         amtElement.innerText = amt;
         feesElement.innerText = fees;
         totalAmountElement.innerText =  totalAmount;
-
+        totalAmountPayable.value = totalAmount;
         unitsElement.innerText = "";
 }
 

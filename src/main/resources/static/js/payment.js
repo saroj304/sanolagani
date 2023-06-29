@@ -35,16 +35,16 @@ function khaltiConfig(){
 
 let config = khaltiConfig();
 var checkout = new KhaltiCheckout(config);
-var btn = document.getElementById("payment-button");
-btn.onclick = function () {
-          var amountInput = document.getElementById("paymentAmount");
+var paymentBtn = document.getElementById("payment-button");
+paymentBtn.onclick = function () {
+          var amountInput = document.getElementById("total");
           
-            var amount = amountInput.value*100;
+            var amount = parseFloat(amountInput.innerText)*100;
             if (amount) {
                  // Convert amount from rupees to paisa
                 config.amount = amount;
-                btn.innerHTML = "Pay " + amount + " Rupees"; // Update button text
                 checkout.show({popupMobile: true});
+                console.log(amount);
             } else {
                 alert("Please enter the amount.");
             }
@@ -55,7 +55,7 @@ btn.onclick = function () {
 var fundManagement = document.getElementById("fund-management");
 var paymentOptions = document.getElementById("payment-options");
 
-fund.addEventListener("click", () => {
+fundManagement.addEventListener("click", () => {
   paymentOptions.style.display = (paymentOptions.style.display === "block") ? "none" : "block";
   console.log(paymentOptions.style.display);
 });
