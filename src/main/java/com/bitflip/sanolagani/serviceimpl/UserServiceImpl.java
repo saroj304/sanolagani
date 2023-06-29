@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bitflip.sanolagani.models.User;
+import com.bitflip.sanolagani.models.Collateral;
 import com.bitflip.sanolagani.models.Investment;
 import com.bitflip.sanolagani.models.RefundRequestData;
 import com.bitflip.sanolagani.models.Transaction;
+import com.bitflip.sanolagani.repository.CollateralRepo;
 import com.bitflip.sanolagani.repository.InvestmentRepo;
 import com.bitflip.sanolagani.repository.RefundRequestRepo;
 import com.bitflip.sanolagani.repository.TransactionRepo;
@@ -31,6 +33,8 @@ public class UserServiceImpl implements UserService {
 	RefundRequestRepo refund_repo;
 	@Autowired 
 	EmailService email_service;
+	@Autowired
+	CollateralRepo collateral_repo;
 	@Override
 	public void saveUser(User u) {
 		userrepo.save(u);
@@ -121,6 +125,35 @@ public class UserServiceImpl implements UserService {
 			investment.setStatus("non refundable");
 			invest_repo.save(investment);
 		}
+	}
+
+	public boolean processRefundCollateralRequest(int id,double amount, RefundRequestData refundrequest, User user) {
+		
+		Collateral collateral = user.getCollateral();
+		if(collateral.getCollateral_amount()>=amount) {
+		 double amounts = collateral.getCollateral_amount()-amount;
+		 collateral.setCollateral_amount(amounts);
+		 collateral_repo.save(collateral);
+		 saveRefundRequest(refundrequest,amount,user,collateral);
+		 return true;
+		}
+		
+		
+		
+		return false;
+	}
+
+	public void saveRefundRequest(RefundRequestData refundrequest,double amount,User user,Collateral collateral) {
+		Transaction transaction = collateral.getTransaction();
+		LocalDateTime datetime = LocalDateTime.now(); 
+		refundrequest.setAmount(amount);
+		refundrequest.setCompany(null);
+		refundrequest.setUser(user);
+		refundrequest.setQuantity(-1);
+		refundrequest.setTransaction(transaction);
+		refundrequest.setRefund_date_time(datetime);
+		refund_repo.save(refundrequest);
+		
 	}
 
 	

@@ -144,15 +144,16 @@ public class PaymentServiceImpl implements PaymentService {
 	         collateral.setTransaction(transaction);
 	         collateral_repo.save(collateral);
 		}else {
-		      for(Collateral collaterals:collaterallist) {
-			     if (collaterals.getUser().getId()==user.getId()) {
+			Collateral collaterals = user.getCollateral();
+		     if(collaterals!=null) {
 			    	 System.out.println("user equal");
 			        double previous_amount = collaterals.getCollateral_amount();
 			        previous_amount+=amount;
 			        collaterals.setCollateral_amount(previous_amount);
+			        collaterals.setTransaction(transaction);
 			        collaterals.setRemarks(remarks);
 			        collateral_repo.save(collaterals);
-			       break;
+
 		           }else {
 		        	   System.out.println("user not equal");
 		        	 collateral.setUser(user);
@@ -164,6 +165,6 @@ public class PaymentServiceImpl implements PaymentService {
 		           }
 	}
 		}
-	}}
+	}
 
 
