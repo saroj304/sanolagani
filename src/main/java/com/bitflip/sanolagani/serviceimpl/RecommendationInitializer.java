@@ -27,19 +27,12 @@ public class RecommendationInitializer {
     }
 	
     public List<Company> initializeRecommendations() {
-        // Assume you have a list of previous investments for a user
-//    	Optional<List<Company>> result = Optional.ofNullable(riskdiversification.getPreviousInvestmentsForUser());
-//     
-//    	if(result.isEmpty()) {
-//    		return null;
-//    	}
-//    	else {
       List<Company> previousInvestments = riskdiversification.getPreviousInvestmentsForUser(); // Replace with your logic
       
 
          //Get the recommended companies for risk diversification
         List<Company> recommendedCompanies = riskdiversification.recommendCompanies(previousInvestments);
-        
+        System.out.println(recommendedCompanies.size());
         // Pass the recommended companies to the view for rendering
          return recommendedCompanies; // Replace with your logic
     }

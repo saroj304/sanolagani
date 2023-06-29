@@ -31,8 +31,6 @@ public class RiskDiversificationImpl implements RiskDiversificationService{
 	@Autowired 
 	CompanyRepo company_repo;
 	
-	List<Integer> company_ids = new ArrayList<>();
-	List<Company> company_list = new ArrayList<>();
 
 	 
 	public List<Company> recommendCompanies(List<Company> previousInvestments) {
@@ -46,12 +44,9 @@ public class RiskDiversificationImpl implements RiskDiversificationService{
         String mostFrequentSector = "";
         int maxFrequency = 0;
         for (Map.Entry<String, Integer> entry : sectorFrequencyMap.entrySet()) {
-        	
             if (entry.getValue() > maxFrequency) {
                 mostFrequentSector = entry.getKey();
-
                 maxFrequency = entry.getValue();
-
             }
         }
         for (Company company : previousInvestments) {
@@ -61,20 +56,14 @@ public class RiskDiversificationImpl implements RiskDiversificationService{
         }
 
 			List<Company> companylist = company_repo.findAll();
-			
-			// Iterate over all fetched companies and check if they are present in the previously invested companies list
 			for (Company company : companylist) {
 			    boolean isInvested = false;
-
-			    // Check if the company is present in the previously invested companies list
 			    for (Company investedCompany : previousInvestments) {
 			        if (investedCompany.getId()==company.getId()) {
 			            isInvested = true;
 			            break;
 			        }
 			    }
-
-			    // If the company is not invested, add it to the non-invested companies list
 			    if (!isInvested) {
 			        recommendedCompanies.add(company);
 			    }
@@ -85,30 +74,27 @@ public class RiskDiversificationImpl implements RiskDiversificationService{
 
 	@Override
 	public List<Company> getPreviousInvestmentsForUser() {
-		
+		List<Integer> company_ids = new ArrayList<>();
+		List<Company> company_list = new ArrayList<>();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String username = authentication.getName();
 		User user= user_repo.findByEmail(username);
 		if(user !=null) {
-		   int id = user.getId();
-			   List<Investment> investment_list=investment_repo.findAll();
-		       for(Investment investment:investment_list) {
-			   if(investment.getUser().getId()==id) {
+			 List<Investment> investment_list = user.getInvestments();
+			 for(Investment investment:investment_list) {
 				  company_ids.add(investment.getCompany().getId());
-				  
-		
+			 	  	
 		}
 		       }
-		      
-		       
+		        
 		   for(int company_id:company_ids) {
 
 		   Company company = company_repo.getById(company_id);
 
 		   company_list.add(company);
-		     
+		    
 	   }
-	       }
+	       
 		   
 		
 		return company_list;

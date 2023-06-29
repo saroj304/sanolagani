@@ -43,7 +43,7 @@
                         </div>
 =======
     
-                        <form th:action="@{'company/invest/'+${company.id}}" class="detail__form">
+                        <form th:action="@{/paywithcollateral}" class="detail__form" method="post">
                             <div class="details__buttons">
                                 <button class="btn btn-light">Rs. <span class="amount">100,000</span></button>
                                 <button class="btn btn-light">Rs. <span class="amount">100,000</span></button>
@@ -53,10 +53,10 @@
 								<input type="hidden" id="companyId" name="companyId" th:value="${company.id}">
                                 <span>Amount: Rs.&nbsp;
                                     <input type="number"
-                                            class="detail__input" name="invest" oninput="this.value = 
+                                            class="detail__input" name="amount" oninput="this.value = 
                                             !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" id="paymentAmount">
                                 </span>
-                                <button class="btn" id="pay">Continue</button>
+                                <button class="btn" id="pay" type="submit">Pay with collateral</button>
                             </div>
                         </form>
 >>>>>>> 4ff590dc79e0fd1bf78347fd97308bdd63ba5f59
@@ -71,13 +71,13 @@
                         <div id="payment-options" class="pay-button-group">
 
                             <button href="#" value="KHALTI" class="pay" id="payment-button">
-                                <img th:src="@{/photos/khalti.jpg}" class="payment" />
+                                <img th:src="@{/images/khalti.jpg}" class="payment" />
                             </button>
                             <button href="#" value="ESEWA" class="pay">
-                                <img th:src="@{/photos/esewa.png}" class="payment">
+                                <img th:src="@{/images/esewa.png}" class="payment">
                             </button>
                             <button href="#" value="IMEPAY" class="pay">
-                                <img th:src="@{/photos/imepay.png}" class="payment">
+                                <img th:src="@{/images/imepay.png}" class="payment">
 
                             </button>
                         </div>
