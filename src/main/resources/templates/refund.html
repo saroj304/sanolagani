@@ -39,14 +39,14 @@
             </div>
             <!-- center dashboard -->
             <div class="center__dashboard board">
-                <form action="#">
+                <form th:action="@{/refundCollateral}" method="post">
                     <div class="bank_row">
                         <label class="load-title" for="account_number">PHONE NUMBER <span style="color: red">*</span></label>
                         <input class="load_input" type="number" id="account_number" min="0"  oninput="validity.valid||(value='')" required>
                     </div>
                     <div class="bank_row">
                         <label class="load-title" for="refund_amount">AMOUNT <span style="color: red">*</span></label>
-                        <input class="load_input" type="number" id="refund_amount" min="1"  oninput="validity.valid||(value='')" required>
+                        <input class="load_input" name="amount" type="number" id="refund_amount" min="1"  oninput="validity.valid||(value='')" required>
                     </div>
                     <div>
                         <button type="submit" class="btn">Continue</button>
