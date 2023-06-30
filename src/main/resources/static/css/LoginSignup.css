@@ -76,3 +76,16 @@
 .forgot__password-link:hover{
     color: #000;
 } 
+.alert-error{
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+.text-danger{
+    color: red;
+}
+#error-msg,  #password-error{
+    color: red;
+    font-size: 15px;
+    width: 100%;
+    /* margin-top: -15px; */
+}
