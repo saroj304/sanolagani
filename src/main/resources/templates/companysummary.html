@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<html>
+<head>
+	
+  <title>View Company Summary</title>
+     <link rel="stylesheet" type="text/css" href="css/viewpage.css">
+</head>
+<body>
+	
+  <div class="container">
+    <h1>View Company Summary</h1>
+    <table>
+      <tr>
+		<th>Company Id</th>
+        <th>Company Name</th>
+        <th>Total Raised Share</th>
+        <th>Total Raised Amount</th>
+        <th>Total User Invested</th>
+        <th>Total Applied Share</th>
+        <th>Total Applied Amount</th>
+        
+      </tr>
+      <tr th:each="company: ${company_list}">
+		     <td>[[${company.id}]]</td>
+             <td>[[${company.companyname}]]</td>
+        	 <td>[[${company.previouslyraisedcapital}/${company.price_per_share}]]</td>  
+        	 <td>[[${company.previouslyraisedcapital}]]</td>
+        	 <td>[[${totalUsersInvestedMap.get(company.getCompanyname())}]]</td>
+        	 <td>[[${totalApplyShareMap.get(company.getCompanyname())}]]</td>
+        	 <td>[[${totalApplyShareMap.get(company.getCompanyname())}*${company.price_per_share}]]</td>
+        	 
+      </tr>
+      <!-- Add more user rows here -->
+    </table>
+  </div>
+</body>
+</html>
