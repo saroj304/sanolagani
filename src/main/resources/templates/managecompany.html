@@ -4,11 +4,7 @@
 <head th:insert="fragment/head.html :: headerfiles">
 </head>
 <!-- main header -->
-<header class='container header__container'>
-    <div>
-        <h1><a href="/" class='logo hover_none'>Sanolagani</a> </h1>
-    </div>
-</header>
+
 <!-- navigation -->
 <header class='container header__container' th:replace="fragment/header.html :: header"></header>
 	<div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
@@ -57,9 +53,9 @@
             </td>
             <td>
                 <button type="submit" class="btn"
-                    th:onclick="|window.location.href='/tables/edit/save/${detail.id}'|">Add</button>
+                    th:onclick="|window.location.href='/managecompany/edit/save/${detail.id}'|">Add</button>
                 <button class="btn btn-danger"
-                    th:onclick="|window.location.href='/tables/edit/${detail.id}'|">Delete</button>
+                    th:onclick="|window.location.href='/managecompany/edit/${detail.id}'|">Delete</button>
             </td>
         </tr>
     </table>

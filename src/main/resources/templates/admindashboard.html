@@ -5,6 +5,8 @@
      <meta charset="UTF-8">
      <title>Dashboard</title>
      <link rel="stylesheet" href="css/admindashboard.css">
+      
+
      <link rel="stylesheet" href="css/admin.css">
      <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
      <link rel="stylesheet" type="text/css" th:href="@{/css/Nav.css}">
@@ -21,27 +23,41 @@
 	</div>
 	
 <div class="dashboard">
-	<div class="sidebar">
-    <!-- Sidebar Content -->
-    <ul>
-      <li><a href="#">Dashboard</a></li>
-      <li><a href="#">Users</a></li>
-      <li>Companies</li>
-      <div class="dropdown-menu">
-                <ul>
-                    <li><a href="#">Registered Company</a></li>
-                    <li><a href="#">Unverified Company</a></li>
-                    <li><a href="#">Customer 3</a></li>
-                    <!-- Add more customer items as needed -->
-                </ul>
-       </div>
-      <li><a href="#">Transactions</a></li>
-    </ul>
-  </div>
-    <div class="main-content">
-      <!-- Main Content Card -->
-      <div class="card">
-        <h2>Welcome to the Admin Dashboard</h2>
+	 <div class="sidebar">
+        <h2>Dashboard</h2>
+          <ul>
+              <li><a href="#">Dashboard</a></li>
+               <li class="dropdown">
+                    <a href="#" class="dropdown-btn">Users</a>
+                    <div class="dropdown-content">
+                          <a th:href="@{/viewusers}">Manage Users</a>
+                          <a th:href="@{/viewinvestment}">View Investment</a>
+                          <a th:href="@{/viewcollateral}">View Collateral</a>
+                     </div>
+                  </li>
+                  <li class="dropdown">
+                   <a href="#" class="dropdown-btn">Companies</a>
+                     <div class="dropdown-content">
+                         <a th:href="@{/viewcompany}">View Companies</a>
+                         <a th:href="@{/managecompany}">Manage Companies</a>
+                     </div>
+                   </li>
+                   <li><a th:href="@{/refunddata}">Refund Data</a></li>
+                   <li><a th:href="@{/companystatistics}">Companies Statistics</a></li>
+                   <li class="dropdown">
+                   <a href="#" class="dropdown-btn">Reports</a>
+                     <div class="dropdown-content">
+                         <a th:href="@{/reports}">Reports Table</a>
+                         <a th:href="@{/companies/statisticsgraph}">Statistics Graph</a>
+                     </div>
+                   </li>
+               </ul>
+          </div>
+                 
+        <div class="main-content">
+           <!-- Main Content Card -->
+            <div class="card">
+             <h2>Welcome to the Admin Dashboard</h2>
         <div class="card">
             <h3>Investment Performance</h3>
             <canvas id="investment-chart"></canvas>
@@ -71,11 +87,15 @@
     </div>
   </div>
   </div>
-   <footer>
 	   <footer th:insert="fragment/footer.html :: footer"></footer>
 
    </footer>
 <script input th:inline="javascript">
+	function fundManagement() {
+	   document.getElementById("fundManagement").classList.toggle("show");
+			}
+			
+			
   // Sample data for the chart
   const investmentData = {
     labels: [[${labels}]],

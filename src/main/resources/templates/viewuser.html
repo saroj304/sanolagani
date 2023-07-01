@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<html>
+<head>
+	
+  <title>View Users</title>
+     <link rel="stylesheet" type="text/css" href="css/viewpage.css">
+</head>
+<body>
+	
+  <div class="container">
+    <h1>View Users</h1>
+    <table>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Address</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Action</th>
+      </tr>
+      <tr th:each="user: ${userlist}">
+             <td>[[${user.fname}]]</td>
+             <td>[[${user.lname}]]</td>
+        	 <td>[[${user.address}]]</td>
+        	 <td>[[${user.email}]]</td>
+        	 <td>[[${user.role}]]</td>
+        	 <td>
+                <button class="btn btn-danger"
+                    th:onclick="|window.location.href='/tables/edit'|">Delete</button>
+             </td>
+      </tr>
+      <!-- Add more user rows here -->
+    </table>
+  </div>
+</body>
+</html>
