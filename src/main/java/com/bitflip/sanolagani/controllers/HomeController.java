@@ -1,6 +1,7 @@
 package com.bitflip.sanolagani.controllers;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.bitflip.sanolagani.models.Company;
@@ -29,6 +29,8 @@ public class HomeController {
 	private SentimentPreprocessor pre;
 	@Autowired
 	RecommendationInitializer recommedationinit;
+	@Autowired
+	AdminController admin_controller;
 
 	@GetMapping({ "/", "/home" })
 	public String homePage(Model model) {
@@ -42,13 +44,15 @@ public class HomeController {
         	LocalDateTime created_date = company.getCreated();
         	String time =company.getTimespanforraisingcapital();
         	String[] timespansplit = time.split(" ",2);
-        	int timespan = Integer.parseInt(timespansplit[0]);
+        	int timespan = Integer.parseInt(timespansplit[0]);			
+			
         	if(company.getStatus().equals("raising")&&now.isAfter(created_date.plusDays(timespan))){
                 company.setStatus("finish");
                 company_repo.save(company);
         	}
         	
-        	}
+        }
+        
         	
 		List<Company> companybasedoncapital = company_repo.findAllCompanyBasesOnRaidedCapitalDesc();
 		Optional<List<Company>> result = Optional.ofNullable(companybasedoncapital);
@@ -66,6 +70,8 @@ public class HomeController {
 			model.addAttribute("c_list", c_list);
 			return "index";
 		}
+		
+    	
 		return "index";
 	}
 
