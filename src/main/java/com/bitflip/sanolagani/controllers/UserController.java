@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bitflip.sanolagani.models.Collateral;
 import com.bitflip.sanolagani.models.Company;
@@ -178,10 +180,35 @@ UserServiceImpl userservice;
 	}
 	
 	
-	@GetMapping("/refund/collateral/{id}")
-	public String getCollateralRefund(@PathVariable("id") int  id) {
+	@GetMapping("/refund/collateral")
+	public String getCollateralRefund() {
 		return "refund";
 	}
+	
+	@PostMapping("/refundCollateral")
+	public String refundProcessing(@RequestParam("amount") double amount,RefundRequestData refundrequest) {
+		User user = getCurrentUser();
+		boolean result = userservice.processRefundCollateralRequest(-1, amount,refundrequest, user);
+		if(result) {
+			return "redirect:/dashboard";
+		}
+		
+		return "redirect:/refund/collateral";
+	}
+	
+	
+	
+	
+	@GetMapping("/tables/refund/{id}")
+	public String refundInvestment(@PathVariable("id") int id,RefundRequestData refundrequest) {
+		User user = getCurrentUser();
+		boolean result = userservice.processRefundRequest(id,refundrequest,user);
+		if(result) {
+		return "redirect:/investmenthistory";
+	}
+		return "redirect:/dashboard";
+	}
+	
 	@GetMapping("/investmenthistory")
 	public String getInvestmentHistory(Model model) {
 		User user = getCurrentUser();
@@ -197,18 +224,6 @@ UserServiceImpl userservice;
 	     model.addAttribute("investmentlist", investmentlist);
 		return "n";
 	}
-	
-	@GetMapping("/tables/refund/{id}")
-	public String refundInvestment(@PathVariable("id") int id,RefundRequestData refundrequest) {
-		User user = getCurrentUser();
-		boolean result = userservice.processRefundRequest(id,refundrequest,user);
-		if(result) {
-		return "redirect:/investmenthistory";
-	}
-		return "redirect:/dashboard";
-	}
-	
-	
 	
 	
 	

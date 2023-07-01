@@ -19,4 +19,7 @@ public interface CompanyRepo extends JpaRepository<Company, Integer> {
 
 	@Query(value = "SELECT id FROM company",nativeQuery = true)
 	public List<Integer> getAllCompany();
+    @Query("SELECT COUNT(u) FROM User u where role='COMPANY'")
+    Long getTotalcompany();
+
 }

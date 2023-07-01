@@ -19,14 +19,34 @@
 	<div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
 	<section th:insert="fragment/dashboard.html :: dashboard"></section>
 
-	<!-- Footer -->
-	<footer>
-		<footer th:insert="fragment/footer.html :: footer"></footer>
 
-	</footer>
+        <div class="collateral__summary board">
+            <h2 class="">MY COLLATERAL SUMMARY</h2>
+            <h3 class="bold">Rs. <span id="amount"></span></h3>
+
+				<div>
+					<p>Collateral balance</p>
+					<p>[[${totalcollateralamount}]]</p>
+				</div>
+				
+				<div>
+				<a th:href="@{/loadfund}">Load</a>
+				<a th:href="@{/refund/collateral}">Refund</a>
+				</div>
+			</div>
+		</div>
+		</div>
+	</section>
+
+
+<!-- Footer -->
+<footer>
+	<footer th:insert="fragment/footer.html :: footer"></footer>
+
+</footer>
 
     <!-- Fund Management Dropdown Script -->
-    <script>
+    <script th:inline="javascript">
        document.addEventListener("DOMContentLoaded", function () {
             var canvas = document.getElementById("myChart2");
 
@@ -76,8 +96,8 @@
         function manageFund(){
             document.getElementById("fundManagement").classList.toggle("show");
         }
-    </script>
+    </script >
 </body>
-   
+
 </html>
 

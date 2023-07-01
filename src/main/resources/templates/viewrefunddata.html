@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<html>
+<head>
+	
+  <title>View Refund Data</title>
+     <link rel="stylesheet" type="text/css" href="css/viewpage.css">
+</head>
+<body>
+	
+  <div class="container">
+    <h1>View Refund Data</h1>
+    <table>
+      <tr>
+        <th>Refund ID</th>
+        <th>UserId</th>
+        <th>User Name</th>
+        <th>CompanyId</th>
+        <th>Company Name</th>
+        <th>Quantity</th>
+        <th>Amount</th>
+        <th>Transaction ID</th>
+        <th>Refund Request Date</th>
+        
+      </tr>
+      <tr th:each="refund: ${refund_list}">
+             <td>[[${refund.id}]]</td>
+             <td>[[${refund.getUser().getId()}]]</td>
+        	 <td>[[${refund.getUser().getFname()}]]</td>
+        	 <td>[[${refund?.getCompany()?.getId()?: 'N/A'}]]</td>
+        	 <td>[[${refund?.getCompany()?.getCompanyname()?: 'Collateral Refund Request'}]]</td>
+        	 <td>[[${refund.quantity}]]</td>  
+        	 <td>[[${refund.amount}]]</td>
+        	 <td>[[${refund.getTransaction().getId()}]]</td>
+        	  <td>
+                <p th:text="${#temporals.format(refund.refund_date_time, 'yyyy-MM-dd') + ' ' + #temporals.format(refund.refund_date_time, 'HH:mm:ss')}"></p>
+			  </td>
+      </tr>
+      <!-- Add more user rows here -->
+    </table>
+  </div>
+</body>
+</html>
