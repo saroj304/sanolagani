@@ -17,8 +17,9 @@
 			<h2>Highest Invest Opportunity</h2>
 			<h5>Offerings that have raised the highest money</h5>
 			<div class="cards row">
-
+              
 				<div class="card " th:each="company : ${companybasedoncapital}">
+					<div th:if="${company.status eq 'raising'}">
 					<span th:text="${company.id}"></span>
 					<!-- 	<span th:text="${company.image}"></span> -->
 					<a th:href="@{/company/{id}/ (id=${company.id})}"> <img
@@ -48,6 +49,7 @@
 					<div class="division">
 						<p>Reg CF via Sanolagani Capital, Ltd.</p>
 					</div>
+				</div>
 				</div>
 			</div>
 		</div>

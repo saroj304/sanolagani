@@ -16,18 +16,15 @@ import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.repository.CompanyRepo;
 import com.bitflip.sanolagani.repository.InvestmentRepo;
 import com.bitflip.sanolagani.repository.UserRepo;
-import com.bitflip.sanolagani.serviceimpl.EmailService;
 import com.bitflip.sanolagani.serviceimpl.UserServiceImpl;
 
 import java.util.List;
-import java.util.Set;
-import java.util.HashSet;
+
 
 
 import java.util.Map;
 import java.util.HashMap;
 
-import java.util.stream.Collectors;
 import java.util.ArrayList;
 
 
