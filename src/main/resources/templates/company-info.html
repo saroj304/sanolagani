@@ -13,9 +13,15 @@
 
         <h5 class='gray'>Feeding the distanced customer with taste.</h5>
       </div>
-
+     <div th:if="${status eq 'on limit'}">
       <a th:href="@{'/company/details/'+${company.id}+'/'}" class='btn mt-20 mb-20'> Invest Now</a>
-
+    </div>
+    <div th:if="${status eq 'limit reached'}">
+		<p>you have already invested up to maximum quantity</p> 
+	</div>
+	<div th:if="${status eq 'time finish'}">
+		<p>investment for this company has closed</p> 
+	</div>
       <p class='gray f-13'>This Reg A+ offering is made available through Sanolagani Primary.
         This investment is speculative, illiquid, and involves a high degree of
         risk, including possible loss of your entire investment. For more

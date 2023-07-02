@@ -64,6 +64,8 @@ public class Company {
 	private String role;
 	@Column
 	private int maximum_quantity;
+	@Column
+	private String status;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
@@ -277,6 +279,14 @@ public class Company {
 
 	public void setRefundrequest(List<RefundRequestData> refundrequest) {
 		this.refundrequest = refundrequest;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

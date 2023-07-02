@@ -1,5 +1,7 @@
 package com.bitflip.sanolagani.controllers;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.bitflip.sanolagani.models.Company;
@@ -28,27 +29,49 @@ public class HomeController {
 	private SentimentPreprocessor pre;
 	@Autowired
 	RecommendationInitializer recommedationinit;
+	@Autowired
+	AdminController admin_controller;
 
 	@GetMapping({ "/", "/home" })
 	public String homePage(Model model) {
-
+        List<Company> company_list = company_repo.findAll();
+    	LocalDateTime now  = LocalDateTime.now();
+        if(company_list.isEmpty()) {
+        	return "index";
+        }
+        
+        for(Company company:company_list) {
+        	LocalDateTime created_date = company.getCreated();
+        	String time =company.getTimespanforraisingcapital();
+        	String[] timespansplit = time.split(" ",2);
+        	int timespan = Integer.parseInt(timespansplit[0]);			
+			
+        	if(company.getStatus().equals("raising")&&now.isAfter(created_date.plusDays(timespan))){
+                company.setStatus("finish");
+                company_repo.save(company);
+        	}
+        	
+        }
+        
+        	
 		List<Company> companybasedoncapital = company_repo.findAllCompanyBasesOnRaidedCapitalDesc();
 		Optional<List<Company>> result = Optional.ofNullable(companybasedoncapital);
+		
 		model.addAttribute("companybasedoncapital", companybasedoncapital);
 		
 		List<Company> companybasedondate = company_repo.findAllCompanyBasesOnCreationalDates();
 		Optional<List<Company>> result1 = Optional.ofNullable(companybasedondate);
 		
 		List<Company> diversifiedcompanylist = recommedationinit.getRecommendCompanies();
+		List<Company> c_list = pre.getCompaniesWithGoodSentiment();
 		if (result != null & result1 != null) {
 			model.addAttribute("companybasedondate", companybasedondate);
-
 			model.addAttribute("diversifiedcompanylist", diversifiedcompanylist);
-			List<Company> c_list = pre.getCompaniesWithGoodSentiment();
 			model.addAttribute("c_list", c_list);
-
 			return "index";
 		}
+		
+    	
 		return "index";
 	}
 

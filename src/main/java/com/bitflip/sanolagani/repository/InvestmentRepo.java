@@ -17,4 +17,8 @@ public interface InvestmentRepo extends JpaRepository<Investment, Integer> {
 		+ "GROUP BY company_id\n"
 		+" ",nativeQuery = true)
 List<Object[]> getTotalSharesPerCompany(@Param("id")int id);
+
+@Query("SELECT SUM(i.quantity) FROM Investment i WHERE i.company.id = :companyId AND i.user.id = :userId")
+Integer getTotalQuantityByUserAndCompany(@Param("userId") int userId, @Param("companyId") int companyId);
+
 }
