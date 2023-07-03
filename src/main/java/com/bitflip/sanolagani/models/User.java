@@ -29,6 +29,8 @@ public class User {
 	private String email;
 	@Column
 	private String password;
+	@Column
+	private String phnum;
 
 	@OneToOne(mappedBy = "user")
 	private Company company;
@@ -160,6 +162,14 @@ public class User {
 
 	public void setRefundrequest(List<RefundRequestData> refundrequest) {
 		this.refundrequest = refundrequest;
+	}
+
+	public String getPhnum() {
+		return phnum;
+	}
+
+	public void setPhnum(String phnum) {
+		this.phnum = phnum;
 	}
 
 }

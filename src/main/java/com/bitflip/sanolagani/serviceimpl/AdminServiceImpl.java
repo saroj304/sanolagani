@@ -98,7 +98,7 @@ public class AdminServiceImpl implements AdminService {
 	     user.setLname(unverified_details.getLname());
 	     company.setCompanyname(unverified_details.getCompanyname());
 	     user.setEmail(unverified_details.getEmail());
-	     company.setPhnum(unverified_details.getPhnum());
+	     user.setPhnum(unverified_details.getPhnum());
 	     company.setSector(unverified_details.getSector());
 	     company.setWebsiteurl(unverified_details.getWebsiteurl());
 	     company.setPreviouslyraisedcapital(unverified_details.getRaisedcapital());
@@ -110,13 +110,14 @@ public class AdminServiceImpl implements AdminService {
 	     company.setCitizenship_bname(unverified_details.getCitizenship_bname());
 	     company.setMaximum_quantity(unverified_details.getMaximum_quantity());
 	     company.setImage(unverified_details.getImage());
+	     company.setStatus("raising");
+	     company.setPwd_change("false");
 	     user.setAddress(unverified_details.getAddress());
 	     user.setPassword(encodedPassword);
 		 user.setRole(company.getRole());
 		 //user_repo.save(user);
           company.setUser(user);
 	     company_repo.save(company);
-
            try {
 			transferUploadedFile(company);
 		} catch (IOException e) {
@@ -207,7 +208,7 @@ public class AdminServiceImpl implements AdminService {
 		message.setSubject("Company Registered Sucessfully");
 		message.setText("your company is sucessfully registered and the authentication details is email:" + to
 				+ " password:" + password + ". Regards:seetal raya from sanolagani project");
-		// mailSender.send(message);
+		mailSender.send(message);
 	}
 
 	@Override

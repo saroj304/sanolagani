@@ -223,6 +223,16 @@ UserServiceImpl userservice;
 	}
 	
 	
+	@GetMapping("/myinfo")
+	public String getUserDetails(Model model) {
+		User user = getCurrentUser();
+		double totalinvestedamount = invest_repo.getTotalInvestedAmount(user.getId());
+		model.addAttribute("user", user);
+        model.addAttribute("totalInvestment", totalinvestedamount);
+		return "my_information";
+	}
+	
+	
 	
 	public User getCurrentUser() {
 	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
