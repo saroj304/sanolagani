@@ -31,9 +31,9 @@
                 <div class="dropdown">
                     <button onclick="fundManagement()" class="drop-btn">Fund Management</button>
                     <div id="fundManagement" class="fundManagementContent">
-                        <a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Sub Fund Management</a>
-                        <a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Sub Fund Management</a>
-                        <a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Sub Fund Management</a>
+                        <a th:href="@{'/collateralsummery/'+${id}+'/'}"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Collateral History</a>
+                        <a th:href="@{'/fundhistory/'+${id}+'/'}"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Transfer History</a>
+                        <a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Settlement</a>
                     </div>
                 </div>
             </div>
@@ -75,9 +75,9 @@
             </div>
         </div>
     </section>
-      <footer>
-		    <footer th:insert="fragment/footer.html :: footer">
-		</footer>
+    <footer>
+        <footer th:insert="fragment/footer.html :: footer"></footer>
+    </footer>
   
 
     <!-- Fund Management Dropdown Script -->
@@ -85,15 +85,6 @@
         function fundManagement() {
             document.getElementById("fundManagement").classList.toggle("show");
         }
-
-        // function spaceValid(reg) {
-        //     str = document.reg;
-        //     if (str.name.value.trim() == "") {
-        //         alert("Enter your name");
-        //         str.name.focus();
-        //         return false;
-        //     }
-        // }
     </script>
 </body>
 

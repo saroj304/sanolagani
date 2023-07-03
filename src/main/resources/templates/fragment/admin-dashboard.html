@@ -1,0 +1,27 @@
+<ul th:fragment="dashboard-left">
+    <li><a th:href="@{/admindashboard}">Dashboard</a></li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-btn">Users</a>
+      <div class="dropdown-content">
+        <a th:href="@{/viewusers}">Manage Users</a>
+        <a th:href="@{/viewinvestment}">View Investment</a>
+        <a th:href="@{/viewcollateral}">View Collateral</a>
+      </div>
+    </li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-btn">Companies</a>
+      <div class="dropdown-content">
+        <a th:href="@{/viewcompany}">View Companies</a>
+        <a th:href="@{/managecompany}">Manage Companies</a>
+      </div>
+    </li>
+    <li><a th:href="@{/refunddata}">Refund Data</a></li>
+    <li><a th:href="@{/companystatistics}">Companies Statistics</a></li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-btn">Reports</a>
+      <div class="dropdown-content">
+        <a th:href="@{/reports}">Reports Table</a>
+        <a th:href="@{/companies/statisticsgraph}">Statistics Graph</a>
+      </div>
+    </li>
+  </ul>

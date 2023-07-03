@@ -1,6 +1,21 @@
-@import
-	url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap')
-	;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
+@import url('./otp.css');
+@import url('./Nav.css');
+@import url('./MostMomentum.css');
+@import url('./MostFunded.css');
+@import url('./LoginSignup.css');
+@import url('./Invest.css');
+@import url('./HowToInvest.css');
+@import url('./Home.css');
+@import url('./Header.css');
+@import url('./Footer.css');
+@import url('./details.css');
+@import url('./dashboard.css');
+@import url('./company_registration.css');
+@import url('./company_table.css');
+@import url('./my_information.css');
+/* @import url('./viewpage.css');
+@import url('./admindashboard.css'); */
 
 * {
 	margin: 0;
@@ -116,6 +131,10 @@ a {
 .btn-primary {
 	background: var(--color-primary);
 	color: var(--color-bg);
+}
+.btn-danger{
+	background:red;
+	font-size: 18px;
 }
 
 img {

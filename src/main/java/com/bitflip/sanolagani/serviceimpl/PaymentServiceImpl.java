@@ -11,10 +11,8 @@ import com.bitflip.sanolagani.repository.CompanyRepo;
 import com.bitflip.sanolagani.repository.InvestmentRepo;
 import com.bitflip.sanolagani.repository.TransactionRepo;
 import com.bitflip.sanolagani.service.PaymentService;
-import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import netscape.javascript.JSObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -36,7 +34,7 @@ public class PaymentServiceImpl implements PaymentService {
     InvestmentRepo invest_repo;
     @Autowired
     TransactionRepo trans_repo;
-  
+
     @Autowired
     CollateralRepo collateral_repo;
     @Override
@@ -62,6 +60,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     @CrossOrigin
     public boolean verifyPayment(Map<String, String> paymentDetails) throws JsonProcessingException {
+
         final String uri = "https://khalti.com/api/v2/payment/verify/";
         RestTemplate restTemplate = new RestTemplate();
         headers = new HttpHeaders();
@@ -73,12 +72,14 @@ public class PaymentServiceImpl implements PaymentService {
         HttpEntity<String> entity = new HttpEntity<>(json, headers);
         ResponseEntity resp = restTemplate.exchange(uri, HttpMethod.POST, entity, String.class);
         int status = resp.getStatusCodeValue();
+        System.out.println(resp.getBody());
         if(status==200) {
-        	return true;
+//        	saveInvestmentdata(token,amount);
+            return true;
         }
         return false;
-    
-}
+    }
+
 
 	@Override
 	public void saveTransactionDetails(String token, String amounts,

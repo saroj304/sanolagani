@@ -1,58 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-	
-     <meta charset="UTF-8">
-     <title>Dashboard</title>
-     <link rel="stylesheet" th:href="@{/css/admindashboard.css}">
-     <link rel="stylesheet" th:href="@{css/admin.css}">
-     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
-     <link rel="stylesheet" type="text/css" th:href="@{/css/Nav.css}">
-     <link rel="stylesheet" type="text/css" th:href="@{/css/Header.css}">
-     <link rel="stylesheet" type="text/css" th:href="@{/css/Footer.css}">
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-       <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/viewpage.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/admindashboard.css}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
 
 </head>
 <body>
-<header class='container header__container'
-		th:replace="fragment/header.html :: header"></header>
-		<div class='full__width' th:insert="fragment/nav.html :: navbar">
-	</div>
-	
-<div class="dashboard">
-	 <div class="sidebar">
-        <h2>Dashboard</h2>
-          <ul>
-              <li><a href="#">Dashboard</a></li>
-               <li class="dropdown">
-                    <a href="#" class="dropdown-btn">Users</a>
-                    <div class="dropdown-content">
-                          <a th:href="@{/viewusers}">Manage Users</a>
-                          <a th:href="@{/viewinvestment}">View Investment</a>
-                          <a th:href="@{/viewcollateral}">View Collateral</a>
-                     </div>
-                  </li>
-                  <li class="dropdown">
-                   <a href="#" class="dropdown-btn">Companies</a>
-                     <div class="dropdown-content">
-                         <a th:href="@{/viewcompany}">View Companies</a>
-                         <a th:href="@{/managecompany}">Manage Companies</a>
-                     </div>
-                   </li>
-                   <li><a th:href="@{/refunddata}">Refund Data</a></li>
-                   <li><a th:href="@{/companystatistics}">Companies Statistics</a></li>
-                   <li class="dropdown">
-                   <a href="#" class="dropdown-btn">Reports</a>
-                     <div class="dropdown-content">
-                         <a th:href="@{/reports}">Reports Table</a>
-                         
-                     </div>
-                   </li>
-               </ul>
-          </div>
+
+  <div class="dashboard">
+    <div class="sidebar">
+      <h2>Dashboard</h2>
+      <ul th:insert="fragment/admin-dashboard.html :: dashboard-left"></ul>
+    </div>
                  
         <div class="main-content">
            <!-- Main Content Card -->
@@ -65,9 +27,7 @@
       </div>
     </div>
   </div>
-	<footer th:insert="fragment/footer.html :: footer"></footer>
 
-   </footer>
 <script input th:inline="javascript">
 	var chartData = {
   labels: [[${companyname_list}]],

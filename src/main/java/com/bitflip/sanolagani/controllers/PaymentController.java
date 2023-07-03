@@ -11,7 +11,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -31,7 +30,7 @@ public class PaymentController {
     @GetMapping("/verifypayment")
     public String verifyPayment(@RequestParam("token") String token, 
     		                    @RequestParam("amount") String amount,
-    		                    @RequestParam(value = "companyid") int companyid,
+    		                    @RequestParam(value = "companyId") int companyid,
     		                    @RequestParam(value="remarks" ,required = false) String remarks,
     		                    Transaction transaction,Investment investment,Collateral collateral) 
     		                    throws JsonProcessingException {
@@ -48,9 +47,11 @@ public class PaymentController {
     }
     
     @PostMapping("/paywithcollateral")
-    public String payWithCollateral(@RequestParam(value = "companyId") int id,@RequestParam("amount") double amount,
-    							Transaction transaction,Investment investment,
-    							Collateral collaterals) {
+    public String payWithCollateral(@RequestParam(value = "companyId") int id,
+                                    @RequestParam("amount") double amount,
+    							    Transaction transaction,
+                                    Investment investment,
+    							    Collateral collaterals) {
         User user = user_controller.getCurrentUser();
     	Collateral collateral = user.getCollateral();
     	if(collateral.getCollateral_amount()>=amount) {
@@ -63,7 +64,7 @@ public class PaymentController {
     	collaretal_repo.save(collateral);
     	return "redirect:/dashboard";
     	}
-    	
+
     	
     	return "redirect:/home";
     }
