@@ -2,10 +2,12 @@ package com.bitflip.sanolagani.controllers;
 
 import com.bitflip.sanolagani.models.Company;
 import com.bitflip.sanolagani.models.Investment;
+import com.bitflip.sanolagani.models.Notification;
 import com.bitflip.sanolagani.models.TrafficData;
 import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.repository.CompanyRepo;
 import com.bitflip.sanolagani.repository.InvestmentRepo;
+import com.bitflip.sanolagani.repository.NotificationRepo;
 import com.bitflip.sanolagani.repository.TrafficDataRepo;
 import com.bitflip.sanolagani.repository.UserRepo;
 
@@ -42,6 +44,8 @@ public class CompanyDetailsController {
     UserRepo userrepo;
     @Autowired
     TrafficDataRepo trafficrepo;
+    @Autowired
+    NotificationRepo notificationrepo;
     
 
     @GetMapping("/company")
@@ -91,30 +95,29 @@ public class CompanyDetailsController {
 
     public String getCompany(@PathVariable("id") Integer id, Model model,TrafficData trafficdata){
     	 List<TrafficData> trafficdatalist = trafficrepo.findAll();
-    	 LocalDateTime nowmonth = LocalDateTime.now();
-    	 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM");
-         String monthString = nowmonth.format(formatter);
+    	 LocalDateTime nowday = LocalDateTime.now();
+    	 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE");
+         String dayString = nowday.format(formatter);
     	    if(trafficdatalist.isEmpty()) {
     	     trafficdata.setCompanyid(id);
     	     trafficdata.setCount(1);
-    	     trafficdata.setVisitmonth(monthString);
+    	     trafficdata.setVisitmonth(dayString);
     	     trafficrepo.save(trafficdata);
     	 }
     	    else if(trafficdatalist.stream()
                     .anyMatch(trafficData -> trafficData.getCompanyid() == id)){
     	    	for (TrafficData traffic:trafficdatalist) {
-    	    		String month = traffic.getVisitmonth();
-    	    		System.out.println(month+" "+monthString);
-    	    		if(monthString.equals(month)&&traffic.getCompanyid()==id) {
+    	    		String day = traffic.getVisitmonth();
+    	    		if(dayString.equals(day)&&traffic.getCompanyid()==id) {
     	    			int count = traffic.getCount();
     	    			count +=1;
     	    			traffic.setCount(count);
     	    			trafficrepo.save(traffic);
     	    			break;
-    	    		}else if(!monthString.equals(month)&&traffic.getCompanyid()==id){
+    	    		}else if(!dayString.equals(day)&&traffic.getCompanyid()==id){
     	    			 trafficdata.setCompanyid(id);
     	        	     trafficdata.setCount(1);
-    	        	     trafficdata.setVisitmonth(monthString);
+    	        	     trafficdata.setVisitmonth(dayString);
     	        	     trafficrepo.save(trafficdata);
     	        	     break;
     	    		}
@@ -122,7 +125,7 @@ public class CompanyDetailsController {
     	    	} else {
     	    		 trafficdata.setCompanyid(id);
     	    	     trafficdata.setCount(1);
-    	    	     trafficdata.setVisitmonth(monthString);
+    	    	     trafficdata.setVisitmonth(dayString);
     	    	     trafficrepo.save(trafficdata);
     	    	
     	    }
@@ -171,29 +174,42 @@ public class CompanyDetailsController {
         User user = usercontroller.getCurrentUser();
        int id = user.getCompany().getId();
     	LocalDateTime currentDate = LocalDateTime.now();
-        Map<String,Integer> pastSixMonths = new LinkedHashMap<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM");
+        Map<String,Integer> pastSixdays = new LinkedHashMap<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE");
         
         for (int i = 6; i >=0; i--) {
-            LocalDateTime month = currentDate.minusMonths(i);
-            String monthString = month.format(formatter);
-            pastSixMonths.put(monthString, 0);
+            LocalDateTime month = currentDate.minusDays(i);
+            String dayString = month.format(formatter);
+            System.out.println(dayString);
+            pastSixdays.put(dayString, 0);
             
         }
     	List<TrafficData> trafficdatalist = trafficrepo.findAllByCompanyid(id);
         for (TrafficData trafficData : trafficdatalist) {
             String visitMonth = trafficData.getVisitmonth();
             int count = trafficData.getCount();
-            pastSixMonths.put(visitMonth, count);
+            pastSixdays.put(visitMonth, count);
         }
-        List<String> labels = new ArrayList<>(pastSixMonths.keySet());
-        List<Integer> trafficvalues = new ArrayList<>(pastSixMonths.values());
+        List<String> labels = new ArrayList<>(pastSixdays.keySet());
+        List<Integer> trafficvalues = new ArrayList<>(pastSixdays.values());
     	model.addAttribute("labels", labels);
     	model.addAttribute("trafficvalues", trafficvalues);
 
     	return "companydashboard";
     }
 
- 
+         @GetMapping("/notification")
+         public String getNotification(Model model) {
+        	 User user = usercontroller.getCurrentUser();
+        	 LocalDateTime now = LocalDateTime.now();
+             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("mm");
+             String min = now.format(formatter);
+             int minute = Integer.parseInt(min);
+        	 int companyid = user.getCompany().getId();
+             List<Notification> notificationlist = notificationrepo.findAllByCompanyid(companyid);
+             model.addAttribute("notificationlist", notificationlist);
+             model.addAttribute("minute", minute);
+        	 return "notification";
+         }
 
-}
+    }
