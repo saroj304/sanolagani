@@ -16,9 +16,9 @@ function khaltiConfig(){
       "eventHandler": {
           onSuccess (payload) {
               // hit merchant api for initiating verfication
-              let companyId = document.getElementById("company-id").innerText;
+              let companyId = document.getElementById("company-id").value;
               console.log(companyId);
-              window.location.href = "/verifypayment?token="+payload.token+"&amount="+payload.amount+"&cId="+companyId;
+              window.location.href = "/verifypayment?token="+payload.token+"&amount="+payload.amount+"&companyId="+companyId;
           },
           onError (error) {
               let errorMsg = document.getElementById("payment-error-message");
@@ -40,6 +40,11 @@ paymentBtn.onclick = function () {
           var amountInput = document.getElementById("total");
           
             var amount = parseFloat(amountInput.innerText)*100;
+
+            if (!amount){
+              console.log("amount is null");
+              amount = amountInput.value * 100;
+            }
             if (amount) {
                  // Convert amount from rupees to paisa
                 config.amount = amount;
