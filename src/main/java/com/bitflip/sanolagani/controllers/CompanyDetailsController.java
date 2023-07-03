@@ -201,14 +201,9 @@ public class CompanyDetailsController {
          @GetMapping("/notification")
          public String getNotification(Model model) {
         	 User user = usercontroller.getCurrentUser();
-        	 LocalDateTime now = LocalDateTime.now();
-             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("mm");
-             String min = now.format(formatter);
-             int minute = Integer.parseInt(min);
         	 int companyid = user.getCompany().getId();
              List<Notification> notificationlist = notificationrepo.findAllByCompanyid(companyid);
              model.addAttribute("notificationlist", notificationlist);
-             model.addAttribute("minute", minute);
         	 return "notification";
          }
 
