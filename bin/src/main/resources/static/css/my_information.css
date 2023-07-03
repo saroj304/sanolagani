@@ -1,0 +1,44 @@
+/* main */
+.my__information__container{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    gap: 1rem;
+    padding: 0 1rem;
+}
+/* right side */
+.center__heading{
+    color: var(--color-gray);
+    text-align: center;
+}
+.center__dashboard hr{
+    color: var(--color-gray);
+}
+.general_detail{
+    padding: 1rem 0;
+    color: var(--color-gray);
+    /* display: flex; */
+}
+.general_profile{
+    /* width: 70%; */
+    display: flex;
+    gap: 10rem;
+    padding: 1rem 0;
+}
+.general_profile h2{
+    font-size: 22px;
+    color: var(--color-gray);
+}
+.personal_detail{
+    /* width: 40%; */
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+.personal_detail h3{
+    font-size: 18px;
+    color: var(--color-gray)
+}
+.personal_detail p{
+    font-size: 15px;
+    color: var(--color-gray)
+}

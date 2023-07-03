@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<html>
 <head>
 	
   <title>View Users</title>
@@ -22,18 +21,17 @@
         <th>Per Share Price</th>
         <th>Time Span</th>
         <th>Role</th>
-
       </tr>
       <tr th:each="company: ${company_list}">
              <td>[[${company.companyname}]]</td>
-             <td>[[${company.getUser().getAddress}]]</td>
+            <td>[[${company.getUser().getAddress}]]</td>
         	 <td>[[${company.phnum}]]</td>
         	 <td>[[${company.sector}]]</td>
         	 <td>[[${company.websiteurl}]]</td>
         	 <td>[[${company.previouslyraisedcapital}]]</td>
         	 <td>[[${company.price_per_share}]]</td>
         	 <td>[[${company.timespanforraisingcapital}]]</td>
-             <td>[[${company.role}]]</td>
+             <td>[[${company.role}]]</td> -->  
         	
       </tr>
       <!-- Add more user rows here -->

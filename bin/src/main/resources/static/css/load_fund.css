@@ -1,0 +1,39 @@
+.center__dashboard{
+    margin-bottom: 2rem;
+}
+.center__dashboard form{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+.bank_row{
+    display: flex;
+    flex-direction: column;
+}
+.load-title{
+    color: var(--color-blue);
+}
+.load_input{
+    height: 35px;
+    background: var(--color-light-gray);
+    padding: 0 10px;
+    font-weight: 400;
+    font-size: 15px;
+    border: 1px solid var(--color-gray);
+}
+.disable{
+    color: var(--color-gray);
+    user-select: none;    
+}
+option{
+    height: 30px;
+}
+
+/* right side total collateral */
+.load div .collateral-title{
+    font-weight: 500;
+}
+.collateral-sub-tile{
+    font-size: 15px;
+    color: var(--color-gray);
+}

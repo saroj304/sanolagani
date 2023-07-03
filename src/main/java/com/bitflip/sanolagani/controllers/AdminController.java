@@ -64,7 +64,7 @@ public class AdminController {
 		return "admin";
 	}
 	
-	@GetMapping("/admindashboard")
+	@GetMapping("admin/admindashboard")
 	public String getAdminDashboardPage(Model model) {
 		LocalDateTime now = LocalDateTime.now();
 		LocalDateTime onehourago = now.minusHours(24);
@@ -117,15 +117,18 @@ public class AdminController {
 
 
 	
-	@GetMapping("/viewusers")
+	@GetMapping("admin/viewusers")
 	public String getAllUsers(Model model) {
 		List<User> user_list = new ArrayList<>();
 		List<User> alluser_list = userrepo.findAll();
 		if(alluser_list.isEmpty()) {
+			
 			return "viewuser";
 		}
 		for(User user:alluser_list) {
+			
 			if(user.getRole().equals("USER")) {
+				System.out.println("User exists");
 				user_list.add(user);
 			}
 		}
@@ -133,7 +136,7 @@ public class AdminController {
 		return "viewuser";
 	}
 	
-	@GetMapping("/viewinvestment")
+	@GetMapping("admin/viewinvestment")
 	public String getAllInvestment(Model model) {
 		List<Investment> investment_list= investmentrepo.findAll();
 		if(investment_list.isEmpty()) {
@@ -142,7 +145,7 @@ public class AdminController {
 		model.addAttribute("investment_list", investment_list);
 		return "viewinvestment";
 	}
-	@GetMapping("/viewcollateral")
+	@GetMapping("admin/viewcollateral")
 	public String getAllCollateral(Model model) {
 		List<Collateral> collateral_list = collateralrepo.findAll();
 		if(collateral_list.isEmpty()) {
@@ -154,7 +157,7 @@ public class AdminController {
 		}
 		return "viewcollateral";
 	}
-	@GetMapping("/managecompany")
+	@GetMapping("admin/managecompany")
 	public String getunverifiedcompany(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication == null || authentication.getName().equals("anonymousUser")) {
@@ -169,24 +172,25 @@ public class AdminController {
 		}
 	}
 
-	@GetMapping("/managecompany/edit/{id}")
+	@GetMapping("admin/managecompany/edit/{id}")
 	public String deleteUnverifiedData(@PathVariable("id") String ids) {
 		int id = Integer.parseInt(ids);
 		admin_service.deleteData(id);
 		return "redirect:/managecompany";
 	}
 
-	@GetMapping("/managecompany/edit/save/{id}")
+	@GetMapping("admin/managecompany/edit/save/{id}")
 	public String addVerifiedCompany(@PathVariable("id") String ids, Company company, User user) {
 		int id = Integer.parseInt(ids);
 		admin_service.saveVerifiedCompany(id, company, user);
 		return "redirect:/managecompany";
 	}
 	
-	@GetMapping("/viewcompany")
+	@GetMapping("admin/viewcompany")
 	public String viewAllCompany(Model model) {
 		List<Company> company_list = companyrepo.findAll();
 		if(company_list.isEmpty()) {
+			System.out.println("the company is empty");
 			return "viewcompany";
 			
 		}
@@ -194,7 +198,7 @@ public class AdminController {
 		return "viewcompany";
 	}
 	
-	@GetMapping("/reports")
+	@GetMapping("admin/reports")
 	public String viewReportDetails(Model model) {
 		List<Investment> invest_list = investmentrepo.findAll();
 		if(invest_list.isEmpty()) {
@@ -204,7 +208,7 @@ public class AdminController {
 		return "adminreport";
 	}
 	
-	@GetMapping("/refunddata")
+	@GetMapping("admin/refunddata")
 	public String getRefundData(Model model) {
 		List<RefundRequestData> refund_list = refundrepo.findAll();
 		if(refund_list.isEmpty()) {
@@ -213,7 +217,7 @@ public class AdminController {
 	   model.addAttribute("refund_list", refund_list);
 		return "viewrefunddata";
 	}
-	@GetMapping("/companystatistics")
+	@GetMapping("admin/companystatistics")
 	public String getCompanyStats(Model model) {
 		List<Company> company_list = companyrepo.findAll();
 		Map<String, Integer> totalUsersInvestedMap = new HashMap<>();
@@ -230,7 +234,7 @@ public class AdminController {
 	}
 	
 	
-	@GetMapping("/companies/statisticsgraph")
+	@GetMapping("admin/companies/statisticsgraph")
 	public String getStatisticsGraph(Model model) {
 		List<Double> total_raised_share = new ArrayList<>();
 		List<Integer> total_applied_share = new ArrayList<>();

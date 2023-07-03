@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragment/head.html :: headerfiles">
+</head>
+<!-- main header -->
+
+<!-- navigation -->
+<header class='container header__container' th:replace="fragment/header.html :: header"></header>
+	<div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
+
+<!-- table -->
+<section>
+    <h1>Company Table</h1>
+    <table id="customers">
+        <tr>
+            <th>company</th>
+            <th>phone</th>
+            <th>file</th>
+            <th>time</th>
+            <th>PPS</th>
+            <th>Amount</th>
+            <th>PAN</th>
+            <th>Cit front</th>
+            <th>Cit back</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="detail: ${UnverfiedCompanies}">
+            <td> <a th:text="${#strings.abbreviate(detail.companyname, 20)}"></a></td>
+            <td> <a th:text="${detail.phnum}"></a></td>
+            <td><a th:text="${#strings.abbreviate(detail.filename, 10)}"
+                    th:href="@{D:\sanolagani\src\main\resources\images\{pan} (pan=${detail.pan_image_name}) }"></a></td>
+            <td>
+                <p th:text="${detail.timespanforraisingcapital}"></p>
+            </td>
+            <td>
+                <p th:text="${detail.price_per_share}"></p>
+            </td>
+            <td>
+                <p th:text="${detail.raisedcapital}"></p>
+            </td>
+            <td>
+                <a th:text="${#strings.abbreviate(detail.pan_image_name, 15)}"
+                    th:href="@{D:\sanolagani\src\main\resources\images\{pan} (pan=${detail.pan_image_name}) }"></a>
+            </td>
+            <td>
+                <a th:text="${#strings.abbreviate(detail.citizenship_fname,15)}"
+                    th:href="@{D:\sanolagani\src\main\resources\images\{pan} (pan=${detail.citizenship_fname}) }"></a>
+            </td>
+            <td>
+                <a th:text="${#strings.abbreviate(detail.citizenship_bname, 15)}"
+                    th:href="@{D:\sanolagani\src\main\resources\images\{pan} (pan=${detail.citizenship_bname}) }"> </a>
+            </td>
+            <td>
+                <button type="submit" class="btn"
+                    th:onclick="|window.location.href='/managecompany/edit/save/${detail.id}'|">Add</button>
+                <button class="btn btn-danger"
+                    th:onclick="|window.location.href='/managecompany/edit/${detail.id}'|">Delete</button>
+            </td>
+        </tr>
+    </table>
+</section>
+<footer>
+		<footer th:insert="fragment/footer.html :: footer">
+
+		</footer>
+
+</body>
+
+</html>

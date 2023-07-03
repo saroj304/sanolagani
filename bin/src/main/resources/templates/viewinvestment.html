@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<html>
+<head>
+	
+  <title>View Investment</title>
+  <link rel="stylesheet" type="text/css" href="css/viewpage.css">
+</head>
+<body>
+	
+  <div class="container">
+    <h1>View Investment</h1>
+    <table>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Amount</th>
+        <th>Email</th>
+        <th>Invested Date</th>
+        <th>Quantity</th>
+        <th>Company Name</th>
+         <th>Refundable until</th>
+        <th>Status</th>
+       
+      </tr>
+      <tr th:each="invested: ${investment_list}">
+             <td>[[${invested.getUser().getFname()}]]</td>
+             <td>[[${invested.getUser().getLname()}]]</td>
+             <td>[[${invested.getAmount()}]]</td>
+             <td>[[${invested.getUser().getEmail()}]]</td>
+             <td>
+				 <p th:text="${#temporals.format(invested.getInvestment_date_time(), 'yyyy-MM-dd') + ' ' + #temporals.format(invested.getInvestment_date_time(), 'HH:mm:ss')}"></p>
+              </td>
+             <td>[[${invested.getQuantity()}]]</td>
+        	 <td>[[${invested.getCompany().getCompanyname()}]]</td>
+        	 <td>
+                <p th:text="${#temporals.format(invested.getRefundableUntil(), 'yyyy-MM-dd') + ' ' + #temporals.format(invested.getRefundableUntil(), 'HH:mm:ss')}"></p>
+			 </td>
+        	 <td>[[${invested.getStatus()}]]</td>
+      </tr>
+      <!-- Add more user rows here -->
+    </table>
+  </div>
+</body>
+</html>
