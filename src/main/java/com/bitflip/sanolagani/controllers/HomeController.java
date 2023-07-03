@@ -108,7 +108,6 @@ public class HomeController {
 	@GetMapping("/text")
 	public String analysis() {
 		List<Company> c_list = pre.getCompaniesWithGoodSentiment();
-		System.out.println(c_list);
 
 		return "index";
 	}

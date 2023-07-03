@@ -22,9 +22,9 @@ public class ExtractTablesFromPDF {
     SpreadsheetExtractionAlgorithm sea = null;
 
     public void extractAllTables(Company company) throws IOException {
-        this.path = "src/main/resources/documents/"+company.getId()+"/"+company.getFilename();
+        this.path = "../sanolagani/src/main/resources/documents/"+company.getId()+"/"+company.getFilename();
         this.documentName = new File(path).getName().split("\\.")[0];
-        this.tsvDirectoryPath = "src/main/resources/output/" + company.getId()+"/";
+        this.tsvDirectoryPath = "../sanolagani/src/main/resources/output/" + company.getId()+"/";
         this.doc = Loader.loadPDF(new File(this.path));
         File opdir = new File(this.tsvDirectoryPath);
         boolean directoryCreated = opdir.mkdir();

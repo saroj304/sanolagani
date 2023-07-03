@@ -56,8 +56,9 @@
 
 
 .center__dashboard{
-	 display: flex;
-    justify-content: space-between;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     max-width: 1000px; /* Adjust the max-width as needed */
 

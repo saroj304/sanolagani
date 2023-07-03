@@ -65,44 +65,43 @@ public class EmailService {
 		return otp;
 	}
 
-	public int generateOtp() {
-		Random rand = new Random();
-		int randomNum = rand.nextInt(999999 - 111111 + 1) + 111111;
-		return randomNum;
-	}
+    public int generateOtp() {
+    	Random rand = new Random();
+    	int randomNum = rand.nextInt(999999 - 111111 + 1) + 111111;
+    	return randomNum;
+    }
+    public String verifyCompanyDetails(@Valid @ModelAttribute("unverifiedcompany")UnverifiedCompanyDetails un_company,
+                              HttpServletRequest request,
+                              BindingResult result)  throws MessagingException, IOException {
 
-	public String verifyCompanyDetails(@Valid @ModelAttribute("unverifiedcompany") UnverifiedCompanyDetails un_company,
-			HttpServletRequest request, BindingResult result) throws MessagingException, IOException {
+      MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+      MultipartFile pdfFile = multipartRequest.getFile("pdfFile");
+      MultipartFile citizen_front = multipartRequest.getFile("citizen_front");
+      MultipartFile citizen_back = multipartRequest.getFile("citizen_back");
+      MultipartFile register_photo = multipartRequest.getFile("companypan");
+      MultipartFile company_image  = multipartRequest.getFile("com_image");
+      
 
-		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-		MultipartFile pdfFile = multipartRequest.getFile("pdfFile");
-		MultipartFile citizen_front = multipartRequest.getFile("citizen_front");
-		MultipartFile citizen_back = multipartRequest.getFile("citizen_back");
-		MultipartFile register_photo = multipartRequest.getFile("companypan");
-		MultipartFile company_image = multipartRequest.getFile("com_image");
+      //to store on the secondary memory  
+      String pdf_name = un_company.getCompanyname()+"_"+pdfFile.getOriginalFilename();
+      String citizen_front_name = un_company.getCompanyname()+"_"+citizen_front.getOriginalFilename();
+      String citizen_back_name = un_company.getCompanyname()+"_"+citizen_back.getOriginalFilename();
+      String register_photo_name = un_company.getCompanyname()+"_"+register_photo.getOriginalFilename();
+      String company_img = un_company.getCompanyname()+"_"+company_image.getOriginalFilename();
+      
+      //to retrieve extension
+      String citizen_front_name_extension = citizen_front_name.substring(citizen_front_name.lastIndexOf(".") + 1);
+      String citizen_back_name_extension = citizen_back_name.substring(citizen_back_name.lastIndexOf(".") + 1);
+      String register_photo_name_extension = register_photo_name.substring(register_photo_name.lastIndexOf(".")+1);
+      //String company_photo_name_extension = company_img.substring(company_img.lastIndexOf(".")+1);
 
-      try {
-		// to store on the secondary memory
-		String pdf_name = un_company.getCompanyname() + "_" + pdfFile.getOriginalFilename();
-		String citizen_front_name = un_company.getCompanyname() + "_" + citizen_front.getOriginalFilename();
-		String citizen_back_name = un_company.getCompanyname() + "_" + citizen_back.getOriginalFilename();
-		String register_photo_name = un_company.getCompanyname() + "_" + register_photo.getOriginalFilename();
-		String company_img = un_company.getCompanyname() + "_" + company_image.getOriginalFilename();
-
-
-		// to retrieve extension
-		String citizen_front_name_extension = citizen_front_name.substring(citizen_front_name.lastIndexOf(".") + 1);
-		String citizen_back_name_extension = citizen_back_name.substring(citizen_back_name.lastIndexOf(".") + 1);
-		String register_photo_name_extension = register_photo_name.substring(register_photo_name.lastIndexOf(".") + 1);
-		// String company_photo_name_extension =
-		// company_img.substring(company_img.lastIndexOf(".")+1);
-
-		MimeMessage message = mailSender.createMimeMessage();
-		MimeMessageHelper helper = new MimeMessageHelper(message, true);
-
-		helper.setTo("raayaseetal@gmail.com");
-		helper.setSubject("company registration details");
-		helper.setText("Registration request for the company having name :" + un_company.getCompanyname());
+      
+      MimeMessage message = mailSender.createMimeMessage();
+      MimeMessageHelper helper = new MimeMessageHelper(message, true);
+      
+      helper.setTo("raayaseetal@gmail.com");
+      helper.setSubject("company registration details");
+      helper.setText("Registration request for the company having name :"+un_company.getCompanyname());
 
 		helper.addAttachment("company_audit_report.pdf", pdfFile);
 		helper.addAttachment("citizenship_front." + citizen_front_name_extension.toLowerCase(), citizen_front);
@@ -146,9 +145,6 @@ public class EmailService {
 
 			adminservice.saveUnverifiedCompany(un_company);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		return "success";
 	}
 
