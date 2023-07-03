@@ -6,6 +6,3 @@
     background: var(--color-bg);
     gap: 1rem;
 }
-.invest__nav ul li a:hover{
-    /* color: var(--color-white); */
-}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<html>
+<head>
+	
+  <title>View Users</title>
+     <link rel="stylesheet" type="text/css" href="css/viewpage.css">
+</head>
+<body>
+	
+  <div class="container">
+    <h1>View Collateral</h1>
+    <table>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Address</th>
+        <th>Amount</th>
+        <th>Email</th>
+        <th>Role</th>
+      </tr>
+      <tr th:each="collateral: ${collateral_list}">
+             <td>[[${collateral.getUser().getFname()}]]</td>
+             <td>[[${collateral.getUser().getLname()}]]</td>
+        	 <td>[[${collateral.getUser().getAddress()}]]</td>
+        	 <td>[[${collateral.collateral_amount}]]</td>
+        	 <td>[[${collateral.getUser().getEmail()}]]</td>
+        	 <td>[[${collateral.getUser().getRole()}]]</td>
+        	
+      </tr>
+      <!-- Add more user rows here -->
+    </table>
+  </div>
+</body>
+</html>

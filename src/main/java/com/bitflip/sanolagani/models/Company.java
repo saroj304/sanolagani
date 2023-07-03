@@ -36,7 +36,8 @@ public class Company {
 	private int id;
 	@Column
 	private String companyname;
-	
+	@Column
+	private String phnum;
 	@Column
 	private String sector;
 	@Column
@@ -250,6 +251,14 @@ public class Company {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public String getPhnum() {
+		return phnum;
+	}
+
+	public void setPhnum(String phnum) {
+		this.phnum = phnum;
 	}
 
 	public List<Feedback> getFeedbacklist() {

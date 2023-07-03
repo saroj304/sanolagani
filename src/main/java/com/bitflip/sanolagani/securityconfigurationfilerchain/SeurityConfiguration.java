@@ -33,17 +33,16 @@ public class SeurityConfiguration extends WebSecurityConfigurerAdapter{
 	 http
 	    .authorizeRequests()
 	    .antMatchers("/login","/register","/otpverify","/companyregister","/companyverify",
-	    		"/managecompany","/addCompany","/managecompany/edit/**","/forgotpassword",
-	    		"/changepassword","/resetpassword","/updatepassword","/","/raisecapital",
-	    		"/documents","/admin","/admindashboard","/viewusers",
-	    		"/viewinvestment","/viewcollateral","/viewcompany","/reports","/refunddata",
-	    		"/companystatistics","/companies/statisticsgraph").permitAll()
+	    		"/managecompany","/addCompany",
+	    	    "/","/raisecapital","/documents",
+	    		"/refunddata").permitAll()
+	    .antMatchers("/changepassword","/resetpassword","/updatepassword","/forgotpassword").hasAnyAuthority("ROLE_USER","ROLE_COMPANY","ROLE_ADMIN")
 	    .antMatchers("/admin/**").hasRole("ADMIN")
 	    .anyRequest().authenticated()
 	    .and()
 	    .formLogin()
 	    .loginPage("/login")
-	    .defaultSuccessUrl("/home")
+	    .defaultSuccessUrl("/home", true)
 	    .failureUrl("/login?error=true")
 	    .usernameParameter("email")
 	    .passwordParameter("password")

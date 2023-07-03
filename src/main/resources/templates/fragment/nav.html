@@ -15,9 +15,9 @@
 			<li sec:authorize="hasRole('ROLE_ANONYMOUS')"><a th:href="@{/login}">Login</a></li>
 			<li sec:authorize="hasRole('ROLE_ANONYMOUS')"><a th:href="@{/register}">Sign Up</a></li>
 
-			<li sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_COMPANY')"><a th:href="@{/dashboard}">portfolio</a>
+			<li sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_COMPANY') or hasRole('ROLE_ADMIN')"><a th:href="@{/dashboard}">portfolio</a>
 			</li>
-			<li sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_COMPANY')"><a th:href="@{/logout}">logout</a></li>
+			<li sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_COMPANY') or hasRole('ROLE_ADMIN')"><a th:href="@{/logout}">logout</a></li>
 			<li sec>
 			</li>
 		</ul>

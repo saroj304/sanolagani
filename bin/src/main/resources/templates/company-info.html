@@ -1,31 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragment/head.html :: headerfiles"></head>
 
+<head th:insert="fragment/head.html :: headerfiles"></head>
 <body>
   <header class='container header__container' th:replace="fragment/header.html :: header"></header>
-
   <div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
 
   <div class="container home__conatiner">
     <div class="home__left">
       <div class="heading__info">
-        <h1>Invest in Voklagyo</h1>
+        <h1>Invest in <span th:text="${company.companyname}"/></h1>
+
         <h5 class='gray'>Feeding the distanced customer with taste.</h5>
       </div>
-
-      <a href="#" class='btn mt-20 mb-20'> Invest Now</a>
-
+     <div th:if="${status eq 'on limit'}">
+      <a th:href="@{'/company/details/'+${company.id}+'/'}" class='btn mt-20 mb-20'> Invest Now</a>
+    </div>
+    <div th:if="${status eq 'limit reached'}">
+		<p>you have already invested up to maximum quantity</p> 
+	</div>
+	<div th:if="${status eq 'time finish'}">
+		<p>investment for this company has closed</p> 
+	</div>
       <p class='gray f-13'>This Reg A+ offering is made available through Sanolagani Primary.
         This investment is speculative, illiquid, and involves a high degree of
         risk, including possible loss of your entire investment. For more
-        information about this offering, please view Bhoklagyo’s Offering Circular
+        information about this offering, please view <span th:text="${company.companyname}"/>’s Offering Circular
         and Related Risks. In addition, as described in the Offering Circular,
         the Company retains the right to continue the offering beyond the Termination Date.
         in its sole discretion.</p>
     </div>
     <div class="home__right">
-      <img th:src="@{'/photos/voklagyoHome.png'}" alt="heading" />
+      <img th:src="@{'/documents/' + ${company.id} + '/' + ${company.image}}" alt="heading" />
     </div>
   </div>
   <!-- Footer -->
