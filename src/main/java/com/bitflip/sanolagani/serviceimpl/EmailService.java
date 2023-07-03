@@ -107,7 +107,7 @@ public class EmailService {
 		helper.addAttachment("citizenship_front." + citizen_front_name_extension.toLowerCase(), citizen_front);
 		helper.addAttachment("citizenship_back." + citizen_back_name_extension, citizen_back);
 		helper.addAttachment("company_register_details." + register_photo_name_extension, register_photo);
-//		mailSender.send(message);
+		mailSender.send(message);
 
 
 			byte[] citizen_f = citizen_front.getBytes();

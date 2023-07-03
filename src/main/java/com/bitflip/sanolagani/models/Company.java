@@ -36,8 +36,7 @@ public class Company {
 	private int id;
 	@Column
 	private String companyname;
-	@Column
-	private String phnum;
+	
 	@Column
 	private String sector;
 	@Column
@@ -66,6 +65,9 @@ public class Company {
 	private int maximum_quantity;
 	@Column
 	private String status;
+	@Column
+	private String pwd_change;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
@@ -162,13 +164,7 @@ public class Company {
 		this.companyname = companyname;
 	}
 
-	public String getPhnum() {
-		return phnum;
-	}
 
-	public void setPhnum(String phnum) {
-		this.phnum = phnum;
-	}
 
 	public User getUser() {
 		return user;
@@ -280,7 +276,6 @@ public class Company {
 	public void setRefundrequest(List<RefundRequestData> refundrequest) {
 		this.refundrequest = refundrequest;
 	}
-
 	public String getStatus() {
 		return status;
 	}
@@ -289,4 +284,13 @@ public class Company {
 		this.status = status;
 	}
 
+	public String getPwd_change() {
+		return pwd_change;
+	}
+
+	public void setPwd_change(String pwd_change) {
+		this.pwd_change = pwd_change;
+	}
+   
+  
 }

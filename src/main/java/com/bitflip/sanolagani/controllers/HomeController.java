@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bitflip.sanolagani.models.Company;
+import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.repository.CompanyRepo;
 import com.bitflip.sanolagani.service.AdminService;
 import com.bitflip.sanolagani.serviceimpl.RecommendationInitializer;
@@ -31,15 +33,27 @@ public class HomeController {
 	RecommendationInitializer recommedationinit;
 	@Autowired
 	AdminController admin_controller;
+	@Autowired
+	UserController usercontroller;
 
 	@GetMapping({ "/", "/home" })
-	public String homePage(Model model) {
+	public String homePage(Model model,RedirectAttributes redirectAttributes) {
+	
+		User user = usercontroller.getCurrentUser();
+		if(user!=null) {
+		   if(user.getRole().equals("COMPANY")) {
+			if(user.getCompany().getPwd_change().equals("false")) {
+				redirectAttributes.addFlashAttribute("email", user.getEmail());
+				return "redirect:/change_password";
+			}
+		}
+		}
+		
         List<Company> company_list = company_repo.findAll();
     	LocalDateTime now  = LocalDateTime.now();
         if(company_list.isEmpty()) {
         	return "index";
         }
-        
         for(Company company:company_list) {
         	LocalDateTime created_date = company.getCreated();
         	String time =company.getTimespanforraisingcapital();
@@ -62,16 +76,17 @@ public class HomeController {
 		List<Company> companybasedondate = company_repo.findAllCompanyBasesOnCreationalDates();
 		Optional<List<Company>> result1 = Optional.ofNullable(companybasedondate);
 		
-		List<Company> diversifiedcompanylist = recommedationinit.getRecommendCompanies();
 		List<Company> c_list = pre.getCompaniesWithGoodSentiment();
 		if (result != null & result1 != null) {
+			List<Company> diversifiedcompanylist = recommedationinit.getRecommendCompanies();
+            System.out.println(diversifiedcompanylist);
 			model.addAttribute("companybasedondate", companybasedondate);
 			model.addAttribute("diversifiedcompanylist", diversifiedcompanylist);
 			model.addAttribute("c_list", c_list);
 			return "index";
 		}
 		
-    	
+		
 		return "index";
 	}
 
