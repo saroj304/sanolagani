@@ -51,55 +51,48 @@
 						th:field="*{phnum}">
 				</div>
 				<div>
-					<input class="register_input" type="text" placeholder="Website URL" name="websiteurl"
-						th:field="*{websiteurl}"> <input class="register_input" type="number"
-						placeholder="Raised Capital" name="raisedcapital" th:field="*{raisedcapital}">
+					<input class="register_input" type="text" placeholder="Website URL" name="websiteurl" th:field="*{websiteurl}">
+					<input class="register_input" type="number" placeholder="Capital To Raise" name="raisedcapital" th:field="*{raisedcapital}">
 				</div>
 				<div>
-					<input class="register_input" type="text" placeholder=" sector"
-						name="sector" th:field="*{sector}"><input
-						class="register_input" type="number"
-						placeholder=" maximum quantity" name="maximum_quantity">
+					<input class="register_input" type="text" placeholder=" sector" name="sector" th:field="*{sector}">
+					<input class="register_input" type="number" placeholder=" maximum quantity" name="maximum_quantity">
 				</div>
-		<div>
-				<input class="register_input register" type="text"
-					placeholder="Time Span For Raising Capital"
-					name="timespanforraisingcapital"
-					th:field="*{timespanforraisingcapital}"> <input
-					class="register_input" type="number" placeholder=" per share price"
-					name="price_per_share"> <br>
-</div>
 
-				<div class="doc_file">
+				<div>
+					<input class="register_input register" type="text" placeholder="Time Span For Raising Capital" name="timespanforraisingcapital"
+						   th:field="*{timespanforraisingcapital}">
+					<input class="register_input" type="number" placeholder="Price per Unit" name="price_per_share">
+					<br>
+				</div>
+
+				<div style="display:flex; flex-direction:column; justify-content: space-between; align-items:center;">
 					<div>
-						<label for="companypanimg">Company image</label>
+						<label for="companypanimg" style="width:40%">Company image</label>
 						<input class="register_input" id="companypanimg" type="file" placeholder="Company image"
-							name="com_image">
+							name="com_image" style="width:40%">
 					</div>
 
 
 					<div>
-						<label for="pdfFile">Company Document PDF including tax
-							clearance: </label> <input class="register_input" id="pdfFile" type="file"
-							placeholder="Company PDF" name="pdfFile">
+						<label for="pdfFile" >Company Document PDF including tax clearance: </label>
+						<input class="register_input" id="pdfFile" type="file" placeholder="Company PDF" name="pdfFile">
 					</div>
 					<div>
-						<label for="companypan">Company PAN Card/VAT Card: </label> <input class="register_input"
-							id="companypan" type="file" placeholder="CompanyPDF" name="companypan" />
-					</div>
-
-					<div>
-						<label for="citizen_front">Citizen Front:</label> <input class="register_input"
-							id="citizen_front" type="file" placeholder="Citizen Front" name="citizen_front">
+						<label for="companypan">Company PAN Card/VAT Card: </label>
+						<input class="register_input" id="companypan" type="file" placeholder="CompanyPDF" name="companypan" />
 					</div>
 
 					<div>
-						<label for="citizen_back">Citizen Back:</label> <input class="register_input" id="citizen_back"
-							type="file" placeholder="Citizen Back" name="citizen_back" />
+						<label for="citizen_front">Citizen Front:</label>
+						<input class="register_input" id="citizen_front" type="file" placeholder="Citizen Front" name="citizen_front">
+					</div>
+
+					<div>
+						<label for="citizen_back">Citizen Back:</label>
+						<input class="register_input" id="citizen_back" type="file" placeholder="Citizen Back" name="citizen_back" />
 					</div>
 				</div>
-
-
 				<button type="submit" class="btn sumbit">Submit</button>
 
 			</form>

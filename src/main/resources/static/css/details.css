@@ -128,3 +128,8 @@ img{
     height: inherit;
     object-fit: fill;
 }
+
+.payment-success-message{
+  background-color:#AEFFD8;
+  color: #285943;
+}

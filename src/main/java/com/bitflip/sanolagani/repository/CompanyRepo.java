@@ -4,10 +4,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
 
 import com.bitflip.sanolagani.models.Company;
-@Repository
+
+import java.util.List;
+
 public interface CompanyRepo extends JpaRepository<Company, Integer> {
 	@Query(value = "SELECT companyname FROM company WHERE id =:obj ",nativeQuery = true)
 	public String getCompanyName(Object obj);
@@ -15,6 +16,10 @@ public interface CompanyRepo extends JpaRepository<Company, Integer> {
 	public List<Company> findAllCompanyBasesOnRaidedCapitalDesc();
     @Query(value = "SELECT * FROM company ORDER BY created desc", nativeQuery = true)
 	public List<Company> findAllCompanyBasesOnCreationalDates();
+
+	@Query(value = "SELECT id FROM company",nativeQuery = true)
+	public List<Integer> getAllCompany();
     @Query("SELECT COUNT(u) FROM User u where role='COMPANY'")
     Long getTotalcompany();
+
 }
