@@ -219,7 +219,7 @@ UserServiceImpl userservice;
 	     }
 	     model.addAttribute("name", user.getFname());
 	     model.addAttribute("investmentlist", investmentlist);
-		return "n";
+		return "investment-details";
 	}
 	
 	

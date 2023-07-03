@@ -13,6 +13,9 @@
 @import url('./dashboard.css');
 @import url('./company_registration.css');
 @import url('./company_table.css');
+@import url('./my_information.css');
+/* @import url('./viewpage.css');
+@import url('./admindashboard.css'); */
 
 * {
 	margin: 0;
@@ -128,6 +131,10 @@ a {
 .btn-primary {
 	background: var(--color-primary);
 	color: var(--color-bg);
+}
+.btn-danger{
+	background:red;
+	font-size: 18px;
 }
 
 img {

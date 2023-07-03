@@ -1,10 +1,10 @@
 <!-- Dashboard -->
 <section class="dashboard" th:fragment="dashboard">
     <div class=" dashboard__container">
-        <div class="left__dashboard board">
+        <div class="left__dashboard board" th:fragment="left-fragment">
             <div>
                 <p><a th:href="@{/riskinfo}">Sanolagani Dashboard</a></p>
-                <p><a href="#">My Information</a></p>
+                <p><a th:href="@{/myinfo}">My Information</a></p>
                 <a th:href="@{'/investmenthistory/'}">My Investment</a>
                 <div class="dropdown">
                     <button onclick="manageFund()" class="drop-btn">Manage Fund</button>

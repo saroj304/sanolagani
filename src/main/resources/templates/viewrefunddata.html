@@ -4,13 +4,16 @@
 <html>
 <head>
 	
-  <title>View Refund Data</title>
-     <link rel="stylesheet" type="text/css" href="css/viewpage.css">
-</head>
+  <title>View Users</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/viewpage.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/admindashboard.css}"></head>
 <body>
 	
-  <div class="container">
-    <h1>View Refund Data</h1>
+  <div class="dashboard">
+    <div class="sidebar">
+      <h2>Dashboard</h2>
+      <ul th:insert="fragment/admin-dashboard.html :: dashboard-left"></ul>
+    </div>
     <table>
       <tr>
         <th>Refund ID</th>

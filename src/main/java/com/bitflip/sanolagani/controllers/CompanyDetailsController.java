@@ -31,7 +31,9 @@ public class CompanyDetailsController {
     UserController usercontroller;
     @Autowired
     InvestmentRepo investrepo;
-<<<<<<< HEAD
+    @Autowired
+    UserRepo userrepo;
+
     @GetMapping("/company")
     public String getAllCompany(Model model) {
         List<Integer> companyId = companyRepo.getAllCompany();
@@ -41,88 +43,75 @@ public class CompanyDetailsController {
 
         model.addAttribute("companies", companies);
         return "company-list";
-=======
-    @Autowired
-    UserRepo userrepo;
-    
-    
+    }
+
     @GetMapping("/change_password")
     public String changePassword(Model model) {
-    	String email = (String) model.asMap().get("email");
-         model.addAttribute("email", email);
-    	return "changeinitialpassword";
+        String email = (String) model.asMap().get("email");
+        model.addAttribute("email", email);
+        return "changeinitialpassword";
     }
+
     @PostMapping("/change/initial/password")
     public String getInitialPasswordChanged(@RequestParam("email") String email,
-    		                                @RequestParam("oldpassword") String oldpass,
-    		                                @RequestParam("password") String newpassword) {
-    	                         
-    	
-    	User user = userrepo.findByEmail(email);
-    	System.out.println(email);
-    	String hashpwd = user.getPassword();
-    	String  plainpwd = oldpass;
-    	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-    	boolean isMatch = passwordEncoder.matches(plainpwd, hashpwd);
+            @RequestParam("oldpassword") String oldpass,
+            @RequestParam("password") String newpassword) {
 
-    	if (isMatch) {
-    	    user.setPassword(passwordEncoder.encode(newpassword));
-    	    user.getCompany().setPwd_change("true");
-    	    userrepo.save(user);
-    	    return "redirect:/home";
-    	} else {
-    	    System.out.println("Password does not match!");
-    	    return "redirect:/home";
+        User user = userrepo.findByEmail(email);
+        System.out.println(email);
+        String hashpwd = user.getPassword();
+        String plainpwd = oldpass;
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        boolean isMatch = passwordEncoder.matches(plainpwd, hashpwd);
 
-    	}
-    	
-    	
->>>>>>> 06c4b8049c027e9eec9a40ac986d0cd6ea037983
+        if (isMatch) {
+            user.setPassword(passwordEncoder.encode(newpassword));
+            user.getCompany().setPwd_change("true");
+            userrepo.save(user);
+            return "redirect:/home";
+        } else {
+            System.out.println("Password does not match!");
+            return "redirect:/home";
+
+        }
+
     }
-    
+
     @GetMapping("/company/{id}")
-    public String getCompany(@PathVariable("id") Integer id, Model model){
-    	String status="on limit";
+    public String getCompany(@PathVariable("id") Integer id, Model model) {
+        String status = "on limit";
         Company company = companyRepo.getReferenceById(id);
-    	LocalDateTime now  = LocalDateTime.now();
-    	LocalDateTime created_date = company.getCreated();
-    	String time =company.getTimespanforraisingcapital();
-    	String[] timespansplit = time.split(" ",2);
-    	int timespan = Integer.parseInt(timespansplit[0]);
-    	System.out.println(company.getCompanyname()+" "+timespan);
-        
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime created_date = company.getCreated();
+        String time = company.getTimespanforraisingcapital();
+        String[] timespansplit = time.split(" ", 2);
+        int timespan = Integer.parseInt(timespansplit[0]);
+        System.out.println(company.getCompanyname() + " " + timespan);
+
         User user = usercontroller.getCurrentUser();
         Integer numberofshare_peruser = investrepo.getTotalQuantityByUserAndCompany(user.getId(), company.getId());
-       if(numberofshare_peruser==null) {
-    	   if(now.isAfter(created_date.plusDays(timespan)) ) {
-           	status = "time finish";
-           }
-    	   model.addAttribute("status",status);
-           model.addAttribute("company", company);
-           return "company-info";
-       }
-       else if(company.getMaximum_quantity()<=numberofshare_peruser) {
-    	   status = "limit reached";
-       } else if(now.isAfter(created_date.plusDays(timespan)) ) {
-        	    status = "time finish";
+        if (numberofshare_peruser == null) {
+            if (now.isAfter(created_date.plusDays(timespan))) {
+                status = "time finish";
+            }
+            model.addAttribute("status", status);
+            model.addAttribute("company", company);
+            return "company-info";
+        } else if (company.getMaximum_quantity() <= numberofshare_peruser) {
+            status = "limit reached";
+        } else if (now.isAfter(created_date.plusDays(timespan))) {
+            status = "time finish";
 
-       }	   
-        model.addAttribute("status",status);
+        }
+        model.addAttribute("status", status);
         model.addAttribute("company", company);
         return "company-info";
     }
 
-   
     @GetMapping("/company/details/{id}")
-    public String getInvestCompanyDetails(@PathVariable("id") int id,Model model) {
-    	Company company = companyRepo.getReferenceById(id);
-    	model.addAttribute("company",company);
-    	return "details";
+    public String getInvestCompanyDetails(@PathVariable("id") int id, Model model) {
+        Company company = companyRepo.getReferenceById(id);
+        model.addAttribute("company", company);
+        return "details";
     }
-<<<<<<< HEAD
-=======
-
- 
-
->>>>>>> 06c4b8049c027e9eec9a40ac986d0cd6ea037983
 }
