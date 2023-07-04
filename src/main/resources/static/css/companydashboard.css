@@ -1,0 +1,55 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar {
+    background-color: #333;
+    color: #fff;
+    width: 250px;
+    height: 100vh;
+    padding: 20px;
+    float: left;
+
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    margin-bottom: 10px;
+}
+
+.sidebar a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    color: #ccc;
+}
+
+.sidebar .active {
+    font-weight: bold;
+}
+
+#lineChart {
+  width: 100%;
+  height: 600px;
+}
+.container {
+  display: flex;
+}
+
+.chart-container {
+  flex-grow: 1;
+  /* Add other styling properties as needed */
+}
+
+
+
+
+

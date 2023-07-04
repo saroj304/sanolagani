@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sidebar Example</title>
+    <link rel="stylesheet" href="css/companydashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+   <div class="container">
+    <div class="sidebar">
+        <ul>
+            <li><a href="#" class="active">Dashboard</a></li>
+            <li><a href="#">Company Overview</a></li>
+            <li><a href="#">Investment Details</a></li>
+            <li><a href="#">Shareholder Management</a></li>
+            <li><a href="#">Financial Performance</a></li>
+            <li><a href="#">Documents and Reports</a></li>
+            <li><a th:href="@{/notification}">Notification</a></li>
+            <li><a href="#">Setting and Account Management</a></li>
+        </ul>
+    </div>
+    <div class="chart-container">
+      <canvas id="lineChart"></canvas>
+    </div>
+  </div>
+  
+  
+   <script input th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+      // Line Chart data
+      var chartData = {
+        labels: [[${labels}]],
+        datasets: [
+          {
+             label: "Revenue",
+             data: [20000, 30000, 25000, 35000, 28000, 40000],
+             backgroundColor: "rgba(75, 192, 192, 0.2)",
+             borderColor: "rgba(75, 192, 192, 1)",
+              borderWidth: 1,
+             fill: "+1"
+          },
+          {
+            label: "Investment Amount",
+            data: [15000, 22000, 18000, 28000, 21000, 32000],
+        	backgroundColor: "rgba(255, 99, 132, 0.2)",
+        	borderColor: "rgba(255, 99, 132, 1)",
+        	borderWidth: 1,
+        	fill: "+2"
+          },
+          {
+            label: "User Acquisition",
+        	data: [1000, 1500, 1200, 1800, 1400, 2000],
+       		backgroundColor: "rgba(255, 205, 86, 0.2)",
+       		borderColor: "rgba(255, 205, 86, 1)",
+       		borderWidth: 1,
+        	fill: true
+          },
+          {
+            label: "Traffic",
+        	data: [[${trafficvalues}]],
+        	backgroundColor: "rgba(54, 162, 235, 0.2)",
+        	borderColor: "rgba(54, 162, 235, 1)",
+        	borderWidth: 1,
+       		fill: true
+          }
+        ]
+      };
+      
+      // Line Chart options
+      var chartOptions = {
+        responsive: true,
+        title: {
+          display: true,
+          text: "Company Metrics"
+        },
+        scales: {
+          x: {
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: "Month"
+            }
+          },
+          y: {
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: "Value"
+            }
+          }
+        }
+      };
+      
+  var canvas = document.getElementById("lineChart");
+      var ctx = canvas.getContext("2d");
+      var lineChart = new Chart(ctx, {
+        type: "line",
+        data: chartData,
+        options: chartOptions
+      });
+    });
+  </script>
+</body>
+</html>

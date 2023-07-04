@@ -121,10 +121,10 @@ public class RegisterController {
 			try {
 				String results=emailservice.verifyCompanyDetails(un_company, request, result);
 					if(results.equalsIgnoreCase("success")) {
-						return "user_login";
+						return "redirect:/login";
 					}
 					else {
-						return "user_signup";
+						return "company_registration";
 					}
 					}catch(Exception e ) {
 						e.printStackTrace();

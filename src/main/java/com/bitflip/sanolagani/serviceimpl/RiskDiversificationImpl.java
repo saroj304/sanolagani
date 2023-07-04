@@ -56,7 +56,6 @@ public class RiskDiversificationImpl implements RiskDiversificationService{
                                                     .filter(investment -> investment.getCompany().getSector().equals(industrySector))
                                                     .mapToDouble(Investment::getAmount)
                                                     .sum());
-           System.out.println(sectorFrequencyMap);
         }
            }
         
@@ -66,7 +65,6 @@ public class RiskDiversificationImpl implements RiskDiversificationService{
             if (entry.getValue() > maxFrequency) {
                 mostFrequentSector = entry.getKey();
                 maxFrequency = entry.getValue();
-                System.out.println(mostFrequentSector);
             }
         }
     	List<Company> companylist = company_repo.findAll();
@@ -117,7 +115,6 @@ public class RiskDiversificationImpl implements RiskDiversificationService{
 	   }
 	       List<Company> companies_list = new ArrayList<>(company_list);
 		   
-		System.out.println("commpanylist: "+companies_list);
 		return companies_list;
 	}
 

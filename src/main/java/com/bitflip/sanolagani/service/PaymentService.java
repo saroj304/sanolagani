@@ -2,6 +2,7 @@ package com.bitflip.sanolagani.service;
 
 import com.bitflip.sanolagani.models.Collateral;
 import com.bitflip.sanolagani.models.Investment;
+import com.bitflip.sanolagani.models.Notification;
 import com.bitflip.sanolagani.models.Transaction;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -15,5 +16,5 @@ public interface PaymentService {
     public boolean verifyPayment(Map<String, String> paymentDetails) throws JsonProcessingException;
 	public void saveTransactionDetails(String token, String amount, int companyid,
 			                          Transaction transaction,String remarks,
-			                          Investment investment,Collateral collateral);
+			                          Investment investment,Collateral collateral,Notification notification);
 }

@@ -3,6 +3,7 @@ package com.bitflip.sanolagani.controllers;
 
 import com.bitflip.sanolagani.models.Collateral;
 import com.bitflip.sanolagani.models.Investment;
+import com.bitflip.sanolagani.models.Notification;
 import com.bitflip.sanolagani.models.Transaction;
 import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.repository.CollateralRepo;
@@ -32,7 +33,7 @@ public class PaymentController {
     		                    @RequestParam("amount") String amount,
     		                    @RequestParam(value = "companyId") int companyid,
     		                    @RequestParam(value="remarks" ,required = false) String remarks,
-    		                    Transaction transaction,Investment investment,Collateral collateral) 
+    		                    Transaction transaction,Investment investment,Collateral collateral,Notification notification) 
     		                    throws JsonProcessingException {
         System.out.println(token + " " + amount+" "+companyid);
         Map<String, String>  details = new HashMap<>();
@@ -41,7 +42,7 @@ public class PaymentController {
        boolean result = paymentService.verifyPayment(details);
        System.out.println(result);
        if(result) {
-    	   paymentService.saveTransactionDetails(token,amount,companyid,transaction,remarks,investment,collateral);
+    	   paymentService.saveTransactionDetails(token,amount,companyid,transaction,remarks,investment,collateral,notification);
        }
         return "redirect:/dashboard";
     }
@@ -51,13 +52,13 @@ public class PaymentController {
                                     @RequestParam("amount") double amount,
     							    Transaction transaction,
                                     Investment investment,
-    							    Collateral collaterals) {
+    							    Collateral collaterals,Notification notification) {
         User user = user_controller.getCurrentUser();
     	Collateral collateral = user.getCollateral();
     	if(collateral.getCollateral_amount()>=amount) {
     	String amounts = String.valueOf(amount);
     	paymentService.saveTransactionDetails("collateral", amounts,id, transaction, 
-    											"paying with collateral", investment, collaterals);
+    											"paying with collateral", investment, collaterals,notification);
     	
     	double amt = collateral.getCollateral_amount();
     	collateral.setCollateral_amount(amt-amount);

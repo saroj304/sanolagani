@@ -32,7 +32,6 @@ public class RecommendationInitializer {
 
          //Get the recommended companies for risk diversification
         List<Company> recommendedCompanies = riskdiversification.recommendCompanies(previousInvestments);
-        System.out.println(recommendedCompanies.size());
         // Pass the recommended companies to the view for rendering
          return recommendedCompanies; // Replace with your logic
     }
