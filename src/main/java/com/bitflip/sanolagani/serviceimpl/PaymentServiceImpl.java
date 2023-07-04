@@ -131,9 +131,9 @@ public class PaymentServiceImpl implements PaymentService {
 			investment.setInvestment_date_time(dateTime);
 			investment.setTransaction(transaction);
 			invest_repo.save(investment);
-			String message = "User: "+user.getFname()+" has invested in your company having name: "
-					          +company.getCompanyname()+", of amount Rs: "+amounts+" and a quantity: "
-					          +quantity+" share";
+			String message = "User: "+user.getFname()+" has invested in your company having company name: "
+					          +company.getCompanyname()+", for a quantity: "
+					          +quantity+" share unit,of amount Rs: "+quantity*company.getPrice_per_share();
 			notificationservice.saveNotification(message, notification,user.getId(),company.getId());
 			
 			
