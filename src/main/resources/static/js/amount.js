@@ -9,36 +9,37 @@ let submitBtn = document.getElementById("submit");
 let totalAmountPayable = document.getElementById("totalAmount");
 
 
-let minInvestment = parseFloat(document.getElementById("pps").innerText.replaceAll(" ",""));
-let maxInvestment = parseFloat(document.getElementById("pps").innerText.replaceAll(" ","")) * parseFloat(document.getElementById("maxq").innerText.replaceAll(" ",""));
+let minInvestment = parseFloat(document.getElementById("pps").innerText.replaceAll(" ", ""));
+let maxInvestment = parseFloat(document.getElementById("pps").innerText.replaceAll(" ", "")) * parseFloat(document.getElementById("maxq").innerText.replaceAll(" ", ""));
 let amt = 0; //total amounts as per price per unit
 let fees = 0; //brokerage charge
 let totalAmount = 0; //total charge
 let units = 0; //number of units
 
 
-for(let i=0; i < amountBtn.length; i++){
-    amountBtn[i].addEventListener("click", function(){
+for (let i = 0; i < amountBtn.length; i++) {
+    amountBtn[i].addEventListener("click", function () {
         submitBtn.disabled = true;
-        let amount  = amountBtn[i].innerText.replace("Rs.", "").replaceAll(",","").replaceAll(" ","");
+        let amount = amountBtn[i].innerText.replace("Rs.", "").replaceAll(",", "").replaceAll(" ", "");
         updateDetails(amount);
         amt = parseFloat(amount);
-        fees = 0.02*amt;
+        fees = 0.02 * amt;
         paymentAmount.value = amount;
     });
 }
 
-function updateDetails(budget){
-        amt = parseFloat(budget);
-        fees = Math.round(0.02*amt,2);
-        totalAmount = amt + fees;
+function updateDetails(budget) {
+    amt = parseFloat(budget);
+    fees = Math.round(0.02 * amt, 2);
+    totalAmount = amt + fees;
 
-        amtElement.innerText = amt;
-        feesElement.innerText = fees;
-        totalAmountElement.innerText =  totalAmount;
-        totalAmountPayable.value = totalAmount;
-        unitsElement.innerText = "";
+    amtElement.innerText = amt;
+    feesElement.innerText = fees;
+    totalAmountElement.innerText = totalAmount;
+    totalAmountPayable.value = totalAmount;
+    unitsElement.innerText = "";
 }
+
 
 paymentAmount.addEventListener("keyup", function(){
       submitBtn.disabled = true;
@@ -58,11 +59,20 @@ paymentAmount.addEventListener("keyup", function(){
       updateDetails(value);
       let message = document.getElementById("message");
       message.innerText = (parseFloat(value) < minInvestment || parseFloat(value) > maxInvestment)? "Amount should be between "+ minInvestment + " and "+ maxInvestment : "";
-    }
+    });
+
+paymentAmount.addEventListener("keyup", function () {
+    submitBtn.disabled = true;
+    var value = paymentAmount.value.replaceAll(" ", "");
+    updateDetails(value);
+    let message = document.getElementById("message");
+    message.innerText = (parseFloat(value) < minInvestment || parseFloat(value) > maxInvestment) ? "Amount should be between " + minInvestment + " and " + maxInvestment : "";
+}
+
 );
 
-confirmBtn.addEventListener("click", function(){
-    units = Math.floor(amt/minInvestment);
+confirmBtn.addEventListener("click", function () {
+    units = Math.floor(amt / minInvestment);
     amount = units * minInvestment;
     updateDetails(amount);
     unitsElement.innerText = units;

@@ -18,32 +18,29 @@
 			<h5>Offerings that have raised the highest money</h5>
 			<div class="cards row">
 				<div class="card" th:each="company : ${companybasedoncapital}" th:if="${company.status eq 'raising'}">
-					<a th:href="@{/company/{id}/ (id=${company.id})}"> <img
-						th:src="@{'/documents/' + ${company.id} + '/' + ${company.image}}"
-						class='card__image' alt="card-image" />
-						<h3 th:text="${company.companyname}" />
+					<a th:href="@{/company/{id}/ (id=${company.id})}"> 
+						<span class="card__tag">20 days left</span>
+						<img th:src="@{'/documents/' + ${company.id} + '/' + ${company.image}}" class='card__image' alt="card-image" />
+						<h3 class="company-name" th:text="${company.companyname}" />
 					</a>
-					<p class='desc'>The palstic that completely disintegrate...</p>
-
+					<p class='info'>
+						<strong>193</strong> investors have invested <strong>Rs. <i>2,700,000+</i></strong> so far.
+					</p>
 					<div class="card__score">
 						<div class="raised">
 							<h3>Rs.
 								[[${#numbers.formatInteger(company.previouslyraisedcapital, 3,
 								'COMMA')}]]</h3>
-							<p class='desc'>Capital To Raise</p>
+							<p class='desc'>Raise Capital</p>
 						</div>
 						<div class="investers">
 							<h3>400</h3>
-							<p class='desc'>Price per Unit</p>
+							<p class='desc'>Unit Price</p>
 						</div>
 						<div class="min__investment">
 							<h3 th:text="${company.maximum_quantity}" />
 							<p class='desc'>Max. Quantity</p>
 						</div>
-					</div>
-
-					<div class="division">
-						<p>Reg CF via Sanolagani Capital, Ltd.</p>
 					</div>
 				</div>
 			</div>
@@ -52,20 +49,19 @@
 
 	<!-- Most Funded -->
 	<section class='mostfunded__section'>
-		<div class="container mostfunded__container">
-			<h2>Recently Launched</h2>
-			<h5>Offerings that have raised the most money in the last few
-				days</h5>
-
-					<div class="cards row">
-						<div class="card " th:each="company : ${companybasedondate}">
-							<a th:href="@{'/company/'+${company.id}+'/'}"> <img
-								th:src="@{'/documents/' + ${company.id} + '/' + ${company.image}}"
-								class='card__image' alt="card-image" />
-						  <h3 th:text="${company.companyname}" />
-							</a>
-					<p class='desc'>The palstic that completely disintegrate...</p>
-
+		<div class="container momentum__container">
+			<h2>Highest Invest Opportunity</h2>
+			<h5>Offerings that have raised the highest money</h5>
+			<div class="cards row">
+				<div class="card" th:each="company : ${companybasedondate}" th:if="${company.status eq 'raising'}">
+					<a th:href="@{/company/{id}/ (id=${company.id})}"> 
+						<span class="card__tag">20 days left</span>
+						<img th:src="@{'/documents/' + ${company.id} + '/' + ${company.image}}" class='card__image' alt="card-image" />
+						<h3 class="company-name" th:text="${company.companyname}" />
+					</a>
+					<p class='info'>
+						<strong>193</strong> investors have invested <strong>Rs. <i>2,700,000+</i></strong> so far.
+					</p>
 					<div class="card__score">
 						<div class="raised">
 							<h3>Rs.
@@ -76,6 +72,11 @@
 						<div class="investers">
 							<h3>400</h3>
 							<p class='desc'>Price per Unit</p>
+							<p class='desc'>Raise Capital</p>
+						</div>
+						<div class="investers">
+							<h3>400</h3>
+							<p class='desc'>Unit Price</p>
 						</div>
 						<div class="min__investment">
 							<h3 th:text="${company.maximum_quantity}" />
@@ -94,7 +95,7 @@
 
 	<!-- Recommend based on feedback -->
 	<section class='momentum__section'>
-		<div class="container momentum__container">
+		<div class="container mostfunded__container">
 			<h2>Feedback</h2>
 			<h5>Recommend companies based on feedback</h5>
 			<div class="cards row">
@@ -122,10 +123,6 @@
 							<h3 th:text="${company.maximum_quantity}" />
 							<p class='desc'>Max. Quantity</p>
 						</div>
-					</div>
-
-					<div class="division">
-						<p>Reg CF via Sanolagani Capital, Ltd.</p>
 					</div>
 				</div>
 			</div>

@@ -244,13 +244,24 @@ public class CompanyDetailsController {
 		return "company_investment-details";
 	}
 	
-	@GetMapping("/company/sector/status")
+	@GetMapping("/company/{sector}/{status}")
 	public String getCompanySortByStatusAndSector(@PathVariable("sector") String sector,
 			@PathVariable("status") String status,Model model) {
 	        
 		List<Company> sectorstatuslist = new ArrayList<>();
-		
-		if(status == "Highest Raised") {
+		if(status.equalsIgnoreCase("null")) {
+			List<Company> companylist = companyRepo.findAll();
+			if(companylist.isEmpty()) {
+				return "company-list"; 
+			}else {
+				for(Company company:companylist) {
+					if(company.getSector().equalsIgnoreCase(sector)) {
+						sectorstatuslist.add(company);
+					}
+				}
+			}
+		}else{
+		   if(status == "Highest Raised") {
 	        List<Company> basedoncapital  = companyRepo.findAll();
 	        Collections.sort(basedoncapital, Comparator.comparing(Company::getPreviouslyraisedcapital).reversed());
             for(Company company:basedoncapital) {
@@ -283,7 +294,9 @@ public class CompanyDetailsController {
          	   }
             }
          } 
-		model.addAttribute("sectorstatuslist", sectorstatuslist);
+		}
+		model.addAttribute("companies", sectorstatuslist);
+		System.out.println(sectorstatuslist.size());
 		return "company-list";
 	}
 	
