@@ -122,7 +122,7 @@ public class PaymentServiceImpl implements PaymentService {
 	
 			LocalDateTime dateTime = LocalDateTime.now();
 			double pricepershare = company.getPrice_per_share();
-			int quantity = (int) (amounts/pricepershare);
+			int quantity = (int) ((amounts/1.02)/pricepershare);
 			investment.setAmount(amounts);
 			investment.setQuantity(quantity);
 			investment.setUser(user);
