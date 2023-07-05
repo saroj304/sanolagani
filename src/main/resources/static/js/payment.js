@@ -43,7 +43,7 @@ paymentBtn.onclick = function () {
 
             if (!amount){
               console.log("amount is null");
-              amount = amountInput.value*100;
+              amount = amountInput.value;
             }
             if (amount) {
                  // Convert amount from rupees to paisa
@@ -53,7 +53,6 @@ paymentBtn.onclick = function () {
             } else {
                 alert("Please enter the amount.");
             }
-       
 }
 
 

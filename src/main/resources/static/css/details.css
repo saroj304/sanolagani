@@ -1,9 +1,7 @@
 .details__container{
     display: grid;
     grid-template-columns: 2fr 1fr;
-    /* border: 1px solid black; */
-    margin-top: 1.5rem;
-    margin-bottom: 2rem;
+    margin: 2rem 0;
 }
 /* ================== left container ================= */
 .left__detail-main{
