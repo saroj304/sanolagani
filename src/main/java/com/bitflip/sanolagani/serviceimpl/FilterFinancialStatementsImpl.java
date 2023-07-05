@@ -21,24 +21,27 @@ public class FilterFinancialStatementsImpl{
         }
     }
 
-    public void getAllFinancialStatements(Integer companyID){
+    public void getAllFinancialStatements(Integer companyID) throws IOException {
         File companyDir = new File("src/main/resources/output/"+companyID);
         List<File> files = Arrays.asList(companyDir.listFiles());
-        String text = "";
+        BufferedReader reader = null;
         for(File file: files){
+            String text = "";
             try {
-                BufferedReader reader = new BufferedReader(new FileReader(companyDir + "/"+file.getName()));
+                reader = new BufferedReader(new FileReader(companyDir + "/"+file.getName()));
+                while (reader.readLine() != null)
                 // checkDocumentsContainingFinancialStatements(reader.readLine());
-                text += reader.readLine();
-                reader.close();
-                break;
-                } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
+                    text += reader.readLine() + "\n";
+                    break;
+                } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+            finally {
+                reader.close();
+                checkDocumentsContainingFinancialStatements(text);
+                System.out.println(text);
+            }
         }
-        checkDocumentsContainingFinancialStatements(text);
     }
 
     private void checkDocumentsContainingFinancialStatements(String s) {
@@ -54,7 +57,7 @@ public class FilterFinancialStatementsImpl{
     }
 
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         FilterFinancialStatementsImpl filterFinancialStatementsImpl = new FilterFinancialStatementsImpl();
         filterFinancialStatementsImpl.getAllFinancialStatements(10);
     }

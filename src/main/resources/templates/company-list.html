@@ -10,6 +10,9 @@
   <!-- All Companies -->
   <section class='mostfunded__section'>
     <div class="container mostfunded__container">
+      <select name="sectors" id="sector-dropdown">
+        <option th:each="company : ${companies}" th:value="${company.sector}" th:text="${company.sector}"></option>
+      </select>
       <h2>Highest Invest Opportunity</h2>
       <h5>Offerings that have raised the highest money</h5>
       <div class="cards row">
@@ -18,7 +21,7 @@
           <!--					<span th:text="${company.previouslyraisedcapital}"></span>-->
           <a th:href="@{/company/{id}/ (id=${company.id})}">
             <img th:src="@{../documents/{id}/{image} (image=${company.image}, id= ${company.id})}"
-                 class='card__image' alt="card-image" />
+                class='card__image' alt="card-image" />
             <h3 th:text="${company.companyname}" />
           </a>
           <p class='desc'>The palstic that completely disintegrate...</p>
