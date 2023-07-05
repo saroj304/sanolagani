@@ -2,6 +2,8 @@ package com.bitflip.sanolagani.controllers;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bitflip.sanolagani.models.Company;
@@ -70,18 +73,22 @@ public class HomeController {
         }
         
         	
-		List<Company> companybasedoncapital = company_repo.findAllCompanyBasesOnRaidedCapitalDesc();
-		Optional<List<Company>> result = Optional.ofNullable(companybasedoncapital);
-		
-		model.addAttribute("companybasedoncapital", companybasedoncapital);
-		
+		List<Company> basedoncapital = company_repo.findAll();
+		Optional<List<Company>> result = Optional.ofNullable(basedoncapital);
+	
+        Collections.sort(basedoncapital, Comparator.comparing(Company::getPreviouslyraisedcapital).reversed());
+        
 		List<Company> companybasedondate = company_repo.findAllCompanyBasesOnCreationalDates();
 		Optional<List<Company>> result1 = Optional.ofNullable(companybasedondate);
-		
+		 
+		List<Company> diversifiedcompanylist = recommedationinit.getRecommendCompanies();
+ 
 		List<Company> c_list = pre.getCompaniesWithGoodSentiment();
+
+		
+		
 		if (result != null & result1 != null) {
-			List<Company> diversifiedcompanylist = recommedationinit.getRecommendCompanies();
-            System.out.println(diversifiedcompanylist);
+    		model.addAttribute("companybasedoncapital", basedoncapital);
 			model.addAttribute("companybasedondate", companybasedondate);
 			model.addAttribute("diversifiedcompanylist", diversifiedcompanylist);
 			model.addAttribute("c_list", c_list);
@@ -100,16 +107,23 @@ public class HomeController {
 
 		return "redirect:/home";
 	}
-
-
-
 //	Sentiment analysis based on the feedback of the company
 
-	@GetMapping("/text")
-	public String analysis() {
-		List<Company> c_list = pre.getCompaniesWithGoodSentiment();
 
-		return "index";
-	}
 
+
+//	@GetMapping("/company/watchlist/{id}")
+//	public String addTOWatchList(@PathVariable("id") int id) {
+//		Company company = company_repo.getReferenceById(id);
+//		company.setIswatchlisted(true);
+//		company_repo.save(company);
+//		return "redirect:/company/"+id;
+//	}
+//	
+//	@GetMapping("/company/mywatchlist")
+//	public String getMyWatchlistedCompany(Model model) {
+//		List<Company> companylist = company_repo.findByiswatchlistedTrue();
+//		model.addAttribute("companies", companylist);
+//		return "company-list";
+//	}
 }
