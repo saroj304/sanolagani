@@ -18,9 +18,8 @@
 			<h5>Offerings that have raised the highest money</h5>
 			<div class="cards row">
 				<div class="card" th:each="company : ${companybasedoncapital}" th:if="${company.status eq 'raising'}">
-					<a th:href="@{/company/{id}/ (id=${company.id})}"> <img
-						th:src="@{'/documents/' + ${company.id} + '/' + ${company.image}}"
-						class='card__image' alt="card-image" />
+					<a th:href="@{/company/{id}/ (id=${company.id})}"> 
+						<img th:src="@{'/documents/' + ${company.id} + '/' + ${company.image}}" class='card__image' alt="card-image" />
 						<h3 th:text="${company.companyname}" />
 					</a>
 					<p class='desc'>The palstic that completely disintegrate...</p>
