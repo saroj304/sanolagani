@@ -34,8 +34,11 @@
 }
 
 :root {
-	--color-blue: #007BFF;
-	--color-blue-variant: #2372c7;
+	--color-dark: #000;
+	--color-white: #fff;
+	--color-blue: #0078D7;
+	--color-blue-hover: #055596;
+
 
 	--color-gray: #6C757D;
 	--color-light-gray: #B7BDBE;
@@ -46,9 +49,9 @@
 	--color-background: #f3f3f3;
 	--color-background-variant: #f9f9f9;
 	
-	--color-dark: #000;
-	--color-white: #fff;
+
 	--transition: all 400ms ease;
+
 	--container-width-lg: 75%;
 	--container-width-md: 86%;
 	--container-width-sm: 90%;
@@ -91,10 +94,6 @@ h1 {
 }
 
 section {
-	/* margin-top: 6rem; */
-	padding-top: 1rem;
-	/* margin-bottom: 5rem; */
-	/* padding-bottom: 3rem; */
 }
 
 .text-light {
@@ -102,9 +101,10 @@ section {
 }
 
 a {
-	color: var(--color-dark);
+	color: #fff;
 	transition: var(--transition);
 	font-size: 18px;
+	text-transform: capitalize;
 }
 
 .nav__link:hover {
@@ -112,31 +112,36 @@ a {
 }
 
 .btn {
-	width: max-content;
-	display: inline-block;
-	color: var(--color-white);
-	padding: 0.75rem 1.2rem;
-	border-radius: 0.4rem;
-	cursor: pointer;
-	border: 1px solid var(--color-primary);
-	transition: var(--transition);
-	background: var(--color-blue);
+    min-width: 100px;
+    display: inline-block;
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #000;
+    transition: var(--transition);
+    font-size: 18px;
 }
-
-.btn:hover {
-	color: var(--color-white);
-	border-color: transparent;
+.btn:hover{
+	background: rgb(180, 178, 178);
+	color: #fff;
 }
 
 .btn-primary {
-	background: var(--color-primary);
-	color: var(--color-bg);
+	background: var(--color-blue);
+	color: #fff !important;
+}
+.btn-primary:hover{
+	background: var(--color-blue-hover);
 }
 .btn-danger{
 	background:red;
-	font-size: 18px;
+	color: #fff !important;
 }
-
+.btn-danger:hover{
+	background: rgb(171, 1, 1);
+}
 img {
 	display: block;
 	width: 100%;
@@ -171,6 +176,73 @@ img {
 	.section {
 		margin-top: 6rem;
 	}
+}
+/* ============ profile dropdown =================== */
+.sub-menu-wrap{
+    position: absolute;
+    top: 130px;
+    right: 10%;
+    width: 290px;
+
+    max-height: 400px;
+    overflow: hidden;
+    transition: max-height 0.5s;
+	box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+	background: #fff;
+	display: none;
+	transition: all 400ms ease;
+	/* border-radius: 10px; */
+	
+}
+.sub-menu-wrap.active-menu{
+    display: block;
+	transition: all 400ms ease;
+}
+.sub-menu-user-info h2{
+	font-size: 20px;
+    font-weight: 500;
+}
+.sub-menu{
+	padding: 0 10px;
+}
+.sub-menu-link{
+	font-size: 15px;
+}
+.sub-menu-link p{
+	margin: 5px 0;
+	color: #000;
+	transition: all 400ms ease;
+}
+.sub-menu-link p:hover{
+	margin-left: 10px;
+	transform: all 400ms ease;
+}
+
+/* ===================== 404 page not found======================== */
+.notfound__container{
+	text-align: center;
+	margin-bottom: 10rem;
+}
+.notfound__container h1{
+	margin-top: 5rem;
+	font-size: 86px;
+}
+.notfound__container h2{
+
+}
+.notfound__container h4{
+	font-size: 12px;
+	letter-spacing: 0.5px;
+	margin-bottom: 3rem !important;
+	text-transform: capitalize;
+}
+.notfound__container a{
+	color: #000 !important;
+	font-size: 15px !important;
+	user-select: none;
+}
+.notfound__container a:hover{
+	text-decoration: underline;
 }
 
 /* =========================== SMALL DEVICES =============================== */

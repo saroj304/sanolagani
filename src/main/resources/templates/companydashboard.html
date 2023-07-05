@@ -15,8 +15,10 @@
             <li><a href="#">Shareholder Management</a></li>
             <li><a href="#">Financial Performance</a></li>
             <li><a href="#">Documents and Reports</a></li>
+
             <li th:if="${unread != 0}"><a th:href="@{/notification}">Notification<span class="notification-count">[[${unread}]]</span></a></li>
             <li th:unless="${unread != 0}"><a th:href="@{/notification}">Notification</a></li>
+
             <li><a th:href="@{/logout}">Setting and Account Management</a></li>
         </ul>
     </div>

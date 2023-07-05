@@ -18,11 +18,17 @@
 .left__dashborad{
     font-size: 15px;
 }
-.left_dashborad div{
+.left_dashborad .dashboard-title-wrap{
     display: flex;
     flex-direction: column;
 }
-.left__dashboard div a:hover{
+.left__dashboard-title:hover{
+    margin-left: 10px;
+}
+.dashboard-title a{
+    color: #000 !important;
+}
+.dashboard-title a:hover{
     margin-left: 10px;
 }
 /* drop down */
@@ -31,12 +37,20 @@
     background: transparent;
     font-size: 18px;
     cursor: pointer;
+    overflow: hidden;
+}
+.drop-btn span{
+    font-size: 12px;
+    border: 1px solid gray;
+    border-radius: 3px;
+    padding: 2px;
+    overflow: hidden;
 }
 .drop-btn:hover{
     margin-left: 10px;
     transition: var(--transition);
 }
-.dropdown{
+.dropdown-manage-fund{
     position: relative;
     display: inline-block;
 }
@@ -46,9 +60,17 @@
     margin-left: 10px;
     font-size: 12px;
 }
-.fundManagementContent a{
+.fundManagementContent div{
     font-size: 15px;
     display: block;
+}
+.fundManagementContent div a{
+    color: #000 !important;
+    font-size: 17px;
+
+}
+.fundManagementContent div a:hover{
+    margin-left: 10px;
 }
 .show{
     display: block;
