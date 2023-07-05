@@ -1,0 +1,94 @@
+.dashboard {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+
+.main-content {
+  flex: 50%;
+}
+
+.card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h3 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.sidebar-item:hover .dropdown-menu {
+    display: block;
+}
+/* Reset default margin and padding */
+body, ul {
+  margin: 0;
+  padding: 0;
+}
+
+/* Sidebar styles */
+.sidebar {
+  background-color: #333;
+  color: #fff;
+  width: 200px;
+  height: 100vh;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+}
+
+.sidebar li {
+  margin-bottom: 10px;
+}
+
+.sidebar a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.sidebar .dropdown-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+}
+.dropdown-content2 {
+  display: none;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 10px;
+}
+
+/* Content area styles */
+.content {
+  padding: 20px;
+ 
+}
+
+/* Show dropdown content on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+        

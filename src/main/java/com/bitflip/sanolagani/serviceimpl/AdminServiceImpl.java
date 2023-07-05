@@ -115,18 +115,23 @@ public class AdminServiceImpl implements AdminService {
 		company.setUser(user);
 		company_repo.save(company);
 		try {
-			transferUploadedFile(company);
+			int company_id = transferUploadedFile(company);
+			System.out.println("file transfered.\n Extracting tables from pdf for company " + company.getId()
+					+ " and company name " + company.getCompanyname() + " .");
+			tablesFromPDF.extractAllTables(company_repo.getReferenceById(company_id));
+			System.out.println("tables extracted.");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 		deleteData(id);
 	}
 
-	public void transferUploadedFile(Company company) throws IOException {
+	public int transferUploadedFile(Company company) throws IOException {
 		// for pdf file
 		List<Company> companylist = company_repo.findAll();
 		int company_id = 0;
-		;
+		
 		for (Company companies : companylist) {
 			if (companies.getUser().getEmail().equals(company.getUser().getEmail())) {
 				company_id = companies.getId();
@@ -165,8 +170,7 @@ public class AdminServiceImpl implements AdminService {
 		Path source_image_path = Path.of(sourcepath + image_name);
 		Path imagedestinationpath = Path.of(destinationpath + image_name);
 		Files.copy(source_image_path, imagedestinationpath, StandardCopyOption.REPLACE_EXISTING);
-
-		tablesFromPDF.extractAllTables(company);
+		return company_id;
 
 	}
 

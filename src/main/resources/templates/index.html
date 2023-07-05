@@ -19,6 +19,7 @@
 			<div class="cards row">
 				<div class="card" th:each="company : ${companybasedoncapital}" th:if="${company.status eq 'raising'}">
 					<a th:href="@{/company/{id}/ (id=${company.id})}"> 
+						<span class="card__tag">20 days left</span>
 						<img th:src="@{'/documents/' + ${company.id} + '/' + ${company.image}}" class='card__image' alt="card-image" />
 						<h3 th:text="${company.companyname}" />
 					</a>

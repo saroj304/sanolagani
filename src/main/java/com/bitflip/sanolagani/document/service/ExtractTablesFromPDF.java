@@ -23,7 +23,8 @@ public class ExtractTablesFromPDF {
 
     public void extractAllTables(Company company) throws IOException {
         this.path = "../sanolagani/src/main/resources/documents/"+company.getId()+"/"+company.getFilename();
-        this.documentName = new File(path).getName().split("\\.")[0];
+        System.out.println("Extracting tables to path: " + this.path);
+        this.documentName = new File(company.getFilename().toString()).getName();
         this.tsvDirectoryPath = "../sanolagani/src/main/resources/output/" + company.getId()+"/";
         this.doc = Loader.loadPDF(new File(this.path));
         File opdir = new File(this.tsvDirectoryPath);

@@ -23,10 +23,54 @@
 </head>
 
 <body>
+	
+<div class="dashboard">
+	 <div class="sidebar">
+        <h2>Dashboard</h2>
+          <ul>
+              <li><a href="#">Dashboard</a></li>
+               <li class="dropdown">
+                    <a href="#" class="dropdown-btn">Users</a>
+                    <div class="dropdown-content">
+                          <a th:href="@{/admin/viewusers}">Manage Users</a>
+                          <a th:href="@{/admin/viewinvestment}">View Investment</a>
+                          <a th:href="@{/admin/viewcollateral}">View Collateral</a>
+                     </div>
+                  </li>
+                  <li class="dropdown">
+                   <a href="#" class="dropdown-btn">Companies</a>
+                     <div class="dropdown-content">
+                         <a th:href="@{/admin/viewcompany}">View Companies</a>
+                         <a th:href="@{/admin/managecompany}">Manage Companies</a>
+                     </div>
+                   </li>
+                   <li><a th:href="@{/admin/refunddata}">Refund Data</a></li>
+                   <li><a th:href="@{/admin/companystatistics}">Companies Statistics</a></li>
+                   <li class="dropdown">
+                   <a href="#" class="dropdown-btn">Reports</a>
+                     <div class="dropdown-content">
+                         <a th:href="@{/admin/reports}">Reports Table</a>
+                         <a th:href="@{admin/companies/statisticsgraph}">Statistics Graph</a>
+                     </div>
+                   </li>
+               </ul>
+          </div>
+                 
+        <div class="main-content">
+           <!-- Main Content Card -->
+            <div class="card">
+             <h2>Welcome to the Admin Dashboard</h2>
+        <div class="card">
+            <h3>Investment Performance</h3>
+            <canvas id="investment-chart"></canvas>
+         </div>
+      </div>
+
   <div class="dashboard">
     <div class="sidebar">
       <h2>Dashboard</h2>
       <ul th:insert="fragment/admin-dashboard.html :: dashboard-left"></ul>
+
     </div>
 
     <div class="main-content">

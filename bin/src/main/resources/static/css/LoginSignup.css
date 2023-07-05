@@ -1,3 +1,6 @@
+.login{
+    margin-bottom: 3rem;
+}
 .login__container{
     display: flex;
     justify-content: space-between;
@@ -25,7 +28,7 @@
     flex-direction: column;
 }
 .heading__background{
-    background: var(--color-bg);
+    background: var(--color-background);
     border-radius: 10px;
     margin-bottom: 3rem;
     display: flex;
@@ -42,17 +45,15 @@
     font-size: 15px;
     margin-bottom: 1rem;
     letter-spacing: .5px;
-    background: var(--color-bg);
-    width: 80%;
-    margin-left: 10%;
+    background: var(--color-background);
+    width: 100%;
     border-radius: 10px;
     border: none;
 }
 .btn__login{
-    width: 80%;
+    width: 100%;
     font-size: 18px;
     text-align: center;
-    margin-left: 10%;
 }
 .btn__login:hover{
     background: var(--color-blue-variant);
@@ -75,3 +76,22 @@
 .forgot__password-link:hover{
     color: #000;
 } 
+.alert-error{
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+.text-danger{
+    color: red;
+}
+#error-msg,  #password-error{
+    color: red;
+    font-size: 15px;
+    width: 100%;
+    /* margin-top: -15px; */
+    text-transform: capitalize;
+}
+.error{
+    color: red;
+    font-size: 15px;
+    width: 100%;
+}

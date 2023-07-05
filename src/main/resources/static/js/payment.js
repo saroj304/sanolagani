@@ -39,11 +39,11 @@ var paymentBtn = document.getElementById("payment-button");
 paymentBtn.onclick = function () {
           var amountInput = document.getElementById("total");
           
-            var amount = parseFloat(amountInput.innerText)*100;
+            var amount = parseFloat(amountInput.innerText);
 
             if (!amount){
               console.log("amount is null");
-              amount = amountInput.value * 100;
+              amount = amountInput.value*100;
             }
             if (amount) {
                  // Convert amount from rupees to paisa

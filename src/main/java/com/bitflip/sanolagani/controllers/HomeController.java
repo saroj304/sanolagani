@@ -45,6 +45,8 @@ public class HomeController {
 			if(user.getCompany().getPwd_change().equals("false")) {
 				redirectAttributes.addFlashAttribute("email", user.getEmail());
 				return "redirect:/change_password";
+			}else {
+				return "redirect:/companydashboard";
 			}
 		}
 		}
@@ -99,10 +101,7 @@ public class HomeController {
 		return "redirect:/home";
 	}
 
-	@GetMapping("/details")
-	public String investNow() {
-		return "details";
-	}
+
 
 //	Sentiment analysis based on the feedback of the company
 

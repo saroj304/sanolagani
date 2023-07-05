@@ -4,6 +4,7 @@ import com.bitflip.sanolagani.controllers.UserController;
 import com.bitflip.sanolagani.models.Collateral;
 import com.bitflip.sanolagani.models.Company;
 import com.bitflip.sanolagani.models.Investment;
+import com.bitflip.sanolagani.models.Notification;
 import com.bitflip.sanolagani.models.Transaction;
 import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.repository.CollateralRepo;
@@ -34,7 +35,8 @@ public class PaymentServiceImpl implements PaymentService {
     InvestmentRepo invest_repo;
     @Autowired
     TransactionRepo trans_repo;
-
+    @Autowired
+    NotificationServiceImpl notificationservice;
     @Autowired
     CollateralRepo collateral_repo;
     @Override
@@ -84,7 +86,8 @@ public class PaymentServiceImpl implements PaymentService {
 	@Override
 	public void saveTransactionDetails(String token, String amounts,
 										int companyid, Transaction transaction,
-										String remarks,Investment investment,Collateral collateral) {
+										String remarks,Investment investment,Collateral collateral,
+										Notification notification) {
 		
 		User user = user_controller.getCurrentUser();
 		LocalDateTime dateTime = LocalDateTime.now();
@@ -96,7 +99,7 @@ public class PaymentServiceImpl implements PaymentService {
         if(companyid!=0) {
            transaction.setTransaction_type("investment");
            trans_repo.save(transaction);
-           saveInvestmentDetails(token,amount,companyid,transaction,remarks,user,investment);
+           saveInvestmentDetails(token,amount,companyid,transaction,remarks,user,investment,notification);
         }else {
         	transaction.setTransaction_type("collateral");
         	 trans_repo.save(transaction);
@@ -111,7 +114,9 @@ public class PaymentServiceImpl implements PaymentService {
 	
 	public void saveInvestmentDetails(String token, double amounts, 
 			                           int companyid,Transaction transaction,
-			                           String remarks,User user,Investment investment) {
+			                           String remarks,User user,Investment investment,
+			                           Notification notification) {
+		
 		String remark=remarks;
 		Company company = company_repo.getReferenceById(companyid);
 	
@@ -126,7 +131,10 @@ public class PaymentServiceImpl implements PaymentService {
 			investment.setInvestment_date_time(dateTime);
 			investment.setTransaction(transaction);
 			invest_repo.save(investment);
-			System.out.println("investment save :"+investment);
+			String message = "User: "+user.getFname()+" has invested in your company having company name: "
+					          +company.getCompanyname()+", for a quantity: "
+					          +quantity+" share unit,of amount Rs: "+quantity*company.getPrice_per_share();
+			notificationservice.saveNotification(message, notification,user.getId(),company.getId());
 			
 			
 	}

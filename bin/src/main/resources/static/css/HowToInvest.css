@@ -13,6 +13,7 @@
 .howtoinvest__info h2{
     font-weight: 600;
     letter-spacing: 0.5px;
+    overflow: hidden;
 }
 .text-upper{
     text-transform: uppercase;
