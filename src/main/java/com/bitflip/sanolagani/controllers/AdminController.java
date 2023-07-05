@@ -55,7 +55,7 @@ public class AdminController {
 		return "admin";
 	}
 
-	@GetMapping("admin/admindashboard")
+	@GetMapping("/admin/admindashboard")
 
 	public String getAdminDashboardPage(Model model) {
 		LocalDateTime now = LocalDateTime.now();
