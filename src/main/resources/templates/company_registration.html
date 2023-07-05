@@ -3,6 +3,7 @@
 
 <head th:insert="fragment/head.html :: headerfiles">
 	<title>Register Company</title>
+	
 </head>
 
 <body>
@@ -93,6 +94,10 @@
 						<input class="register_input" id="citizen_back" type="file" placeholder="Citizen Back" name="citizen_back" />
 					</div>
 				</div>
+
+				<div>
+					<textarea name="description" id="description" cols="30" rows="10" placeholder="Description"></textarea>
+				</div>
 				<button type="submit" class="btn sumbit">Submit</button>
 
 			</form>
@@ -103,6 +108,21 @@
 	<footer>
 		<footer th:insert="fragment/footer.html :: footer"> </footer>
 	</footer>
+	<script src="https://cdn.tiny.cloud/1/e3z2ecxasuxnyu4ybjuj9s5enkf3rd5nn7dddrh78hparzr6/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+	<script>
+		tinymce.init({
+			selector: 'textarea',
+			plugins: 'accordion anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+			toolbar: 'accordion undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+			tinycomments_mode: 'embedded',
+			tinycomments_author: 'Author name',
+			mergetags_list: [
+				{ value: 'First.Name', title: 'First Name' },
+				{ value: 'Email', title: 'Email' },
+			]
+		});
+	</script>
+	
 </body>
 
 </html>
