@@ -51,8 +51,10 @@ UserServiceImpl userservice;
 		List<Investment> investment_list = user.getInvestments();
 		Collateral collateral = user.getCollateral();
 		if(collateral ==null){
-			model.addAttribute("id", user.getId());
-			return "dashboard";
+			model.addAttribute("totalcollateralamount", 0) ;
+		}else{
+			model.addAttribute("totalcollateralamount", collateral.getCollateral_amount()) ;
+
 		}
 		if(investment_list!=null) {
 		List<Object> totalsharelist = new ArrayList<>();
@@ -61,6 +63,7 @@ UserServiceImpl userservice;
 		List<Object[]> investmentlist = invest_repo.getTotalSharesPerCompany(user.getId());
 	    for(Object[] obj:investmentlist) {
 	    	String companyname = company_repo.getCompanyName(obj[0]);
+			System.out.println("company: " +companyname);
 	    	companynamelist.add(companyname);
 	    	totalsharelist.add(obj[1]);
 	    	totalamountlist.add(obj[2]);
@@ -72,8 +75,8 @@ UserServiceImpl userservice;
          int size = investmentlist.size();
          int totalshare = investment_list.stream()
         		     .mapToInt(Investment::getQuantity).sum();
-         
-        model.addAttribute("totalcollateralamount", collateral.getCollateral_amount()) ;
+        System.out.println(companynamelist);
+        // model.addAttribute("totalcollateralamount", collateral.getCollateral_amount()) ;
         model.addAttribute("id", user.getId());
   		model.addAttribute("totalshare", totalshare);
  		model.addAttribute("size", size);
