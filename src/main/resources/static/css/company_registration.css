@@ -14,6 +14,10 @@
 .company_registration {
     text-align: center;
 }
+.register-row{
+    display: flex;
+    gap: 4rem;
+}
 
 .register_input {
     padding: 8px 10px;
@@ -36,4 +40,28 @@
 .doc_file{
     display: flex;
     flex-direction: column;
+}
+.register-document{
+    width: 660px;
+    margin-bottom: 2rem;
+
+}
+.register-document div{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 10px;
+}
+.register-document div label{
+    /* border: 0.5px solid black; */
+    /* border-radius: 8px; */
+    font-size: 18px;
+    /* color: var(--color-gray); */
+    color: var(--color-blue);
+}
+.upload-doc {
+    border: 1px solid gray;
+    height: 32px;
+    font-size: 18px;
+    border-radius: 5px;
 }
