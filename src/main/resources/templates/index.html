@@ -13,44 +13,12 @@
 
 	<!-- Most Momentum -->
 	<section class='momentum__section'>
-<<<<<<< HEAD
 		<div class="container mostfunded__container">
 			<h2>Highest Invest Opportunity</h2>
 			<h5>Offerings that have raised the highest money</h5>
 			<div class="cards row">
 				<div class="card" th:each="company : ${companybasedoncapital}" th:if="${company.status eq 'raising'}">
 					<div th:replace="fragment/company-card.html :: card"></div>
-=======
-		<div class="container momentum__container">
-			<h2>Highest Raised</h2>
-			<h5>Offerings that have raised the highest money</h5>
-			<div class="cards row">
-				<div class="card" th:each="company : ${companybasedoncapital}" th:if="${company.status eq 'raising'}">
-					<a th:href="@{/company/{id}/ (id=${company.id})}"> 
-						<span class="card__tag">[[${remainingdaysmap.get(company.companyname)}]] Days Left</span>
-						<img th:src="@{'/documents/' + ${company.id} + '/' + ${company.image}}" class='card__image' alt="card-image" />
-						<h3 class="company-name" th:text="${company.companyname}" />
-					</a>
-					<p class='info'>
-						<strong>[[${totalUsersInvestedMap.get(company.companyname)}]]</strong> investors have invested <strong>Rs. <i>[[${totalApplyShareMap.get(company.companyname)*company.price_per_share}]]</i></strong> so far.
-					</p>
-					<div class="card__score">
-						<div class="raised">
-							<h3>Rs.
-								[[${#numbers.formatInteger(company.previouslyraisedcapital, 3,
-								'COMMA')}]]</h3>
-							<p class='desc'>Raise Capital</p>
-						</div>
-						<div class="investers">
-							<h3>400</h3>
-							<p class='desc'>Unit Price</p>
-						</div>
-						<div class="min__investment">
-							<h3 th:text="${company.maximum_quantity}" />
-							<p class='desc'>Max. Quantity</p>
-						</div>
-					</div>
->>>>>>> 6e233ace45c8d6e0cf2f1495b26fcbb663e111b2
 				</div>
 			</div>
 		</div>
@@ -63,43 +31,7 @@
 			<h5>Offerings that have raised the highest money</h5>
 			<div class="cards row">
 				<div class="card" th:each="company : ${companybasedondate}" th:if="${company.status eq 'raising'}">
-<<<<<<< HEAD
 					<div th:replace="fragment/company-card.html :: card"></div>
-=======
-					<a th:href="@{/company/{id}/ (id=${company.id})}"> 
-						<span class="card__tag">20 days left</span>
-						<img th:src="@{'/documents/' + ${company.id} + '/' + ${company.image}}" class='card__image' alt="card-image" />
-						<h3 class="company-name" th:text="${company.companyname}" />
-					</a>
-					<p class='info'>
-						<strong>[[${totalUsersInvestedMap.get(company.companyname)}]]</strong> investors have invested <strong>Rs. <i>[[${totalApplyShareMap.get(company.companyname)*company.price_per_share}]]</i></strong> so far.
-					</p>
-					<div class="card__score">
-						<div class="raised">
-							<h3>Rs.
-								[[${#numbers.formatInteger(company.previouslyraisedcapital, 3,
-								'COMMA')}]]</h3>
-							<p class='desc'>Capital To Raise</p>
-						</div>
-						<div class="investers">
-							<h3>400</h3>
-							<p class='desc'>Price per Unit</p>
-							<p class='desc'>Raise Capital</p>
-						</div>
-						<div class="investers">
-							<h3>400</h3>
-							<p class='desc'>Unit Price</p>
-						</div>
-						<div class="min__investment">
-							<h3 th:text="${company.maximum_quantity}" />
-							<p class='desc'>Max. Quantity</p>
-						</div>
-					</div>
-
-					<div class="division">
-						<p>Reg CF via Sanolagani Capital, Ltd.</p>
-					</div>
->>>>>>> 6e233ace45c8d6e0cf2f1495b26fcbb663e111b2
 				</div>
 			</div>
 		</div>
@@ -113,37 +45,8 @@
 			<h5>Recommend companies based on feedback</h5>
 			<div class="cards row">
 
-<<<<<<< HEAD
 				<div class="card " th:each="company : ${c_list}">
 					<div th:replace="fragment/company-card.html :: card"></div>
-=======
-				<div class="card " th:each="company : ${c_list}" th:if="${company.status eq 'raising'}">
-					<a th:href="@{'/company/'+${company.id}+'/'}"> <img
-		                <span class="card__tag">20 days left</span>
-						th:src="@{'/documents/'+${company.id}+'/'+${company.image}}"
-						class='card__image' alt="card-image" />
-						<h3 th:text="${company.companyname}" />
-					</a>
-                     <p class='info'>
-						<strong>[[${totalUsersInvestedMap.get(company.companyname)}]]</strong> investors have invested <strong>Rs. <i>[[${totalApplyShareMap.get(company.companyname)*company.price_per_share}]]</i></strong> so far.
-					</p>
-					<div class="card__score">
-						<div class="raised">
-							<h3>Rs.
-								[[${#numbers.formatInteger(company.previouslyraisedcapital, 3,
-								'COMMA')}]]</h3>
-							<p class='desc'>Capital To Raise</p>
-						</div>
-						<div class="investers">
-							<h3>400</h3>
-							<p class='desc'>Price per Unit</p>
-						</div>
-						<div class="min__investment">
-							<h3 th:text="${company.maximum_quantity}" />
-							<p class='desc'>Max. Quantity</p>
-						</div>
-					</div>
->>>>>>> 6e233ace45c8d6e0cf2f1495b26fcbb663e111b2
 				</div>
 			</div>
 		</div>
@@ -156,40 +59,8 @@
 			<h5>Recommend companies based on diversification</h5>
 			<div class="cards row">
 
-<<<<<<< HEAD
 				<div class="card " th:each="company : ${diversifiedcompanylist}">
 					<div th:replace="fragment/company-card.html :: card"></div>
-=======
-				<div class="card " th:each="company : ${diversifiedcompanylist}" th:if="${company.status eq 'raising'}">
-					<a th:href="@{'/company/'+${company.id}+'/'}"> <img
-						th:src="@{'/documents/'+${company.id}+'/'+${company.image}}"
-						class='card__image' alt="card-image" />
-					<h3 th:text="${company.companyname}" />
-					</a>
-                    <p class='info'>
-						<strong>[[${totalUsersInvestedMap.get(company.companyname)}]]</strong> investors have invested <strong>Rs. <i>[[${totalApplyShareMap.get(company.companyname)*company.price_per_share}]]</i></strong> so far.
-					</p>
-					<div class="card__score">
-						<div class="raised">
-							<h3>Rs.
-								[[${#numbers.formatInteger(company.previouslyraisedcapital, 3,
-								'COMMA')}]]</h3>
-							<p class='desc'>Capital To Raise</p>
-						</div>
-						<div class="investers">
-							<h3>400</h3>
-							<p class='desc'>Price per Unit</p>
-						</div>
-						<div class="min__investment">
-							<h3 th:text="${company.maximum_quantity}" />
-							<p class='desc'>Max. Quantity</p>
-						</div>
-					</div>
-
-					<div class="division">
-						<p>Reg CF via Sanolagani Capital, Ltd.</p>
-					</div>
->>>>>>> 6e233ace45c8d6e0cf2f1495b26fcbb663e111b2
 				</div>
 			</div>
 		</div>
