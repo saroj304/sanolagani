@@ -1,0 +1,26 @@
+<div th:fragment="card">
+    <a th:href="@{/company/{id}/ (id=${company.id})}"> 
+        <span class="card__tag">20 days left</span>
+        <img th:src="@{'/documents/' + ${company.id} + '/' + ${company.image}}" class='card__image' alt="card-image" />
+        <h3 class="company-name" th:text="${company.companyname}" />
+    </a>
+    <p class='info'>
+        <strong>193</strong> investors have invested <strong>Rs. <i>2,700,000+</i></strong> so far.
+    </p>
+    <div class="card__score">
+        <div class="raised">
+            <h3>Rs.
+                [[${#numbers.formatInteger(company.previouslyraisedcapital, 3,
+                'COMMA')}]]</h3>
+            <p class='desc'>Raise Capital</p>
+        </div>
+        <div class="investers">
+            <h3>400</h3>
+            <p class='desc'>Unit Price</p>
+        </div>
+        <div class="min__investment">
+            <h3 th:text="${company.maximum_quantity}" />
+            <p class='desc'>Max. Quantity</p>
+        </div>
+    </div>
+</div>

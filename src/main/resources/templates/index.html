@@ -13,35 +13,12 @@
 
 	<!-- Most Momentum -->
 	<section class='momentum__section'>
-		<div class="container momentum__container">
+		<div class="container mostfunded__container">
 			<h2>Highest Invest Opportunity</h2>
 			<h5>Offerings that have raised the highest money</h5>
 			<div class="cards row">
 				<div class="card" th:each="company : ${companybasedoncapital}" th:if="${company.status eq 'raising'}">
-					<a th:href="@{/company/{id}/ (id=${company.id})}"> 
-						<span class="card__tag">20 days left</span>
-						<img th:src="@{'/documents/' + ${company.id} + '/' + ${company.image}}" class='card__image' alt="card-image" />
-						<h3 class="company-name" th:text="${company.companyname}" />
-					</a>
-					<p class='info'>
-						<strong>193</strong> investors have invested <strong>Rs. <i>2,700,000+</i></strong> so far.
-					</p>
-					<div class="card__score">
-						<div class="raised">
-							<h3>Rs.
-								[[${#numbers.formatInteger(company.previouslyraisedcapital, 3,
-								'COMMA')}]]</h3>
-							<p class='desc'>Raise Capital</p>
-						</div>
-						<div class="investers">
-							<h3>400</h3>
-							<p class='desc'>Unit Price</p>
-						</div>
-						<div class="min__investment">
-							<h3 th:text="${company.maximum_quantity}" />
-							<p class='desc'>Max. Quantity</p>
-						</div>
-					</div>
+					<div th:replace="fragment/company-card.html :: card"></div>
 				</div>
 			</div>
 		</div>
@@ -49,35 +26,12 @@
 
 	<!-- Most Funded -->
 	<section class='mostfunded__section'>
-		<div class="container momentum__container">
+		<div class="container mostfunded__container">
 			<h2>Highest Invest Opportunity</h2>
 			<h5>Offerings that have raised the highest money</h5>
 			<div class="cards row">
 				<div class="card" th:each="company : ${companybasedondate}" th:if="${company.status eq 'raising'}">
-					<a th:href="@{/company/{id}/ (id=${company.id})}"> 
-						<span class="card__tag">20 days left</span>
-						<img th:src="@{'/documents/' + ${company.id} + '/' + ${company.image}}" class='card__image' alt="card-image" />
-						<h3 class="company-name" th:text="${company.companyname}" />
-					</a>
-					<p class='info'>
-						<strong>193</strong> investors have invested <strong>Rs. <i>2,700,000+</i></strong> so far.
-					</p>
-					<div class="card__score">
-						<div class="raised">
-							<h3>Rs.
-								[[${#numbers.formatInteger(company.previouslyraisedcapital, 3,
-								'COMMA')}]]</h3>
-							<p class='desc'>Raise Capital</p>
-						</div>
-						<div class="investers">
-							<h3>400</h3>
-							<p class='desc'>Unit Price</p>
-						</div>
-						<div class="min__investment">
-							<h3 th:text="${company.maximum_quantity}" />
-							<p class='desc'>Max. Quantity</p>
-						</div>
-					</div>
+					<div th:replace="fragment/company-card.html :: card"></div>
 				</div>
 			</div>
 		</div>
@@ -92,29 +46,7 @@
 			<div class="cards row">
 
 				<div class="card " th:each="company : ${c_list}">
-					<a th:href="@{'/company/'+${company.id}+'/'}"> <img
-						th:src="@{'/documents/'+${company.id}+'/'+${company.image}}"
-						class='card__image' alt="card-image" />
-						<h3>Timeplast</h3>
-					</a>
-
-					<p class='desc'>The palstic that completely disintegrate...</p>
-
-					<div class="card__score">
-						<div class="raised">
-							<h3 th:text="${company.previouslyraisedcapital}"></h3>
-							<p class='desc'>Raised</p>
-						</div>
-						<div class="investers">
-							<h3 th:text="${company.companyname}"></h3>
-							<p class='desc'>CompanyName</p>
-						</div>
-						<div class="min__investment">
-							<h3 th:text="${company.maximum_quantity}" />
-							<p class='desc'>Min. Investment</p>
-						</div>
-
-					</div>
+					<div th:replace="fragment/company-card.html :: card"></div>
 				</div>
 			</div>
 		</div>
@@ -122,39 +54,13 @@
 	
 <section class='momentum__section'
 		sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_COMPANY')">
-		<div class="container momentum__container">
+		<div class="container mostfunded__container">
 			<h2>Diversification</h2>
 			<h5>Recommend companies based on diversification</h5>
 			<div class="cards row">
 
 				<div class="card " th:each="company : ${diversifiedcompanylist}">
-					<a th:href="@{'/company/'+${company.id}+'/'}"> <img
-						th:src="@{'/documents/'+${company.id}+'/'+${company.image}}"
-						class='card__image' alt="card-image" />
-						<h3>Timeplast</h3>
-					</a>
-
-					<p class='desc'>The palstic that completely disintegrate...</p>
-
-					<div class="card__score">
-						<div class="raised">
-							<h3 th:text="${company.previouslyraisedcapital}"></h3>
-							<p class='desc'>Raised</p>
-						</div>
-						<div class="investers">
-							<h3 th:text="${company.companyname}"></h3>
-							<p class='desc'>CompanyName</p>
-						</div>
-						<div class="min__investment">
-							<h3 th:text="${company.maximum_quantity}" />
-							<p class='desc'>Min. Investment</p>
-						</div>
-
-					</div>
-
-					<div class="division">
-						<p>Reg CF via Sanolagani Capital, Ltd.</p>
-					</div>
+					<div th:replace="fragment/company-card.html :: card"></div>
 				</div>
 			</div>
 		</div>
