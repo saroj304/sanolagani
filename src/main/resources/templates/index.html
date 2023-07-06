@@ -19,12 +19,12 @@
 			<div class="cards row">
 				<div class="card" th:each="company : ${companybasedoncapital}" th:if="${company.status eq 'raising'}">
 					<a th:href="@{/company/{id}/ (id=${company.id})}"> 
-						<span class="card__tag">20 days left</span>
+						<span class="card__tag">[[${remainingdaysmap.get(company.companyname)}]] Days Left</span>
 						<img th:src="@{'/documents/' + ${company.id} + '/' + ${company.image}}" class='card__image' alt="card-image" />
 						<h3 class="company-name" th:text="${company.companyname}" />
 					</a>
 					<p class='info'>
-						<strong>193</strong> investors have invested <strong>Rs. <i>2,700,000+</i></strong> so far.
+						<strong>[[${totalUsersInvestedMap.get(company.companyname)}]]</strong> investors have invested <strong>Rs. <i>[[${totalApplyShareMap.get(company.companyname)*company.price_per_share}]]</i></strong> so far.
 					</p>
 					<div class="card__score">
 						<div class="raised">
@@ -60,7 +60,7 @@
 						<h3 class="company-name" th:text="${company.companyname}" />
 					</a>
 					<p class='info'>
-						<strong>193</strong> investors have invested <strong>Rs. <i>2,700,000+</i></strong> so far.
+						<strong>[[${totalUsersInvestedMap.get(company.companyname)}]]</strong> investors have invested <strong>Rs. <i>[[${totalApplyShareMap.get(company.companyname)*company.price_per_share}]]</i></strong> so far.
 					</p>
 					<div class="card__score">
 						<div class="raised">
@@ -100,14 +100,16 @@
 			<h5>Recommend companies based on feedback</h5>
 			<div class="cards row">
 
-				<div class="card " th:each="company : ${c_list}">
+				<div class="card " th:each="company : ${c_list}" th:if="${company.status eq 'raising'}">
 					<a th:href="@{'/company/'+${company.id}+'/'}"> <img
+		                <span class="card__tag">20 days left</span>
 						th:src="@{'/documents/'+${company.id}+'/'+${company.image}}"
 						class='card__image' alt="card-image" />
 						<h3 th:text="${company.companyname}" />
 					</a>
-					<p class='desc'>The palstic that completely disintegrate...</p>
-
+                     <p class='info'>
+						<strong>[[${totalUsersInvestedMap.get(company.companyname)}]]</strong> investors have invested <strong>Rs. <i>[[${totalApplyShareMap.get(company.companyname)*company.price_per_share}]]</i></strong> so far.
+					</p>
 					<div class="card__score">
 						<div class="raised">
 							<h3>Rs.
@@ -136,14 +138,15 @@
 			<h5>Recommend companies based on diversification</h5>
 			<div class="cards row">
 
-				<div class="card " th:each="company : ${diversifiedcompanylist}">
+				<div class="card " th:each="company : ${diversifiedcompanylist}" th:if="${company.status eq 'raising'}">
 					<a th:href="@{'/company/'+${company.id}+'/'}"> <img
 						th:src="@{'/documents/'+${company.id}+'/'+${company.image}}"
 						class='card__image' alt="card-image" />
 					<h3 th:text="${company.companyname}" />
 					</a>
-					<p class='desc'>he palstic that completely disintegrate...</p>
-
+                    <p class='info'>
+						<strong>[[${totalUsersInvestedMap.get(company.companyname)}]]</strong> investors have invested <strong>Rs. <i>[[${totalApplyShareMap.get(company.companyname)*company.price_per_share}]]</i></strong> so far.
+					</p>
 					<div class="card__score">
 						<div class="raised">
 							<h3>Rs.
