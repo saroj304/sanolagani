@@ -1,10 +1,13 @@
 package com.bitflip.sanolagani.controllers;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -68,11 +71,25 @@ public class HomeController {
         	if(company.getStatus().equals("raising")&&now.isAfter(created_date.plusDays(timespan))){
                 company.setStatus("finish");
                 company_repo.save(company);
+                
         	}
         	
         }
         
-        	
+		Map<String, Integer> totalUsersInvestedMap = new HashMap<>();
+		Map<String,Integer> remainingdaysmap = new HashMap<>();
+		Map<String, Integer> totalApplyShareMap = new HashMap<>();
+
+        for(Company company:company_list) {
+			totalUsersInvestedMap.put(company.getCompanyname(), admin_controller.getTotalNumberOfUserInvested(company));
+            remainingdaysmap.put(company.getCompanyname(), calculateRemainingDays(company));
+			totalApplyShareMap.put(company.getCompanyname(),admin_controller.getTotalNumberOfShareApplied(company));
+
+       }
+        
+       
+        
+        
 		List<Company> basedoncapital = company_repo.findAll();
 		Optional<List<Company>> result = Optional.ofNullable(basedoncapital);
 	
@@ -92,6 +109,10 @@ public class HomeController {
 			model.addAttribute("companybasedondate", companybasedondate);
 			model.addAttribute("diversifiedcompanylist", diversifiedcompanylist);
 			model.addAttribute("c_list", c_list);
+			model.addAttribute("totalUsersInvestedMap", totalUsersInvestedMap);
+			model.addAttribute("remainingdaysmap", remainingdaysmap);
+			model.addAttribute("totalApplyShareMap", totalApplyShareMap);
+
 			return "index";
 		}
 		
@@ -101,15 +122,23 @@ public class HomeController {
 
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
-		// HttpStatusReturningLogoutSuccessHandler hs=new
-		// HttpStatusReturningLogoutSuccessHandler();
 		request.getSession(false).invalidate();
 
 		return "redirect:/home";
 	}
-//	Sentiment analysis based on the feedback of the company
 
+  public int calculateRemainingDays(Company company) {
+	  LocalDateTime currentDateTime = LocalDateTime.now();
 
+	  LocalDateTime registrationDateTime = company.getCreated(); // Replace with your own logic to get the registration date and time
+	  String time =company.getTimespanforraisingcapital();
+	  String[] timespansplit = time.split(" ",2);
+	  int timespan = Integer.parseInt(timespansplit[0]);
+	  LocalDateTime endDateTime = registrationDateTime.plusDays(timespan);
+	  int remainingDays = (int)ChronoUnit.DAYS.between(currentDateTime, endDateTime);
+	  return remainingDays;
+
+  }
 
 
 //	@GetMapping("/company/watchlist/{id}")
