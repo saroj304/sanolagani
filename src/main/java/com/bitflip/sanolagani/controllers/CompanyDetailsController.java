@@ -13,11 +13,15 @@ import com.bitflip.sanolagani.repository.UserRepo;
 import com.bitflip.sanolagani.serviceimpl.RecommendationInitializer;
 import com.bitflip.sanolagani.serviceimpl.SentimentPreprocessor;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -51,16 +55,7 @@ public class CompanyDetailsController {
 	@Autowired
 	RecommendationInitializer recommedationinit;
 
-//	@GetMapping("/company")
-//	public String getAllCompany(Model model) {
-//		List<Integer> companyId = companyRepo.getAllCompany();
-//		List<Company> companies = new ArrayList<>();
-//		for (int id : companyId)
-//			companies.add(companyRepo.getReferenceById(id));
-//
-//		model.addAttribute("companies", companies);
-//		return "company-list";
-//	}
+
 	@GetMapping("/company")
 	public String getAllCompany(Model model) {
 		List<Company> companylist = companyRepo.findAll();
@@ -74,6 +69,12 @@ public class CompanyDetailsController {
 	@GetMapping("/change_password")
 	public String changePassword(Model model) {
 		String email = (String) model.asMap().get("email");
+		if(email==null) {
+			User user = usercontroller.getCurrentUser();
+			model.addAttribute("email",user.getEmail());
+			return "changeinitialpassword";
+
+		}
 		model.addAttribute("email", email);
 		return "changeinitialpassword";
 	}
@@ -89,15 +90,25 @@ public class CompanyDetailsController {
 		String plainpwd = oldpass;
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		boolean isMatch = passwordEncoder.matches(plainpwd, hashpwd);
+		
+		boolean matchcurrentandold = passwordEncoder.matches(newpassword, hashpwd);
+		if(matchcurrentandold) {
+			System.out.println("You cannot use the same password as old");
+			return "redirect:/change_password";
+		}
 
-		if (isMatch) {
+		if (isMatch && user.getRole().equalsIgnoreCase("COMPANY")) {
 			user.setPassword(passwordEncoder.encode(newpassword));
 			user.getCompany().setPwd_change("true");
 			userrepo.save(user);
 			return "redirect:/home";
-		} else {
-			System.out.println("Password does not match!");
+		} else if(isMatch && user.getRole().equalsIgnoreCase("USER")){
+			user.setPassword(passwordEncoder.encode(newpassword));
+			userrepo.save(user);
 			return "redirect:/home";
+		}else {
+			System.out.println("Password does not match!");
+			return "redirect:/change_password";
 
 		}
 
@@ -181,7 +192,6 @@ public class CompanyDetailsController {
 		return "details";
 	}
 
-
 	// company dashboard
 
 	@GetMapping("/companydashboard")
@@ -190,28 +200,62 @@ public class CompanyDetailsController {
 		int id = user.getCompany().getId();
 		LocalDateTime currentDate = LocalDateTime.now();
 		Map<String,Integer> pastSixdays = new LinkedHashMap<>();
+		Map<String,Double> pastSixdaysinvestmentamount = new LinkedHashMap<>();
+		Map<String, Integer> totalUsersInvestedMap = new HashMap<>();
+
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE");
 
 		for (int i = 6; i >=0; i--) {
 			LocalDateTime month = currentDate.minusDays(i);
-			String dayString = month.format(formatter);
-			System.out.println(dayString);
+			String dayString = month.format(formatter).toLowerCase();
 			pastSixdays.put(dayString, 0);
-
+			pastSixdaysinvestmentamount.put(dayString, 0.0);
+			totalUsersInvestedMap.put(dayString, 0);
 		}
 		List<TrafficData> trafficdatalist = trafficrepo.findAllByCompanyid(id);
-		for (TrafficData trafficData : trafficdatalist) {
-			String visitMonth = trafficData.getVisitmonth();
+		if(!trafficdatalist.isEmpty()) {
+		 for (TrafficData trafficData : trafficdatalist) {
+			String visitMonth = trafficData.getVisitmonth().toLowerCase();
 			int count = trafficData.getCount();
 			pastSixdays.put(visitMonth, count);
 		}
+		
+		}
+		
+		List<Investment> investmentlist = investrepo.findAllByCompany_id(id);
+		if(!investmentlist.isEmpty()) {
+			String dayname="";
+			for(Investment investment:investmentlist) {
+				LocalDateTime investedtime = investment.getInvestment_date_time();
+                LocalDate dates = investedtime.toLocalDate();
+                Date date = Date.valueOf(dates);
+				DayOfWeek dayofweek = investedtime.getDayOfWeek();
+				if(!dayname.equalsIgnoreCase(dayofweek.name())) {
+			     dayname = dayofweek.name().toLowerCase();
+				 double amount = investrepo.getTotalInvestedByDate(date);
+				 pastSixdaysinvestmentamount.put(dayname, amount);
+				 int useracquistionnumber = investrepo.getTotalInvestedUserByDate(date);
+				 totalUsersInvestedMap.put(dayname,useracquistionnumber);
+				 
+				}
+				
+			}
+			
+		}
+		List<Double> investedamount = new ArrayList<>(pastSixdaysinvestmentamount.values());
+		model.addAttribute("investedamount", investedamount);
+		
+        List<Integer> totaluseracquisition = new ArrayList<>(totalUsersInvestedMap.values());
+		model.addAttribute("totaluseracquisition", totaluseracquisition);
+		
+		List<Integer> trafficvalues = new ArrayList<>(pastSixdays.values());		
+		model.addAttribute("trafficvalues", trafficvalues);
+		
 		List<String> labels = new ArrayList<>(pastSixdays.keySet());
-		List<Integer> trafficvalues = new ArrayList<>(pastSixdays.values());
 		int count = notificationrepo.countByCompanyidAndIsreadFalse(id);
+		
 		model.addAttribute("unread", count);
 		model.addAttribute("labels", labels);
-		model.addAttribute("trafficvalues", trafficvalues);
-
 		return "companydashboard";
 	}
 
