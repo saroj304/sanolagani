@@ -28,7 +28,7 @@
                 <form th:action="@{/register}" method="post" onsubmit=" registerValidate()">
                     <input class='input__box' type="text`" placeholder='First Name' name="fname" id="fname"  />
                     <input class='input__box' type="text" placeholder='Last Name' name="lname" id="lname"  />
-                    <input class='input__box' type="email" placeholder='Email' name="email" id="email"  />
+                    <input class='input__box' type="email" placeholder='Email' name="email"  />
                     <input class='input__box' type="number" placeholder='Mobile Number' name="mobile" id="mobile"  />
 
                     <input class='input__box' type="text`" placeholder='Address' name="address" id="address"  />
@@ -53,7 +53,6 @@
         registerValidate = ()=>{
             let fname = document.getElementById('fname').value;
             let lname = document.getElementById('lname').value;
-            let email = document.getElementById('email').value;
             let mobile = document.getElementById('mobile').value;
             let address = document.getElementById('address').value;
             let password = document.getElementById('password').value;
@@ -61,7 +60,7 @@
 
             let fnamecheck = /^[a-zA-Z ]{3,}$/;
             let lnamecheck = /^[a-zA-Z]{3,}$/;
-            let emailcheck = /^[A-Za-z_.]{3,}@[A-Za-z]{3,}[.]{1}[A-Za-z]{2,6}$/;
+            // let emailcheck = /^[A-Za-z_.]{3,}@[A-Za-z]{3,}[.]{1}[A-Za-z]{2,6}$/;
             let mobilecheck = /^[9]{1}[78]{1}[0-9]{8}$/;
             let addresscheck = /^[a-zA-Z0-9 ]{3,}$/;
             let passwordcheck = /^(?=.*[0-9])(?=.*[!@#$%^*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
@@ -80,12 +79,12 @@
                 return false;
             }
 
-            if(emailcheck.test(email)){
-                document.getElementById('error-msg').innerHTML = "";
-            }else{
-                document.getElementById('error-msg').innerHTML = "** Enter valid email";
-                return false;
-            }
+            // if(emailcheck.test(email)){
+            //     document.getElementById('error-msg').innerHTML = "";
+            // }else{
+            //     document.getElementById('error-msg').innerHTML = "** Enter valid email";
+            //     return false;
+            // }
 
             if(mobilecheck.test(mobile)){
                 document.getElementById('error-msg').innerHTML = "";

@@ -28,7 +28,7 @@
 	<!-- Company Registration -->
 	<section class="company">
 		<div class="container comapany__container">
-			<h2>Register your company</h2>
+			<h2>Register company</h2>
 			<p class="error" th:text="${error}"></p>
 			<form th:action="@{/companyverify}" th:object="${un_company}" class="company_registration" method="POST"
 				enctype="multipart/form-data">
@@ -99,7 +99,7 @@
 				<div>
 					<textarea name="description" id="description" cols="30" rows="10" placeholder="Description"></textarea>
 				</div>
-				<button type="submit" class="btn sumbit">Submit</button>
+				<button type="submit" class="btn btn-primary sumbit">Submit</button>
 
 			</form>
 		</div>
