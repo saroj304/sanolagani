@@ -113,17 +113,33 @@
 	<script>
 		tinymce.init({
 			selector: 'textarea',
-			plugins: 'accordion anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
-			toolbar: 'accordion undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+			plugins: 	'accordion anchor autolink charmap codesample emoticons image link lists media searchreplace table \
+						visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker \
+						tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes \
+						mergetags autocorrect typography inlinecss lists autosave',
+			toolbar: 	'accordion undo redo checklist numlist bullist indent outdent | \
+						restoredraft blocks fontfamily fontsize | \
+						bold italic underline align| \
+						link image media table | \
+						addcomment showcomments | \
+						spellcheckdialog a11ycheck typography | \
+						emoticons charmap | \
+						removeformat',
+			menubar: 'file edit view insert format tools table',
 			tinycomments_mode: 'embedded',
 			tinycomments_author: 'Author name',
-			mergetags_list: [
-				{ value: 'First.Name', title: 'First Name' },
-				{ value: 'Email', title: 'Email' },
-			]
+			min_height: 600,
+			advlist_bullet_styles: 'circle',
+			advlist_number_styles: 'lower-alpha,lower-roman,upper-alpha,upper-roman',
+			default_link_target: '_blank',
+			autosave_interval: '20s',
+			font_size_formats: '8pt 10pt 12pt 14pt 16pt 18pt 24pt 36pt 48pt',
+			skin: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'oxide-dark' : 'oxide'),
+  			content_css: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default')
 		});
 	</script>
 	
 </body>
 
 </html>
+

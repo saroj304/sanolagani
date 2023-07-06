@@ -56,6 +56,8 @@
 	--container-width-lg: 75%;
 	--container-width-md: 86%;
 	--container-width-sm: 90%;
+
+	--text-sm: 0.9rem;
 }
 
 html {
@@ -111,6 +113,10 @@ a {
 
 .nav__link:hover {
 	color: var(--color-white);
+}
+
+.nav-link-sm-text {
+	font-size: var(--text-sm);
 }
 
 .btn {
