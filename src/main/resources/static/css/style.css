@@ -56,6 +56,8 @@
 	--container-width-lg: 75%;
 	--container-width-md: 86%;
 	--container-width-sm: 90%;
+
+	--text-sm: 0.9rem;
 }
 
 html {
@@ -113,33 +115,41 @@ a {
 	color: var(--color-white);
 }
 
-.btn {
-	width: max-content;
-	display: inline-block;
-	color: var(--color-white);
-	padding: 0.75rem 1.2rem;
-	border-radius: 0.4rem;
-	cursor: pointer;
-	border: 1px solid var(--color-primary);
-	transition: var(--transition);
-	background: var(--color-blue);
-	font-size: 18px;
+.nav-link-sm-text {
+	font-size: var(--text-sm);
 }
 
-.btn:hover {
-	background: var(--color-blue-hover);
-	border-color: transparent;
+.btn {
+    min-width: 100px;
+    display: inline-block;
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #000;
+    transition: var(--transition);
+    font-size: 18px;
+}
+.btn:hover{
+	background: rgb(180, 178, 178);
+	color: #fff;
 }
 
 .btn-primary {
-	background: var(--color-primary);
-	color: var(--color-bg);
+	background: var(--color-blue);
+	color: #fff !important;
+}
+.btn-primary:hover{
+	background: var(--color-blue-hover);
 }
 .btn-danger{
 	background:red;
-	font-size: 18px;
+	color: #fff !important;
 }
-
+.btn-danger:hover{
+	background: rgb(171, 1, 1);
+}
 img {
 	display: block;
 	width: 100%;
@@ -214,6 +224,33 @@ img {
 .sub-menu-link p:hover{
 	margin-left: 10px;
 	transform: all 400ms ease;
+}
+
+/* ===================== 404 page not found======================== */
+.notfound__container{
+	text-align: center;
+	margin-bottom: 10rem;
+}
+.notfound__container h1{
+	margin-top: 5rem;
+	font-size: 86px;
+}
+.notfound__container h2{
+
+}
+.notfound__container h4{
+	font-size: 12px;
+	letter-spacing: 0.5px;
+	margin-bottom: 3rem !important;
+	text-transform: capitalize;
+}
+.notfound__container a{
+	color: #000 !important;
+	font-size: 15px !important;
+	user-select: none;
+}
+.notfound__container a:hover{
+	text-decoration: underline;
 }
 
 /* =========================== SMALL DEVICES =============================== */
