@@ -23,8 +23,10 @@ import com.bitflip.sanolagani.models.Company;
 import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.repository.CompanyRepo;
 import com.bitflip.sanolagani.service.AdminService;
+import com.bitflip.sanolagani.service.UserService;
 import com.bitflip.sanolagani.serviceimpl.RecommendationInitializer;
 import com.bitflip.sanolagani.serviceimpl.SentimentPreprocessor;
+import com.bitflip.sanolagani.serviceimpl.UserServiceImpl;
 
 @Controller
 public class HomeController {
@@ -41,6 +43,8 @@ public class HomeController {
 	AdminController admin_controller;
 	@Autowired
 	UserController usercontroller;
+	@Autowired
+	UserServiceImpl userservice;
 
 	@GetMapping({ "/", "/home" })
 	public String homePage(Model model,RedirectAttributes redirectAttributes) {
@@ -155,4 +159,6 @@ public class HomeController {
 //		model.addAttribute("companies", companylist);
 //		return "company-list";
 //	}
+  
+ 
 }
