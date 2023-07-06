@@ -19,16 +19,16 @@
 <!--                        <span id="company-id" hidden>[[${company.id}]]</span>-->
                         <input type="hidden" id="company-id" name="companyId" th:value="${company.id}">
                         <span id="pps" hidden>[[${company.price_per_share}]]</span>
-                        <span id="maxq" hidden>[[${company.maximum_quantity}]]</span>
+                        <span id="maxq" hidden>[[${remainingQuantity}]]</span>
 
                         <div class="details__buttons">
-                            <button class="btn btn-light amount" th:with="min=${company.maximum_quantity * 0.1 * company.price_per_share}">
+                            <button class="btn btn-light amount" th:with="min=${remainingQuantity * 0.1 * company.price_per_share}">
                                 Rs. [[${#numbers.formatInteger(min, 3, 'COMMA')}]]
                             </button>
-                            <button class="btn btn-light amount" th:with="mid=${company.maximum_quantity * 0.5 * company.price_per_share}">
+                            <button class="btn btn-light amount" th:with="mid=${remainingQuantity * 0.5 * company.price_per_share}">
                                 Rs. [[${#numbers.formatInteger(mid, 3, 'COMMA')}]]
                             </button>
-                            <button class="btn btn-light amount" th:with="max=${company.maximum_quantity * company.price_per_share}">
+                            <button class="btn btn-light amount" th:with="max=${remainingQuantity * company.price_per_share}">
                                 Rs. [[${#numbers.formatInteger(max, 3, 'COMMA')}]]
                             </button>
                         </div>
@@ -114,7 +114,7 @@
                     <form th:action="@{/paywithcollateral}" class="detail__form" method="post">
                         <input type="hidden" id="companyId" name="companyId" th:value="${company.id}">
                         <input type="hidden" id="totalAmount" name="amount">
-                        <button type="submit" class="btn btn-success" disabled id="submit">Submit Investment</button>
+                        <button type="submit" class="btn btn-success" disabled id="submit">Pay with Collateral</button>
                     </form>
 
                 </div>

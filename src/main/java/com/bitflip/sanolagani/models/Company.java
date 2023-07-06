@@ -66,6 +66,7 @@ public class Company {
 	private int maximum_quantity;
 	@Column
 	private String status;
+	
 	@Column
 	private String pwd_change;
 
@@ -304,6 +305,8 @@ public class Company {
 	public void setPwd_change(String pwd_change) {
 		this.pwd_change = pwd_change;
 	}
+
+
    
   
 }

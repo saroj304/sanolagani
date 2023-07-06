@@ -20,6 +20,7 @@ public class NotificationServiceImpl {
 	        notification.setCreatedAt(LocalDateTime.now());
 	        notification.setUserid(userid);
 	        notification.setCompanyid(companyid);
+	        notification.setIsread(false);
 	        notificationrepo.save(notification);
 	    }
 

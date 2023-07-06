@@ -22,6 +22,8 @@ public class Notification {
     private int companyid;
     @Column
     private int userid;
+    @Column
+    private boolean isread;
 	public int getId() {
 		return id;
 	}
@@ -51,6 +53,12 @@ public class Notification {
 	}
 	public void setUserid(int userid) {
 		this.userid = userid;
+	}
+	public boolean isIsread() {
+		return isread;
+	}
+	public void setIsread(boolean isread) {
+		this.isread = isread;
 	}
     
     

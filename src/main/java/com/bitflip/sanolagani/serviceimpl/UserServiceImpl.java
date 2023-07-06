@@ -57,6 +57,7 @@ public class UserServiceImpl implements UserService {
 				String encode_password=AdminServiceImpl.encodePassword(password);
 				user.setPassword(encode_password);
 				userrepo.save(user);
+				email_service.sendChangePasswordMail(email);
 			}
 		}
 		

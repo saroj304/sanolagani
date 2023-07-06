@@ -1,8 +1,13 @@
 package com.bitflip.sanolagani.controllers;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bitflip.sanolagani.models.Company;
@@ -65,26 +71,48 @@ public class HomeController {
         	if(company.getStatus().equals("raising")&&now.isAfter(created_date.plusDays(timespan))){
                 company.setStatus("finish");
                 company_repo.save(company);
+                
         	}
         	
         }
         
-        	
-		List<Company> companybasedoncapital = company_repo.findAllCompanyBasesOnRaidedCapitalDesc();
-		Optional<List<Company>> result = Optional.ofNullable(companybasedoncapital);
-		
-		model.addAttribute("companybasedoncapital", companybasedoncapital);
-		
+		Map<String, Integer> totalUsersInvestedMap = new HashMap<>();
+		Map<String,Integer> remainingdaysmap = new HashMap<>();
+		Map<String, Integer> totalApplyShareMap = new HashMap<>();
+
+        for(Company company:company_list) {
+			totalUsersInvestedMap.put(company.getCompanyname(), admin_controller.getTotalNumberOfUserInvested(company));
+            remainingdaysmap.put(company.getCompanyname(), calculateRemainingDays(company));
+			totalApplyShareMap.put(company.getCompanyname(),admin_controller.getTotalNumberOfShareApplied(company));
+
+       }
+        
+       
+        
+        
+		List<Company> basedoncapital = company_repo.findAll();
+		Optional<List<Company>> result = Optional.ofNullable(basedoncapital);
+	
+        Collections.sort(basedoncapital, Comparator.comparing(Company::getPreviouslyraisedcapital).reversed());
+        
 		List<Company> companybasedondate = company_repo.findAllCompanyBasesOnCreationalDates();
 		Optional<List<Company>> result1 = Optional.ofNullable(companybasedondate);
-		
+		 
+		List<Company> diversifiedcompanylist = recommedationinit.getRecommendCompanies();
+ 
 		List<Company> c_list = pre.getCompaniesWithGoodSentiment();
+
+		
+		
 		if (result != null & result1 != null) {
-			List<Company> diversifiedcompanylist = recommedationinit.getRecommendCompanies();
-            System.out.println(diversifiedcompanylist);
+    		model.addAttribute("companybasedoncapital", basedoncapital);
 			model.addAttribute("companybasedondate", companybasedondate);
 			model.addAttribute("diversifiedcompanylist", diversifiedcompanylist);
 			model.addAttribute("c_list", c_list);
+			model.addAttribute("totalUsersInvestedMap", totalUsersInvestedMap);
+			model.addAttribute("remainingdaysmap", remainingdaysmap);
+			model.addAttribute("totalApplyShareMap", totalApplyShareMap);
+
 			return "index";
 		}
 		
@@ -94,22 +122,37 @@ public class HomeController {
 
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
-		// HttpStatusReturningLogoutSuccessHandler hs=new
-		// HttpStatusReturningLogoutSuccessHandler();
 		request.getSession(false).invalidate();
 
 		return "redirect:/home";
 	}
 
+  public int calculateRemainingDays(Company company) {
+	  LocalDateTime currentDateTime = LocalDateTime.now();
+
+	  LocalDateTime registrationDateTime = company.getCreated(); // Replace with your own logic to get the registration date and time
+	  String time =company.getTimespanforraisingcapital();
+	  String[] timespansplit = time.split(" ",2);
+	  int timespan = Integer.parseInt(timespansplit[0]);
+	  LocalDateTime endDateTime = registrationDateTime.plusDays(timespan);
+	  int remainingDays = (int)ChronoUnit.DAYS.between(currentDateTime, endDateTime);
+	  return remainingDays;
+
+  }
 
 
-//	Sentiment analysis based on the feedback of the company
-
-	@GetMapping("/text")
-	public String analysis() {
-		List<Company> c_list = pre.getCompaniesWithGoodSentiment();
-
-		return "index";
-	}
-
+//	@GetMapping("/company/watchlist/{id}")
+//	public String addTOWatchList(@PathVariable("id") int id) {
+//		Company company = company_repo.getReferenceById(id);
+//		company.setIswatchlisted(true);
+//		company_repo.save(company);
+//		return "redirect:/company/"+id;
+//	}
+//	
+//	@GetMapping("/company/mywatchlist")
+//	public String getMyWatchlistedCompany(Model model) {
+//		List<Company> companylist = company_repo.findByiswatchlistedTrue();
+//		model.addAttribute("companies", companylist);
+//		return "company-list";
+//	}
 }

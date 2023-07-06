@@ -9,4 +9,6 @@ import com.bitflip.sanolagani.models.Notification;
 public interface NotificationRepo extends JpaRepository<Notification, Integer>{
     
 	public List<Notification> findAllByCompanyid(int companyid);
+	
+	public int countByCompanyidAndIsreadFalse(int companyid);
 }
