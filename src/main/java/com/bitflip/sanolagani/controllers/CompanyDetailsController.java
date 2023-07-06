@@ -1,9 +1,11 @@
 package com.bitflip.sanolagani.controllers;
 
 import com.bitflip.sanolagani.models.Company;
+import com.bitflip.sanolagani.models.CompanyDetailedDescription;
 import com.bitflip.sanolagani.models.Notification;
 import com.bitflip.sanolagani.models.TrafficData;
 import com.bitflip.sanolagani.models.User;
+import com.bitflip.sanolagani.repository.CompanyDetailedDescriptionRepo;
 import com.bitflip.sanolagani.repository.CompanyRepo;
 import com.bitflip.sanolagani.repository.InvestmentRepo;
 import com.bitflip.sanolagani.repository.NotificationRepo;
@@ -40,6 +42,9 @@ public class CompanyDetailsController {
     TrafficDataRepo trafficrepo;
     @Autowired
     NotificationRepo notificationrepo;
+
+    @Autowired
+    CompanyDetailedDescriptionRepo companyDetailedDescriptionRepo;
 
     @GetMapping("/company")
     public String getAllCompany(Model model) {
@@ -184,7 +189,7 @@ public class CompanyDetailsController {
         List<Integer> trafficvalues = new ArrayList<>(pastSixdays.values());
         model.addAttribute("labels", labels);
         model.addAttribute("trafficvalues", trafficvalues);
-
+        
         return "companydashboard";
     }
 
@@ -197,11 +202,25 @@ public class CompanyDetailsController {
         return "notification";
     }
 
-	@GetMapping("company-overview")
+	@GetMapping("company/overview")
 	public String getCompanyOverview(Model model) {
 		User user = usercontroller.getCurrentUser();
         Company company = user.getCompany();
 		model.addAttribute("bod", company);
+		return "company-overview";
+	}
+
+    @PostMapping("company/overview")
+	public String setCompanyOverview(Model model, 
+                                    @RequestParam("title") String title, 
+                                    @RequestParam("description") String description,
+                                    CompanyDetailedDescription companyDetailedDescription) {
+		User user = usercontroller.getCurrentUser();
+        companyDetailedDescription.setTitle(title);
+        companyDetailedDescription.setFull_text(description);
+        companyDetailedDescription.setAuthor(user.getId());
+        companyDetailedDescriptionRepo.save(companyDetailedDescription);
+
 		return "company-overview";
 	}
 }

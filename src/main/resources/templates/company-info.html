@@ -15,8 +15,8 @@
       <div th:if="${status eq 'on limit'}">
         <a th:href="@{'/company/details/'+${company.id}+'/'}" class='btn mt-20 mb-20'> Invest Now</a>
       </div>
-      <div th:if="${status eq 'limit reached'}">
-		    <p>you have already invested up to maximum quantity</p> 
+      <div th:if="${status eq 'limit reached'}" class="message-maximum-invested">
+		    <p>You have reached your maximum investment quantity. Thank you for being part of us.</p> 
 	    </div>
 	    <div th:if="${status eq 'time finish'}">
 		    <p>investment for this company has closed</p> 
@@ -34,7 +34,7 @@
           </div>
         </nav>
       </div>
-
+      <br/>
       <h3 id='company-details'>Company Details</h3>
       <p class='gray f-13'>This Reg A+ offering is made available through Sanolagani Primary.
         This investment is speculative, illiquid, and involves a high degree of
@@ -43,7 +43,7 @@
         and Related Risks. In addition, as described in the Offering Circular,
         the Company retains the right to continue the offering beyond the Termination Date.
         in its sole discretion.</p>
-
+        <br/>
         <h3 id='management-teams'>Management Team</h3>
           <table class="bod">
             <thead>
