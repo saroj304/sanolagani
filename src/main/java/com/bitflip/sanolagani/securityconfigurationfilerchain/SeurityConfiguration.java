@@ -25,8 +25,9 @@ public class SeurityConfiguration extends WebSecurityConfigurerAdapter{
 	    .antMatchers("/login","/register","/otpverify","/companyregister","/companyverify",
 	    		"/managecompany/edit/**","/addCompany",
 	    	    "/","/raisecapital","/documents",
-	    		"/refunddata","/admin/**").permitAll()
-	    .antMatchers("/changepassword","/resetpassword","/updatepassword","/forgotpassword").hasAnyAuthority("ROLE_USER","ROLE_COMPANY","ROLE_ADMIN")
+	    		"/refunddata","/admin/**","/resetpassword","/updatepassword","/forgotpassword",
+	    		"/changepassword").permitAll()
+	//    .antMatchers("/changepassword").hasAnyAuthority("ROLE_USER","ROLE_COMPANY","ROLE_ADMIN")
 	    //.antMatchers("/admin/**").hasRole("ADMIN")
 	    .anyRequest().authenticated()
 	    .and()

@@ -11,12 +11,14 @@
     <div class="sidebar">
         <ul>
             <li><a href="#" class="active">Dashboard</a></li>
-            <li><a href="#">Company Overview</a></li>
-            <li><a href="#">Investment Details</a></li>
+            <li><a th:href="@{/company/investment/details}">Investment Details</a></li>
             <li><a href="#">Shareholder Management</a></li>
             <li><a href="#">Financial Performance</a></li>
             <li><a href="#">Documents and Reports</a></li>
-            <li><a th:href="@{/notification}">Notification</a></li>
+
+            <li th:if="${unread != 0}"><a th:href="@{/notification}">Notification<span class="notification-count">[[${unread}]]</span></a></li>
+            <li th:unless="${unread != 0}"><a th:href="@{/notification}">Notification</a></li>
+
             <li><a th:href="@{/logout}">Setting and Account Management</a></li>
         </ul>
     </div>
@@ -33,16 +35,8 @@
         labels: [[${labels}]],
         datasets: [
           {
-             label: "Revenue",
-             data: [20000, 30000, 25000, 35000, 28000, 40000],
-             backgroundColor: "rgba(75, 192, 192, 0.2)",
-             borderColor: "rgba(75, 192, 192, 1)",
-              borderWidth: 1,
-             fill: "+1"
-          },
-          {
             label: "Investment Amount",
-            data: [15000, 22000, 18000, 28000, 21000, 32000],
+            data: [[${investedamount}]],
         	backgroundColor: "rgba(255, 99, 132, 0.2)",
         	borderColor: "rgba(255, 99, 132, 1)",
         	borderWidth: 1,
@@ -50,7 +44,7 @@
           },
           {
             label: "User Acquisition",
-        	data: [1000, 1500, 1200, 1800, 1400, 2000],
+        	data: [[${totaluseracquisition}]],
        		backgroundColor: "rgba(255, 205, 86, 0.2)",
        		borderColor: "rgba(255, 205, 86, 1)",
        		borderWidth: 1,

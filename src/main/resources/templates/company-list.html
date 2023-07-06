@@ -10,6 +10,7 @@
   <!-- All Companies -->
   <section class='mostfunded__section'>
     <div class="container mostfunded__container">
+      <h2>Companies</h2>
       <select name="sectors" id="sector-dropdown">
         <option th:each="company : ${companies}" th:value="${company.sector}" th:text="${company.sector}"></option>
       </select>

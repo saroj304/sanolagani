@@ -22,6 +22,7 @@ import com.bitflip.sanolagani.models.Investment;
 import com.bitflip.sanolagani.models.UnverifiedCompanyDetails;
 import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.repository.UnverifiedCompanyRepo;
+import com.bitflip.sanolagani.repository.UserRepo;
 import com.bitflip.sanolagani.service.AdminService;
 
 import java.io.IOException;
@@ -42,7 +43,8 @@ public class EmailService {
 	private JavaMailSender mailSender;
 	@Autowired
 	private AdminService adminservice;
-
+     @Autowired
+     UserRepo userrepo;
 	private String otp;
 
 	public String sendEmail(String to) {
@@ -156,6 +158,17 @@ public class EmailService {
 		message.setText("Dear "+user.getFname()+", has done a refund request of the invested"
 				       + " amount rs :"+investment.getAmount()+"\n"
 				       + " having company name :"+company.getCompanyname()+".");
+	
+		mailSender.send(message);
+	}
+public void sendChangePasswordMail(String email) {
+		User user = userrepo.findByEmail(email);
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setTo(email);
+		message.setSubject("Your Sanolagani password has been changed");
+		message.setText("This is a confirmation that the password for"
+				+ " your sanolagani account having name "+user.getFname()+" "+user.getLname()
+				+" has just been changed.");
 	
 		mailSender.send(message);
 	}
