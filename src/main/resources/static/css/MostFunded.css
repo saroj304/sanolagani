@@ -9,6 +9,7 @@
 .mostfunded__container{
     margin-top: 2rem;
     margin-bottom: 2rem;
+    padding: 2rem;
 }
 .mostfunded__container h2{
     text-transform: capitalize;
@@ -39,7 +40,6 @@
 }
 
 .card h3{
-    margin-top: 1rem;
     font-size: 14px ;
 }
 .company-name{
@@ -76,8 +76,7 @@
 
 .card__score{
     display: flex;
-    gap: 20px;
-    margin-top: -10px;
+    gap: 10px;
     justify-content: space-between;
 }
 
@@ -87,9 +86,14 @@
 
 .cards{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
     margin: 20px;
+}
+
+.card{
+    margin: 1rem 1.5rem;
+    padding: auto;
 }
 .division{
     margin-bottom: 3rem;

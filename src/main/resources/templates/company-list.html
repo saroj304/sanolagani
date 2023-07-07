@@ -10,6 +10,7 @@
   <!-- All Companies -->
   <section class='mostfunded__section'>
     <div class="container mostfunded__container">
+
       <h2>Companies</h2>
       <select name="sectors" id="sector-dropdown">
         <option th:each="company : ${companies}" th:value="${company.sector}" th:text="${company.sector}"></option>
@@ -19,32 +20,7 @@
       <div class="cards row">
 
         <div class="card " th:each="company : ${companies}">
-          <!--					<span th:text="${company.previouslyraisedcapital}"></span>-->
-          <a th:href="@{/company/{id}/ (id=${company.id})}">
-            <img th:src="@{../documents/{id}/{image} (image=${company.image}, id= ${company.id})}"
-                class='card__image' alt="card-image" />
-            <h3 th:text="${company.companyname}" />
-          </a>
-          <p class='desc'>The palstic that completely disintegrate...</p>
-
-          <div class="card__score">
-            <div class="raised">
-              <h3>Rs. [[${#numbers.formatInteger(company.previouslyraisedcapital, 3, 'COMMA')}]]</h3>
-              <p class='desc'>Capital To Raise</p>
-            </div>
-            <div class="investers">
-              <h3>400</h3>
-              <p class='desc'>Price per Unit</p>
-            </div>
-            <div class="min__investment">
-              <h3 th:text="${company.maximum_quantity}" />
-              <p class='desc'>Max. Quantity</p>
-            </div>
-          </div>
-
-          <div class="division">
-            <p>Reg CF via Sanolagani Capital, Ltd.</p>
-          </div>
+          <div th:replace="fragment/company-card.html :: card"></div>
         </div>
       </div>
     </div>

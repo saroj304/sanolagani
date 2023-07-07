@@ -5,7 +5,6 @@
             var ctx = canvas.getContext("2d");
 
             var companies =[[${companynamelist}]]; // Replace with your actual company names
-            console.log(companies);
             var shares = [2, 3, 4] // Replace with your actual number of shares data
             var investments = [[${totalamountlist}]]; // Replace with your additional data
 

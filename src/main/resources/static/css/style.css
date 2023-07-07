@@ -56,6 +56,12 @@
 	--container-width-lg: 75%;
 	--container-width-md: 86%;
 	--container-width-sm: 90%;
+
+	--text-sm: 0.9rem;
+
+	--color-message-positive-bg: #c7f9cc;
+	--color-message-postitive-text: #075216;
+	--color-message-positive-border: #ffca3a;
 }
 
 html {
@@ -76,7 +82,7 @@ body {
 /* ===================== GENERAL STYLES ========================= */
 .container {
 	width: var(--container-width-lg);
-	margin: 0 auto;
+	margin: 5px auto;
 }
 
 h1, h2, h3, h4 {
@@ -113,6 +119,10 @@ a {
 	color: var(--color-white);
 }
 
+.nav-link-sm-text {
+	font-size: var(--text-sm);
+}
+
 .btn {
     min-width: 100px;
     display: inline-block;
@@ -126,7 +136,7 @@ a {
     font-size: 18px;
 }
 .btn:hover{
-	background: rgb(180, 178, 178);
+	background: #303030;
 	color: #fff;
 }
 

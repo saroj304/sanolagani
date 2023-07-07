@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.time.LocalDateTime;
 //import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 //import java.util.Set;
 //
@@ -20,7 +21,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -69,6 +69,9 @@ public class Company {
 	
 	@Column
 	private String pwd_change;
+
+	@ManyToMany(mappedBy = "companies", cascade = CascadeType.ALL)
+	private Set<BoardMembers> boardmembers;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -83,6 +86,7 @@ public class Company {
 
 	@OneToMany(mappedBy = "company")
 	private List<Feedback> feedbacklist;
+
 	@CreationTimestamp
 	private LocalDateTime created;
 	
