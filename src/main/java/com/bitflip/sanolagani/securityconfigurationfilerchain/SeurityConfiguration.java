@@ -26,7 +26,7 @@ public class SeurityConfiguration extends WebSecurityConfigurerAdapter{
 	    		"/managecompany/edit/**","/addCompany",
 	    	    "/","/raisecapital","/documents",
 	    		"/refunddata","/admin/**","/resetpassword","/updatepassword","/forgotpassword",
-	    		"/changepassword","/reset/reports").permitAll()
+	    		"/changepassword","/reset/reports","/company/documents/reports").permitAll()
 	//    .antMatchers("/changepassword").hasAnyAuthority("ROLE_USER","ROLE_COMPANY","ROLE_ADMIN")
 	    //.antMatchers("/admin/**").hasRole("ADMIN")
 	    .anyRequest().authenticated()
