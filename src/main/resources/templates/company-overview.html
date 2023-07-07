@@ -10,19 +10,25 @@
         <div th:replace="fragment/company-dashboard.html :: sidebar"></div>
     
       <form th:action="@{/company/overview}" method="POST" class="chart-container">
-        <div>
+        <div class="input-field" >
           <input type="text" name="title" id="title" placeholder="Title" />
-        <div>
-          <div>
-              <label for="document">Upload Document</label>
-              <input class="upload-doc" id="document" type="file" placeholder="Upload your audit report" name="audit_report" />
+        </div>
+          <div class="input-field">
+            <label for="audit_report" class="input-label">
+              <input type="file" class="file-input" name="audit_report" id="audit-report"/>
+              <span for="audit_report" class="help-text">Upload your audit report</span>
+              <span id="file-name" class="file-name">No file selected</span>
+            </label>
           </div>
           <textarea name="description" id="description" cols="30" rows="10" placeholder="Description"></textarea>
-        </div>
         <button type="submit" class="btn sumbit">Submit</button>
       </form>
     </div>
-
+    <script>
+      document.querySelector("#audit-report").onchange = function(){
+        document.querySelector("#file-name").textContent = this.files[0].name;
+      }
+    </script>
     <script>
       tinymce.init({
         selector: 'textarea',

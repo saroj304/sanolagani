@@ -1,17 +1,12 @@
 package com.bitflip.sanolagani.controllers;
 
 import com.bitflip.sanolagani.models.Company;
-import com.bitflip.sanolagani.models.CompanyDetailedDescription;
+import com.bitflip.sanolagani.models.CompanyArticles;
 import com.bitflip.sanolagani.models.Investment;
 import com.bitflip.sanolagani.models.Notification;
 import com.bitflip.sanolagani.models.TrafficData;
 import com.bitflip.sanolagani.models.User;
-import com.bitflip.sanolagani.repository.CompanyDetailedDescriptionRepo;
-import com.bitflip.sanolagani.repository.CompanyRepo;
-import com.bitflip.sanolagani.repository.InvestmentRepo;
-import com.bitflip.sanolagani.repository.NotificationRepo;
-import com.bitflip.sanolagani.repository.TrafficDataRepo;
-import com.bitflip.sanolagani.repository.UserRepo;
+import com.bitflip.sanolagani.repository.*;
 import com.bitflip.sanolagani.serviceimpl.RecommendationInitializer;
 import com.bitflip.sanolagani.serviceimpl.SentimentPreprocessor;
 
@@ -38,6 +33,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.bitflip.sanolagani.controllers.AdminController;
 @Controller
 public class CompanyDetailsController {
     @Autowired
@@ -54,12 +50,18 @@ public class CompanyDetailsController {
     NotificationRepo notificationrepo;
 
     @Autowired
-    CompanyDetailedDescriptionRepo companyDetailedDescriptionRepo;
+    CompanyArticlesRepo articlesRepo;
+
+    @Autowired
+    HomeController homecontroller;
 
     @Autowired
     private SentimentPreprocessor pre;
     @Autowired
     RecommendationInitializer recommedationinit;
+
+    @Autowired
+    AdminController admin_controller;
 
     @GetMapping("/company")
     public String getAllCompany(Model model) {
@@ -67,6 +69,19 @@ public class CompanyDetailsController {
         if (companylist.isEmpty()) {
             return "company-list";
         }
+        Map<String, Integer> totalUsersInvestedMap = new HashMap<>();
+		Map<String,Integer> remainingdaysmap = new HashMap<>();
+		Map<String, Integer> totalApplyShareMap = new HashMap<>();
+
+        for(Company company:companylist) {
+			totalUsersInvestedMap.put(company.getCompanyname(), admin_controller.getTotalNumberOfUserInvested(company));
+            remainingdaysmap.put(company.getCompanyname(), homecontroller.calculateRemainingDays(company));
+			totalApplyShareMap.put(company.getCompanyname(),admin_controller.getTotalNumberOfShareApplied(company));
+
+       }
+        model.addAttribute("totalUsersInvestedMap", totalUsersInvestedMap);
+        model.addAttribute("remainingdaysmap", remainingdaysmap);
+        model.addAttribute("totalApplyShareMap", totalApplyShareMap);
         model.addAttribute("companies", companylist);
         return "company-list";
     }
@@ -156,14 +171,17 @@ public class CompanyDetailsController {
         }
 
         String status = "on limit";
+        User user = usercontroller.getCurrentUser();
         Company company = companyRepo.getReferenceById(id);
+        List<CompanyArticles> allArticles = articlesRepo.findByCompanyId(id);
+
+        model.addAttribute("articles", allArticles);
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime created_date = company.getCreated();
         String time = company.getTimespanforraisingcapital();
         String[] timespansplit = time.split(" ", 2);
         int timespan = Integer.parseInt(timespansplit[0]);
 
-        User user = usercontroller.getCurrentUser();
         Integer numberofshare_peruser = investrepo.getTotalQuantityByUserAndCompany(user.getId(), company.getId());
         if (numberofshare_peruser == null) {
             if (now.isAfter(created_date.plusDays(timespan))) {
@@ -357,12 +375,13 @@ public class CompanyDetailsController {
     public String setCompanyOverview(Model model,
             @RequestParam("title") String title,
             @RequestParam("description") String description,
-            CompanyDetailedDescription companyDetailedDescription) {
+            CompanyArticles article) {
         User user = usercontroller.getCurrentUser();
-        companyDetailedDescription.setTitle(title);
-        companyDetailedDescription.setFull_text(description);
-        companyDetailedDescription.setAuthor(user.getId());
-        companyDetailedDescriptionRepo.save(companyDetailedDescription);
+        article.setTitle(title);
+        article.setFull_text(description);
+        article.setAuthor(user);
+        article.setCompany(user.getCompany());
+        articlesRepo.save(article);
 
         return "company-overview";
     }

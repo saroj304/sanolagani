@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:insert="fragment/head.html :: headerfiles"></head>
+
 <body>
   <header class='container header__container' th:replace="fragment/header.html :: header"></header>
   <div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
@@ -9,7 +10,7 @@
   <div class="container home__conatiner">
     <div class="home__left">
       <div class="heading__info">
-        <h1>Invest in <span th:text="${company.companyname}"/></h1>
+        <h1>Invest in <span th:text="${company.companyname}" /></h1>
         <h5 class='gray'>193 people have already invested 2,700,000+ in [[${company.companyname}]].</h5>
       </div>
       <div th:if="${status eq 'on limit'}">
@@ -25,26 +26,29 @@
         <nav class='container nav__container'>
           <div class="left">
               <ul>
-                <li><a href="#company-details"  class="nav-link-sm-text">Details</a></li>
-                <li><a href="#documents" class="nav-link-sm-text">Documents</a></li>
-                <li><a href="#success-stories" class="nav-link-sm-text">Success Stories</a></li>
-                <li><a href="#management-teams" class="nav-link-sm-text">Management</a></li>
-                <li><a href="#" class="nav-link-sm-text">More Information</a></li>
+                <li><a href="#company-details"  class="nav-link-sm-text link">Details</a></li>
+                <li><a href="#documents" class="nav-link-sm-text link">Documents</a></li>
+                <li><a href="#success-stories" class="nav-link-sm-text link">Success Stories</a></li>
+                <li><a href="#management-teams" class="nav-link-sm-text link">Management</a></li>
+                <li><a href="#" class="nav-link-sm-text link">More Information</a></li>
               </ul>
           </div>
         </nav>
       </div>
       <br/>
-      <h3 id='company-details'>Company Details</h3>
-      <p class='gray f-13'>This Reg A+ offering is made available through Sanolagani Primary.
-        This investment is speculative, illiquid, and involves a high degree of
-        risk, including possible loss of your entire investment. For more
-        information about this offering, please view <span th:text="${company.companyname}"/>’s Offering Circular
-        and Related Risks. In addition, as described in the Offering Circular,
-        the Company retains the right to continue the offering beyond the Termination Date.
-        in its sole discretion.</p>
+      <h1 id='company-details'>Company Details</h1>
+      <div th:each="article : ${articles}">
+        <div class="article">
+          <h2 th:text="${article.title}"></h2>
+          <hr/>
+          <span th:text="${article.getAuthored_date_time()}"></span>
+          <hr/>
+          <div>[(${article.getFull_text()})]</div>
+        </div>
+        <br/><br/><br/>
+      </div>
         <br/>
-        <h3 id='management-teams'>Management Team</h3>
+        <h1 id='management-teams'>Management Team</h1>
           <table class="bod">
             <thead>
                 <th>Management Team</th>
@@ -94,31 +98,44 @@
               </tr>
             </tbody>
           </table>
-        </h3>
+        <br/><br/><br/>
         <h3 id='documents'>Documents</h3>
         <div class="news">
           <table class="news-table">
-              <tr class="news-head">
-                  <th class="news-head-date">DATE</th>
-                  <th class="news-head-event">NEWS</th>
+            <tbody>
+              <tr class="news-row">
+                  <td class="news-data-date">
+                    <a href="#">May 7, 2023<br>
+                    <img src="./images/voklagyo.png" alt="img" class="doc-img">
+                  </td>
+  
+                  <td class="news-data-event">
+                    <a href="#">News goes here</a>
+                  </td>
               </tr>
               <tr class="news-row">
-                  <td class="news-data-date"><a href="#">May 7, 2023<br><img src="./images/voklagyo.png" alt="img" class="doc-img"></td>
-  
-                  <td class="news-data-event"><a href="#">News goes here</a></td>
+                  <td class="news-data-date">
+                    <a href="#">May 7, 2023<br>
+                    <img src="./images/voklagyo.png" alt="img" class="doc-img">
+                  </td>
+                  <td class="news-data-event">
+                    <a href="#">News goes here</a>
+                  </td>
               </tr>
               <tr class="news-row">
-                  <td class="news-data-date"><a href="#">May 7, 2023<br><img src="./images/voklagyo.png" alt="img" class="doc-img"></td>
+                  <td class="news-data-date">
+                    <a href="#">May 7, 2023<br>
+                      <img src="./images/voklagyo.png" alt="img" class="doc-img">
+                    </td>
   
-                  <td class="news-data-event"><a href="#">News goes here</a></td>
+                  <td class="news-data-event">
+                    <a href="#">News goes here</a>
+                  </td>
               </tr>
-              <tr class="news-row">
-                  <td class="news-data-date"><a href="#">May 7, 2023<br><img src="./images/voklagyo.png" alt="img" class="doc-img"></td>
-  
-                  <td class="news-data-event"><a href="#">News goes here</a></td>
-              </tr>
+            </tbody>
           </table>
       </div>
+      <br/><br/><br/>
         <h3 id='success-stories'>Success Stories</h3>
     </div>
 
@@ -132,4 +149,5 @@
 
   </footer>
 </body>
+
 </html>

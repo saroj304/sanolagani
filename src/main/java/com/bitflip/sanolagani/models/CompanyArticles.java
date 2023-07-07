@@ -7,24 +7,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 
 @Entity
 @Table(name = "company_details_markup")
-public class CompanyDetailedDescription {
+public class CompanyArticles {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     
-    @Column(updatable = false)
+    @Column(name = "created_on", updatable = false)
     private LocalDateTime authored_date_time;
 
+    @Column(name = "last_modified")
     private LocalDateTime last_modified_date_time;
 
-    @Column(nullable = false)
-    private Integer author;
+    @ManyToOne
+    @JoinColumn(name = "author", referencedColumnName = "id")
+    private User author;
 
+    @ManyToOne
+    @JoinColumn(name = "company", referencedColumnName = "id")
+    private Company company;
 
     @Column(nullable = false)
     private String title;
@@ -32,7 +38,7 @@ public class CompanyDetailedDescription {
     @Column(nullable = false, length = 100000)
     private String full_text;
 
-    public CompanyDetailedDescription(){
+    public CompanyArticles(){
         this.authored_date_time = LocalDateTime.now();
     }
 
@@ -40,11 +46,11 @@ public class CompanyDetailedDescription {
         return id;
     }
 
-    public void setAuthor(Integer author) {
+    public void setAuthor(User author) {
         this.author = author;
     }
 
-    public Integer getAuthor() {
+    public User getAuthor() {
         return author;
     }
 
@@ -76,5 +82,13 @@ public class CompanyDetailedDescription {
 
     public void setFull_text(String full_text) {
         this.full_text = full_text;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+    
+    public Company getCompany() {
+        return company;
     }
 }
