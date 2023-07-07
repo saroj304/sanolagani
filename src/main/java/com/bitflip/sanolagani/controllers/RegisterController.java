@@ -59,7 +59,7 @@ public class RegisterController {
 	@PostMapping("/register")
 	public String saveUser(@Valid @ModelAttribute("user") User user, BindingResult result,RedirectAttributes redirectAttributes) {
 		//this.user = user;
-		 userstore.add(user);
+		userstore.add(user);
 		if (result.hasErrors()) {
 			return "user_signup";
 		}

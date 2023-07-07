@@ -1,0 +1,30 @@
+<div th:fragment="card">
+    <a th:href="@{/company/{id}/ (id=${company.id})}"> 
+        <span class="card__tag">[[${remainingdaysmap.get(company.companyname)}]] Days left</span>
+        <img th:src="@{'/documents/' + ${company.id} + '/' + ${company.image}}" class='card__image' alt="card-image" />
+        <h3 class="company-name" th:text="${company.companyname}" />
+    </a>
+
+    <p class='info' th:if="${totalUsersInvestedMap.get(company.companyname)} > 0">
+        <strong>[[${totalUsersInvestedMap.get(company.companyname)}]]</strong> investors have invested <strong>Rs. <i>[[${#numbers.formatInteger(totalApplyShareMap.get(company.companyname)*company.price_per_share, 3 ,'COMMA')}]]</i>+</strong> so far.
+    </p>
+    <p class='info' th:if="${totalUsersInvestedMap.get(company.companyname)} == 0">
+        <strong>Be an early investor.</strong>
+    </p> 
+    <div class="card__score">
+        <div class="raised">
+            <h3>Rs.
+                [[${#numbers.formatInteger(company.previouslyraisedcapital, 3,
+                'COMMA')}]]</h3>
+            <p class='desc'>Raise Capital</p>
+        </div>
+        <div class="investers">
+            <h3>[[${company.price_per_share}]]</h3>
+            <p class='desc'>Unit Price</p>
+        </div>
+        <div class="min__investment">
+            <h3 th:text="${company.maximum_quantity}" />
+            <p class='desc'>Max. Quantity</p>
+        </div>
+    </div>
+</div>

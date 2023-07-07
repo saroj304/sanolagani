@@ -30,21 +30,23 @@ import com.bitflip.sanolagani.serviceimpl.UserServiceImpl;
 
 @Controller
 public class HomeController {
-
+	@Autowired
+	UserController usercontroller;
+	
 	@Autowired
 	AdminService adminservice;
 	@Autowired
-	private CompanyRepo company_repo; // Assuming you have a CompanyRepository to fetch companies
+	private CompanyRepo company_repo; 
 	@Autowired
 	private SentimentPreprocessor pre;
 	@Autowired
 	RecommendationInitializer recommedationinit;
 	@Autowired
 	AdminController admin_controller;
-	@Autowired
-	UserController usercontroller;
+
 	@Autowired
 	UserServiceImpl userservice;
+
 
 	@GetMapping({ "/", "/home" })
 	public String homePage(Model model,RedirectAttributes redirectAttributes) {

@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.bitflip.sanolagani.models.Collateral;
 import com.bitflip.sanolagani.models.Company;
+import com.bitflip.sanolagani.models.CompanyArticles;
 import com.bitflip.sanolagani.models.Transaction;
 import com.bitflip.sanolagani.models.UnverifiedCompanyDetails;
 import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.models.Investment;
 import com.bitflip.sanolagani.models.RefundRequestData;
 import com.bitflip.sanolagani.repository.CollateralRepo;
+import com.bitflip.sanolagani.repository.CompanyArticlesRepo;
 import com.bitflip.sanolagani.repository.CompanyRepo;
 import com.bitflip.sanolagani.repository.InvestmentRepo;
 import com.bitflip.sanolagani.repository.RefundRequestRepo;
@@ -48,9 +50,8 @@ public class AdminController {
 	private CollateralRepo collateralrepo;
 	@Autowired
 	private RefundRequestRepo refundrepo;
-
-
-
+	@Autowired
+	private CompanyArticlesRepo companyarticlesrepo;
 
 	@GetMapping("/admin/admindashboard")
 	public String getAdminDashboardPage(Model model) {
@@ -193,6 +194,18 @@ public class AdminController {
 		}
 		model.addAttribute("invest_list", invest_list);
 		return "adminreport";
+	}
+
+	@GetMapping("/company/all-articles")
+	public String viewArticles(Model model) {
+		User user = userrepo.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+		Company company = companyrepo.findById(user.getCompany().getId()).get();
+		List<CompanyArticles> article_list = companyarticlesrepo.findByCompanyId(company.getId());
+		if (article_list.isEmpty()) {
+			return "articles";
+		}
+		model.addAttribute("articles", article_list);
+		return "articles";
 	}
 
 	@GetMapping("/admin/refunddata")

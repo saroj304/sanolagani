@@ -56,6 +56,12 @@
 	--container-width-lg: 75%;
 	--container-width-md: 86%;
 	--container-width-sm: 90%;
+
+	--text-sm: 0.9rem;
+
+	--color-message-positive-bg: #c7f9cc;
+	--color-message-postitive-text: #075216;
+	--color-message-positive-border: #ffca3a;
 }
 
 html {
@@ -76,12 +82,30 @@ body {
 /* ===================== GENERAL STYLES ========================= */
 .container {
 	width: var(--container-width-lg);
-	margin: 0 auto;
+	margin: 5px auto;
 }
 
 h1, h2, h3, h4 {
-	font-weight: 400;
 	color: var(--color-dark);
+}
+h1 {
+	font-size: 1.4rem;
+	font-weight: 400;
+}
+
+h2 {
+	font-size: 1.3rem;
+	font-weight: 400;
+}
+
+h3 {
+	font-size: 1.2rem;
+	font-weight: 200;
+}
+
+h4 {
+	font-size: 1.1rem;
+	font-weight: 100;
 }
 
 h5 {
@@ -91,18 +115,11 @@ h5 {
 	margin-top: -10px;
 }
 
-h1 {
-	font-size: 2.5rem;
-}
-
-section {
-}
-
 .text-light {
 	color: var(--color-light);
 }
 
-a {
+.link {
 	color: #fff;
 	transition: var(--transition);
 	font-size: 18px;
@@ -113,12 +130,16 @@ a {
 	color: var(--color-white);
 }
 
+.nav-link-sm-text {
+	font-size: var(--text-sm);
+}
+
 .btn {
     min-width: 100px;
     display: inline-block;
     color: #000;
     padding: 5px 10px;
-    border-radius: 10px;
+    border-radius: 8px;
     text-align: center;
     cursor: pointer;
     border: 1px solid #000;
@@ -126,7 +147,7 @@ a {
     font-size: 18px;
 }
 .btn:hover{
-	background: rgb(180, 178, 178);
+	background: #303030;
 	color: #fff;
 }
 
@@ -193,6 +214,7 @@ img {
 	background: #fff;
 	display: none;
 	transition: all 400ms ease;
+	z-index: 99;
 	/* border-radius: 10px; */
 	
 }
@@ -246,7 +268,41 @@ img {
 .notfound__container a:hover{
 	text-decoration: underline;
 }
+.news{
+    text-align: center;
+}
+.news-table{
+    width: 100%;
+    position: relative;
+    border: hidden;
+}
 
+.news-row{
+    min-height: 50px;
+    padding: 5px;
+	border: hidden;
+}
+.news-data-date{
+    color: #000 !important;
+    font-size: 16px;
+    padding: 5px 10px;
+	border: hidden;
+}
+.news-data-event{
+    text-align: left;
+    padding: 0 10px;
+    color: #000 !important;
+    font-size: 16px;
+	border: hidden;
+}
+
+.doc-img{
+    border: 1px solid green;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    margin-left: 40%;
+}
 /* =========================== SMALL DEVICES =============================== */
 @media screen and (max-width: 640px) {
 	.container {
@@ -256,3 +312,4 @@ img {
 		margin-bottom: 2rem;
 	}
 }
+

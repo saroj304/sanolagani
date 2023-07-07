@@ -43,11 +43,11 @@ paymentBtn.onclick = function () {
 
             if (!amount){
               console.log("amount is null");
-              amount = amountInput.value;
+               amount = amountInput.value *100;
             }
             if (amount) {
                  // Convert amount from rupees to paisa
-                config.amount = amount;
+                config.amount = amount*100;
                 checkout.show({popupMobile: true});
                 console.log(amount);
             } else {
@@ -60,6 +60,7 @@ var fundManagement = document.getElementById("fund-management");
 var paymentOptions = document.getElementById("payment-options");
 
 fundManagement.addEventListener("click", () => {
-  paymentOptions.style.display = (paymentOptions.style.display === "block") ? "none" : "block";
+  paymentOptions.style.display = (paymentOptions.style.display === "inline-flex") ? "none" : "inline-flex";
+  paymentOptions.style.justifyContent = "space-around";
   console.log(paymentOptions.style.display);
 });

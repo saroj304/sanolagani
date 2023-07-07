@@ -7,19 +7,9 @@
 </head>
 <body>
 
-   <div class="container">
-    <div class="sidebar">
-        <ul>
-            <li><a href="#" class="active">Dashboard</a></li>
-            <li><a href="#">Company overview</a></li>
-            <li><a th:href="@{/company/investment/details}">Investment Details</a></li>
-            <li><a href="#">Documents and Reports</a></li>
 
-            <li th:if="${unread != 0}"><a th:href="@{/notification}">Notification<span class="notification-count">[[${unread}]]</span></a></li>
-            <li th:unless="${unread != 0}"><a th:href="@{/notification}">Notification</a></li>
-
-            <li><a th:href="@{/logout}">Setting and Account Management</a></li>
-        </ul>
+  <div class="container">
+    <div th:replace="fragment/company-dashboard.html :: sidebar">
     </div>
     <div class="chart-container">
       <canvas id="lineChart"></canvas>
