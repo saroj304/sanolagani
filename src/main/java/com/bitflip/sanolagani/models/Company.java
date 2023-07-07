@@ -74,6 +74,8 @@ public class Company {
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
 
+	@OneToMany(mappedBy = "company")
+	private List<CompanyFile> companyfilelist;
 
 	@OneToMany(mappedBy = "company")
 	private List<Investment> investments;
@@ -300,6 +302,14 @@ public class Company {
 
 	public void setPwd_change(String pwd_change) {
 		this.pwd_change = pwd_change;
+	}
+
+	public List<CompanyFile> getCompanyfilelist() {
+		return companyfilelist;
+	}
+
+	public void setCompanyfilelist(List<CompanyFile> companyfilelist) {
+		this.companyfilelist = companyfilelist;
 	}
 
 
