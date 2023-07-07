@@ -22,3 +22,6 @@ footer {
 .footer-logo{
     color: #fff !important;
 }
+.second h2, .third h2, .fourth h2{
+    color: #f3f3f3 !important;
+}

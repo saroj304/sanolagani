@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:insert="fragment/head.html :: headerfiles"></head>
+
 <body>
   <header class='container header__container' th:replace="fragment/header.html :: header"></header>
   <div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
@@ -9,7 +10,7 @@
   <div class="container home__conatiner">
     <div class="home__left">
       <div class="heading__info">
-        <h1>Invest in <span th:text="${company.companyname}"/></h1>
+        <h1>Invest in <span th:text="${company.companyname}" /></h1>
         <h5 class='gray'>193 people have already invested 2,700,000+ in [[${company.companyname}]].</h5>
       </div>
       <div th:if="${status eq 'on limit'}">
@@ -59,45 +60,45 @@
               <td th:text="${management.position}"></td>
               <td><a th:href="${management.linkedin}">LinkedIn</a></td>
             </tr> -->
-            <tbody>
-              <tr>
-                <td>Mr. Keshab Kumar Basnet</td>
-                <td>Chairman</td>
-                <td><a href="#">LinkedIn</a></td>
-              </tr>
-              <tr>
-                <td>Bishnu Prasad Bhusal</td>
-                <td>Under Secretary</td>
-                <td><a href="#">LinkedIn</a></td>
-              </tr>
-              <tr>
-                <td>Mr. Raj Kumar Khatiwada</td>
-                <td>Board of Director</td>
-                <td><a href="#">LinkedIn</a></td>
-              </tr>
-              <tr>
-                <td>Mr. Devi Prasad Baral</td>
-                <td>Board of Director</td>
-                <td><a href="#">LinkedIn</a></td>
-              </tr>
-              <tr>
-                <td>Mr. Lil Bahadur Basnet</td>
-                <td>Board of Director</td>
-                <td><a href="#">LinkedIn</a></td>
-              </tr>
-              <tr>
-                <td>Mr. Kuber Prasad Rai</td>
-                <td>Board of Director</td>
-                <td><a href="#">LinkedIn</a></td>
-              </tr>
-              <tr>
-                <td>Mr Ramesh Chaudhary</td>
-                <td>Board of Director</td>
-                <td><a href="#">LinkedIn</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </h3>
+        <tbody>
+          <tr>
+            <td>Mr. Keshab Kumar Basnet</td>
+            <td>Chairman</td>
+            <td><a href="#">LinkedIn</a></td>
+          </tr>
+          <tr>
+            <td>Bishnu Prasad Bhusal</td>
+            <td>Under Secretary</td>
+            <td><a href="#">LinkedIn</a></td>
+          </tr>
+          <tr>
+            <td>Mr. Raj Kumar Khatiwada</td>
+            <td>Board of Director</td>
+            <td><a href="#">LinkedIn</a></td>
+          </tr>
+          <tr>
+            <td>Mr. Devi Prasad Baral</td>
+            <td>Board of Director</td>
+            <td><a href="#">LinkedIn</a></td>
+          </tr>
+          <tr>
+            <td>Mr. Lil Bahadur Basnet</td>
+            <td>Board of Director</td>
+            <td><a href="#">LinkedIn</a></td>
+          </tr>
+          <tr>
+            <td>Mr. Kuber Prasad Rai</td>
+            <td>Board of Director</td>
+            <td><a href="#">LinkedIn</a></td>
+          </tr>
+          <tr>
+            <td>Mr Ramesh Chaudhary</td>
+            <td>Board of Director</td>
+            <td><a href="#">LinkedIn</a></td>
+          </tr>
+        </tbody>
+      </table>
+      </h3>
     </div>
 
 
@@ -110,4 +111,5 @@
 
   </footer>
 </body>
+
 </html>
