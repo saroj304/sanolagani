@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" th:href="@{/css/companydashboard.css}">
+</head>
+<body>
+
+  <div class="container">
+    <div th:replace="fragment/company-dashboard.html :: sidebar">
+    </div>
+    <div class="chart-container">
+      <div th:each="article : ${articles}">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title" th:text="${article.title}">Title</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
