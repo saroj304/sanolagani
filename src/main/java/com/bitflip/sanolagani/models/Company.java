@@ -77,6 +77,8 @@ public class Company {
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
 
+	@OneToMany(mappedBy = "company")
+	private List<CompanyArticles> companydetaileddescription;
 
 	@OneToMany(mappedBy = "company")
 	private List<Investment> investments;

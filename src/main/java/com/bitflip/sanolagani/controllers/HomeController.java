@@ -28,7 +28,9 @@ import com.bitflip.sanolagani.serviceimpl.SentimentPreprocessor;
 
 @Controller
 public class HomeController {
-
+	@Autowired
+	UserController usercontroller;
+	
 	@Autowired
 	AdminService adminservice;
 	@Autowired
@@ -39,8 +41,7 @@ public class HomeController {
 	RecommendationInitializer recommedationinit;
 	@Autowired
 	AdminController admin_controller;
-	@Autowired
-	UserController usercontroller;
+
 
 	@GetMapping({ "/", "/home" })
 	public String homePage(Model model,RedirectAttributes redirectAttributes) {
