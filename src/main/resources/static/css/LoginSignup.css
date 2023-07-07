@@ -72,11 +72,16 @@ h5.forgot__password a {
     transition: var(--transition);
     font-size: bold;
 }
-.active{
+.active {
     background: var(--color-blue);
-    border-radius: 10px;
-    color: #fff m !important;
+    border-radius: 8px;
+    min-width: 200px;
+    text-align: center;
     transition: var(--transition);
+}
+
+a.active h2 {
+    color: #fff;
 }
 .forgot__password-link:hover{
     color: #000;

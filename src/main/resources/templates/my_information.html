@@ -1,31 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Sanolagani</title>
-        <head th:replace="fragment/head.html :: headerfiles"></head>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanolagani</title>
 
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-            integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
-    </head>
+    <head th:replace="fragment/head.html :: headerfiles"></head>
 
-    <body>
-<header class='container header__container' th:replace="fragment/header.html :: header"></header>
-<div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <header class='container header__container' th:replace="fragment/header.html :: header"></header>
+    <div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
 
 
-	<!-- Dashboard -->
-	<section class="dashboard">
-		<div class=" dashboard__container">
-			<div class="left__dashboard board" th:insert="fragment/dashboard.html :: left-fragment"></div>
+    <!-- Dashboard -->
+    <section class="dashboard">
+        <div class=" dashboard__container">
+            <div class="left__dashboard board" th:fragment="left-fragment">
+                <div class="dashboard-title-wrap">
+                    <div class="dashboard-title"><a th:href="@{/riskinfo}">Dashboard</a></div>
+                    <div class="dashboard-title"><a th:href="@{/myinfo}">My Information</a></div>
+                    <div class="dashboard-title"><a th:href="@{'/investmenthistory/'}">My Investment</a></div>
+
+                    <div class="dropdown-manage-fund">
+                        <button onclick="manageFund()" class="drop-btn">
+                            Manage Fund
+                            <span>&nbsp;v&nbsp;</span>
+                        </button>
+                        <div id="fundManagement" class="fundManagementContent">
+                            <div> <a th:href="@{'/collateralsummery/'+${id}+'/'}"><i
+                                        class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Collateral History</a></div>
+
+                            <div><a th:href="@{'/fundhistory/'+${id}+'/'}"><i
+                                        class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Transfer History</a>
+                            </div>
+                            <div><a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Settlement</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="my-info-center board">
                 <div class="center__heading">
-                    <div><h2>My Information</h2></div>
+                    <div>
+                        <h2>My Information</h2>
+                    </div>
                 </div>
                 <hr>
                 <!-- profile details -->
@@ -84,7 +109,7 @@
                             <div>
                                 <br>
                                 <a th:href="@{/loadfund}" class="btn btn-primary">Load</a>
-                                <a th:href="@{/refund/collateral}"class="btn">Refund</a> 
+                                <a th:href="@{/refund/collateral}" class="btn">Refund</a>
                             </div>
                         </div>
                     </div>
@@ -94,17 +119,17 @@
         </div>
     </section>
 
-        <!-- Footer -->
-<footer>
-	<footer th:insert="fragment/footer.html :: footer"></footer>
+    <!-- Footer -->
+    <footer>
+        <footer th:insert="fragment/footer.html :: footer"></footer>
 
-</footer>
-        <!-- Fund Management Dropdown Script -->
-        <script>
-            function fundManagement(){
-                document.getElementById("fundManagement").classList.toggle("show");
-            }
-        </script>
-    </body>
+    </footer>
+    <!-- Fund Management Dropdown Script -->
+    <script>
+        function manageFund() {
+            document.getElementById("fundManagement").classList.toggle("show");
+        }
+    </script>
+</body>
 
 </html>
