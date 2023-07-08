@@ -169,7 +169,7 @@ public void sendChangePasswordMail(String email) {
 		message.setText("This is a confirmation that the password for"
 				+ " your sanolagani account having name "+user.getFname()+" "+user.getLname()
 				+" has just been changed.");
-	
+	    
 		mailSender.send(message);
 	}
 

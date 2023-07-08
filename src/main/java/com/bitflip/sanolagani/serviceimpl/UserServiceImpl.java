@@ -7,6 +7,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import  java.util.Map;
+import java.util.HashMap;
 import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.models.Collateral;
 import com.bitflip.sanolagani.models.Investment;
@@ -17,8 +22,8 @@ import com.bitflip.sanolagani.repository.InvestmentRepo;
 import com.bitflip.sanolagani.repository.RefundRequestRepo;
 import com.bitflip.sanolagani.repository.TransactionRepo;
 import com.bitflip.sanolagani.repository.UserRepo;
-import com.bitflip.sanolagani.service.AdminService;
 import com.bitflip.sanolagani.service.UserService;
+
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -35,6 +40,15 @@ public class UserServiceImpl implements UserService {
 	EmailService email_service;
 	@Autowired
 	CollateralRepo collateral_repo;
+	
+	ScheduledExecutorService executorService;
+	
+	Map<String,String> emailpwdmap = new HashMap<>();
+    boolean result = true;
+	List<Integer> idlist = new ArrayList<>();
+	String encode_password="";
+	
+	
 	@Override
 	public void saveUser(User u) {
 		userrepo.save(u);
@@ -50,17 +64,27 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void updatePassword(String email, String password) {
+	public void updatePassword(String email, String password,boolean result) {
+	    this.result=result;
 		List<User> userlist = userrepo.findAll();
 		for(User user:userlist) {
-			if(user.getEmail().equals(email)) {
-				String encode_password=AdminServiceImpl.encodePassword(password);
+			if(result && user.getEmail().equals(email)) {
+				emailpwdmap.put(email, user.getPassword());
+				 this.encode_password=AdminServiceImpl.encodePassword(password);
 				user.setPassword(encode_password);
-				userrepo.save(user);
+				userrepo.save(user);	        
 				email_service.sendChangePasswordMail(email);
+			
 			}
 		}
-		
+	}
+	
+	
+	public void saveOldUser(String email,String password) {
+	     User user = userrepo.findByEmail(email);
+	     user.setPassword(password);
+	     userrepo.save(user);
+	     System.out.println("password-"+password);
 	}
 
 	public List<Transaction> getCollateralSummery(int id) {
@@ -78,6 +102,7 @@ public class UserServiceImpl implements UserService {
 		return null;
 		
 	}
+
 
 	public List<Transaction> getFundHistory(int id) {
 		List<Transaction> transaction_list = new ArrayList<>();

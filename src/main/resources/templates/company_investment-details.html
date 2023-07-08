@@ -17,9 +17,9 @@
                 <div class="investment-item-content">
                     <div class="investment-item-title">[[${investment.getUser().getFname()}]]</div>
                     <div class="investment-item-description" th:if="${investment.status eq 'refundable'}">
-						           [[${investment.status+" until-"+investment.refundableUntil}]]</div>
+						           [[${investment.status + " until- "+ investment.refundableUntil}]]</div>
 				    <div class="investment-item-description" th:unless="${investment.status eq 'refundable'}">
-						           [[${investment.status]]</div>
+						           [[${investment.status}]]</div>
                 </div>
                 <div class="investment-item-amount">Rs. [[${#numbers.formatInteger(investment.quantity * investment.getCompany().getPrice_per_share(), 3, 'COMMA')}]]</div>
                 <div class="investment-item-date" style="margin-left: 10px;">on [[${#temporals.format(investment.investment_date_time, 'yyyy-MM-dd') + ', ' + #temporals.format(investment.investment_date_time, 'HH:mm:ss')}]]</div>

@@ -78,6 +78,9 @@ public class Company {
 	private User user;
 
 	@OneToMany(mappedBy = "company")
+	private List<CompanyFile> companyfilelist;
+	
+	@OneToMany(mappedBy = "company")
 	private List<CompanyArticles> companydetaileddescription;
 
 	@OneToMany(mappedBy = "company")
@@ -306,6 +309,30 @@ public class Company {
 
 	public void setPwd_change(String pwd_change) {
 		this.pwd_change = pwd_change;
+	}
+
+	public List<CompanyFile> getCompanyfilelist() {
+		return companyfilelist;
+	}
+
+	public void setCompanyfilelist(List<CompanyFile> companyfilelist) {
+		this.companyfilelist = companyfilelist;
+	}
+
+	public Set<BoardMembers> getBoardmembers() {
+		return boardmembers;
+	}
+
+	public void setBoardmembers(Set<BoardMembers> boardmembers) {
+		this.boardmembers = boardmembers;
+	}
+
+	public List<CompanyArticles> getCompanydetaileddescription() {
+		return companydetaileddescription;
+	}
+
+	public void setCompanydetaileddescription(List<CompanyArticles> companydetaileddescription) {
+		this.companydetaileddescription = companydetaileddescription;
 	}
 
 

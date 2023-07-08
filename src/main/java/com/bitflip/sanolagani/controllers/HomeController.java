@@ -23,8 +23,10 @@ import com.bitflip.sanolagani.models.Company;
 import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.repository.CompanyRepo;
 import com.bitflip.sanolagani.service.AdminService;
+import com.bitflip.sanolagani.service.UserService;
 import com.bitflip.sanolagani.serviceimpl.RecommendationInitializer;
 import com.bitflip.sanolagani.serviceimpl.SentimentPreprocessor;
+import com.bitflip.sanolagani.serviceimpl.UserServiceImpl;
 
 @Controller
 public class HomeController {
@@ -34,13 +36,16 @@ public class HomeController {
 	@Autowired
 	AdminService adminservice;
 	@Autowired
-	private CompanyRepo company_repo; // Assuming you have a CompanyRepository to fetch companies
+	private CompanyRepo company_repo; 
 	@Autowired
 	private SentimentPreprocessor pre;
 	@Autowired
 	RecommendationInitializer recommedationinit;
 	@Autowired
 	AdminController admin_controller;
+
+	@Autowired
+	UserServiceImpl userservice;
 
 
 	@GetMapping({ "/", "/home" })
@@ -156,4 +161,6 @@ public class HomeController {
 //		model.addAttribute("companies", companylist);
 //		return "company-list";
 //	}
+  
+ 
 }

@@ -19,9 +19,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.LinkedHashMap;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -72,13 +74,16 @@ public class CompanyDetailsController {
         Map<String, Integer> totalUsersInvestedMap = new HashMap<>();
 		Map<String,Integer> remainingdaysmap = new HashMap<>();
 		Map<String, Integer> totalApplyShareMap = new HashMap<>();
+        Set<String> sectorlist = new HashSet<>();
 
         for(Company company:companylist) {
 			totalUsersInvestedMap.put(company.getCompanyname(), admin_controller.getTotalNumberOfUserInvested(company));
             remainingdaysmap.put(company.getCompanyname(), homecontroller.calculateRemainingDays(company));
 			totalApplyShareMap.put(company.getCompanyname(),admin_controller.getTotalNumberOfShareApplied(company));
 
-       }
+            sectorlist.add(company.getSector());
+        }
+        model.addAttribute("sectorlist", sectorlist);
         model.addAttribute("totalUsersInvestedMap", totalUsersInvestedMap);
         model.addAttribute("remainingdaysmap", remainingdaysmap);
         model.addAttribute("totalApplyShareMap", totalApplyShareMap);
