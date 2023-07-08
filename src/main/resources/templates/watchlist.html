@@ -11,11 +11,7 @@
   <section class='mostfunded__section'>
     <div class="container mostfunded__container">
 
-      <h2>Companies</h2>
-      <select name="sectors" id="sector-dropdown" >
-           <option th:each="sector : ${sectorlist}" th:value="${sector}"><a href="@{'/company/'+${sector}}">[[${sector}]]</a></option>
-      </select>
-      
+      <h2>Watchlisted Company</h2>
       <div class="cards row">
 
         <div class="card " th:each="company : ${companies}">
