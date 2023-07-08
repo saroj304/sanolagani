@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -163,8 +164,11 @@ public class RegisterController {
   }
         
         @PostMapping("/updatepassword")
-        public String updatePassword(@RequestParam("email") String email,@RequestParam("password") String password) {
-        	userservice.updatePassword(email,password);
+        public String updatePassword(@RequestParam("email") String email,
+        		                   @RequestParam("password") String password
+        		                       ) {
+        	boolean result = true;
+        	userservice.updatePassword(email,password,result);
         	return "redirect:/login";
         }
         @GetMapping("/raisecapital")
