@@ -385,4 +385,10 @@ public class CompanyDetailsController {
 
         return "company-overview";
     }
+
+    @GetMapping("/company/management")
+    public String getCompanyManagement() {
+
+        return "company-management";
+    }
 }

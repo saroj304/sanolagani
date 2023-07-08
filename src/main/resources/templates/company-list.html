@@ -13,7 +13,12 @@
 
       <h2>Companies</h2>
       <select name="sectors" id="sector-dropdown">
-        <option th:each="company : ${companies}" th:value="${company.sector}" th:text="${company.sector}"></option>
+        <div class="dropdown">
+          <p class="btn">Filter By Sector<i class="fa-solid fa-plus"></i></p>
+          <div class="dropdown-content">
+            <a href="#" class="btn">[[${company.sector}]]</a>
+          </div>
+        </div>
       </select>
       <h2>Highest Invest Opportunity</h2>
       <h5>Offerings that have raised the highest money</h5>
