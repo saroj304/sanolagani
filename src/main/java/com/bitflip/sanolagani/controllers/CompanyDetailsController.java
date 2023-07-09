@@ -1,5 +1,6 @@
 package com.bitflip.sanolagani.controllers;
 
+import com.bitflip.sanolagani.models.BoardMembers;
 import com.bitflip.sanolagani.models.Company;
 import com.bitflip.sanolagani.models.CompanyArticles;
 import com.bitflip.sanolagani.models.Investment;
@@ -30,12 +31,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bitflip.sanolagani.controllers.AdminController;
+import org.springframework.web.bind.annotation.RequestBody;
+
 @Controller
 public class CompanyDetailsController {
     @Autowired
@@ -64,6 +68,9 @@ public class CompanyDetailsController {
 
     @Autowired
     AdminController admin_controller;
+
+    @Autowired
+    BoardMembersRepo boardMembersRepo;
 
     @GetMapping("/company")
     public String getAllCompany(Model model) {
@@ -141,6 +148,7 @@ public class CompanyDetailsController {
     @GetMapping("/company/{id}")
     public String getCompany(@PathVariable("id") Integer id, Model model, TrafficData trafficdata) {
         List<TrafficData> trafficdatalist = trafficrepo.findAll();
+
         LocalDateTime nowday = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE");
         String dayString = nowday.format(formatter);
@@ -201,8 +209,11 @@ public class CompanyDetailsController {
             status = "time finish";
 
         }
+        Set<BoardMembers> boardMembers = boardMembersRepo.findByCompanies(company);
         model.addAttribute("status", status);
         model.addAttribute("company", company);
+        model.addAttribute("boardMembers", boardMembers);
+        System.out.println(boardMembers);
         return "company-info";
     }
 
@@ -364,7 +375,6 @@ public class CompanyDetailsController {
          } 
 		}
 		model.addAttribute("companies", sectorstatuslist);
-		System.out.println(sectorstatuslist.size());
 		return "company-list";
 	}
 
@@ -393,7 +403,35 @@ public class CompanyDetailsController {
 
     @GetMapping("/company/management")
     public String getCompanyManagement() {
-
+        User user = usercontroller.getCurrentUser();
+        Company company = user.getCompany();
+        Set<BoardMembers> boardMembers = boardMembersRepo.findByCompanies(company);
+        System.out.println(boardMembers);
         return "company-management";
     }
+
+    @PostMapping(value="/company/management")
+    public String postCompanyManagement(@RequestBody MultiValueMap<String, String> formData, 
+                                        BoardMembers member) {
+        Integer fields = Integer.parseInt(formData.getFirst("numberOfInputFields"));
+        Set<BoardMembers> members = new HashSet<>();
+        for(int i=0; i<fields; i++) {
+            String firstName = formData.getFirst("firstName-"+i);
+            String middleName = formData.getFirst("middleName-"+i);
+            String lastName = formData.getFirst("lastName-"+i);
+            String title = formData.getFirst("title-"+i);
+            String socialLink = formData.getFirst("socialLink-"+i);
+            member.setFirstName(firstName);
+            member.setMiddleName(middleName);
+            member.setLastName(lastName);
+            member.setPosition(title);
+            members.add(member);
+            member = new BoardMembers();
+        }
+        if(members != null) {
+            boardMembersRepo.saveAll(members);
+        }
+        return "company-management";
+    }
+    
 }

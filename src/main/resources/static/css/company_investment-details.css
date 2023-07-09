@@ -4,13 +4,6 @@ body {
             padding: 0;
         }
 
-.container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f1f1f1;
-        }
 .investment-details {
             width: 800px;
             background-color: #ffffff;
@@ -52,7 +45,7 @@ h1 {
         }
 
 .investment-item-content {
-            flex-grow: 1;
+            width: 300px;
         }
 
 .investment-item-title {
@@ -77,3 +70,5 @@ h1 {
             color: #999999;
             font-size: 14px;
         }
+
+

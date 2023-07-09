@@ -61,39 +61,12 @@
               <td><a th:href="${management.linkedin}">LinkedIn</a></td>
             </tr> -->
             <tbody>
-              <tr>
-                <td>Mr. Keshab Kumar Basnet</td>
-                <td>Chairman</td>
-                <td><a href="#">LinkedIn</a></td>
-              </tr>
-              <tr>
-                <td>Bishnu Prasad Bhusal</td>
-                <td>Under Secretary</td>
-                <td><a href="#">LinkedIn</a></td>
-              </tr>
-              <tr>
-                <td>Mr. Raj Kumar Khatiwada</td>
-                <td>Board of Director</td>
-                <td><a href="#">LinkedIn</a></td>
-              </tr>
-              <tr>
-                <td>Mr. Devi Prasad Baral</td>
-                <td>Board of Director</td>
-                <td><a href="#">LinkedIn</a></td>
-              </tr>
-              <tr>
-                <td>Mr. Lil Bahadur Basnet</td>
-                <td>Board of Director</td>
-                <td><a href="#">LinkedIn</a></td>
-              </tr>
-              <tr>
-                <td>Mr. Kuber Prasad Rai</td>
-                <td>Board of Director</td>
-                <td><a href="#">LinkedIn</a></td>
-              </tr>
-              <tr>
-                <td>Mr Ramesh Chaudhary</td>
-                <td>Board of Director</td>
+              <tr th:each="member : ${boardMembers}">
+                <td>[[${member.getFirstName()}]]&nbsp;
+                  [[${member.getMiddleName()}]]&nbsp;
+                  [[${member.getLastName()}]]</td>
+                </td>
+                <td>[[${getPosition()}]]</td>
                 <td><a href="#">LinkedIn</a></td>
               </tr>
             </tbody>
