@@ -66,7 +66,6 @@ public class Company {
 	private int maximum_quantity;
 	@Column
 	private String status;
-	
 	@Column
 	private String pwd_change;
 
@@ -79,6 +78,8 @@ public class Company {
 
 	@OneToMany(mappedBy = "company")
 	private List<CompanyFile> companyfilelist;
+	
+	
 	
 	@OneToMany(mappedBy = "company")
 	private List<CompanyArticles> companydetaileddescription;
@@ -334,6 +335,8 @@ public class Company {
 	public void setCompanydetaileddescription(List<CompanyArticles> companydetaileddescription) {
 		this.companydetaileddescription = companydetaileddescription;
 	}
+
+	
 
 
    

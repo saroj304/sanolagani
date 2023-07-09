@@ -34,6 +34,9 @@ public class User {
 
 	@OneToOne(mappedBy = "user")
 	private Company company;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Watchlist> watchlist;
 
     @OneToMany(mappedBy = "user")
 	private List<Investment> investments;
@@ -172,4 +175,13 @@ public class User {
 		this.phnum = phnum;
 	}
 
+	public List<Watchlist> getWatchlist() {
+		return watchlist;
+	}
+
+	public void setWatchlist(List<Watchlist> watchlist) {
+		this.watchlist = watchlist;
+	}
+
+	
 }

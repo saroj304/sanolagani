@@ -7,6 +7,7 @@ import com.bitflip.sanolagani.models.Investment;
 import com.bitflip.sanolagani.models.Notification;
 import com.bitflip.sanolagani.models.TrafficData;
 import com.bitflip.sanolagani.models.User;
+import com.bitflip.sanolagani.models.Watchlist;
 import com.bitflip.sanolagani.repository.*;
 import com.bitflip.sanolagani.serviceimpl.RecommendationInitializer;
 import com.bitflip.sanolagani.serviceimpl.SentimentPreprocessor;
@@ -35,11 +36,15 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+<<<<<<< HEAD
 import com.bitflip.sanolagani.controllers.AdminController;
 import org.springframework.web.bind.annotation.RequestBody;
 
+=======
+>>>>>>> d5493a93f94ebb0c0b86293e9c9c5a06d99cfe92
 @Controller
 public class CompanyDetailsController {
     @Autowired
@@ -68,6 +73,9 @@ public class CompanyDetailsController {
 
     @Autowired
     AdminController admin_controller;
+    
+    @Autowired
+    WatchlistRepo watchlistrepo;
 
     @Autowired
     BoardMembersRepo boardMembersRepo;
@@ -209,7 +217,27 @@ public class CompanyDetailsController {
             status = "time finish";
 
         }
+<<<<<<< HEAD
         Set<BoardMembers> boardMembers = boardMembersRepo.findByCompanies(company);
+=======
+        
+        
+        
+        List<Watchlist> watchlist = watchlistrepo.findByUserId(user.getId());
+        List<Integer> companyids = new ArrayList<>();
+        boolean iswatchlistedblank= true;
+        System.out.println(watchlist);
+        if(!watchlist.isEmpty()) {
+        	iswatchlistedblank=false;
+        	for(Watchlist watch:watchlist) {
+        		if(watch.getCompany_id()==id) {
+        			companyids.add(watch.getCompany_id());
+        		}
+        	}
+        	model.addAttribute("companyids", companyids);
+        }
+        model.addAttribute("iswatchlistedblank", iswatchlistedblank);
+>>>>>>> d5493a93f94ebb0c0b86293e9c9c5a06d99cfe92
         model.addAttribute("status", status);
         model.addAttribute("company", company);
         model.addAttribute("boardMembers", boardMembers);
@@ -323,13 +351,13 @@ public class CompanyDetailsController {
         return "company_investment-details";
     }
 
-	@GetMapping("/company/{sector}/{status}")
-	public String getCompanySortByStatusAndSector(@PathVariable("sector") String sector,
-			@PathVariable("status") String status,Model model) {
+    @GetMapping("/company/filter/{sector}")
+    public String getCompanyBySector(@PathVariable(value = "sector",required=false) String sector,
+    		                                     Model model) {
 	        
 		List<Company> sectorstatuslist = new ArrayList<>();
-		if(status.equalsIgnoreCase("null")) {
-			List<Company> companylist = companyRepo.findAll();
+		List<Company> companylist = companyRepo.findAll();
+		System.out.println(companylist.size());
 			if(companylist.isEmpty()) {
 				return "company-list"; 
 			}else {
@@ -339,44 +367,27 @@ public class CompanyDetailsController {
 					}
 				}
 			}
-		}else{
-		   if(status == "Highest Raised") {
-	        List<Company> basedoncapital  = companyRepo.findAll();
-	        Collections.sort(basedoncapital, Comparator.comparing(Company::getPreviouslyraisedcapital).reversed());
-            for(Company company:basedoncapital) {
-        	   if(company.getSector().equalsIgnoreCase(sector)) {
-        		 sectorstatuslist.add(company);
-        	   }
-             }
-		}
-		else if(status =="Recently Launched") {
-             List<Company> basedondate = companyRepo.findAllCompanyBasesOnCreationalDates();
-             for(Company company:basedondate) {
-          	   if(company.getSector().equalsIgnoreCase(sector)) {
-          		 sectorstatuslist.add(company);
-          	   }
-             }
-          }
-		else if(status =="Feedback") {
-              List<Company> basedonfeedback = pre.getCompaniesWithGoodSentiment();
-              for(Company company:basedonfeedback) {
-           	   if(company.getSector().equalsIgnoreCase(sector)) {
-           		 sectorstatuslist.add(company);
-           	   }
-              }
-           }  
-		else if(status =="Diversification") {
-	        List<Company> basedondiversification = recommedationinit.getRecommendCompanies();
-            for(Company company:basedondiversification) {
-         	   if(company.getSector().equalsIgnoreCase(sector)) {
-         		 sectorstatuslist.add(company);
-         	   }
-            }
-         } 
-		}
-		model.addAttribute("companies", sectorstatuslist);
-		return "company-list";
+	
+		Map<String, Integer> totalUsersInvestedMap = new HashMap<>();
+		Map<String,Integer> remainingdaysmap = new HashMap<>();
+		Map<String, Integer> totalApplyShareMap = new HashMap<>();
+        Set<String> sectorlist = new HashSet<>();
+
+		 for(Company company:companylist) {
+				totalUsersInvestedMap.put(company.getCompanyname(), admin_controller.getTotalNumberOfUserInvested(company));
+	            remainingdaysmap.put(company.getCompanyname(), homecontroller.calculateRemainingDays(company));
+				totalApplyShareMap.put(company.getCompanyname(),admin_controller.getTotalNumberOfShareApplied(company));
+		        sectorlist.add(company.getSector());
+	        }
+	        model.addAttribute("sectorlist", sectorlist);
+	        model.addAttribute("totalUsersInvestedMap", totalUsersInvestedMap);
+	        model.addAttribute("remainingdaysmap", remainingdaysmap);
+	        model.addAttribute("totalApplyShareMap", totalApplyShareMap);
+		    model.addAttribute("companies", sectorstatuslist);
+		   return "company-list";
 	}
+    
+    
 
     @GetMapping("company/overview")
     public String getCompanyOverview(Model model) {
