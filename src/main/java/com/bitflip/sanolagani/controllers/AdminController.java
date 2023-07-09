@@ -266,6 +266,24 @@ public class AdminController {
 
 		return "companystatisticsgraph";
 	}
+	
+	@GetMapping("/admin/refund/{status}/{id}")
+	public String getRefundApprove(@PathVariable("id") int id,@PathVariable(value="status") String status) {	
+		admin_service.getRefundApprove(id,status);
+		return "redirect:/admin/refunddata";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public int getTotalNumberOfUserInvested(Company company) {
 		List<Investment> investment_list = company.getInvestments();
