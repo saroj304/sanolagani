@@ -3,6 +3,7 @@ package com.bitflip.sanolagani.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -82,7 +83,6 @@ AdminController admin_controller;
          int totalshare = investment_list.stream()
         		     .mapToInt(Investment::getQuantity).sum();
         System.out.println(companynamelist);
-        // model.addAttribute("totalcollateralamount", collateral.getCollateral_amount()) ;
         model.addAttribute("id", user.getId());
   		model.addAttribute("totalshare", totalshare);
  		model.addAttribute("size", size);
@@ -158,7 +158,15 @@ AdminController admin_controller;
 	}
 	
 	@GetMapping("/loadfund")
-	public String loadCollateral() {
+	public String loadCollateral(Model model) {
+		User user = getCurrentUser();
+		Collateral collateral = user.getCollateral();
+		if(collateral ==null){
+			model.addAttribute("totalcollateralamount", 0) ;
+		}else{
+			model.addAttribute("totalcollateralamount", collateral.getCollateral_amount()) ;
+
+		}
 		return "load_fund";
 	}
 	
@@ -187,7 +195,16 @@ AdminController admin_controller;
 	
 	
 	@GetMapping("/refund/collateral")
-	public String getCollateralRefund() {
+	public String getCollateralRefund(Model model) {
+		User user = getCurrentUser();
+		Collateral collateral = user.getCollateral();
+		if(collateral ==null){
+			model.addAttribute("totalcollateralamount", 0) ;
+		}else{
+			model.addAttribute("totalcollateralamount", collateral.getCollateral_amount()) ;
+
+		}
+		model.addAttribute("userphone", user.getPhnum());
 		return "refund";
 	}
 	
@@ -268,6 +285,39 @@ AdminController admin_controller;
 		    model.addAttribute("companies", companylist);
 		   return "company-list";
 	}
+	
+	
+	
+	@GetMapping("/user/edit/details")
+	public String getUserDetailsPage(Model model) {
+		User user = getCurrentUser();
+		model.addAttribute("user", user);
+		return "edit_userprofile";
+	}
+	
+	@PostMapping("/user/edit/savedetails")
+	public String saveEditDetails(@ModelAttribute("user") User user) {
+		
+		User login_user = getCurrentUser();
+		User fetch_user = userrepo.getReferenceById(login_user.getId());
+		fetch_user.setAddress(user.getAddress());
+		fetch_user.setEmail(user.getEmail());
+		fetch_user.setFname(user.getFname());
+		fetch_user.setLname(user.getLname());
+		fetch_user.setPhnum(user.getPhnum());
+		userrepo.save(fetch_user);
+		System.out.println("save user");
+		
+		return "redirect:/myinfo";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public User getCurrentUser() {
 	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
