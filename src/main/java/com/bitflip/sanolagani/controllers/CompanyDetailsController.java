@@ -28,6 +28,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.LinkedHashMap;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,12 +40,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-<<<<<<< HEAD
 import com.bitflip.sanolagani.controllers.AdminController;
 import org.springframework.web.bind.annotation.RequestBody;
 
-=======
->>>>>>> d5493a93f94ebb0c0b86293e9c9c5a06d99cfe92
 @Controller
 public class CompanyDetailsController {
     @Autowired
@@ -217,10 +215,8 @@ public class CompanyDetailsController {
             status = "time finish";
 
         }
-<<<<<<< HEAD
-        Set<BoardMembers> boardMembers = boardMembersRepo.findByCompanies(company);
-=======
-        
+        List<BoardMembers> boardMembers = boardMembersRepo.findAllByCompany(company);
+        System.out.println(boardMembers.size());
         
         
         List<Watchlist> watchlist = watchlistrepo.findByUserId(user.getId());
@@ -237,7 +233,6 @@ public class CompanyDetailsController {
         	model.addAttribute("companyids", companyids);
         }
         model.addAttribute("iswatchlistedblank", iswatchlistedblank);
->>>>>>> d5493a93f94ebb0c0b86293e9c9c5a06d99cfe92
         model.addAttribute("status", status);
         model.addAttribute("company", company);
         model.addAttribute("boardMembers", boardMembers);
@@ -416,7 +411,7 @@ public class CompanyDetailsController {
     public String getCompanyManagement() {
         User user = usercontroller.getCurrentUser();
         Company company = user.getCompany();
-        Set<BoardMembers> boardMembers = boardMembersRepo.findByCompanies(company);
+        List<BoardMembers> boardMembers = boardMembersRepo.findAllByCompany(company);
         System.out.println(boardMembers);
         return "company-management";
     }
@@ -426,23 +421,45 @@ public class CompanyDetailsController {
                                         BoardMembers member) {
         Integer fields = Integer.parseInt(formData.getFirst("numberOfInputFields"));
         Set<BoardMembers> members = new HashSet<>();
+        User user = usercontroller.getCurrentUser();
+        Company company = user.getCompany();
         for(int i=0; i<fields; i++) {
             String firstName = formData.getFirst("firstName-"+i);
             String middleName = formData.getFirst("middleName-"+i);
             String lastName = formData.getFirst("lastName-"+i);
             String title = formData.getFirst("title-"+i);
             String socialLink = formData.getFirst("socialLink-"+i);
+
             member.setFirstName(firstName);
             member.setMiddleName(middleName);
             member.setLastName(lastName);
             member.setPosition(title);
             members.add(member);
+            member.setCompany(company);
             member = new BoardMembers();
         }
         if(members != null) {
             boardMembersRepo.saveAll(members);
         }
         return "company-management";
+    }
+
+    @GetMapping("/company/all-articles")
+	public String viewArticles(Model model) {
+		User user = userrepo.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+		Company company = companyRepo.findById(user.getCompany().getId()).get();
+		List<CompanyArticles> article_list = articlesRepo.findByCompanyId(company.getId());
+		if (article_list.isEmpty()) {
+			return "articles";
+		}
+		model.addAttribute("articles", article_list);
+		return "articles";
+	}
+
+    @GetMapping("/company/reports")
+    public String getCompanyDocuments(Model model) {
+
+        return "company-reports";
     }
     
 }

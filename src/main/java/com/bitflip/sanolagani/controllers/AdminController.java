@@ -196,17 +196,6 @@ public class AdminController {
 		return "adminreport";
 	}
 
-	@GetMapping("/company/all-articles")
-	public String viewArticles(Model model) {
-		User user = userrepo.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
-		Company company = companyrepo.findById(user.getCompany().getId()).get();
-		List<CompanyArticles> article_list = companyarticlesrepo.findByCompanyId(company.getId());
-		if (article_list.isEmpty()) {
-			return "articles";
-		}
-		model.addAttribute("articles", article_list);
-		return "articles";
-	}
 
 	@GetMapping("/admin/refunddata")
 

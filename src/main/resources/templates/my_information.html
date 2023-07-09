@@ -22,7 +22,7 @@
     <!-- Dashboard -->
     <section class="dashboard">
         <div class=" dashboard__container">
-            <div class="left__dashboard board" th:fragment="left-fragment">
+            <div class="left__dashboard board" th:replace="left-fragment">
                 <div class="dashboard-title-wrap">
                     <div class="dashboard-title"><a th:href="@{/riskinfo}">Dashboard</a></div>
                     <div class="dashboard-title"><a th:href="@{/myinfo}">My Information</a></div>
