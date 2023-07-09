@@ -43,6 +43,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.bitflip.sanolagani.controllers.AdminController;
 import org.springframework.web.bind.annotation.RequestBody;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1a0e467110d6ade3bdd4d4d89dc5270bfdb344ac
 @Controller
 public class CompanyDetailsController {
     @Autowired
@@ -318,12 +322,14 @@ public class CompanyDetailsController {
         return "companydashboard";
     }
 
-    @GetMapping("/notification")
+    @GetMapping("/company/notification")
     public String getNotification(Model model) {
         User user = usercontroller.getCurrentUser();
         int companyid = user.getCompany().getId();
         List<Notification> notificationlist = notificationrepo.findAllByCompanyid(companyid);
         markNotificationAsRead(notificationlist);
+        Collections.reverse(notificationlist);
+        
         model.addAttribute("notificationlist", notificationlist);
         return "notification";
     }

@@ -76,29 +76,6 @@ public class AdminController {
 		return "admindashboard";
 	}
 
-	private static Map<String, Double> aggregateData(List<Transaction> transactions) {
-		Map<String, Double> aggregatedData = new LinkedHashMap<>();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
-
-		LocalDateTime currentTime = LocalDateTime.now();
-		LocalDateTime startTime = currentTime.minusHours(24).withMinute(0).withSecond(0).withNano(0);
-
-		while (startTime.isBefore(currentTime)) {
-			final LocalDateTime currentHour = startTime;
-			LocalDateTime endTime = startTime.plusHours(1);
-			String label = startTime.format(formatter);
-			double totalAmount = transactions.stream()
-					.filter(transaction -> transaction.getTransaction_date_time().isAfter(currentHour)
-							&& transaction.getTransaction_date_time().isBefore(endTime))
-					.mapToDouble(Transaction::getAmount).sum();
-
-			aggregatedData.put(label, totalAmount);
-
-			startTime = endTime;
-		}
-		return aggregatedData;
-	}
-
 	@GetMapping("admin/viewusers")
 	public String getAllUsers(Model model) {
 		List<User> user_list = new ArrayList<>();
@@ -255,6 +232,45 @@ public class AdminController {
 
 		return "companystatisticsgraph";
 	}
+	
+	@GetMapping("/admin/refund/{status}/{id}")
+	public String getRefundApprove(@PathVariable("id") int id,@PathVariable(value="status") String status) {	
+		admin_service.getRefundApprove(id,status);
+		return "redirect:/admin/refunddata";
+	}
+	
+	
+	
+
+	
+	
+	
+
+	public static Map<String, Double> aggregateData(List<Transaction> transactions) {
+		Map<String, Double> aggregatedData = new LinkedHashMap<>();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
+
+		LocalDateTime currentTime = LocalDateTime.now();
+		LocalDateTime startTime = currentTime.minusHours(24).withMinute(0).withSecond(0).withNano(0);
+
+		while (startTime.isBefore(currentTime)) {
+			final LocalDateTime currentHour = startTime;
+			LocalDateTime endTime = startTime.plusHours(1);
+			String label = startTime.format(formatter);
+			double totalAmount = transactions.stream()
+					.filter(transaction -> transaction.getTransaction_date_time().isAfter(currentHour)
+							&& transaction.getTransaction_date_time().isBefore(endTime))
+					.mapToDouble(Transaction::getAmount).sum();
+
+			aggregatedData.put(label, totalAmount);
+
+			startTime = endTime;
+		}
+		return aggregatedData;
+	}
+
+	
+	
 
 	public int getTotalNumberOfUserInvested(Company company) {
 		List<Investment> investment_list = company.getInvestments();

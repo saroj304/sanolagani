@@ -25,7 +25,7 @@
         <th>Amount</th>
         <th>Transaction ID</th>
         <th>Refund Request Date</th>
-        
+        <th>Action</th>
       </tr>
       <tr th:each="refund: ${refund_list}">
              <td>[[${refund.id}]]</td>
@@ -39,6 +39,14 @@
         	  <td>
                 <p th:text="${#temporals.format(refund.refund_date_time, 'yyyy-MM-dd') + ' ' + #temporals.format(refund.refund_date_time, 'HH:mm:ss')}"></p>
 			  </td>
+			  <td>
+                <button class="btn btn-danger"
+                    th:onclick="|window.location.href='/admin/refund/approve/'+${refund.id}|">Approve</button>
+             </td>
+             <td>
+                <button class="btn btn-danger"
+                    th:onclick="|window.location.href='/admin/refund/reject/'+${refund.id}|">Reject</button>
+             </td>
       </tr>
       <!-- Add more user rows here -->
     </table>

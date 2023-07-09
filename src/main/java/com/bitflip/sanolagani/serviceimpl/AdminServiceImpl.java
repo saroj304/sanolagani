@@ -18,10 +18,11 @@ import org.springframework.stereotype.Service;
 
 import com.bitflip.sanolagani.document.service.ExtractTablesFromPDF;
 import com.bitflip.sanolagani.models.Company;
-
+import com.bitflip.sanolagani.models.RefundRequestData;
 import com.bitflip.sanolagani.models.UnverifiedCompanyDetails;
 import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.repository.CompanyRepo;
+import com.bitflip.sanolagani.repository.RefundRequestRepo;
 import com.bitflip.sanolagani.repository.UnverifiedCompanyRepo;
 import com.bitflip.sanolagani.repository.UserRepo;
 import com.bitflip.sanolagani.service.AdminService;
@@ -41,6 +42,10 @@ public class AdminServiceImpl implements AdminService {
 	UserRepo user_repo;
 	@Autowired
 	ExtractTablesFromPDF tablesFromPDF;
+	@Autowired
+	RefundRequestRepo refund_repo;
+	
+	
 	private UnverifiedCompanyDetails unverified_details;
 	List<Company> moneyList = new ArrayList<>();
 
@@ -209,4 +214,62 @@ public class AdminServiceImpl implements AdminService {
 		return companylist;
 	}
 
+	@Override
+	public boolean saveAdmin(User user,String email) {
+		String plain_password = generatePassword();
+		String encodedPassword = encodePassword(plain_password);
+		sendAdminEmail(email, plain_password);// sending password email after regisrtating
+        user.setPassword(encodedPassword);
+        user.setRole("ADMIN");
+        user_repo.save(user);
+		return true;
+	}
+
+	public void sendAdminEmail(String email, String plain_password) {
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setTo("raayaseetal@gmail.com");
+		message.setSubject("Company Registered Sucessfully");
+		message.setText("The authentication details for admin is :" + email
+				+ " password:" + plain_password + ". Regards:seetal raya from sanolagani project");
+		mailSender.send(message);
+	}
+
+	@Override
+	public void getRefundApprove(int id,String status) {
+		RefundRequestData refund = refund_repo.getReferenceById(id);
+		sendRefundEmail(refund,status);
+		refund_repo.delete(refund);
+		
+	}
+
+	public void sendRefundEmail(RefundRequestData refund, String status) {
+         User user = refund.getUser();
+         Company company = refund.getCompany();
+        SimpleMailMessage message = new SimpleMailMessage();
+        System.out.println(user.getEmail());
+        String email =user.getEmail();
+ 		message.setTo(email);
+ 		message.setSubject("Refund Request");
+ 		if(status.equalsIgnoreCase("approve")&&refund.getQuantity()>0) {
+ 		message.setText("The request for the refund of amount:" + refund.getAmount()
+ 				+ " on:" + refund.getRefund_date_time() + " invested on company " +company.getCompanyname()
+ 				+" is approved. Regards:seetal raya from sanolagani project");
+ 		
+ 		}
+ 		if(status.equalsIgnoreCase("approve")&&refund.getQuantity()<0) {
+ 	 		message.setText("The request for the refund of amount:" + refund.getAmount()
+ 	 				+ " on:" + refund.getRefund_date_time() + " invested on collateral is approved. Regards:seetal raya from sanolagani project");
+ 	 		
+ 	 		}
+ 		if(status.equalsIgnoreCase("reject")) {
+ 	 		message.setText("The request for the refund of amount:" + refund.getAmount()
+ 	 				+ " on:" + refund.getRefund_date_time() + " is rejected. Regards:seetal raya from sanolagani project");
+ 	 		
+ 		
+		
+	}
+ 		mailSender.send(message);
+	}	
+	
+	
 }

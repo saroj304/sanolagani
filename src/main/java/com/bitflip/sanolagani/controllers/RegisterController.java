@@ -24,7 +24,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import com.bitflip.sanolagani.models.UnverifiedCompanyDetails;
 import com.bitflip.sanolagani.models.User;
-
+import com.bitflip.sanolagani.service.AdminService;
 import com.bitflip.sanolagani.service.UserService;
 import com.bitflip.sanolagani.serviceimpl.EmailService;
 import java.util.Map;
@@ -40,6 +40,8 @@ public class RegisterController {
 	BCryptPasswordEncoder passwordencoder;
 	@Autowired
 	EmailService emailservice;
+	@Autowired
+	AdminService adminservice;
 	
 	private Map<String, String> otpStore = new HashMap<>();
 	private List<User> userstore = new ArrayList<>();
@@ -182,4 +184,14 @@ public class RegisterController {
     		}
         }
         
+        @GetMapping("/admin/signup")
+        public String getAdminSignupPage() {
+        	return "admin_signup";
+        }
+        
+        @PostMapping("/admin/saveadmin")
+        public String saveAdminDetails(@ModelAttribute("user") User admin, @RequestParam("email") String email) {
+        	boolean result=adminservice.saveAdmin(admin,email);
+        	return "redirect:/admin/signup"; 
+        }
 }
