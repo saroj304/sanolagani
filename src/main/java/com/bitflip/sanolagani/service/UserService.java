@@ -1,6 +1,5 @@
 package com.bitflip.sanolagani.service;
 
-import org.springframework.security.authentication.AuthenticationManager;
 
 import com.bitflip.sanolagani.models.User;
 
