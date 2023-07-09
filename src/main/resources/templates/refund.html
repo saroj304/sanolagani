@@ -21,19 +21,31 @@
 
 
     <!-- Dashboard -->
+ <!-- Dashboard -->
     <section class="dashboard">
         <div class=" dashboard__container">
             <!-- left dashboard -->
-            <div class="left__dashboard board">
-                <div><a href="#">Sanolagani Dashboard</a></div>
-                <div><a href="#"><a href="#">My Information</a></a></div>
+            <div class="left__dashboard board" th:fragment="left-fragment">
+                <div class="dashboard-title-wrap">
+                    <div class="dashboard-title"><a th:href="@{/riskinfo}">Dashboard</a></div>
+                    <div class="dashboard-title"><a th:href="@{/myinfo}">My Information</a></div>
+                    <div class="dashboard-title"><a th:href="@{'/investmenthistory/'}">My Investment</a></div>
 
-                <div class="dropdown">
-                    <button onclick="fundManagement()" class="drop-btn">Fund Management</button>
-                    <div id="fundManagement" class="fundManagementContent">
-                        <a th:href="@{'/collateralsummery/'+${id}+'/'}"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Collateral History</a>
-                        <a th:href="@{'/fundhistory/'+${id}+'/'}"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Transfer History</a>
-                        <a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Settlement</a>
+                    <div class="dropdown-manage-fund">
+                        <button onclick="manageFund()" class="drop-btn">
+                            Manage Fund
+                            <span>&nbsp;v&nbsp;</span>
+                        </button>
+                        <div id="fundManagement" class="fundManagementContent">
+                            <div> <a th:href="@{'/collateralsummery/'+${id}+'/'}"><i
+                                        class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Collateral History</a></div>
+
+                            <div><a th:href="@{'/fundhistory/'+${id}+'/'}"><i
+                                        class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Transfer History</a>
+                            </div>
+                            <div><a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Settlement</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -42,11 +54,11 @@
                 <form th:action="@{/refundCollateral}" method="post">
                     <div class="bank_row">
                         <label class="load-title" for="account_number">PHONE NUMBER <span style="color: red">*</span></label>
-                        <input class="load_input" type="number" id="account_number" min="0"  oninput="validity.valid||(value='')" required>
+                        <input class="load_input" type="number" id="account_number" min="0" th:value="${userphone}" oninput="validity.valid||(value='')" readonly required>
                     </div>
                     <div class="bank_row">
                         <label class="load-title" for="refund_amount">AMOUNT <span style="color: red">*</span></label>
-                        <input class="load_input" name="amount" type="number" id="refund_amount" min="1"  oninput="validity.valid||(value='')" required>
+                        <input class="load_input" name="amount" type="number" id="refund_amount" min="1" th:max="${totalcollateralamount}" oninput="validity.valid||(value='')" required>
                     </div>
                     <div>
                         <button type="submit" class="btn">Continue</button>
@@ -61,15 +73,8 @@
                 <!-- total collateral -->
                 <div class="load board">
                     <div>
-                        <p class="collateral-title">NPR &nbsp;<span>0.0</span></p>
+                        <p class="collateral-title">NPR &nbsp;<span>[[${totalcollateralamount}]]</span></p>
                         <p class="collateral-sub-tile">Total Collateral</p>
-                    </div>
-                </div>
-                <!-- total collateral -->
-                <div class="load board">
-                    <div>
-                        <p class="collateral-title">NPR &nbsp;<span>0.0</span></p>
-                        <p class="collateral-sub-tile">Available Collateral</p>
                     </div>
                 </div>
             </div>
@@ -82,10 +87,11 @@
 
     <!-- Fund Management Dropdown Script -->
     <script>
-        function fundManagement() {
-            document.getElementById("fundManagement").classList.toggle("show");
-        }
-    </script>
+            function manageFund() {
+                document.getElementById("fundManagement").classList.toggle("show");
+            }
+
+        </script>
 </body>
 
 </html>

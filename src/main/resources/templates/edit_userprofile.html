@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragment/head.html :: headerfiles">
+	<title>Register Company</title>
+	
+</head>
+
+<body>
+	<!-- header -->
+	<header class='container header__container'>
+		<div>
+			<h1>
+				<a href="/" class='logo hover_none'>Sanolagani</a>
+			</h1>
+		</div>
+	
+	</header>
+	<div class='full__width' th:insert="fragment/nav.html :: navbar">
+	</div>
+
+	<section class="company">
+		<div class="container comapany__container">
+			<h2>Register company</h2>
+			<p class="error" th:text="${error}"></p>
+			<form  th:action="@{/user/edit/savedetails}" class="company_registration" method="POST"
+				enctype="multipart/form-data">
+				<div class="register-row">
+					<input class="register_input" type="text" th:value="${user.fname}" name="fname">
+					<input class="register_input" type="text" th:value="${user.lname}" name="lname">
+				</div>
+
+
+				<div class="register-row">
+					<input class="register_input" type="email"  th:value="${user.email}" name="email">
+					<input class="register_input" type="number" th:value="${user.phnum}" name="phnum">
+				</div>
+			<div class="register-row">
+					<input class="register_input" type="text"  th:value="${user.address}" name="address">
+					</div>
+				<button type="submit" class="btn sumbit">Save</button>
+
+
+			</form>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer>
+		<footer th:insert="fragment/footer.html :: footer"> </footer>
+	</footer>
+
+	
+</body>
+
+</html>
+

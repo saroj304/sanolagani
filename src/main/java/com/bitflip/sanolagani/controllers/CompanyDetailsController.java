@@ -39,12 +39,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-<<<<<<< HEAD
 import com.bitflip.sanolagani.controllers.AdminController;
 import org.springframework.web.bind.annotation.RequestBody;
 
-=======
->>>>>>> d5493a93f94ebb0c0b86293e9c9c5a06d99cfe92
+
 @Controller
 public class CompanyDetailsController {
     @Autowired
@@ -217,9 +215,9 @@ public class CompanyDetailsController {
             status = "time finish";
 
         }
-<<<<<<< HEAD
+
         Set<BoardMembers> boardMembers = boardMembersRepo.findByCompanies(company);
-=======
+
         
         
         
@@ -237,7 +235,6 @@ public class CompanyDetailsController {
         	model.addAttribute("companyids", companyids);
         }
         model.addAttribute("iswatchlistedblank", iswatchlistedblank);
->>>>>>> d5493a93f94ebb0c0b86293e9c9c5a06d99cfe92
         model.addAttribute("status", status);
         model.addAttribute("company", company);
         model.addAttribute("boardMembers", boardMembers);
@@ -323,12 +320,14 @@ public class CompanyDetailsController {
         return "companydashboard";
     }
 
-    @GetMapping("/notification")
+    @GetMapping("/company/notification")
     public String getNotification(Model model) {
         User user = usercontroller.getCurrentUser();
         int companyid = user.getCompany().getId();
         List<Notification> notificationlist = notificationrepo.findAllByCompanyid(companyid);
         markNotificationAsRead(notificationlist);
+        Collections.reverse(notificationlist);
+        
         model.addAttribute("notificationlist", notificationlist);
         return "notification";
     }

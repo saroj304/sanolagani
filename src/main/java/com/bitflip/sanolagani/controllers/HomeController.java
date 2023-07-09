@@ -61,6 +61,9 @@ public class HomeController {
 				return "redirect:/companydashboard";
 			}
 		}
+		 if(user.getRole().equals("ADMIN")) {
+			 return "redirect:/admin/admindashboard";
+		 }
 		}
 		
         List<Company> company_list = company_repo.findAll();
@@ -147,21 +150,6 @@ public class HomeController {
 
   }
 
-
-//	@GetMapping("/company/watchlist/{id}")
-//	public String addTOWatchList(@PathVariable("id") int id) {
-//		Company company = company_repo.getReferenceById(id);
-//		company.setIswatchlisted(true);
-//		company_repo.save(company);
-//		return "redirect:/company/"+id;
-//	}
-//	
-//	@GetMapping("/company/mywatchlist")
-//	public String getMyWatchlistedCompany(Model model) {
-//		List<Company> companylist = company_repo.findByiswatchlistedTrue();
-//		model.addAttribute("companies", companylist);
-//		return "company-list";
-//	}
   
  
 }
