@@ -32,13 +32,21 @@ public class BoardMembers {
     private String position;
 
     @ManyToMany()
-    @JoinTable(name = "member_of",
+    @JoinTable(name = "company_board_members",
             joinColumns = @JoinColumn(name = "board_members"),
             inverseJoinColumns = @JoinColumn(name = "company"))
     private Set<Company> companies;
 
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setCompanies(Set<Company> companies) {
+        this.companies = companies;
     }
 
     public Set<Company> getCompanies() {
