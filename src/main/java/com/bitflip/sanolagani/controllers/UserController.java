@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bitflip.sanolagani.models.Collateral;
+import com.bitflip.sanolagani.models.Company;
 import com.bitflip.sanolagani.models.Investment;
 import com.bitflip.sanolagani.models.RefundRequestData;
 import com.bitflip.sanolagani.models.Transaction;
@@ -22,8 +23,11 @@ import java.util.List;
 
 
 import java.util.Map;
+import java.util.Set;
 import java.util.HashMap;
-
+import java.util.HashSet;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 
@@ -42,6 +46,9 @@ InvestmentRepo invest_repo;
 CompanyRepo company_repo;
 @Autowired
 UserServiceImpl userservice;
+@Autowired
+AdminController admin_controller;
+
 
 	
 	@GetMapping("/dashboard")
@@ -234,7 +241,33 @@ UserServiceImpl userservice;
 		return "my_information";
 	}
 	
-	
+	@GetMapping("/user/myinvestment")
+	public String getMyInvestment(Model model) {
+		User user = getCurrentUser();
+		Map<String, Integer> totalUsersInvestedMap = new HashMap<>();
+		Map<String,Integer> remainingdaysmap = new HashMap<>();
+		Map<String, Integer> totalApplyShareMap = new HashMap<>();
+        Set<String> sectorlist = new HashSet<>();
+		Set<Company> companylist = new HashSet<>();
+		
+		List<Investment> myinvestmentlist = invest_repo.findAllByUser_id(user.getId());
+        for(Investment investment:myinvestmentlist)	{
+        	companylist.add(investment.getCompany());
+        }
+		
+		 for(Company company:companylist) {
+				totalUsersInvestedMap.put(company.getCompanyname(), admin_controller.getTotalNumberOfUserInvested(company));
+	            remainingdaysmap.put(company.getCompanyname(), calculateRemainingDays(company));
+				totalApplyShareMap.put(company.getCompanyname(),admin_controller.getTotalNumberOfShareApplied(company));
+		        sectorlist.add(company.getSector());
+	        }
+	        model.addAttribute("sectorlist", sectorlist);
+	        model.addAttribute("totalUsersInvestedMap", totalUsersInvestedMap);
+	        model.addAttribute("remainingdaysmap", remainingdaysmap);
+	        model.addAttribute("totalApplyShareMap", totalApplyShareMap);
+		    model.addAttribute("companies", companylist);
+		   return "company-list";
+	}
 	
 	public User getCurrentUser() {
 	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -245,5 +278,17 @@ UserServiceImpl userservice;
 	    }
 	    return null; // Or handle the case where the user is not authenticated
 	}
-	
+	 public int calculateRemainingDays(Company company) {
+		  LocalDateTime currentDateTime = LocalDateTime.now();
+
+		  LocalDateTime registrationDateTime = company.getCreated(); // Replace with your own logic to get the registration date and time
+		  String time =company.getTimespanforraisingcapital();
+		  String[] timespansplit = time.split(" ",2);
+		  int timespan = Integer.parseInt(timespansplit[0]);
+		  LocalDateTime endDateTime = registrationDateTime.plusDays(timespan);
+		  int remainingDays = (int)ChronoUnit.DAYS.between(currentDateTime, endDateTime);
+		  return remainingDays;
+
+	  }
+
 }

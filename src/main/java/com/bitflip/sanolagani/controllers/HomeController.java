@@ -91,6 +91,7 @@ public class HomeController {
             remainingdaysmap.put(company.getCompanyname(), calculateRemainingDays(company));
 			totalApplyShareMap.put(company.getCompanyname(),admin_controller.getTotalNumberOfShareApplied(company));
 
+			
        }
         
        

@@ -31,8 +31,9 @@ double getTotalInvestedByDate(@Param("date")Date date);
 @Query("SELECT COALESCE(count(DISTINCT user_id),0) FROM Investment  WHERE DATE(investment_date_time)  = :date")
 int getTotalInvestedUserByDate(Date date);
 
-
 List<Investment> findAllByCompany_id(int companyId);
+
+List<Investment> findAllByUser_id(int id);
 
 
 }
