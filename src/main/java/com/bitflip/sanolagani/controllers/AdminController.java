@@ -76,7 +76,7 @@ public class AdminController {
 		return "admindashboard";
 	}
 
-	@GetMapping("admin/viewusers")
+	@GetMapping("/admin/viewusers")
 	public String getAllUsers(Model model) {
 		List<User> user_list = new ArrayList<>();
 		List<User> alluser_list = userrepo.findAll();
@@ -121,16 +121,12 @@ public class AdminController {
 	}
 
 	@GetMapping("/admin/managecompany")
-
 	public String getunverifiedcompany(Model model) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication == null || authentication.getName().equals("anonymousUser")) {
 			List<UnverifiedCompanyDetails> details = admin_service.fetchAll();
 			if (details != null) {
 				model.addAttribute("UnverfiedCompanies", details);
 				return "managecompany";
-			}
-			return "managecompany";
+		
 		} else {
 			return "redirect:/home";
 		}
