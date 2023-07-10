@@ -63,7 +63,7 @@ public class PaymentController {
     	double amt = collateral.getCollateral_amount();
     	collateral.setCollateral_amount(amt-amount);
     	collaretal_repo.save(collateral);
-    	return "redirect:/dashboard";
+    	return "redirect:/user/dashboard";
     	}
 
     	
