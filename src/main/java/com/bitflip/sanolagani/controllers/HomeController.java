@@ -58,7 +58,7 @@ public class HomeController {
 				redirectAttributes.addFlashAttribute("email", user.getEmail());
 				return "redirect:/change_password";
 			}else {
-				return "redirect:/companydashboard";
+				return "redirect:/company/companydashboard";
 			}
 		}
 		 if(user.getRole().equals("ADMIN")) {
@@ -111,7 +111,7 @@ public class HomeController {
 		List<Company> diversifiedcompanylist = recommedationinit.getRecommendCompanies();
  
 		List<Company> c_list = pre.getCompaniesWithGoodSentiment();
-
+        System.out.println(c_list.size());
 		
 		
 		if (result != null & result1 != null) {
