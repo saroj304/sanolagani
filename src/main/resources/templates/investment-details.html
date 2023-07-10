@@ -51,7 +51,7 @@
 				<td th:if="${investment.status eq 'refundable'}">
                 
                 <button class="btn btn-danger"
-                    th:onclick="|window.location.href='/tables/refund/${investment.id}'|">Refund</button>
+                    th:onclick="|window.location.href='/user/tables/refund/${investment.id}'|">Refund</button>
                 </td>
                 <td th:unless="${investment.status eq 'refundable'}">time finish to refund or edit</td>
         </tr>
