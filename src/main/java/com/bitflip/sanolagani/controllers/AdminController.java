@@ -87,7 +87,6 @@ public class AdminController {
 		for (User user : alluser_list) {
 
 			if (user.getRole().equals("USER")) {
-				System.out.println("User exists");
 				user_list.add(user);
 			}
 		}

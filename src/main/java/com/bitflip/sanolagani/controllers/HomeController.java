@@ -32,11 +32,11 @@ import com.bitflip.sanolagani.serviceimpl.UserServiceImpl;
 public class HomeController {
 	@Autowired
 	UserController usercontroller;
-	
+
 	@Autowired
 	AdminService adminservice;
 	@Autowired
-	private CompanyRepo company_repo; 
+	private CompanyRepo company_repo;
 	@Autowired
 	private SentimentPreprocessor pre;
 	@Autowired
@@ -47,75 +47,68 @@ public class HomeController {
 	@Autowired
 	UserServiceImpl userservice;
 
-
 	@GetMapping({ "/", "/home" })
-	public String homePage(Model model,RedirectAttributes redirectAttributes) {
-	
+	public String homePage(Model model, RedirectAttributes redirectAttributes) {
+
 		User user = usercontroller.getCurrentUser();
-		if(user!=null) {
-		   if(user.getRole().equals("COMPANY")) {
-			if(user.getCompany().getPwd_change().equals("false")) {
-				redirectAttributes.addFlashAttribute("email", user.getEmail());
-				return "redirect:/change_password";
-			}else {
-				return "redirect:/companydashboard";
+		if (user != null) {
+			if (user.getRole().equals("COMPANY")) {
+				if (user.getCompany().getPwd_change().equals("false")) {
+					redirectAttributes.addFlashAttribute("email", user.getEmail());
+					return "redirect:/change_password";
+				} else {
+					return "redirect:/companydashboard";
+				}
+			}
+			if (user.getRole().equals("ADMIN")) {
+				return "redirect:/admin/admindashboard";
 			}
 		}
-		 if(user.getRole().equals("ADMIN")) {
-			 return "redirect:/admin/admindashboard";
-		 }
+
+		List<Company> company_list = company_repo.findAll();
+		LocalDateTime now = LocalDateTime.now();
+		if (company_list.isEmpty()) {
+			return "index";
 		}
-		
-        List<Company> company_list = company_repo.findAll();
-    	LocalDateTime now  = LocalDateTime.now();
-        if(company_list.isEmpty()) {
-        	return "index";
-        }
-        for(Company company:company_list) {
-        	LocalDateTime created_date = company.getCreated();
-        	String time =company.getTimespanforraisingcapital();
-        	String[] timespansplit = time.split(" ",2);
-        	int timespan = Integer.parseInt(timespansplit[0]);			
-			
-        	if(company.getStatus().equals("raising")&&now.isAfter(created_date.plusDays(timespan))){
-                company.setStatus("finish");
-                company_repo.save(company);
-                
-        	}
-        	
-        }
-        
+		for (Company company : company_list) {
+			LocalDateTime created_date = company.getCreated();
+			String time = company.getTimespanforraisingcapital();
+			String[] timespansplit = time.split(" ", 2);
+			int timespan = Integer.parseInt(timespansplit[0]);
+
+			if (company.getStatus().equals("raising") && now.isAfter(created_date.plusDays(timespan))) {
+				company.setStatus("finish");
+				company_repo.save(company);
+
+			}
+
+		}
+
 		Map<String, Integer> totalUsersInvestedMap = new HashMap<>();
-		Map<String,Integer> remainingdaysmap = new HashMap<>();
+		Map<String, Integer> remainingdaysmap = new HashMap<>();
 		Map<String, Integer> totalApplyShareMap = new HashMap<>();
 
-        for(Company company:company_list) {
+		for (Company company : company_list) {
 			totalUsersInvestedMap.put(company.getCompanyname(), admin_controller.getTotalNumberOfUserInvested(company));
-            remainingdaysmap.put(company.getCompanyname(), calculateRemainingDays(company));
-			totalApplyShareMap.put(company.getCompanyname(),admin_controller.getTotalNumberOfShareApplied(company));
+			remainingdaysmap.put(company.getCompanyname(), calculateRemainingDays(company));
+			totalApplyShareMap.put(company.getCompanyname(), admin_controller.getTotalNumberOfShareApplied(company));
 
-			
-       }
-        
-       
-        
-        
+		}
+
 		List<Company> basedoncapital = company_repo.findAll();
 		Optional<List<Company>> result = Optional.ofNullable(basedoncapital);
-	
-        Collections.sort(basedoncapital, Comparator.comparing(Company::getPreviouslyraisedcapital).reversed());
-        
+
+		Collections.sort(basedoncapital, Comparator.comparing(Company::getPreviouslyraisedcapital).reversed());
+
 		List<Company> companybasedondate = company_repo.findAllCompanyBasesOnCreationalDates();
 		Optional<List<Company>> result1 = Optional.ofNullable(companybasedondate);
-		 
+
 		List<Company> diversifiedcompanylist = recommedationinit.getRecommendCompanies();
- 
+
 		List<Company> c_list = pre.getCompaniesWithGoodSentiment();
 
-		
-		
 		if (result != null & result1 != null) {
-    		model.addAttribute("companybasedoncapital", basedoncapital);
+			model.addAttribute("companybasedoncapital", basedoncapital);
 			model.addAttribute("companybasedondate", companybasedondate);
 			model.addAttribute("diversifiedcompanylist", diversifiedcompanylist);
 			model.addAttribute("c_list", c_list);
@@ -125,8 +118,7 @@ public class HomeController {
 
 			return "index";
 		}
-		
-		
+
 		return "index";
 	}
 
@@ -137,19 +129,18 @@ public class HomeController {
 		return "redirect:/home";
 	}
 
-  public int calculateRemainingDays(Company company) {
-	  LocalDateTime currentDateTime = LocalDateTime.now();
+	public int calculateRemainingDays(Company company) {
+		LocalDateTime currentDateTime = LocalDateTime.now();
 
-	  LocalDateTime registrationDateTime = company.getCreated(); // Replace with your own logic to get the registration date and time
-	  String time =company.getTimespanforraisingcapital();
-	  String[] timespansplit = time.split(" ",2);
-	  int timespan = Integer.parseInt(timespansplit[0]);
-	  LocalDateTime endDateTime = registrationDateTime.plusDays(timespan);
-	  int remainingDays = (int)ChronoUnit.DAYS.between(currentDateTime, endDateTime);
-	  return remainingDays;
+		LocalDateTime registrationDateTime = company.getCreated(); // Replace with your own logic to get the
+																	// registration date and time
+		String time = company.getTimespanforraisingcapital();
+		String[] timespansplit = time.split(" ", 2);
+		int timespan = Integer.parseInt(timespansplit[0]);
+		LocalDateTime endDateTime = registrationDateTime.plusDays(timespan);
+		int remainingDays = (int) ChronoUnit.DAYS.between(currentDateTime, endDateTime);
+		return remainingDays;
 
-  }
+	}
 
-  
- 
 }

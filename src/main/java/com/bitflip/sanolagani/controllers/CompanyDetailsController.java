@@ -43,10 +43,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.bitflip.sanolagani.controllers.AdminController;
 import org.springframework.web.bind.annotation.RequestBody;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 1a0e467110d6ade3bdd4d4d89dc5270bfdb344ac
 @Controller
 public class CompanyDetailsController {
     @Autowired
@@ -127,7 +123,6 @@ public class CompanyDetailsController {
             @RequestParam("password") String newpassword) {
 
         User user = userrepo.findByEmail(email);
-        System.out.println(email);
         String hashpwd = user.getPassword();
         String plainpwd = oldpass;
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -135,7 +130,6 @@ public class CompanyDetailsController {
 
         boolean matchcurrentandold = passwordEncoder.matches(newpassword, hashpwd);
         if (matchcurrentandold) {
-            System.out.println("You cannot use the same password as old");
             return "redirect:/change_password";
         }
 
@@ -149,7 +143,6 @@ public class CompanyDetailsController {
             userrepo.save(user);
             return "redirect:/home";
         } else {
-            System.out.println("Password does not match!");
             return "redirect:/change_password";
 
         }
@@ -220,13 +213,11 @@ public class CompanyDetailsController {
 
         }
         List<BoardMembers> boardMembers = boardMembersRepo.findAllByCompany(company);
-        System.out.println(boardMembers.size());
         
         
         List<Watchlist> watchlist = watchlistrepo.findByUserId(user.getId());
         List<Integer> companyids = new ArrayList<>();
         boolean iswatchlistedblank= true;
-        System.out.println(watchlist);
         if(!watchlist.isEmpty()) {
         	iswatchlistedblank=false;
         	for(Watchlist watch:watchlist) {
@@ -240,7 +231,6 @@ public class CompanyDetailsController {
         model.addAttribute("status", status);
         model.addAttribute("company", company);
         model.addAttribute("boardMembers", boardMembers);
-        System.out.println(boardMembers);
         return "company-info";
     }
 
@@ -358,7 +348,6 @@ public class CompanyDetailsController {
 	        
 		List<Company> sectorstatuslist = new ArrayList<>();
 		List<Company> companylist = companyRepo.findAll();
-		System.out.println(companylist.size());
 			if(companylist.isEmpty()) {
 				return "company-list"; 
 			}else {
@@ -418,7 +407,6 @@ public class CompanyDetailsController {
         User user = usercontroller.getCurrentUser();
         Company company = user.getCompany();
         List<BoardMembers> boardMembers = boardMembersRepo.findAllByCompany(company);
-        System.out.println(boardMembers);
         return "company-management";
     }
 
