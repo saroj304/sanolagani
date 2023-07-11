@@ -85,7 +85,7 @@ html {
 
 /* ===================== GENERAL STYLES ========================= */
 .container {
-	width: var(--container-width-lg);
+	width: var(--container-width-md);
 	margin: 5px auto;
 }
 

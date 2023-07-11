@@ -52,18 +52,17 @@ public class PaymentController {
             Investment investment,
             Collateral collaterals, Notification notification) {
         User user = user_controller.getCurrentUser();
-        Collateral collateral = user.getCollateral();
-        if (collateral.getCollateral_amount() >= amount) {
-            String amounts = String.valueOf(amount);
-            paymentService.saveTransactionDetails("collateral", amounts, id, transaction,
-                    "paying with collateral", investment, collaterals, notification);
-
-            double amt = collateral.getCollateral_amount();
-            collateral.setCollateral_amount(amt - amount);
-            collaretal_repo.save(collateral);
-            return "redirect:/dashboard";
-        }
-
+    	Collateral collateral = user.getCollateral();
+    	if(collateral.getCollateral_amount()>=amount) {
+    	String amounts = String.valueOf(amount);
+    	paymentService.saveTransactionDetails("collateral", amounts,id, transaction, 
+    											"paying with collateral", investment, collaterals,notification);
+    	
+    	double amt = collateral.getCollateral_amount();
+    	collateral.setCollateral_amount(amt-amount);
+    	collaretal_repo.save(collateral);
+    	return "redirect:/user/dashboard";
+    	}
         return "redirect:/home";
     }
 

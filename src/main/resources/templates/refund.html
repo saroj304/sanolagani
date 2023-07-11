@@ -29,7 +29,7 @@
             </div>
             <!-- center dashboard -->
             <div class="center__dashboard board">
-                <form th:action="@{/refundCollateral}" method="post">
+                <form th:action="@{/user/refundCollateral}" method="post">
                     <div class="bank_row">
                         <label class="load-title" for="account_number">PHONE NUMBER <span style="color: red">*</span></label>
                         <input class="load_input" type="number" id="account_number" min="0" th:value="${userphone}" oninput="validity.valid||(value='')" readonly required>

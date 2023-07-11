@@ -11,7 +11,6 @@
     <div class="home__left">
       <div class="heading__info">
         <h1>Invest in <span th:text="${company.companyname}" /></h1>
-        <h5 class='gray'>193 people have already invested 2,700,000+ in [[${company.companyname}]].</h5>
       </div>
       <div th:if="${status eq 'on limit'}">
         <a th:href="@{'/company/details/'+${company.id}+'/'}" class='btn mt-20 mb-20'> Invest Now</a>
@@ -110,14 +109,24 @@
       </div>
       <br/><br/><br/>
         <h3 id='success-stories'>Success Stories</h3>
+        <div th:if="${is_invested}">
+			<p>Provide Feedback</p>
+			<form th:action="@{'/user/feedback/'+${company.id}}" method="POST">
+			   <textarea id="feedback" name="feedbacktext" rows="4" cols="50"></textarea>
+			   <input type="submit" value="post">
+            </form>
+		</div>
     </div>
 
 
     <div class="home__right" style="min-height: 60vh;">
 	<div th:if="${!iswatchlistedblank and ! #lists.contains(companyids, company.id)}"><a th:href="@{'/company/addtowatchlist/'+${company.id}}" class="btn btn__primary"><i class="fa-regular fa-heart" ></i>&nbsp;Add to watchlist</a><br/><br/>
       </div>
+      <div th:if="${!iswatchlistedblank and  #lists.contains(companyids, company.id)}"><a th:href="@{'/company/deletewatchlist/'+${company.id}}" class="btn btn__primary">&nbsp;Delete from watchlist</a><br/><br/>
+      </div>
       <div th:if="${iswatchlistedblank}"><a th:href="@{'/company/addtowatchlist/'+${company.id}}" class="btn btn__primary"><i class="fa-regular fa-heart" ></i>&nbsp;Add to watchlist</a><br/><br/>
       </div>
+      
       <img th:src="@{'/documents/' + ${company.id} + '/' + ${company.image}}" alt="heading" />
     </div>
   </div>

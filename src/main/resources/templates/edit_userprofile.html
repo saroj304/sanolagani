@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head th:insert="fragment/head.html :: headerfiles">
-	<title>Register Company</title>
+	<title>Edit Profile</title>
 	
 </head>
 
@@ -21,7 +21,7 @@
 
 	<section class="company">
 		<div class="container comapany__container">
-			<h2>Register company</h2>
+			<h2>Edit Profile</h2>
 			<p class="error" th:text="${error}"></p>
 			<form  th:action="@{/user/edit/savedetails}" class="company_registration" method="POST"
 				enctype="multipart/form-data">

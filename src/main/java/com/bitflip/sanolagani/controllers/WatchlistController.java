@@ -43,6 +43,15 @@ public class WatchlistController {
 		return "redirect:/company/"+id;
 	}
 	
+	   
+    @GetMapping("/company/deletewatchlist/{id}")
+      public String deleteWatchlist(@PathVariable("id") int id) {
+    	    User user = usercontroller.getCurrentUser();
+			Watchlist watchlist = watchlist_repo.findByCompanyId(id,user.getId());
+			watchlist_repo.delete(watchlist);
+			return "redirect:/company/"+id;
+	}
+	
 	@GetMapping("/company/mywatchlist")
 	public String getMyWatchlisted(Model model) {
 		User user = usercontroller.getCurrentUser();
