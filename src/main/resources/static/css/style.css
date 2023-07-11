@@ -13,6 +13,7 @@
 @import url('./company_registration.css');
 @import url('./company_table.css');
 @import url('./my_information.css');
+@import url('./load_fund.css');
 /* @import url('./viewpage.css');
 @import url('./admindashboard.css'); */
 
@@ -72,6 +73,9 @@ html {
 	/* display: none; */
 	
 }
+input[type=number]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+  }
 
 body {
 	font-family: 'Poppins', sans-serif;
@@ -145,6 +149,7 @@ h5 {
     border: 1px solid #000;
     transition: var(--transition);
     font-size: 18px;
+	text-transform: capitalize;
 }
 .btn:hover{
 	background: #303030;
