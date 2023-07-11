@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bitflip.sanolagani.models.Collateral;
 import com.bitflip.sanolagani.models.Company;
+import com.bitflip.sanolagani.models.Feedback;
 import com.bitflip.sanolagani.models.Investment;
 import com.bitflip.sanolagani.models.RefundRequestData;
 import com.bitflip.sanolagani.models.Transaction;
 import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.repository.CompanyRepo;
+import com.bitflip.sanolagani.repository.FeedbackRepo;
 import com.bitflip.sanolagani.repository.InvestmentRepo;
 import com.bitflip.sanolagani.repository.UserRepo;
 import com.bitflip.sanolagani.serviceimpl.UserServiceImpl;
@@ -49,10 +51,11 @@ CompanyRepo company_repo;
 UserServiceImpl userservice;
 @Autowired
 AdminController admin_controller;
-
+@Autowired
+FeedbackRepo feedback_repo;
 
 	
-	@GetMapping("/dashboard")
+	@GetMapping("/user/dashboard")
 	public String myDashboard(Model model) {
 		User user = getCurrentUser();
 		List<Investment> investment_list = user.getInvestments();
@@ -96,7 +99,7 @@ AdminController admin_controller;
 		return "dashboard";
 	}
 	
-	@GetMapping("/riskinfo")
+	@GetMapping("/user/riskinfo")
 	public String riskInformation(Model model) {
 		
 		Map<String, Double> sectorInvestments = new HashMap<>();
@@ -157,7 +160,7 @@ AdminController admin_controller;
 		return "diversificationgraph";
 	}
 	
-	@GetMapping("/loadfund")
+	@GetMapping("/user/loadfund")
 	public String loadCollateral(Model model) {
 		User user = getCurrentUser();
 		Collateral collateral = user.getCollateral();
@@ -170,7 +173,7 @@ AdminController admin_controller;
 		return "load_fund";
 	}
 	
-	@GetMapping("/collateralsummery/{id}")
+	@GetMapping("/user/collateralsummery/{id}")
 	public String getCollateralHistory(@PathVariable("id") int id,Model model) {
 		List<Transaction>  transactionlist= userservice.getCollateralSummery(id);
 		if(transactionlist ==null) {
@@ -181,7 +184,7 @@ AdminController admin_controller;
 		model.addAttribute("transactionlist", transactionlist);
 		return "Collateral_summary";
 	}
-	@GetMapping("/fundhistory/{id}")
+	@GetMapping("/user/fundhistory/{id}")
 	public String getAllFundHistory(@PathVariable("id") int id,Model model) {
 		List<Transaction> transactionlist = userservice.getFundHistory(id);
 		if(transactionlist==null) {
@@ -194,7 +197,7 @@ AdminController admin_controller;
 	}
 	
 	
-	@GetMapping("/refund/collateral")
+	@GetMapping("/user/refund/collateral")
 	public String getCollateralRefund(Model model) {
 		User user = getCurrentUser();
 		Collateral collateral = user.getCollateral();
@@ -208,31 +211,31 @@ AdminController admin_controller;
 		return "refund";
 	}
 	
-	@PostMapping("/refundCollateral")
+	@PostMapping("/user/refundCollateral")
 	public String refundProcessing(@RequestParam("amount") double amount,RefundRequestData refundrequest) {
 		User user = getCurrentUser();
 		boolean result = userservice.processRefundCollateralRequest(-1, amount,refundrequest, user);
 		if(result) {
-			return "redirect:/dashboard";
+			return "redirect:/user/dashboard";
 		}
 		
-		return "redirect:/refund/collateral";
+		return "redirect:/user/refund/collateral";
 	}
 	
 	
 	
 	
-	@GetMapping("/tables/refund/{id}")
+	@GetMapping("/user/tables/refund/{id}")
 	public String refundInvestment(@PathVariable("id") int id,RefundRequestData refundrequest) {
 		User user = getCurrentUser();
 		boolean result = userservice.processRefundRequest(id,refundrequest,user);
 		if(result) {
-		return "redirect:/investmenthistory";
+		return "redirect:/user/investmenthistory";
 	}
-		return "redirect:/dashboard";
+		return "redirect:/user/dashboard";
 	}
 	
-	@GetMapping("/investmenthistory")
+	@GetMapping("/user/investmenthistory")
 	public String getInvestmentHistory(Model model) {
 		User user = getCurrentUser();
 		List<Investment> investmentlist = user.getInvestments();
@@ -249,7 +252,7 @@ AdminController admin_controller;
 	}
 	
 	
-	@GetMapping("/myinfo")
+	@GetMapping("/user/myinfo")
 	public String getUserDetails(Model model) {
 		User user = getCurrentUser();
 		double totalinvestedamount = invest_repo.getTotalInvestedAmount(user.getId());
@@ -308,16 +311,22 @@ AdminController admin_controller;
 		userrepo.save(fetch_user);
 		System.out.println("save user");
 		
-		return "redirect:/myinfo";
+		return "redirect:/user/myinfo";
+	}
+	@PostMapping("/user/feedback/{id}")
+	public String postFeedback(@PathVariable("id") Integer id,Feedback feedback,@RequestParam("feedbacktext") String feedbacktext) {
+		
+		Company company = company_repo.getReferenceById(id);
+		feedback.setCompany(company);
+		feedback.setUser(getCurrentUser());
+		feedback.setFeedbacktext(feedbacktext);
+		feedback_repo.save(feedback);
+		
+		return "redirect:/company/"+id;
 	}
 	
 	
-	
-	
-	
-	
-	
-	
+
 	
 	public User getCurrentUser() {
 	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

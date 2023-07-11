@@ -96,6 +96,7 @@ public class CompanyDetailsController {
 
             sectorlist.add(company.getSector());
         }
+        
         model.addAttribute("sectorlist", sectorlist);
         model.addAttribute("totalUsersInvestedMap", totalUsersInvestedMap);
         model.addAttribute("remainingdaysmap", remainingdaysmap);
@@ -154,7 +155,7 @@ public class CompanyDetailsController {
     @GetMapping("/company/{id}")
     public String getCompany(@PathVariable("id") Integer id, Model model, TrafficData trafficdata) {
         List<TrafficData> trafficdatalist = trafficrepo.findAll();
-
+       boolean is_invested = true;
         LocalDateTime nowday = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE");
         String dayString = nowday.format(formatter);
@@ -202,14 +203,10 @@ public class CompanyDetailsController {
         int timespan = Integer.parseInt(timespansplit[0]);
 
         Integer numberofshare_peruser = investrepo.getTotalQuantityByUserAndCompany(user.getId(), company.getId());
-        if (numberofshare_peruser == null) {
-            if (now.isAfter(created_date.plusDays(timespan))) {
-                status = "time finish";
+         if(numberofshare_peruser==0) {
+        	 is_invested=false;
             }
-            model.addAttribute("status", status);
-            model.addAttribute("company", company);
-            return "company-info";
-        } else if (company.getMaximum_quantity() <= numberofshare_peruser) {
+         if (company.getMaximum_quantity() <= numberofshare_peruser) {
             status = "limit reached";
         } else if (now.isAfter(created_date.plusDays(timespan))) {
             status = "time finish";
@@ -219,12 +216,9 @@ public class CompanyDetailsController {
         Set<BoardMembers> boardMembers = boardMembersRepo.findByCompanies(company);
 
         
-        
-        
         List<Watchlist> watchlist = watchlistrepo.findByUserId(user.getId());
         List<Integer> companyids = new ArrayList<>();
         boolean iswatchlistedblank= true;
-        System.out.println(watchlist);
         if(!watchlist.isEmpty()) {
         	iswatchlistedblank=false;
         	for(Watchlist watch:watchlist) {
@@ -234,6 +228,7 @@ public class CompanyDetailsController {
         	}
         	model.addAttribute("companyids", companyids);
         }
+        model.addAttribute("is_invested", is_invested);
         model.addAttribute("iswatchlistedblank", iswatchlistedblank);
         model.addAttribute("status", status);
         model.addAttribute("company", company);
@@ -255,7 +250,7 @@ public class CompanyDetailsController {
 
     // company dashboard
 
-    @GetMapping("/companydashboard")
+    @GetMapping("/company/companydashboard")
     public String gerDashboard(Model model) {
         User user = usercontroller.getCurrentUser();
         int id = user.getCompany().getId();
@@ -443,5 +438,7 @@ public class CompanyDetailsController {
         }
         return "company-management";
     }
+    
+ 
     
 }
