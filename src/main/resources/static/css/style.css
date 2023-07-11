@@ -24,6 +24,9 @@
 	outline: none;
 	list-style: none;
 	overflow-x: hidden;
+	font-family: Roboto Mono, Helvetica, sans-serif;
+	line-height: 1.7;
+
 }
 
 /* display: none; */
@@ -64,6 +67,13 @@
 	--color-message-positive-border: #ffca3a;
 }
 
+.warning{
+	color: #fb5607;
+	background-color: #fff6cc;
+	opacity: 0.8;
+	padding:5px;
+}
+
 html {
 	scroll-behavior: smooth;
 }
@@ -71,12 +81,6 @@ html {
 ::-webkit-scrollbar {
 	/* display: none; */
 	
-}
-
-body {
-	font-family: 'Poppins', sans-serif;
-	line-height: 1.7;
-	/* background: red; */
 }
 
 /* ===================== GENERAL STYLES ========================= */
@@ -164,6 +168,10 @@ h5 {
 }
 .btn-danger:hover{
 	background: rgb(171, 1, 1);
+}
+
+.refund{
+	width: -webkit-fill-available;
 }
 img {
 	display: block;

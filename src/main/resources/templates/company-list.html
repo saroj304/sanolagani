@@ -16,7 +16,7 @@
         <div class="dropdown">
           <p class="btn">Filter By Sector<i class="fa-solid fa-plus"></i></p>
           <div class="dropdown-content" th:each="sector : ${sectorlist}">
-            <a href="#" class="btn">[[${sector}]]</a>
+            <a href="#" class="btn" th:text="${sector}">[[${sector}]]</a>
           </div>
         </div>
       </select>

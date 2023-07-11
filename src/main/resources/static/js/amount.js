@@ -42,8 +42,8 @@ function updateDetails(budget) {
 
 
 paymentAmount.addEventListener("keyup", function(){
-      submitBtn.disabled = true;
-       var input = document.getElementById("paymentAmount");
+        submitBtn.disabled = true;
+        var input = document.getElementById("paymentAmount");
         var value = input.value;
         
         if (value <= maxInvestment) {
@@ -55,10 +55,10 @@ paymentAmount.addEventListener("keyup", function(){
             console.log(maxInvestment);
             input.value=maxInvestment;
         }
-      var value = paymentAmount.value.replaceAll(" ","");
-      updateDetails(value);
-      let message = document.getElementById("message");
-      message.innerText = (parseFloat(value) < minInvestment || parseFloat(value) > maxInvestment)? "Amount should be between "+ minInvestment + " and "+ maxInvestment : "";
+        var value = paymentAmount.value.replaceAll(" ","");
+        updateDetails(value);
+        let message = document.getElementById("message");
+        message.innerText = (parseFloat(value) < minInvestment || parseFloat(value) > maxInvestment)? "Amount should be between "+ minInvestment + " and "+ maxInvestment : "";
     });
 
 paymentAmount.addEventListener("keyup", function () {
