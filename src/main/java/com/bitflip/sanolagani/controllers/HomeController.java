@@ -2,7 +2,6 @@ package com.bitflip.sanolagani.controllers;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -16,14 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bitflip.sanolagani.models.Company;
 import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.repository.CompanyRepo;
 import com.bitflip.sanolagani.service.AdminService;
-import com.bitflip.sanolagani.service.UserService;
 import com.bitflip.sanolagani.serviceimpl.RecommendationInitializer;
 import com.bitflip.sanolagani.serviceimpl.SentimentPreprocessor;
 import com.bitflip.sanolagani.serviceimpl.UserServiceImpl;
@@ -106,11 +103,35 @@ public class HomeController {
 		List<Company> diversifiedcompanylist = recommedationinit.getRecommendCompanies();
 
 		List<Company> c_list = pre.getCompaniesWithGoodSentiment();
+
 		if (result != null & result1 != null) {
-			model.addAttribute("companybasedoncapital", basedoncapital);
-			model.addAttribute("companybasedondate", companybasedondate);
-			model.addAttribute("diversifiedcompanylist", diversifiedcompanylist);
-			model.addAttribute("c_list", c_list);
+			if(basedoncapital.size()>=3) {
+    		    model.addAttribute("companybasedoncapital", basedoncapital.subList(0, 3));
+			}else {
+   		        model.addAttribute("companybasedoncapital", basedoncapital);
+
+			}
+			if(companybasedondate.size()>=3) {
+			    model.addAttribute("companybasedondate", companybasedondate.subList(0, 3));
+			}else {
+				model.addAttribute("companybasedondate", companybasedondate);
+
+			}
+			
+			if(diversifiedcompanylist!=null&&diversifiedcompanylist.size()>=3) {
+				model.addAttribute("diversifiedcompanylist", diversifiedcompanylist.subList(0, 3));
+
+			}else {
+				model.addAttribute("diversifiedcompanylist", diversifiedcompanylist);
+
+			}
+			if(c_list!=null&&c_list.size()>=3) {
+				model.addAttribute("c_list", c_list.subList(0, 3));
+
+			}else {
+				model.addAttribute("c_list", c_list);
+
+			}
 			model.addAttribute("totalUsersInvestedMap", totalUsersInvestedMap);
 			model.addAttribute("remainingdaysmap", remainingdaysmap);
 			model.addAttribute("totalApplyShareMap", totalApplyShareMap);
@@ -131,8 +152,7 @@ public class HomeController {
 	public int calculateRemainingDays(Company company) {
 		LocalDateTime currentDateTime = LocalDateTime.now();
 
-		LocalDateTime registrationDateTime = company.getCreated(); // Replace with your own logic to get the
-																	// registration date and time
+		LocalDateTime registrationDateTime = company.getCreated(); // Replace with your own logic to get the registration date and time
 		String time = company.getTimespanforraisingcapital();
 		String[] timespansplit = time.split(" ", 2);
 		int timespan = Integer.parseInt(timespansplit[0]);

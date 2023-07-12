@@ -34,7 +34,7 @@ public class WatchlistController {
 	@Autowired
 	HomeController homecontroller; 
 
-	@GetMapping("/company/addtowatchlist/{id}")
+	@GetMapping("/user/company/addtowatchlist/{id}")
      public String addCompanyToWatchlist(@PathVariable("id") int id,Watchlist watchlist) {
 		User user = usercontroller.getCurrentUser();
 		watchlist.setUser(user);
@@ -44,7 +44,7 @@ public class WatchlistController {
 	}
 	
 	   
-    @GetMapping("/company/deletewatchlist/{id}")
+    @GetMapping("/user/company/deletewatchlist/{id}")
       public String deleteWatchlist(@PathVariable("id") int id) {
     	    User user = usercontroller.getCurrentUser();
 			Watchlist watchlist = watchlist_repo.findByCompanyId(id,user.getId());

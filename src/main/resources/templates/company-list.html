@@ -24,7 +24,7 @@
           </p>
           <div class="toggle-list" id="toggle-elements">
             <div class="dropdown-content" th:each="sector : ${sectorlist}">
-              <a href="#" class="dropdown-list">[[${sector}]]</a>
+              <a th:href="@{'/company/filter/'+${sector}}" class="dropdown-list">[[${sector}]]</a>
             </div>
 >>>>>>> 356f9149378b71b89c069f0b878d06768a3c3a7f
           </div>

@@ -30,7 +30,7 @@ function khaltiConfig(){
         }
     };
 
-  return config;
+    return config;
 }
 
 let config = khaltiConfig();
