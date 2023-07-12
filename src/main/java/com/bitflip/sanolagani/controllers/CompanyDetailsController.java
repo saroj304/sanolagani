@@ -145,6 +145,10 @@ public class CompanyDetailsController {
             user.setPassword(passwordEncoder.encode(newpassword));
             userrepo.save(user);
             return "redirect:/home";
+        } else if (isMatch && user.getRole().equalsIgnoreCase("ADMIN")) {
+            user.setPassword(passwordEncoder.encode(newpassword));
+            userrepo.save(user);
+            return "redirect:/home";
         } else {
             System.out.println("Password does not match!");
             return "redirect:/change_password";

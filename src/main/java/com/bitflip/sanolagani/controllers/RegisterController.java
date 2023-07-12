@@ -32,7 +32,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 
-@Controller
 public class RegisterController {
 	@Autowired
 	UserService userservice;
@@ -42,6 +41,8 @@ public class RegisterController {
 	EmailService emailservice;
 	@Autowired
 	AdminService adminservice;
+	@Autowired
+	UserController usercontroller;
 	
 	private Map<String, String> otpStore = new HashMap<>();
 	private List<User> userstore = new ArrayList<>();
@@ -154,6 +155,9 @@ public class RegisterController {
         @GetMapping("/changepassword")
     	public String changePassword(Model model) {
         String email = (String) model.asMap().get("email");
+       if(email==null) {
+    	   email=usercontroller.getCurrentUser().getEmail();
+       }
         model.addAttribute("email", email);
 	      return "changepassword";
   }

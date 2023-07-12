@@ -18,7 +18,7 @@
       <div th:if="${status eq 'limit reached'}" class="message-maximum-invested">
 		    <p>You have reached your maximum investment quantity. Thank you for being part of us.</p> 
 	    </div>
-	    <div th:if="${status eq 'time finish'}">
+	    <div th:if="${status eq 'time finish'}" class="message-maximum-invested">
 		    <p>investment for this company has closed</p> 
 	    </div>
       <div class="full__width" style="margin: 30px 0;">
@@ -120,11 +120,11 @@
 
 
     <div class="home__right" style="min-height: 60vh;">
-	<div th:if="${!iswatchlistedblank and ! #lists.contains(companyids, company.id)}"><a th:href="@{'/company/addtowatchlist/'+${company.id}}" class="btn btn__primary"><i class="fa-regular fa-heart" ></i>&nbsp;Add to watchlist</a><br/><br/>
+	<div th:if="${!iswatchlistedblank and ! #lists.contains(companyids, company.id)}"><a th:href="@{'/user/company/addtowatchlist/'+${company.id}}" class="btn btn__primary"><i class="fa-regular fa-heart" ></i>&nbsp;Add to watchlist</a><br/><br/>
       </div>
-      <div th:if="${!iswatchlistedblank and  #lists.contains(companyids, company.id)}"><a th:href="@{'/company/deletewatchlist/'+${company.id}}" class="btn btn__primary">&nbsp;Delete from watchlist</a><br/><br/>
+      <div th:if="${!iswatchlistedblank and  #lists.contains(companyids, company.id)}"><a th:href="@{'/user/company/deletewatchlist/'+${company.id}}" class="btn btn__primary">&nbsp;Delete from watchlist</a><br/><br/>
       </div>
-      <div th:if="${iswatchlistedblank}"><a th:href="@{'/company/addtowatchlist/'+${company.id}}" class="btn btn__primary"><i class="fa-regular fa-heart" ></i>&nbsp;Add to watchlist</a><br/><br/>
+      <div th:if="${iswatchlistedblank}"><a th:href="@{'/user/company/addtowatchlist/'+${company.id}}" class="btn btn__primary"><i class="fa-regular fa-heart" ></i>&nbsp;Add to watchlist</a><br/><br/>
       </div>
       
       <img th:src="@{'/documents/' + ${company.id} + '/' + ${company.image}}" alt="heading" />

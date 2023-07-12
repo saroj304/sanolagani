@@ -111,14 +111,37 @@ public class HomeController {
 		List<Company> diversifiedcompanylist = recommedationinit.getRecommendCompanies();
  
 		List<Company> c_list = pre.getCompaniesWithGoodSentiment();
-        System.out.println(c_list.size());
+        
 		
 		
 		if (result != null & result1 != null) {
-    		model.addAttribute("companybasedoncapital", basedoncapital);
-			model.addAttribute("companybasedondate", companybasedondate);
-			model.addAttribute("diversifiedcompanylist", diversifiedcompanylist);
-			model.addAttribute("c_list", c_list);
+			if(basedoncapital.size()>=3) {
+    		     model.addAttribute("companybasedoncapital", basedoncapital.subList(0, 3));
+			}else {
+   		         model.addAttribute("companybasedoncapital", basedoncapital);
+
+			}
+			if(companybasedondate.size()>=3) {
+			     model.addAttribute("companybasedondate", companybasedondate.subList(0, 3));
+			}else {
+				 model.addAttribute("companybasedondate", companybasedondate);
+
+			}
+			
+			if(diversifiedcompanylist!=null&&diversifiedcompanylist.size()>=3) {
+				model.addAttribute("diversifiedcompanylist", diversifiedcompanylist.subList(0, 3));
+
+			}else {
+				model.addAttribute("diversifiedcompanylist", diversifiedcompanylist);
+
+			}
+			if(c_list!=null&&c_list.size()>=3) {
+				model.addAttribute("c_list", c_list.subList(0, 3));
+
+			}else {
+				model.addAttribute("c_list", c_list);
+
+			}
 			model.addAttribute("totalUsersInvestedMap", totalUsersInvestedMap);
 			model.addAttribute("remainingdaysmap", remainingdaysmap);
 			model.addAttribute("totalApplyShareMap", totalApplyShareMap);
