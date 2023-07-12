@@ -69,10 +69,9 @@ public class UserServiceImpl implements UserService {
 		List<User> userlist = userrepo.findAll();
 		for(User user:userlist) {
 			if(result && user.getEmail().equals(email)) {
-				emailpwdmap.put(email, user.getPassword());
 				 this.encode_password=AdminServiceImpl.encodePassword(password);
-				user.setPassword(encode_password);
-				userrepo.save(user);	        
+				 user.setPassword(encode_password);
+				  userrepo.save(user);	        
 				email_service.sendChangePasswordMail(email);
 			
 			}
@@ -80,12 +79,6 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	
-	public void saveOldUser(String email,String password) {
-	     User user = userrepo.findByEmail(email);
-	     user.setPassword(password);
-	     userrepo.save(user);
-	     System.out.println("password-"+password);
-	}
 
 	public List<Transaction> getCollateralSummery(int id) {
           List<Transaction> transaction_list = new ArrayList<>();
