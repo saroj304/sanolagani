@@ -52,7 +52,7 @@ public class WatchlistController {
 			return "redirect:/company/"+id;
 	}
 	
-	@GetMapping("/company/mywatchlist")
+	@GetMapping("/user/company/mywatchlist")
 	public String getMyWatchlisted(Model model) {
 		User user = usercontroller.getCurrentUser();
 

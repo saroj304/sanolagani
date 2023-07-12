@@ -38,7 +38,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Controller
 public class UserController {
-<<<<<<< HEAD
 	@Autowired
 	UserRepo userrepo;
 	@Autowired
@@ -49,25 +48,11 @@ public class UserController {
 	UserServiceImpl userservice;
 	@Autowired
 	AdminController admin_controller;
-
-	@GetMapping("/dashboard")
-=======
-@Autowired
-UserRepo userrepo;
-@Autowired
-InvestmentRepo invest_repo;
-@Autowired
-CompanyRepo company_repo;
-@Autowired
-UserServiceImpl userservice;
-@Autowired
-AdminController admin_controller;
-@Autowired
-FeedbackRepo feedback_repo;
+	@Autowired
+	FeedbackRepo feedback_repo;
 
 	
 	@GetMapping("/user/dashboard")
->>>>>>> 356f9149378b71b89c069f0b878d06768a3c3a7f
 	public String myDashboard(Model model) {
 		User user = getCurrentUser();
 		List<Investment> investment_list = user.getInvestments();
@@ -108,13 +93,8 @@ FeedbackRepo feedback_repo;
 		}
 		return "dashboard";
 	}
-<<<<<<< HEAD
-
-	@GetMapping("/riskinfo")
-=======
 	
 	@GetMapping("/user/riskinfo")
->>>>>>> 356f9149378b71b89c069f0b878d06768a3c3a7f
 	public String riskInformation(Model model) {
 
 		Map<String, Double> sectorInvestments = new HashMap<>();
@@ -173,13 +153,8 @@ FeedbackRepo feedback_repo;
 
 		return "diversificationgraph";
 	}
-<<<<<<< HEAD
-
-	@GetMapping("/loadfund")
-=======
 	
 	@GetMapping("/user/loadfund")
->>>>>>> 356f9149378b71b89c069f0b878d06768a3c3a7f
 	public String loadCollateral(Model model) {
 		User user = getCurrentUser();
 		Collateral collateral = user.getCollateral();
@@ -192,20 +167,12 @@ FeedbackRepo feedback_repo;
 		model.addAttribute("id", user.getId());
 		return "load_fund";
 	}
-<<<<<<< HEAD
-
-	@GetMapping("/collateralsummery/{id}")
-	public String getCollateralHistory(@PathVariable("id") int id, Model model) {
-		List<Transaction> transactionlist = userservice.getCollateralSummery(id);
-		if (transactionlist == null) {
-=======
 	
 	@GetMapping("/user/collateralsummery/{id}")
 	public String getCollateralHistory(@PathVariable("id") int id,Model model) {
 		List<Transaction>  transactionlist= userservice.getCollateralSummery(id);
 		if(transactionlist ==null) {
->>>>>>> 356f9149378b71b89c069f0b878d06768a3c3a7f
-			return "redirect:/dashboard";
+			return "redirect:/user/dashboard";
 		}
 		User user = userrepo.getReferenceById(id);
 		model.addAttribute("id", user.getId());
@@ -213,14 +180,8 @@ FeedbackRepo feedback_repo;
 		model.addAttribute("transactionlist", transactionlist);
 		return "Collateral_summary";
 	}
-<<<<<<< HEAD
-
-	@GetMapping("/fundhistory/{id}")
-	public String getAllFundHistory(@PathVariable("id") int id, Model model) {
-=======
 	@GetMapping("/user/fundhistory/{id}")
 	public String getAllFundHistory(@PathVariable("id") int id,Model model) {
->>>>>>> 356f9149378b71b89c069f0b878d06768a3c3a7f
 		List<Transaction> transactionlist = userservice.getFundHistory(id);
 		if (transactionlist == null) {
 			return "redirect:/dashboard";
@@ -248,35 +209,6 @@ FeedbackRepo feedback_repo;
 		model.addAttribute("userphone", user.getPhnum());
 		return "refund";
 	}
-<<<<<<< HEAD
-
-	@PostMapping("/refundCollateral")
-	public String refundProcessing(@RequestParam("amount") double amount, RefundRequestData refundrequest,
-			Model model) {
-		User user = getCurrentUser();
-		boolean result = userservice.processRefundCollateralRequest(-1, amount, refundrequest, user);
-		model.addAttribute("id", user.getId());
-		if (result) {
-			return "redirect:/dashboard";
-		}
-
-		return "redirect:/refund/collateral";
-	}
-
-	@GetMapping("/tables/refund/{id}")
-	public String refundInvestment(@PathVariable("id") int id, RefundRequestData refundrequest, Model model) {
-		User user = getCurrentUser();
-		boolean result = userservice.processRefundRequest(id, refundrequest, user);
-		model.addAttribute("id", user.getId());
-		if (result) {
-			return "redirect:/investmenthistory";
-		}
-
-		return "redirect:/dashboard";
-	}
-
-	@GetMapping("/investmenthistory")
-=======
 	
 	@PostMapping("/user/refundCollateral")
 	public String refundProcessing(@RequestParam("amount") double amount,RefundRequestData refundrequest) {
@@ -303,14 +235,13 @@ FeedbackRepo feedback_repo;
 	}
 	
 	@GetMapping("/user/investmenthistory")
->>>>>>> 356f9149378b71b89c069f0b878d06768a3c3a7f
 	public String getInvestmentHistory(Model model) {
 		User user = getCurrentUser();
 		List<Investment> investmentlist = user.getInvestments();
 		model.addAttribute("id", user.getId());
 
 		if (investmentlist.isEmpty()) {
-			return "redirect:/dashboard";
+			return "redirect:/user/dashboard";
 		}
 		for (Investment investment : investmentlist) {
 			userservice.changeStatus(investment);
@@ -319,14 +250,9 @@ FeedbackRepo feedback_repo;
 		model.addAttribute("investmentlist", investmentlist);
 		return "investment-details";
 	}
-<<<<<<< HEAD
-
-	@GetMapping("/myinfo")
-=======
 	
 	
 	@GetMapping("/user/myinfo")
->>>>>>> 356f9149378b71b89c069f0b878d06768a3c3a7f
 	public String getUserDetails(Model model) {
 		User user = getCurrentUser();
 		double totalinvestedamount = invest_repo.getTotalInvestedAmount(user.getId());
@@ -385,12 +311,6 @@ FeedbackRepo feedback_repo;
 		fetch_user.setLname(user.getLname());
 		fetch_user.setPhnum(user.getPhnum());
 		userrepo.save(fetch_user);
-<<<<<<< HEAD
-
-		return "redirect:/myinfo";
-	}
-
-=======
 		System.out.println("save user");
 		
 		return "redirect:/user/myinfo";
@@ -410,7 +330,6 @@ FeedbackRepo feedback_repo;
 	
 
 	
->>>>>>> 356f9149378b71b89c069f0b878d06768a3c3a7f
 	public User getCurrentUser() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {

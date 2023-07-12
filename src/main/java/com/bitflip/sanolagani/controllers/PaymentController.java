@@ -42,7 +42,7 @@ public class PaymentController {
             paymentService.saveTransactionDetails(token, amount, companyid, transaction, remarks, investment,
                     collateral, notification);
         }
-        return "redirect:/dashboard";
+        return "redirect:/user/dashboard";
     }
 
     @PostMapping("/paywithcollateral")

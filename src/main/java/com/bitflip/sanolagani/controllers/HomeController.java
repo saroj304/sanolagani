@@ -106,13 +106,6 @@ public class HomeController {
 		List<Company> diversifiedcompanylist = recommedationinit.getRecommendCompanies();
 
 		List<Company> c_list = pre.getCompaniesWithGoodSentiment();
-<<<<<<< HEAD
-
-=======
-        System.out.println(c_list.size());
-		
-		
->>>>>>> 356f9149378b71b89c069f0b878d06768a3c3a7f
 		if (result != null & result1 != null) {
 			model.addAttribute("companybasedoncapital", basedoncapital);
 			model.addAttribute("companybasedondate", companybasedondate);
