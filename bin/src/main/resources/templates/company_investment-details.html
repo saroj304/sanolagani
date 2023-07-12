@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Company Dashboard - Investment Details</title>
+        <link rel="stylesheet" th:href="@{/css/company_investment-details.css}">
+        <link rel="stylesheet" th:href="@{/css/companydashboard.css}">
+    <style>
+            </style>
+</head>
+<body>
+    <div class="container">
+        <div th:replace="fragment/company-dashboard.html :: sidebar"></div>
+        <div class="investment-details">
+            <h1>Investment Details</h1>
+            <div class="investment-item" th:each="investment :${investmentlist}">
+                <div class="investment-item-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div class="investment-item-content">
+                    <div class="investment-item-title">[[${investment.getUser().getFname()}]]</div>
+                    <div class="investment-item-description" th:if="${investment.status eq 'refundable'}">
+						[[${investment.status + " until- "+ investment.refundableUntil}]]
+                    </div>
+				    <div class="investment-item-description" th:unless="${investment.status eq 'refundable'}">
+                        [[${investment.status}]]
+                    </div>
+                </div>
+                <div style="display:block;">
+                    <div class="investment-item-amount">Rs. [[${#numbers.formatInteger(investment.quantity * investment.getCompany().getPrice_per_share(), 3, 'COMMA')}]]</div>
+                    <div class="investment-item-date" style="width:200px;">on [[${#temporals.format(investment.investment_date_time, 'yyyy-MM-dd') + ', ' + #temporals.format(investment.investment_date_time, 'HH:mm:ss')}]]</div>
+                </div>
+                <div style="display:block;">
+                    <div class="investment-item-amount">Quantity-[[${investment.quantity}]]</div>
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>

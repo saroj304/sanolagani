@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragment/head.html :: headerfiles">
+	<title>Edit Profile</title>
+
+</head>
+
+<body>
+	<!-- header -->
+	<header class='container header__container'>
+		<div>
+			<h1>
+				<a href="/" class='logo hover_none'>Sanolagani</a>
+			</h1>
+		</div>
+
+	</header>
+	<div class='full__width' th:insert="fragment/nav.html :: navbar">
+	</div>
+
+	<section class="dashboard">
+		<div class="dashboard__container">
+			<div class="left__dashboard borad" th:insert="fragment/dashboard.html :: left-fragment">
+
+			</div>
+			<div class="center__dashboard-edit_profile board">
+
+				<h2>Edit Profile</h2>
+				<hr>
+				<p class="error" th:text="${error}"></p>
+				<form th:action="@{/user/edit/savedetails}" method="POST" enctype="multipart/form-data">
+					<div class="edit-row">
+						<label for="fname">First Name:</label>
+						<input class="register_input" id="fname" type="text" th:value="${user.fname}" name="fname">
+					</div>
+					<div class="edit-row">
+						<label for="lname">Last Name:</label>
+						<input class="register_input" id="lname" type="text" th:value="${user.lname}" name="lname">
+					</div>
+					<div class="edit-row">
+						<label for="email">Email: </label>
+						<input class="register_input" id="email" type="email" th:value="${user.email}" name="email">
+					</div>
+					<div class="edit-row">
+						<label for="phone">Mobile Number:</label>
+						<input class="register_input" id="phone" type="number" th:value="${user.phnum}" name="phnum">
+					</div>
+					<div class="edit-row">
+						<label for="address">Address:</label>
+						<input class="register_input" id="address" type="text" th:value="${user.address}"
+							name="address">
+					</div>
+					<div class="edit-row">
+						<div></div>
+						<button type="submit" class="btn btn-primary edit-btn">Save</button>
+
+					</div>
+					<hr>
+
+
+				</form>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer>
+		<footer th:insert="fragment/footer.html :: footer"> </footer>
+	</footer>
+
+	<script>
+		function manageFund() {
+			document.getElementById("fundManagement").classList.toggle("show");
+		}
+	</script>
+
+
+</body>
+
+</html>

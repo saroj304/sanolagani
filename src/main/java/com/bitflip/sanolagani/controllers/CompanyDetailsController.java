@@ -14,6 +14,10 @@ import com.bitflip.sanolagani.serviceimpl.SentimentPreprocessor;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -31,6 +35,11 @@ import java.util.LinkedHashMap;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
@@ -39,6 +48,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bitflip.sanolagani.controllers.AdminController;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -231,6 +241,11 @@ public class CompanyDetailsController {
         model.addAttribute("is_invested", is_invested);
         model.addAttribute("iswatchlistedblank", iswatchlistedblank);
         model.addAttribute("status", status);
+        LocalDateTime formatteddate=company.getCreated();
+        String[] formattedDate =formatteddate.toString().split("T");
+        // GETTING THE DATE AND EXCLUDING THE TIME
+        String formatteddata = formattedDate[0];
+        model.addAttribute("formattedDate", formatteddata);
         model.addAttribute("company", company);
         model.addAttribute("boardMembers", boardMembers);
         return "company-info";
@@ -389,20 +404,32 @@ public class CompanyDetailsController {
         return "company-overview";
     }
 
-    @PostMapping("company/overview")
-    public String setCompanyOverview(Model model,
-            @RequestParam("title") String title,
-            @RequestParam("description") String description,
-            CompanyArticles article) {
-        User user = usercontroller.getCurrentUser();
-        article.setTitle(title);
-        article.setFull_text(description);
-        article.setAuthor(user);
-        article.setCompany(user.getCompany());
-        articlesRepo.save(article);
+@PostMapping("company/overview")
+	public String setCompanyOverview(Model model, @RequestParam("audit_report") MultipartFile audit_report,
+			CompanyArticles article) throws IllegalStateException, IOException {
 
-        return "company-overview";
-    }
+		if (!audit_report.isEmpty()) {
+			User user = usercontroller.getCurrentUser();
+			article.setAuthor(user);
+			article.setCompany(user.getCompany());
+			articlesRepo.save(article);
+			int id = user.getCompany().getId();
+			String fileName = audit_report.getOriginalFilename();
+			System.out.println(fileName);
+			System.out.println(id);
+			// Specify the directory where you want to save the PDF file
+			String uploadDir = "../sanolagani/src/main/resources/documents/" + id + "/" + fileName;
+
+			// Save the file to the specified directory
+			File saveFile = new File(uploadDir);
+			FileOutputStream outputStream = new FileOutputStream(saveFile);
+			outputStream.write(audit_report.getBytes());
+			System.out.println();
+			outputStream.close();
+			return "company-overview";
+		}
+		return "company-overview";
+	}
 
     @GetMapping("/company/management")
     public String getCompanyManagement() {
@@ -457,4 +484,29 @@ public class CompanyDetailsController {
 
         return "company-reports";
     }
+@GetMapping("/file/{fileName}/{id}")
+	public ResponseEntity<InputStreamResource> displayPdf(@PathVariable String fileName, @PathVariable Integer id)
+			throws IOException {
+		// Logic to retrieve the PDF file from the file system
+		String filePath = "../sanolagani/src/main/resources/documents/" + id + "/" + fileName;
+		File file = new File(filePath);
+
+		// Read the file content into a byte array
+		byte[] content = new byte[(int) file.length()];
+		FileInputStream fis = new FileInputStream(file);
+		fis.read(content);
+		fis.close();
+
+		// Create a ByteArrayResource with the file content
+		ByteArrayResource resource = new ByteArrayResource(content);
+
+		// Set the response headers
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_PDF);
+		headers.setContentDispositionFormData(fileName, fileName);
+
+		// Return the PDF file as a response entity
+		return ResponseEntity.ok().headers(headers).body(new InputStreamResource(resource.getInputStream()));
+	}
+
 }

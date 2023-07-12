@@ -77,12 +77,12 @@
             <tbody>
               <tr class="news-row">
                   <td class="news-data-date">
-                    <a href="#">May 7, 2023<br>
+                    <a href="#" th:text="*{formattedDate}"><br>
                     <img src="./images/voklagyo.png" alt="img" class="doc-img">
                   </td>
   
                   <td class="news-data-event">
-                    <a href="#">News goes here</a>
+                    <a th:href="@{'/file/'+${company.filename}+'/'+ ${company.id}}">[[${company.getFilename()}]]</a>
                   </td>
               </tr>
               <tr class="news-row">
