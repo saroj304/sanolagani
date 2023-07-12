@@ -13,23 +13,16 @@
 
       <h2>Companies</h2>
         <div class="dropdown">
-<<<<<<< HEAD
-          <p class="btn">Filter By Sector<i class="fa-solid fa-plus"></i></p>
-          <div class="dropdown-content" th:each="sector : ${sectorlist}">
-            <a href="#" class="btn" th:text="${sector}">[[${sector}]]</a>
-=======
           <p class="button" onclick="toggleElements()">
             Filter By Sector&nbsp;
             <i class="fa-solid fa-plus" id="symbol"></i>
           </p>
           <div class="toggle-list" id="toggle-elements">
             <div class="dropdown-content" th:each="sector : ${sectorlist}">
-              <a th:href="@{'/company/filter/'+${sector}}" class="dropdown-list">[[${sector}]]</a>
+              <a th:href="@{'/user/company/filter/'+${sector}}" class="dropdown-list">[[${sector}]]</a>
             </div>
->>>>>>> 356f9149378b71b89c069f0b878d06768a3c3a7f
           </div>
         </div>
-      </div>
       
       <div class="cards row">
 

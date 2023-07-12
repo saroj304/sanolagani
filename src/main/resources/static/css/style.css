@@ -198,6 +198,9 @@ img {
 	width: 100%;
 	object-fit: cover;
 }
+i{
+	padding:0px 3px;
+}
 
 .mt-20 {
 	margin-top: 20px;
