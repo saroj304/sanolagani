@@ -158,11 +158,10 @@ public class AdminController {
 	}
 
 	@GetMapping("/admin/reports")
-
 	public String viewReportDetails(Model model) {
 		List<Investment> invest_list = investmentrepo.findAll();
 		if (invest_list.isEmpty()) {
-			return "reports";
+			return "adminreport";
 		}
 		model.addAttribute("invest_list", invest_list);
 		return "adminreport";
@@ -233,13 +232,6 @@ public class AdminController {
 		admin_service.getRefundApprove(id,status);
 		return "redirect:/admin/refunddata";
 	}
-	
-	
-	
-
-	
-	
-	
 
 	public static Map<String, Double> aggregateData(List<Transaction> transactions) {
 		Map<String, Double> aggregatedData = new LinkedHashMap<>();

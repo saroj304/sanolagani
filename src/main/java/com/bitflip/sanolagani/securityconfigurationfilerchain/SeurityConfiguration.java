@@ -24,12 +24,14 @@ public class SeurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeHttpRequests(requests -> requests
                         .antMatchers("/login", "/register", "/otpverify", "/companyregister",
-                                "/", "/raisecapital", "/documents",
+                                "/", "/raisecapital", "/documents", "/companyverify",
                                 "/resetpassword", "/updatepassword", "/forgotpassword",
                                 "/changepassword", "/reset/reports", "/company/documents/reports", "/signup/admin",
                                 "/saveadmin")
                         .permitAll()
-                        .antMatchers("/admin/**","/user/**","/company/**").hasAnyRole("ADMIN","USER","COMPANY")
+                        .antMatchers("/admin/**").hasRole("ADMIN")
+                        .antMatchers("/user/**").hasRole("USER")        
+                        .antMatchers("/company/**").hasRole("COMPANY")
                         .anyRequest().authenticated())
                 .formLogin(login -> login
                         .loginPage("/login")

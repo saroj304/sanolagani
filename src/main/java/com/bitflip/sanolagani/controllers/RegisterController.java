@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 
+@Controller
 public class RegisterController {
 	@Autowired
 	UserService userservice;
@@ -40,6 +42,15 @@ public class RegisterController {
 	
 	private Map<String, String> otpStore = new HashMap<>();
 	private List<User> userstore = new ArrayList<>();
+
+	@GetMapping("/companyregister")
+	public String companySignupPage(@ModelAttribute("un_company") UnverifiedCompanyDetails un_company) {
+		System.out.println("company register");
+		return "company_registration";
+	}
+
+
+
 	@GetMapping("/register")
 	public String registerPage(@ModelAttribute("user") User user) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -104,10 +115,7 @@ public class RegisterController {
 
 	// company register
 
-	@GetMapping("/companyregister")
-	public String companySignupPage(@ModelAttribute("un_company") UnverifiedCompanyDetails un_company) {
-		return "company_registration";
-	}
+	
 
 	@PostMapping("/companyverify")
 	public String verifyCompany(@Valid @ModelAttribute("un_company") UnverifiedCompanyDetails un_company,
@@ -184,12 +192,12 @@ public class RegisterController {
     		}
         }
         
-        @GetMapping("/admin/signup")
+        @GetMapping("/signup/admin")
         public String getAdminSignupPage() {
         	return "admin_signup";
         }
         
-        @PostMapping("/admin/saveadmin")
+        @PostMapping("/saveadmin")
         public String saveAdminDetails(@ModelAttribute("user") User admin, @RequestParam("email") String email) {
         	boolean result=adminservice.saveAdmin(admin,email);
         	return "redirect:/admin/signup"; 

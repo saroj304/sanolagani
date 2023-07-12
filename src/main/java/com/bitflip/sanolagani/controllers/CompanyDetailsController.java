@@ -78,7 +78,7 @@ public class CompanyDetailsController {
     @Autowired
     BoardMembersRepo boardMembersRepo;
 
-    @GetMapping("/company")
+    @GetMapping("/user/company")
     public String getAllCompany(Model model) {
         List<Company> companylist = companyRepo.findAll();
         if (companylist.isEmpty()) {
@@ -153,7 +153,7 @@ public class CompanyDetailsController {
         }
 
     }
-    @GetMapping("/company/{id}")
+    @GetMapping("/user/company/{id}")
     public String getCompany(@PathVariable("id") Integer id, Model model, TrafficData trafficdata) {
         List<TrafficData> trafficdatalist = trafficrepo.findAll();
        boolean is_invested = true;
@@ -236,7 +236,7 @@ public class CompanyDetailsController {
         return "company-info";
     }
 
-    @GetMapping("/company/details/{id}")
+    @GetMapping("/user/company/details/{id}")
     public String getInvestCompanyDetails(@PathVariable("id") int id, Model model) {
         Company company = companyRepo.getReferenceById(id);
         User user = usercontroller.getCurrentUser();
@@ -344,7 +344,7 @@ public class CompanyDetailsController {
         return "company_investment-details";
     }
 
-    @GetMapping("/company/filter/{sector}")
+    @GetMapping("/user/company/filter/{sector}")
     public String getCompanyBySector(@PathVariable(value = "sector",required=false) String sector,
     		                                     Model model) {
 	        
@@ -457,7 +457,4 @@ public class CompanyDetailsController {
 
         return "company-reports";
     }
-    
- 
-    
 }
