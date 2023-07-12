@@ -149,11 +149,11 @@ public class UserServiceImpl implements UserService {
 		
 		Collateral collateral = user.getCollateral();
 		if(collateral.getCollateral_amount()>=amount) {
-		 double amounts = collateral.getCollateral_amount()-amount;
-		 collateral.setCollateral_amount(amounts);
-		 collateral_repo.save(collateral);
-		 saveRefundRequest(refundrequest,amount,user,collateral);
-		 return true;
+			double amounts = collateral.getCollateral_amount()-amount;
+			collateral.setCollateral_amount(amounts);
+			collateral_repo.save(collateral);
+			saveRefundRequest(refundrequest,amount,user,collateral);
+			return true;
 		}
 		
 		

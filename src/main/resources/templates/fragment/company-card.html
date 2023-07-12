@@ -1,5 +1,5 @@
 <div th:fragment="card">
-    <a th:href="@{/company/{id}/ (id=${company.id})}"> 
+    <a th:href="@{/user/company/{id}/ (id=${company.id})}"> 
         <span class="card__tag" th:if="${remainingdaysmap.get(company.companyname)}>0">[[${remainingdaysmap.get(company.companyname)}]] Days left</span>
         <img th:src="@{'/documents/' + ${company.id} + '/' + ${company.image}}" class='card__image' alt="card-image" />
         <h3 class="company-name" th:text="${company.companyname}" />

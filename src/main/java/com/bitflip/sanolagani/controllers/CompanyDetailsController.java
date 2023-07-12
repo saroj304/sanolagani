@@ -28,6 +28,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.LinkedHashMap;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,7 +42,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bitflip.sanolagani.controllers.AdminController;
 import org.springframework.web.bind.annotation.RequestBody;
-
 
 @Controller
 public class CompanyDetailsController {
@@ -78,7 +78,7 @@ public class CompanyDetailsController {
     @Autowired
     BoardMembersRepo boardMembersRepo;
 
-    @GetMapping("/company")
+    @GetMapping("/user/company")
     public String getAllCompany(Model model) {
         List<Company> companylist = companyRepo.findAll();
         if (companylist.isEmpty()) {
@@ -124,7 +124,6 @@ public class CompanyDetailsController {
             @RequestParam("password") String newpassword) {
 
         User user = userrepo.findByEmail(email);
-        System.out.println(email);
         String hashpwd = user.getPassword();
         String plainpwd = oldpass;
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -132,7 +131,6 @@ public class CompanyDetailsController {
 
         boolean matchcurrentandold = passwordEncoder.matches(newpassword, hashpwd);
         if (matchcurrentandold) {
-            System.out.println("You cannot use the same password as old");
             return "redirect:/change_password";
         }
 
@@ -150,13 +148,12 @@ public class CompanyDetailsController {
             userrepo.save(user);
             return "redirect:/home";
         } else {
-            System.out.println("Password does not match!");
             return "redirect:/change_password";
 
         }
 
     }
-    @GetMapping("/company/{id}")
+    @GetMapping("/user/company/{id}")
     public String getCompany(@PathVariable("id") Integer id, Model model, TrafficData trafficdata) {
         List<TrafficData> trafficdatalist = trafficrepo.findAll();
        boolean is_invested = true;
@@ -216,9 +213,8 @@ public class CompanyDetailsController {
             status = "time finish";
 
         }
-
-        Set<BoardMembers> boardMembers = boardMembersRepo.findByCompanies(company);
-
+        List<BoardMembers> boardMembers = boardMembersRepo.findAllByCompany(company);
+        
         
         List<Watchlist> watchlist = watchlistrepo.findByUserId(user.getId());
         List<Integer> companyids = new ArrayList<>();
@@ -237,11 +233,10 @@ public class CompanyDetailsController {
         model.addAttribute("status", status);
         model.addAttribute("company", company);
         model.addAttribute("boardMembers", boardMembers);
-        System.out.println(boardMembers);
         return "company-info";
     }
 
-    @GetMapping("/company/details/{id}")
+    @GetMapping("/user/company/details/{id}")
     public String getInvestCompanyDetails(@PathVariable("id") int id, Model model) {
         Company company = companyRepo.getReferenceById(id);
         User user = usercontroller.getCurrentUser();
@@ -349,13 +344,12 @@ public class CompanyDetailsController {
         return "company_investment-details";
     }
 
-    @GetMapping("/company/filter/{sector}")
+    @GetMapping("/user/company/filter/{sector}")
     public String getCompanyBySector(@PathVariable(value = "sector",required=false) String sector,
     		                                     Model model) {
 	        
 		List<Company> sectorstatuslist = new ArrayList<>();
 		List<Company> companylist = companyRepo.findAll();
-		System.out.println(companylist.size());
 			if(companylist.isEmpty()) {
 				return "company-list"; 
 			}else {
@@ -414,8 +408,7 @@ public class CompanyDetailsController {
     public String getCompanyManagement() {
         User user = usercontroller.getCurrentUser();
         Company company = user.getCompany();
-        Set<BoardMembers> boardMembers = boardMembersRepo.findByCompanies(company);
-        System.out.println(boardMembers);
+        List<BoardMembers> boardMembers = boardMembersRepo.findAllByCompany(company);
         return "company-management";
     }
 
@@ -424,17 +417,21 @@ public class CompanyDetailsController {
                                         BoardMembers member) {
         Integer fields = Integer.parseInt(formData.getFirst("numberOfInputFields"));
         Set<BoardMembers> members = new HashSet<>();
+        User user = usercontroller.getCurrentUser();
+        Company company = user.getCompany();
         for(int i=0; i<fields; i++) {
             String firstName = formData.getFirst("firstName-"+i);
             String middleName = formData.getFirst("middleName-"+i);
             String lastName = formData.getFirst("lastName-"+i);
             String title = formData.getFirst("title-"+i);
             String socialLink = formData.getFirst("socialLink-"+i);
+
             member.setFirstName(firstName);
             member.setMiddleName(middleName);
             member.setLastName(lastName);
             member.setPosition(title);
             members.add(member);
+            member.setCompany(company);
             member = new BoardMembers();
         }
         if(members != null) {
@@ -442,7 +439,22 @@ public class CompanyDetailsController {
         }
         return "company-management";
     }
-    
- 
-    
+
+    @GetMapping("/company/all-articles")
+	public String viewArticles(Model model) {
+		User user = userrepo.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+		Company company = companyRepo.findById(user.getCompany().getId()).get();
+		List<CompanyArticles> article_list = articlesRepo.findByCompanyId(company.getId());
+		if (article_list.isEmpty()) {
+			return "articles";
+		}
+		model.addAttribute("articles", article_list);
+		return "articles";
+	}
+
+    @GetMapping("/company/reports")
+    public String getCompanyDocuments(Model model) {
+
+        return "company-reports";
+    }
 }

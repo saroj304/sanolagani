@@ -2,24 +2,8 @@
 <html>
 
 <head>
-  <style>
-    ul{
-      list-style: none;
-    }
-    .card li{
-      display: flex;
-      justify-content: space-between;
-    }
-    .stats{
-      width:180px;
-    }
-  </style>
-  <meta charset="UTF-8">
   <title>Dashboard</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/css/viewpage.css}">
-  <link rel="stylesheet" type="text/css" th:href="@{/css/admindashboard.css}">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+  <head th:replace="fragment/admin-head.html :: head"></head>
 </head>
 
 <body>
@@ -29,7 +13,6 @@
     <div class="sidebar">
       <h2>Dashboard</h2>
       <ul th:insert="fragment/admin-dashboard.html :: dashboard-left"></ul>
-
     </div>
 
     <div class="main-content">
@@ -63,7 +46,6 @@
           </ul>
         </div>
         <br/><br/>
-     
       </div>
     </div>
   </div>
@@ -72,7 +54,6 @@
     function fundManagement() {
       document.getElementById("fundManagement").classList.toggle("show");
     }
-
 
     // Sample data for the chart
     const investmentData = {
