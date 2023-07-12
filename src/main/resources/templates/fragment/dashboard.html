@@ -3,10 +3,10 @@
     <div class=" dashboard__container">
         <div class="left__dashboard board" th:fragment="left-fragment">
             <div class="dashboard-title-wrap">
-                <div class="dashboard-title"><a th:href="@{/dashboard}">Dashboard</a></div>
-                <div class="dashboard-title"><a th:href="@{/riskinfo}">Investment Diversification</a></div>
-                <div class="dashboard-title"><a th:href="@{/myinfo}">My Information</a></div>
-                <div class="dashboard-title"><a th:href="@{'/investmenthistory/'}">My Investment</a></div>
+                <div class="dashboard-title"><a th:href="@{/user/dashboard}">Dashboard</a></div>
+                <div class="dashboard-title"><a th:href="@{/user/riskinfo}">Investment Diversification</a></div>
+                <div class="dashboard-title"><a th:href="@{/user/myinfo}">My Information</a></div>
+                <div class="dashboard-title"><a th:href="@{'/user/investmenthistory/'}">My Investment</a></div>
                 
                 <div class="dropdown-manage-fund">
                     <div onclick="manageFund()" class="button" style="cursor: pointer;">

@@ -29,7 +29,7 @@
                 <li><a href="#documents" class="nav-link-sm-text link">Documents</a></li>
                 <li><a href="#success-stories" class="nav-link-sm-text link">Success Stories</a></li>
                 <li><a href="#management-teams" class="nav-link-sm-text link">Management</a></li>
-                <li><a href="#" class="nav-link-sm-text link">More Information</a></li>
+                <li><a th:href="@{/table/{firm}/1 (firm=${company.id})}" class="nav-link-sm-text link">Financials</a></li>
               </ul>
           </div>
         </nav>
@@ -110,11 +110,12 @@
       <br/><br/><br/>
         <h3 id='success-stories'>Success Stories</h3>
         <div th:if="${is_invested}">
-			<p>Provide Feedback</p>
-			<form th:action="@{'/user/feedback/'+${company.id}}" method="POST">
-			   <textarea id="feedback" name="feedbacktext" rows="4" cols="50"></textarea>
-			   <input type="submit" value="post">
-            </form>
+			<h3>Provide Feedback</h3>
+			<form class="textarea-input" th:action="@{'/user/feedback/'+${company.id}}" method="POST">
+			    <textarea id="feedback" name="feedbacktext" rows="4" cols="50" placeholder="Type here..." required></textarea>
+          <br/>
+			    <input type="submit" value="Submit" class="btn">
+      </form>
 		</div>
     </div>
 
