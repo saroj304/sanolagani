@@ -282,21 +282,24 @@ public class CompanyDetailsController {
 
         }
 
-        List<Investment> investmentlist = investrepo.findAllByCompany_id(id);
+        List<Investment> investmentlist = investrepo.findAllByCompany_id(id,currentDate.minusDays(6));
+        System.out.println(investmentlist.size());
         if (!investmentlist.isEmpty()) {
             String dayname = "";
             for (Investment investment : investmentlist) {
+            	System.out.println(investment.getCompany().getCompanyname()+" "+investment.getAmount());
                 LocalDateTime investedtime = investment.getInvestment_date_time();
                 LocalDate dates = investedtime.toLocalDate();
                 Date date = Date.valueOf(dates);
                 DayOfWeek dayofweek = investedtime.getDayOfWeek();
                 if (!dayname.equalsIgnoreCase(dayofweek.name())) {
                     dayname = dayofweek.name().toLowerCase();
-                    double amount = investrepo.getTotalInvestedByDate(date);
+                    double amount = investrepo.getTotalInvestedByDate(date,id);
+                    
                     pastSixdaysinvestmentamount.put(dayname, amount);
-                    int useracquistionnumber = investrepo.getTotalInvestedUserByDate(date);
+                    int useracquistionnumber = investrepo.getTotalInvestedUserByDate(date,id);
                     totalUsersInvestedMap.put(dayname, useracquistionnumber);
-
+                  System.out.println(pastSixdaysinvestmentamount);
                 }
 
             }
