@@ -244,13 +244,23 @@ public class CompanyDetailsController {
 		model.addAttribute("is_invested", is_invested);
 		model.addAttribute("iswatchlistedblank", iswatchlistedblank);
 		model.addAttribute("status", status);
-		LocalDateTime formatteddate = company.getCreated();
-		String[] formattedDate = formatteddate.toString().split("T");
-		// GETTING THE DATE AND EXCLUDING THE TIME
-		String formatteddata = formattedDate[0];
-		model.addAttribute("formattedDate", formatteddata);
+//		LocalDateTime formatteddate = company.getCreated();
+//		String[] formattedDate = formatteddate.toString().split("T");
+//		// GETTING THE DATE AND EXCLUDING THE TIME
+//		String formatteddata = formattedDate[0];
+//		model.addAttribute("formattedDate", formatteddata);
 		model.addAttribute("company", company);
 		model.addAttribute("boardMembers", boardMembers);
+		
+		//retriveing companyfile and  comparing id of company with fk id of companyfile and then retrieving comoany id and companyfile title
+		List<CompanyFile>cmpfile=cmprepo.findAll();
+		List<CompanyFile>cmpfiles=new ArrayList<>();
+		for(CompanyFile file:cmpfile) {
+			if(id.equals(file.getCompany().getId())){
+			   cmpfiles.add(file);
+			}
+		}
+		model.addAttribute("file", cmpfiles);
 		return "company-info";
 	}
 
@@ -517,7 +527,6 @@ public class CompanyDetailsController {
 		// Return the PDF file as a response entity
 		return ResponseEntity.ok().headers(headers).body(new InputStreamResource(resource.getInputStream()));
 	}
-
 }
 
 	
