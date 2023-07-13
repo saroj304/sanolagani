@@ -23,9 +23,11 @@ public class CompanyFile {
 	private String filename;
 	@Column
 	private String filetype;
+	@Column
+	private String title;
 	@CreationTimestamp
 	private LocalDate uploaddate;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "company_id")
 	private Company company;
@@ -68,9 +70,14 @@ public class CompanyFile {
 
 	public void setUploaddate(LocalDate uploaddate) {
 		this.uploaddate = uploaddate;
-	} 
-	
-	
-	
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 }
