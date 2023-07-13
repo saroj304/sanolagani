@@ -54,7 +54,7 @@ public class HomeController {
 					redirectAttributes.addFlashAttribute("email", user.getEmail());
 					return "redirect:/change_password";
 				} else {
-					return "redirect:/companydashboard";
+					return "redirect:/company/companydashboard";
 				}
 			}
 			if (user.getRole().equals("ADMIN")) {
