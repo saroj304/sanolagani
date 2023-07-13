@@ -267,8 +267,10 @@ public class CompanyDetailsController {
 
 	// company dashboard
 
+	
+	
 	@GetMapping("/company/companydashboard")
-	public String gerDashboard(Model model) {
+	public String getDashboard(Model model) {
 		User user = usercontroller.getCurrentUser();
 		int id = user.getCompany().getId();
 		LocalDateTime currentDate = LocalDateTime.now();
@@ -295,7 +297,7 @@ public class CompanyDetailsController {
 
 		}
 
-		List<Investment> investmentlist = investrepo.findAllByCompany_id(id);
+		List<Investment> investmentlist = investrepo.findAllByCompany_id(id,currentDate.minusDays(6));
 		if (!investmentlist.isEmpty()) {
 			String dayname = "";
 			for (Investment investment : investmentlist) {
@@ -305,9 +307,9 @@ public class CompanyDetailsController {
 				DayOfWeek dayofweek = investedtime.getDayOfWeek();
 				if (!dayname.equalsIgnoreCase(dayofweek.name())) {
 					dayname = dayofweek.name().toLowerCase();
-					double amount = investrepo.getTotalInvestedByDate(date);
+					double amount = investrepo.getTotalInvestedByDate(date,id);
 					pastSixdaysinvestmentamount.put(dayname, amount);
-					int useracquistionnumber = investrepo.getTotalInvestedUserByDate(date);
+					int useracquistionnumber = investrepo.getTotalInvestedUserByDate(date,id);
 					totalUsersInvestedMap.put(dayname, useracquistionnumber);
 
 				}
@@ -331,6 +333,7 @@ public class CompanyDetailsController {
 		model.addAttribute("labels", labels);
 		return "companydashboard";
 	}
+
 
 	@GetMapping("/company/notification")
 	public String getNotification(Model model) {
@@ -516,3 +519,23 @@ public class CompanyDetailsController {
 	}
 
 }
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
