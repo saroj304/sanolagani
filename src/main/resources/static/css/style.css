@@ -14,6 +14,8 @@
 @import url('./company_table.css');
 @import url('./my_information.css');
 @import url('./load_fund.css');
+@import url('./user_profile.css');
+/* @import url('./diversificationgraph.css'); */
 /* @import url('./viewpage.css');
 @import url('./admindashboard.css'); */
 
@@ -25,6 +27,9 @@
 	outline: none;
 	list-style: none;
 	overflow-x: hidden;
+	font-family: Roboto Mono, Helvetica, sans-serif;
+	line-height: 1.7;
+
 }
 
 /* display: none; */
@@ -65,6 +70,13 @@
 	--color-message-positive-border: #ffca3a;
 }
 
+.warning{
+	color: #fb5607;
+	background-color: #fff6cc;
+	opacity: 0.8;
+	padding:5px;
+}
+
 html {
 	scroll-behavior: smooth;
 }
@@ -76,12 +88,6 @@ html {
 input[type=number]::-webkit-inner-spin-button {
 	-webkit-appearance: none;
   }
-
-body {
-	font-family: 'Poppins', sans-serif;
-	line-height: 1.7;
-	/* background: red; */
-}
 
 /* ===================== GENERAL STYLES ========================= */
 .container {
@@ -119,6 +125,20 @@ h5 {
 	margin-top: -10px;
 }
 
+textarea {
+	resize: none;
+	width: 40vw;
+	padding: 10px;
+	border: 1px solid var(--color-gray);
+	border-radius: 5px;
+	height: 8rem;
+}
+.textarea-input{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
 .text-light {
 	color: var(--color-light);
 }
@@ -149,6 +169,7 @@ h5 {
     border: 1px solid #000;
     transition: var(--transition);
     font-size: 18px;
+	overflow: hidden;
 	text-transform: capitalize;
 }
 .btn:hover{
@@ -170,10 +191,17 @@ h5 {
 .btn-danger:hover{
 	background: rgb(171, 1, 1);
 }
+
+.refund{
+	width: -webkit-fill-available;
+}
 img {
 	display: block;
 	width: 100%;
 	object-fit: cover;
+}
+i{
+	padding:0px 3px;
 }
 
 .mt-20 {

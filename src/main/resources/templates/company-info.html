@@ -29,7 +29,7 @@
                 <li><a href="#documents" class="nav-link-sm-text link">Documents</a></li>
                 <li><a href="#success-stories" class="nav-link-sm-text link">Success Stories</a></li>
                 <li><a href="#management-teams" class="nav-link-sm-text link">Management</a></li>
-                <li><a href="#" class="nav-link-sm-text link">More Information</a></li>
+                <li><a th:href="@{/table/{firm}/1 (firm=${company.id})}" class="nav-link-sm-text link">Financials</a></li>
               </ul>
           </div>
         </nav>
@@ -65,7 +65,7 @@
                   [[${member.getMiddleName()}]]&nbsp;
                   [[${member.getLastName()}]]</td>
                 </td>
-                <td>[[${getPosition()}]]</td>
+                <td>[[${member.getPosition()}]]</td>
                 <td><a href="#">LinkedIn</a></td>
               </tr>
             </tbody>
@@ -77,12 +77,12 @@
             <tbody>
               <tr class="news-row">
                   <td class="news-data-date">
-                    <a href="#">May 7, 2023<br>
+                    <a href="#" th:text="*{formattedDate}"><br>
                     <img src="./images/voklagyo.png" alt="img" class="doc-img">
                   </td>
   
                   <td class="news-data-event">
-                    <a href="#">News goes here</a>
+                    <a th:href="@{'/file/'+${company.filename}+'/'+ ${company.id}}">[[${company.getFilename()}]]</a>
                   </td>
               </tr>
               <tr class="news-row">
@@ -110,21 +110,22 @@
       <br/><br/><br/>
         <h3 id='success-stories'>Success Stories</h3>
         <div th:if="${is_invested}">
-			<p>Provide Feedback</p>
-			<form th:action="@{'/user/feedback/'+${company.id}}" method="POST">
-			   <textarea id="feedback" name="feedbacktext" rows="4" cols="50"></textarea>
-			   <input type="submit" value="post">
-            </form>
+			<h3>Provide Feedback</h3>
+			<form class="textarea-input" th:action="@{'/user/feedback/'+${company.id}}" method="POST">
+			    <textarea id="feedback" name="feedbacktext" rows="4" cols="50" placeholder="Type here..." required></textarea>
+          <br/>
+			    <input type="submit" value="Submit" class="btn">
+      </form>
 		</div>
     </div>
 
 
     <div class="home__right" style="min-height: 60vh;">
-	<div th:if="${!iswatchlistedblank and ! #lists.contains(companyids, company.id)}"><a th:href="@{'/user/company/addtowatchlist/'+${company.id}}" class="btn btn__primary"><i class="fa-regular fa-heart" ></i>&nbsp;Add to watchlist</a><br/><br/>
+	<div th:if="${!iswatchlistedblank and ! #lists.contains(companyids, company.id)}"><a th:href="@{'/user/company/addtowatchlist/'+${company.id}}" class="btn btn__primary">&nbsp;<i class="fa-regular fa-heart" ></i>&nbsp;Add to watchlist</a><br/><br/>
       </div>
-      <div th:if="${!iswatchlistedblank and  #lists.contains(companyids, company.id)}"><a th:href="@{'/user/company/deletewatchlist/'+${company.id}}" class="btn btn__primary">&nbsp;Delete from watchlist</a><br/><br/>
+      <div th:if="${!iswatchlistedblank and  #lists.contains(companyids, company.id)}"><a th:href="@{'/user/company/deletewatchlist/'+${company.id}}" class="btn btn__primary">&nbsp;<i class="fa-solid fa-heart" ></i>&nbsp;Delete from watchlist</a><br/><br/>
       </div>
-      <div th:if="${iswatchlistedblank}"><a th:href="@{'/user/company/addtowatchlist/'+${company.id}}" class="btn btn__primary"><i class="fa-regular fa-heart" ></i>&nbsp;Add to watchlist</a><br/><br/>
+      <div th:if="${iswatchlistedblank}"><a th:href="@{'/user/company/addtowatchlist/'+${company.id}}" class="btn btn__primary">&nbsp;<i class="fa-regular fa-heart" ></i>&nbsp;Add to watchlist</a><br/><br/>
       </div>
       
       <img th:src="@{'/documents/' + ${company.id} + '/' + ${company.image}}" alt="heading" />

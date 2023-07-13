@@ -87,7 +87,6 @@ public class AdminController {
 		for (User user : alluser_list) {
 
 			if (user.getRole().equals("USER")) {
-				System.out.println("User exists");
 				user_list.add(user);
 			}
 		}
@@ -159,27 +158,15 @@ public class AdminController {
 	}
 
 	@GetMapping("/admin/reports")
-
 	public String viewReportDetails(Model model) {
 		List<Investment> invest_list = investmentrepo.findAll();
 		if (invest_list.isEmpty()) {
-			return "reports";
+			return "adminreport";
 		}
 		model.addAttribute("invest_list", invest_list);
 		return "adminreport";
 	}
 
-	@GetMapping("/company/all-articles")
-	public String viewArticles(Model model) {
-		User user = userrepo.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
-		Company company = companyrepo.findById(user.getCompany().getId()).get();
-		List<CompanyArticles> article_list = companyarticlesrepo.findByCompanyId(company.getId());
-		if (article_list.isEmpty()) {
-			return "articles";
-		}
-		model.addAttribute("articles", article_list);
-		return "articles";
-	}
 
 	@GetMapping("/admin/refunddata")
 
@@ -245,13 +232,6 @@ public class AdminController {
 		admin_service.getRefundApprove(id,status);
 		return "redirect:/admin/refunddata";
 	}
-	
-	
-	
-
-	
-	
-	
 
 	public static Map<String, Double> aggregateData(List<Transaction> transactions) {
 		Map<String, Double> aggregatedData = new LinkedHashMap<>();

@@ -133,8 +133,8 @@ public class PaymentServiceImpl implements PaymentService {
 			investment.setTransaction(transaction);
 			invest_repo.save(investment);
 			String message = "User: "+user.getFname()+" has invested in your company having company name: "
-					          +company.getCompanyname()+", for a quantity: "
-					          +quantity+" share unit,of amount Rs: "+quantity*company.getPrice_per_share();
+					        +company.getCompanyname()+", for a quantity: "
+					        +quantity+" share unit,of amount Rs: "+quantity*company.getPrice_per_share();
 			notificationservice.saveNotification(message, notification,user.getId(),company.getId());
 			
 			
@@ -147,12 +147,11 @@ public class PaymentServiceImpl implements PaymentService {
 		List <Collateral> collaterallist = collateral_repo.findAll();
 		System.out.println(collaterallist);
 		if(collaterallist.isEmpty()) {
-			System.out.println("inside null");
-			 collateral.setUser(user);
-	         collateral.setCollateral_amount(amount);
-	         collateral.setRemarks(remarks);
-	         collateral.setTransaction(transaction);
-	         collateral_repo.save(collateral);
+			collateral.setUser(user);
+			collateral.setCollateral_amount(amount);
+			collateral.setRemarks(remarks);
+			collateral.setTransaction(transaction);
+			collateral_repo.save(collateral);
 		}else {
 			Collateral collaterals = user.getCollateral();
 		     if(collaterals!=null) {
