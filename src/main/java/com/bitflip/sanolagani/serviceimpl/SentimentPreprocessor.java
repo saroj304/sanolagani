@@ -55,7 +55,6 @@ public class SentimentPreprocessor {
 		Map<Company, Double> sentimentScores = calculateSentimentScores(companies, feedbacks);
 		// Filter companies with good sentiment scores
 		List<Company> companiesWithGoodSentiment = filterCompaniesWithGoodSentiment(sentimentScores);
-        System.out.println(companiesWithGoodSentiment);
 
 
 		return companiesWithGoodSentiment;
@@ -64,18 +63,18 @@ public class SentimentPreprocessor {
 
 	public Map<Company, Double> calculateSentimentScores(List<Company> companies, List<Feedback> feedbacks) {
 		Map<Company, Double> sentimentScores = new HashMap<>();
-
+        List<Integer> ids = new ArrayList<>();
 		// Iterate over each company
 		for (Company company : companies) {
 			double totalScore = 0.0;
 			int count = 0;
-
-
+            if(!ids.contains(company.getId()))  {
 			for (Feedback feedback : feedbacks) {
 
 				if (feedback.getCompany().getId()== company.getId()) {
 					String text = preprocessText(feedback.getFeedbacktext());
 					double sentimentScore = performSentimentAnalysis(text);
+					 ids.add(company.getId());
 					totalScore += sentimentScore;
 					count++;
 				}
@@ -84,8 +83,10 @@ public class SentimentPreprocessor {
 
 			sentimentScores.put(company, averageScore);
 		}
-		return sentimentScores;
+		
 	}
+      return sentimentScores;
+}
 
 
 	public double performSentimentAnalysis(String feedbackText) {
@@ -94,7 +95,7 @@ public class SentimentPreprocessor {
 		Annotation annotation = new Annotation(feedbackText);
 		pipeline.annotate(annotation);
 		for (CoreMap sentence : annotation.get(CoreAnnotations.SentencesAnnotation.class)) {
-			sentimentScore += sentence.get(SentimentCoreAnnotations.SentimentClass.class).equalsIgnoreCase("positive") ? 1.0 : -1.0;
+			sentimentScore = sentence.get(SentimentCoreAnnotations.SentimentClass.class).equalsIgnoreCase("positive") ? 1.0 : 0.0;
 		}
 		return sentimentScore;
 	}
@@ -104,6 +105,7 @@ public class SentimentPreprocessor {
 
 		// Define the threshold for good sentiment
 		double threshold = 0.7;
+
 
 		// Iterate over the sentiment scores
 		for (Map.Entry<Company, Double> entry : sentimentScores.entrySet()) {

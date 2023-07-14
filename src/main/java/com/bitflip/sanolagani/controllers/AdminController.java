@@ -121,10 +121,10 @@ public class AdminController {
 
 	@GetMapping("/admin/managecompany")
 	public String getunverifiedcompany(Model model) {
-			List<UnverifiedCompanyDetails> details = admin_service.fetchAll();
-			if (details != null) {
-				model.addAttribute("UnverfiedCompanies", details);
-				return "managecompany";
+		List<UnverifiedCompanyDetails> details = admin_service.fetchAll();
+		if (details != null) {
+			model.addAttribute("UnverfiedCompanies", details);
+			return "managecompany";
 		
 		} else {
 			return "redirect:/home";
@@ -135,7 +135,7 @@ public class AdminController {
 	public String deleteUnverifiedData(@PathVariable("id") String ids) {
 		int id = Integer.parseInt(ids);
 		admin_service.deleteData(id);
-		return "redirect:/managecompany";
+		return "redirect:/admin/managecompany";
 	}
 
 	@GetMapping("/admin/managecompany/edit/save/{id}")

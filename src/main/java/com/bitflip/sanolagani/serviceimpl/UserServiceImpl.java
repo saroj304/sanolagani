@@ -71,6 +71,9 @@ public class UserServiceImpl implements UserService {
 			if(result && user.getEmail().equals(email)) {
 				 this.encode_password=AdminServiceImpl.encodePassword(password);
 				 user.setPassword(encode_password);
+				 if(user.getRole().equals("COMPANY")) {
+					user.getCompany().setPwd_change("true");
+				 }
 				  userrepo.save(user);	        
 				email_service.sendChangePasswordMail(email);
 			
@@ -165,10 +168,8 @@ public class UserServiceImpl implements UserService {
 		Transaction transaction = collateral.getTransaction();
 		RefundRequestData refunddatas = new  RefundRequestData();
 		List<RefundRequestData> refunddatalist = refund_repo.findAll();
-		System.out.println("for loop baira");
         boolean result = false;
 			for(RefundRequestData refunddata: refunddatalist) {
-				System.out.println("if baira");
 				if(refunddata.getTransaction().getId()==transaction.getId()) {
 					result = true;
 					refunddatas=refunddata;
@@ -177,7 +178,6 @@ public class UserServiceImpl implements UserService {
 			}
 			if(result) {
 				double amounts = refunddatas.getAmount();
-				System.out.println("contains vhitra");
 				refunddatas.setAmount(amount+amounts);
 				refund_repo.save(refunddatas);
 			}else {

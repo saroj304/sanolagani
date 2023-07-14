@@ -13,7 +13,7 @@
         <h1>Invest in <span th:text="${company.companyname}" /></h1>
       </div>
       <div th:if="${status eq 'on limit'}">
-        <a th:href="@{'/company/details/'+${company.id}+'/'}" class='btn mt-20 mb-20'> Invest Now</a>
+        <a th:href="@{'/user/company/details/'+${company.id}+'/'}" class='btn mt-20 mb-20'> Invest Now</a>
       </div>
       <div th:if="${status eq 'limit reached'}" class="message-maximum-invested">
 		    <p>You have reached your maximum investment quantity. Thank you for being part of us.</p> 
@@ -29,7 +29,7 @@
                 <li><a href="#documents" class="nav-link-sm-text link">Documents</a></li>
                 <li><a href="#success-stories" class="nav-link-sm-text link">Success Stories</a></li>
                 <li><a href="#management-teams" class="nav-link-sm-text link">Management</a></li>
-                <li><a th:href="@{/table/{firm}/1 (firm=${company.id})}" class="nav-link-sm-text link">Financials</a></li>
+                <li><a th:href="@{/table/{firm}/1 (firm=${company.id})}" class="nav-link-sm-text link" target="_blank">Financials</a></li>
               </ul>
           </div>
         </nav>
@@ -54,11 +54,6 @@
                 <th>Position</th>
                 <th>Social</th>
             </thead>
-            <!-- <tr th:each="management : ${company.managements}">
-              <td th:text="${management.name}"></td>
-              <td th:text="${management.position}"></td>
-              <td><a th:href="${management.linkedin}">LinkedIn</a></td>
-            </tr> -->
             <tbody>
               <tr th:each="member : ${boardMembers}">
                 <td>[[${member.getFirstName()}]]&nbsp;
@@ -77,33 +72,22 @@
             <tbody>
               <tr class="news-row">
                   <td class="news-data-date">
-                    <a href="#">May 7, 2023<br>
-                    <img src="./images/voklagyo.png" alt="img" class="doc-img">
+                    <span>May 7, 2023</span>
                   </td>
   
                   <td class="news-data-event">
-                    <a href="#">News goes here</a>
+                    <a href="#">Quarterly Audit Report 2023 Q1</a>
                   </td>
               </tr>
               <tr class="news-row">
-                  <td class="news-data-date">
-                    <a href="#">May 7, 2023<br>
-                    <img src="./images/voklagyo.png" alt="img" class="doc-img">
-                  </td>
-                  <td class="news-data-event">
-                    <a href="#">News goes here</a>
-                  </td>
-              </tr>
-              <tr class="news-row">
-                  <td class="news-data-date">
-                    <a href="#">May 7, 2023<br>
-                      <img src="./images/voklagyo.png" alt="img" class="doc-img">
-                    </td>
-  
-                  <td class="news-data-event">
-                    <a href="#">News goes here</a>
-                  </td>
-              </tr>
+                <td class="news-data-date">
+                  <span>September 4, 2023</span>
+                </td>
+
+                <td class="news-data-event">
+                  <a href="#">Quarterly Audit Report 2023 Q2</a>
+                </td>
+            </tr>
             </tbody>
           </table>
       </div>
