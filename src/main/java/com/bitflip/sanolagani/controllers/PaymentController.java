@@ -39,6 +39,9 @@ public class PaymentController {
         details.put("amount", amount);
         boolean result = paymentService.verifyPayment(details);
         if (result) {
+            double amt = Double.parseDouble(amount);
+            amt /= 100;
+            amount = String.valueOf(amt);
             paymentService.saveTransactionDetails(token, amount, companyid, transaction, remarks, investment,
                     collateral, notification);
         }

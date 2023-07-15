@@ -13,7 +13,7 @@
 				<h1>Invest in <span th:text="${company.companyname}" /></h1>
 			</div>
 			<div th:if="${status eq 'on limit'}">
-				<a th:href="@{'/company/details/'+${company.id}+'/'}" class='btn mt-20 mb-20'> Invest Now</a>
+				<a th:href="@{'/user/company/details/'+${company.id}+'/'}" class='btn mt-20 mb-20'> Invest Now</a>
 			</div>
 			<div th:if="${status eq 'limit reached'}" class="message-maximum-invested">
 				<p>You have reached your maximum investment quantity. Thank you for being part of us.</p>

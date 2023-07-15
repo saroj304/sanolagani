@@ -95,6 +95,13 @@
 .toggle-list{
     display: none;
 }
+.payment-dropdown{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin-top: 10px;
+    background: #efefef;
+}
 
 .dropdown{
     background:#efefef;
