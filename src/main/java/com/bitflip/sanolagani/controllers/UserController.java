@@ -324,7 +324,7 @@ public class UserController {
 		feedback.setFeedbacktext(feedbacktext);
 		feedback_repo.save(feedback);
 		
-		return "redirect:/company/"+id;
+		return "redirect:/user/company/"+id;
 	}
 	
 	
